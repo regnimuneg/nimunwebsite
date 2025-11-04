@@ -1,0 +1,297 @@
+@import '@/styles/mixins.scss';
+@import '@/styles/globals.scss';
+
+// Main container for the packages section
+.container {
+  padding: 60px 20px; // Add vertical and horizontal padding
+  background-color: #f8f9fa; // Light background if needed, or keep white
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+// Sub-heading style
+.subHeading {
+  color: #6c757d; // Grey color for the sub-heading
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+// Main title style
+.mainTitle {
+  color: #0036bf;
+  font-size: 2.8rem; // Slightly smaller than original
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  margin: 0 16px; // Reduced margin
+  text-align: center;
+  font-family: 'Montserrat', sans-serif; // Ensure font consistency
+}
+
+// Row containing the title and lines
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px; // Limit width for better appearance
+  margin-bottom: 30px;
+}
+
+// Decorative lines next to the title
+.line {
+  flex-grow: 1;
+  height: 4px; // Thinner line
+  background: #0036bf;
+}
+
+// Container for the toggle buttons
+.toggleContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  background-color: #e9ecef; // Light grey background for the toggle area
+  border-radius: 20px; // Rounded corners for the container
+  padding: 5px;
+}
+
+// Style for individual toggle buttons
+.toggleButton {
+  padding: 8px 25px;
+  border: none;
+  background-color: transparent; // Default transparent background
+  color: #495057; // Default text color
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 18px; // Rounded corners for buttons
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  margin: 0 5px;
+
+  &:hover {
+    background-color: #dee2e6; // Slight background on hover
+  }
+}
+
+// Style for the active toggle button
+.activeToggle {
+  background-color: #0036bf; // Blue background for active
+  color: #fff; // White text for active
+  box-shadow: 0 2px 5px rgba(0, 54, 191, 0.3);
+
+  &:hover {
+    background-color: #002ca6; // Darker blue on hover when active
+  }
+}
+
+// Grid container for the package cards
+.packageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  width: 100%;
+  max-width: 1200px;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+// Individual package card style
+.packageCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #dee2e6; // Light border
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); // Softer shadow
+  overflow: hidden;
+  padding: 25px;
+  position: relative;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// Style for the 'Most Popular' badge
+.popularBadge {
+  position: absolute;
+  top: 10px;
+  right: -30px; // Position partially outside
+  background-color: #17a2b8; // Cyan color for the badge
+  color: #fff;
+  padding: 5px 30px; // Adjust padding
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px; // Fixed width for consistency
+  text-align: center;
+}
+
+// Header section within the card (title, price)
+.cardHeader {
+  text-align: left;
+  margin-bottom: 20px;
+  padding-right: 30px; // Space for the badge
+}
+
+// Title style within the card
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  // Color is set dynamically via inline style
+}
+
+// Price container
+.priceContainer {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: baseline; // Align price and type
+}
+
+// Price value style
+.priceValue {
+  color: #343a40; // Darker price color
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+// Price type style (/Delegate, /Group)
+.priceType {
+  color: #6c757d; // Grey color
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+// Group info style
+.groupInfo {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: -5px; // Bring closer to price
+  margin-bottom: 15px;
+}
+
+// Description container
+.descriptionContainer {
+  flex: 1 1 auto;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+// Description list style
+.descriptionList {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+// Description list item style
+.descriptionItem {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem; // Slightly smaller font
+  color: #495057; // Text color
+  margin-bottom: 12px;
+  text-align: left;
+
+  &::before {
+    content: '•'; // Use a bullet point or checkmark
+    color: #0036bf; // Blue color for the bullet/check
+    font-size: 1.2em;
+    margin-right: 10px;
+    font-weight: bold;
+    line-height: 1; // Ensure proper vertical alignment
+  }
+}
+
+// Apply button style
+.applyButton {
+  background: #0037c0;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%; // Make button full width
+  margin-top: auto; // Push button to the bottom
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #002ca6; // Darker blue on hover
+  }
+}
+
+// Media Queries for responsiveness
+@media (max-width: 992px) {
+  .mainTitle {
+    font-size: 2.4rem;
+  }
+  .packageGrid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 15px;
+  }
+  .mainTitle {
+    font-size: 2rem;
+  }
+  .titleRow {
+    max-width: 90%;
+  }
+  .packageGrid {
+    grid-template-columns: 1fr; // Stack cards vertically
+    gap: 20px;
+    max-width: 400px; // Limit width on mobile
+  }
+  .packageCard {
+    padding: 20px;
+  }
+  .priceValue {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainTitle {
+    font-size: 1.8rem;
+  }
+  .toggleButton {
+    padding: 6px 18px;
+    font-size: 0.8rem;
+  }
+  .priceValue {
+    font-size: 2rem;
+  }
+  .descriptionItem {
+    font-size: 0.9rem;
+  }
+  .applyButton {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}

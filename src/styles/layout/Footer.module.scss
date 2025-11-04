@@ -1,0 +1,77 @@
+@import '@/styles/animations.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/globals.scss';
+
+.footer {
+  width: 100%;
+  padding: 30px;
+  font-family: 'Bionix';
+  font-size: 2rem;
+  background-color: #0037c0;
+
+  .fix {
+    @include flex-column;
+    @include width-fix;
+  }
+
+  .copyrights {
+    @include flex-row;
+    align-items: center;
+    justify-content: start;
+    gap: 12px;
+    color: var(--font-color-primary);
+
+    .name {
+      @include flex-row-inline;
+      gap: 10px;
+      align-items: center;
+      font-weight: $font-weight-medium;
+
+      .logo {
+        @include background-contain;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: auto;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      @include flex-row-inline;
+      gap: 6px;
+      align-items: center;
+
+      .link {
+        @include flex-row;
+        align-items: center;
+        color: var(--white-color);
+        font-family: 'Montserrat';
+        font-size: $font-size-m;
+
+        .icon {
+          font-size: $font-size-xl;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .footer {
+    overflow-x: hidden; // Prevent horizontal overflow
+
+    .copyrights {
+      font-size: $font-size-s; // Adjust font size on small screens
+
+      .container {
+        gap: 10px; // Adjust gap for smaller screens
+      }
+    }
+
+    .fix {
+      width: 100%; // Ensure it's fully contained within the footer width
+    }
+  }
+}

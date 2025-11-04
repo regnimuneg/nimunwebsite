@@ -1,0 +1,371 @@
+@font-face {
+  font-family: 'Bionix', 'Montserrat';
+  src: url('/fonts/Bionix.otf') format('opentype'); /* Correct relative path */
+  font-weight: normal;
+  font-style: normal;
+}
+.container {
+  text-align: center;
+  background-color: #f8f9fa;
+  height: auto;
+  padding-top: 5rem;
+
+  h1 {
+    font-size: 3rem;
+    padding: 4rem 4rem 0 4rem;
+    text-align: left;
+    color: #0037c0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Bionix';
+  }
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: row; /* Align elements horizontally */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center the entire group */
+  font-family: 'Montserrat';
+  font-size: 20px;
+  padding: 2rem 4rem;
+
+  // Divider
+  .divider {
+    height: 200px; /* Keep the divider vertical */
+    width: 12px;
+    background-color: #0037c0;
+    align-items: center;
+    margin: auto; /* Ensures the divider is centered in its container */
+  }
+
+  p {
+    font-family: 'Montserrat';
+    padding: 2rem;
+    line-height: 2rem;
+    font-weight: 500;
+  }
+}
+
+.annualConferencesContainer {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+  gap: 1rem; /* Adds spacing between the heading and the dividers */
+
+  .sideDivider {
+    flex: 1; /* Ensures the dividers stretch to fill the available space */
+    height: 40px; /* Adjust thickness */
+    width: 210px;
+    margin: auto; /* Ensures the divider is centered in its container */
+    background-color: #0037c0; /* Change to match your design */
+  }
+  h3 {
+    text-align: center;
+    font-weight: bolder;
+    font-family: 'Montserrat';
+    font-size: 45px;
+  }
+}
+
+.boxesContainer {
+  display: flex; /* Enables flex properties for alignment */
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  gap: 100px; /* Space between the boxes */
+  padding: 1rem 1rem 5rem 1rem;
+  .box {
+    background-color: #f4f4f4;
+    color: #000000;
+    font-size: 27px;
+    font-family: 'Bionix';
+    font-weight: bold;
+    padding: 2rem 3rem;
+    border: 6px solid #0037c0;
+    border-radius: 8px;
+    width: 600px;
+    height: 100px;
+    text-transform: uppercase;
+    display: flex; /* Ensures content inside the box is flex-aligned */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    text-align: center; /* Aligns text in the center */
+    box-sizing: border-box; /* Includes padding and border in width/height */
+  }
+}
+
+.detailsContainer {
+  padding: 0 4rem;
+  h3 {
+    font-family: 'Montserrat';
+    font-size: 40px;
+    font-weight: 600;
+    text-align: left;
+    padding: 20px 0;
+  }
+  .Statistics {
+    display: flex;
+    padding: 1rem 0;
+  }
+  //NIMUN stats
+  .StatDivider {
+    background-color: #0037c0;
+    height: auto;
+    width: 10px;
+  }
+  .StatText {
+    font-family: 'Montserrat';
+    font-size: 20px;
+    color: black;
+    padding: 1.5rem;
+    margin: auto;
+  }
+  img {
+    margin: auto;
+  }
+  .StatItem {
+    margin: auto;
+    padding: 1rem;
+    .StatNumber {
+      font-family: 'Bionix';
+      margin: auto;
+      font-size: 3rem;
+    }
+    .StatLabel {
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'Montserrat';
+      margin: auto;
+    }
+  }
+}
+
+.decorativeLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px; /* Adjust spacing between title and line */
+  position: relative;
+  width: 35%; /* Matches the width of the text */
+  height: 3.5px; /* Line thickness */
+  background-color: black; /* Blue color for the line */
+}
+.decorativeLine::after {
+  content: '';
+  position: absolute;
+  right: 0; /* Places the dot at the far-right end */
+  width: 10px; /* Size of the dot */
+  height: 10px;
+  background-color: black; /* Same blue color as the line */
+  border-radius: 50%; /* Makes it a perfect circle */
+}
+.skyline {
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: block; /* Removes inline spacing */
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ensures it fits fully */
+}
+
+@media (max-width: 900px) {
+  // Tablet styles
+  .container {
+    padding-top: 3rem;
+
+    h1 {
+      font-size: 2.5rem;
+      padding: 3rem 2rem 0 2rem;
+      text-align: center;
+    }
+  }
+
+  .descriptionContainer {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 1rem 2rem;
+
+    .divider {
+      height: 12px; /* Make the divider horizontal */
+      width: 100px; /* Adjust width */
+      margin: 1rem auto;
+    }
+
+    p {
+      padding: 1rem;
+      font-size: 18px;
+    }
+  }
+
+  .annualConferencesContainer {
+    flex-direction: column; /* Stack vertically */
+    gap: 0.5rem;
+
+    .sideDivider {
+      height: 700px; /* Adjust thickness */
+      width: 100%; /* Stretch across container */
+    }
+
+    h3 {
+      font-size: 30px;
+    }
+  }
+
+  .boxesContainer {
+    flex-direction: row; /* Stack vertically */
+    gap: 1rem;
+
+    .box {
+      display: flex;
+      width: 50%;
+      font-size: 22px;
+    }
+  }
+
+  .detailsContainer {
+    padding: 0 2rem;
+
+    h3 {
+      font-size: 30px;
+    }
+
+    .Statistics {
+      flex-direction: row;
+    }
+
+    .StatText {
+      font-size: 18px;
+      padding: 1rem;
+    }
+
+    .StatItem {
+      .StatNumber {
+        font-size: 2.5rem;
+      }
+      .StatLabel {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .decorativeLine {
+    width: 50%;
+    height: 2px;
+  }
+
+  .decorativeLine::after {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 700px) {
+  // Mobile styles
+  .container {
+    padding-top: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      padding: 2rem 1rem 0 1rem;
+      text-align: center;
+    }
+  }
+
+  .descriptionContainer {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 1rem;
+
+    .divider {
+      height: 8px; /* Make the divider horizontal */
+      width: 50px; /* Adjust width */
+      margin: 1rem auto;
+    }
+
+    p {
+      padding: 0.5rem;
+      font-size: 16px;
+    }
+  }
+
+  .annualConferencesContainer {
+    flex-direction: column; /* Stack vertically */
+    gap: 0.5rem;
+
+    .sideDivider {
+      height: 8px; /* Adjust thickness */
+      width: 80%; /* Stretch across container */
+    }
+
+    h3 {
+      font-size: 24px;
+    }
+  }
+
+  .boxesContainer {
+    flex-direction: column; /* Stack vertically */
+    gap: 0.5rem;
+
+    .box {
+      width: 95%;
+      height: auto;
+      font-size: 18px;
+      padding: 1rem;
+    }
+  }
+
+  .detailsContainer {
+    padding: 0 1rem;
+
+    h3 {
+      font-size: 24px;
+    }
+
+    .Statistics {
+      flex-direction: column;
+      img {
+        order: 0; /* Ensure the stat item comes last */
+        width: 100px;
+        height: auto;
+      }
+    }
+
+    .StatText {
+      font-size: 16px;
+      order: 3; /* Ensure the stat item comes last */
+    }
+    .StatItem {
+      order: 1; /* Ensure the stat item comes last */
+
+      .StatNumber {
+        font-size: 2rem;
+      }
+      .StatLabel {
+        font-size: 1.5rem;
+      }
+    }
+    .StatDivider {
+      background-color: #0037c0;
+      width: 100%;
+      height: 3px;
+      order: 2; /* Divider comes after the paragraph */
+    }
+  }
+
+  .decorativeLine {
+    width: 70%;
+    height: 1.5px;
+  }
+
+  .decorativeLine::after {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  .detailsContainer {
+    h3 {
+      font-size: 20px;
+    }
+  }
+}

@@ -1,0 +1,117 @@
+@import '@/styles/animations.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/globals.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  padding: 50px 0;
+}
+
+.card {
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  background-color: white;
+  text-align: left; /* Align text to the left */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-family: 'Bionix';
+  margin: 20px;
+  text-align: auto;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0033cc; /* Matches the blue color in the screenshot */
+}
+
+.content {
+  display: flex;
+  flex-direction: row; /* Layout side-by-side */
+  justify-content: space-between; /* Space out the sections */
+  align-items: flex-start; /* Align items to the top */
+  gap: 20px; /* Add gap between map and contact details */
+  width: 100%;
+}
+
+.gps {
+  margin: 20px;
+  width: 90%;
+}
+
+.gps iframe {
+  border-radius: 10px;
+  width: 100%; /* Full width of container */
+  height: 250px; /* Adjust height as necessary */
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align contact details to the left */
+  gap: 20px;
+  width: 90%; /* Set width for contact details */
+}
+
+.contactIcons {
+  display: flex;
+  justify-content: space-evenly; /* Evenly space icons */
+  align-items: center; /* Vertically center icons */
+  width: 100%; /* Take full width of container */
+  .iconLink {
+    background-color: #0033cc; /* Blue background for icons */
+    color: #fff; /* White icon color */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.1); /* Slight zoom on hover */
+    }
+  }
+}
+
+.contactText {
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 20px;
+  .contactItem {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add spacing between icon and text */
+    margin-bottom: 30px;
+
+    .icon {
+      color: #0033cc;
+      font-size: 1.5rem; /* Larger icon size */
+    }
+
+    span {
+      font-size: 1.1rem; /* Adjust text size */
+    }
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  .content {
+    flex-direction: column; /* Stack content vertically */
+    gap: 10px;
+    flex: 1;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 450) {
+  .title {
+    font-size: 20px !important;
+  }
+}

@@ -1,0 +1,455 @@
+@import '../animations.scss';
+@import '../mixins.scss';
+@import '../globals.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+$height: 55px;
+$header-border-radius: 30px;
+
+.header {
+  font-family: 'Montserrat' !important;
+  position: fixed;
+  z-index: 10;
+  top: 20px; // Position below the top edge
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; // Adjust width as needed
+  max-width: 1400px; // Max width for large screens
+  transition: box-shadow $transition-s $transition-ease; // Only transition shadow now
+  background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background ALWAYS
+  backdrop-filter: blur(10px);
+  height: auto;
+  border-radius: $header-border-radius; // Rounded ALWAYS
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Initial shadow
+
+  .fix {
+    @include flex-row;
+    justify-content: space-between;
+    padding: 5px 15px; // Adjust padding inside the header
+    margin: auto;
+    align-items: center;
+    min-height: 60px; // Ensure minimum height
+  }
+
+  // New container for Logo + Nav links
+  .leftSideContainer {
+    display: flex;
+    align-items: center;
+    gap: 30px; // Gap between logo and nav links
+  }
+
+  .logoWrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    // Removed padding-left, handled by leftSideContainer gap
+
+    .logo {
+      margin-right: 15px;
+      height: $height;
+      width: auto;
+      flex-shrink: 0; // Prevent logo from shrinking
+    }
+
+    .textWrapper {
+      display: flex;
+      flex-direction: column;
+      color: #333;
+      line-height: 1.3;
+
+      .mainText {
+        font-size: 0.9rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .subText {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-top: 0px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  // Navigation bar itself (inside leftSideContainer on desktop)
+  .navbar {
+    @include flex-row;
+    gap: 25px; // Gap between nav buttons
+    align-items: center;
+    margin: 0;
+    .navButton {
+      color: #333;
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #fff;
+        color: #0037c0;
+        border-color: #eee;
+      }
+    }
+  }
+
+  // Container for the right-side elements (NIMUN text, Apply button)
+  .rightSideContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    border-radius: 100px;
+
+    padding-right: 0px; // Add some padding on the right
+  }
+
+  .nimunText {
+    color: #000; // Black text
+    font-family: 'Bionix';
+    font-weight: bold; // Bold
+    font-size: 1.2rem;
+    display: flex; // To center text vertically
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 0px;
+    background-color: transparent; // Ensure no extra background
+  }
+  .applyButton {
+    background-color: #0037c0;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: #002ca6;
+    }
+  }
+}
+
+// Styles for the sticky header state - ONLY add shadow, keep other styles the same
+.header.stick {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); // Slightly stronger shadow when sticky
+  // REMOVED: top, width, background-color, border-radius changes
+}
+
+// Hamburger button for mobile
+.hamburgerButton {
+  color: #0037c0;
+  // Ensure it's properly positioned on the right when menu is hidden
+  margin-left: auto;
+}
+
+// Mobile Drawer Styles - ENHANCED
+.drawerPaper {
+  width: 280px; // Slightly wider for better appearance
+  background-color: rgba(255, 255, 255, 0.95); // Semi-transparent background
+  backdrop-filter: blur(10px); // Blur effect like desktop header
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1); // Add shadow for depth
+  border-radius: 0 0 0 15px; // Rounded bottom-left corner
+}
+
+.drawerContent {
+  padding: 2rem 1.5rem; // More padding for better spacing
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; // Increased gap between elements
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(240, 240, 250, 0.8)
+  ); // Subtle gradient background
+  height: 100%; // Full height
+  border-left: 1px solid rgba(230, 230, 250, 0.5); // Subtle border
+
+  // Styles for Menu component inside drawer
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px; // Increased gap between nav items
+    order: 1; // Ensure Menu appears first
+    margin-top: 10px; // Add some space at the top
+
+    .navButton {
+      background-color: transparent;
+      color: #333;
+      padding: 12px 18px; // More padding for better touch targets
+      text-align: left;
+      border-radius: 10px; // More rounded corners
+      font-size: 1.1rem; // Larger font
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent; // Prepare for hover effect
+
+      &:hover {
+        background-color: rgba(240, 240, 255, 0.8);
+        border-left: 3px solid #0037c0; // Blue accent on hover
+        color: #0037c0;
+      }
+    }
+  }
+
+  // Styles for RightSideElements inside drawer - ENHANCED to match desktop
+  .rightSideContainer {
+    margin-top: 30px; // More space above
+    padding-top: 25px; // More padding
+    border-top: 1px solid rgba(200, 200, 250, 0.5); // Lighter, more subtle border
+    flex-direction: row; // Change to row like desktop
+    align-items: center; // Center items vertically
+    justify-content: center; // Center horizontally
+    gap: 10px; // Match desktop gap
+    background-color: white; // White background
+    border-radius: 100px; // Rounded corners like desktop
+    padding: 5px; // Add padding
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); // Subtle shadow
+    width: 90%; // Not full width
+    margin-left: auto;
+    margin-right: auto;
+
+    .nimunText {
+      text-align: center;
+      padding-left: 15px; // Add padding
+      font-size: 1.1rem; // Slightly smaller than desktop
+    }
+
+    .applyButton {
+      text-align: center;
+      background-color: #0037c0;
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: inline-block; // Ensure proper display
+
+      &:hover {
+        background-color: #002ca6;
+      }
+    }
+  }
+}
+
+// Media Queries
+@media screen and (max-width: 1050px) {
+  // Tablet breakpoint
+  .header {
+    width: 95%;
+    top: 10px;
+    .fix {
+      padding: 5px 10px;
+      min-height: 55px;
+    }
+    // Hide desktop nav links container
+    .leftSideContainer > .navbar {
+      display: none;
+    }
+    // Hide desktop right side container
+    .rightSideContainer {
+      display: none;
+    }
+  }
+  // Hamburger is displayed via Header.tsx logic
+}
+
+@media screen and (max-width: 600px) {
+  // Mobile breakpoint - UPDATED to match desktop styling
+  .header {
+    width: 90%; // Match desktop width percentage
+    top: 10px; // Position slightly below top like desktop
+    border-radius: $header-border-radius; // Keep rounded corners like desktop
+    background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background like desktop
+    backdrop-filter: blur(10px); // Blur effect like desktop
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Same shadow as desktop
+
+    .fix {
+      padding: 5px 10px;
+      min-height: 50px;
+    }
+    .leftSideContainer {
+      gap: 15px; // Reduce gap on mobile if needed
+    }
+    .logoWrapper {
+      .logo {
+        height: 35px;
+        margin-right: 10px;
+      }
+      .textWrapper {
+        .mainText,
+        .subText {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+  // Drawer styles are defined above
+}
+
+// Container for each nav item to position the dropdown
+.navItemContainer {
+  position: relative; // Needed for absolute positioning of the dropdown
+  display: inline-block; // Or flex item if navbar is flex
+}
+
+// Style for the anchor tag wrapping the button
+.navLink {
+  display: inline-block; // Ensures the link takes up space correctly
+  text-decoration: none; // Remove default underline
+  color: inherit; // Inherit text color
+  cursor: pointer; // Use pointer cursor
+
+  // Apply hover effect to the link wrapper for a larger hover area (optional)
+  // &:hover {
+  //   .navButton { // Target the button inside on hover
+  //     opacity: 0.8;
+  //   }
+  // }
+}
+
+// Style for the dropdown menu itself
+.dropdownMenu {
+  position: absolute;
+  top: 100%; // Position below the button
+  left: 0;
+  background-color: #fff; // Example background, adjust to your theme
+  border: 1px solid #eee; // Example border
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Example shadow
+  padding: 8px 0; // Padding top/bottom
+  min-width: 180px; // Minimum width for the dropdown
+  z-index: 1000; // Ensure it appears above other content
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+  margin-top: 5px; // Small gap between button and dropdown
+
+  // Styles for mobile/tablet where it might open differently
+  @media (max-width: 1050px) {
+    position: static; // Change position for mobile toggle
+    box-shadow: none;
+    border: none;
+    background-color: rgba(245, 245, 255, 0.5); // Light background
+    border-radius: 8px; // Rounded corners
+    padding: 5px 0; // Add some padding
+    margin-top: 5px; // Add a small top margin for spacing in the drawer
+    width: 100%; // Take full width within the drawer/mobile menu
+    display: flex; // Use flex for vertical stacking
+    flex-direction: column;
+    align-items: flex-start; // Align items to the start
+  }
+}
+
+// Style for individual items within the dropdown
+.dropdownItem {
+  display: block;
+  padding: 10px 20px; // Padding for each item
+  color: #333; // Example text color
+  text-decoration: none;
+  white-space: nowrap; // Prevent wrapping
+  font-size: 0.9rem; // Adjust font size as needed
+  font-family: 'Montserrat'; // Use the Montserrat variable
+
+  &:hover {
+    background-color: #f5f5f5; // Example hover background
+    color: #000; // Example hover text color
+  }
+
+  @media (max-width: 1050px) {
+    padding: 12px 15px; // Adjust padding for mobile
+    width: 100%; // Ensure items take full width
+    color: #444; // Slightly darker text
+    font-size: 1rem; // Slightly smaller than main mobile nav items
+    border-left: 2px solid transparent; // Prepare for hover effect
+
+    &:hover {
+      background-color: rgba(240, 240, 255, 0.8); // Light blue hover
+      border-left: 2px solid #0037c0; // Blue accent on hover
+      color: #0037c0;
+    }
+  }
+}
+
+// Optional: Style for the dropdown indicator (e.g., chevron)
+.dropdownIndicator {
+  margin-left: 6px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid currentColor; // Arrow pointing down
+  transition: transform 0.2s ease-in-out;
+
+  // Rotate arrow when dropdown is open
+  // Target the link which has the aria-expanded attribute
+  .navLink[aria-expanded='true'] & {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 1050px) {
+    // Optionally hide or change indicator on mobile
+    // display: none;
+  }
+}
+
+// Ensure nav buttons have consistent styling
+// This targets the StyledButton component itself
+.navButton {
+  color: inherit; // Inherit color from header/parent
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px; // Example padding
+  font-size: 1rem; // Example font size
+  text-transform: uppercase; // Match existing style
+  font-weight: 600; // Example weight
+  display: inline-flex; // Helps align text and indicator
+  align-items: center;
+  width: 100%; // Make button fill the link wrapper
+  justify-content: space-between; // Push indicator to the right if needed, or center
+
+  &:hover {
+    // Define hover state if needed (or handle on .navLink hover)
+    opacity: 0.8;
+  }
+}
+
+// Adjustments for mobile drawer context if needed
+.drawerContent {
+  .navItemContainer {
+    display: block; // Stack items vertically
+    width: 100%;
+  }
+  .navLink {
+    display: block; // Make link take full width
+    width: 100%;
+  }
+  .navButton {
+    width: 100%;
+    text-align: left;
+    padding: 15px; // Drawer padding
+    font-size: 1.1rem;
+    justify-content: flex-start; // Align text left in drawer
+  }
+  .dropdownMenu {
+    // Styles already adjusted via media query above
+    padding-left: 15px; // Indent submenu items in drawer
+  }
+}

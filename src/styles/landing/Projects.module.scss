@@ -1,0 +1,311 @@
+@import '@/styles/animations.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/globals.scss';
+
+.blueBanner {
+  // position: absolute;
+  display: block;
+  top: 0;
+  padding-top: 50px;
+  margin-top:60px;
+  left: 0;
+  width: 100%;
+  height:auto;
+  z-index: -1; // Send the banner to the back
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+.stats {
+  // position: absolute;
+  top: 0;
+  margin-top:120px;
+  left: 0;
+  width:100%;
+  height:auto;
+  z-index: -1; // Send the banner to the back
+}
+.container {
+  width: 100%;
+  position: relative;
+  padding: 0 100px;
+
+  .slider {
+    overflow: hidden; // Hide the scrollbar
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .projectContainer {
+    display: flex;
+    align-items: center;
+    height: 700px;
+    gap: 50px; // Space between cards
+  }
+
+  .projectCard {
+    @include flex-column;
+    flex: 0 0 400px; // Ensure cards have a fixed width
+    height: 590px; // Increase the height of the cards
+    padding-top: 0px;
+    padding-bottom: 20px;
+    
+    border: 4px solid BLUE;
+    border-radius: 10px;
+    // background-color: #F3F3F3;
+    ;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden; // Prevent overflow
+    align-items: center;
+    position: relative; // For positioning the button
+
+    .icon {
+      align-items: center;
+      justify-content: center;
+      font-size: 0px; // Increase the icon size
+      margin-bottom: 0px;
+    }
+    
+
+    .textContent {
+      align-items: center;
+      justify-content: center;
+      text-align: center; // Center text content
+
+      .title {
+        padding-left: 20px;
+        padding-right: 20px;
+        font-weight: bolder; // Increase font weight
+        font-size: $font-size-2xl;
+        color: blue;
+
+        margin-bottom: 10px;
+        background: #F9F9F9;
+        padding: 5px 10px; // Add padding for better appearance
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+     
+      }
+
+      .accent {
+        font-size: $font-size-l;
+        font-weight: $font-weight-medium;
+        margin-bottom: 20px;
+        color: #000000A1;
+      }
+
+      .description {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top:30px;
+        font-weight: $font-weight-regular;
+        font-size: $font-size-l;
+        color: #000;
+        .bold {
+          font-weight: $font-weight-semibold;
+          color: var(--font-color-primary);
+        }
+      }
+    }
+
+    .applyButton {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: $font-size-l;
+      font-weight: $font-weight-semibold;
+      background-color: #7E9ECD;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: blue;
+      }
+    }
+  }
+
+  .scrollButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #7E9ECD;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white; // White icon color
+    font-size: 24px; // Increase icon size
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.left {
+      left: 75px;
+      margin-top:30px;
+      z-index: 10;
+    }
+
+    &.right {
+      right: 75px;
+      margin-top: 30px;
+      z-index: 10;
+    }
+
+    &:hover {
+      background-color: blue; // Darker shade on hover
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .blueBanner {
+    display: flex;
+    flex: 1;
+    position: relative;
+    margin-top: 50px;
+    margin: 10px !important; /* Center the banner horizontally */
+    width: 80%; /* Set width to 100% to maintain size */
+    height: auto;
+    overflow: hidden; /* Hide the overflowing content */
+    z-index: -1; /* Send the banner to the back */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 70%;
+  }
+  .stats {
+    // position: absolute;
+    top: 0;
+    margin-top:100px;
+    left: 0;
+    height:auto;
+    z-index: -1; // Send the banner to the back
+  }
+  .container {
+    padding-top:0px;
+    padding: 0 2px !important;
+    .projectContainer {
+      display: flex;
+      align-items: center;
+      height: 600px;
+      gap: 20px; // Space between cards
+    }
+
+    .projectCard {
+      @include flex-column;
+      flex: 0 0 290px; // Ensure cards have a fixed width
+      height: 450px; // Increase the height of the cards
+      padding-top: 10px;
+      padding-bottom:0px;
+      border: 3px solid blue;
+      border-radius: 10px;
+      background-color: transparent;
+      box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+      overflow: hidden; // Prevent overflow
+      align-items: center;
+      position: relative; // For positioning the button
+
+      .icon {
+        padding-top:0px;
+        align-items: center;
+        justify-content: center;
+        
+      }
+
+      .textContent {
+        align-items: center;
+        justify-content: center;
+        text-align: center; // Center text content
+
+        .title {
+          font-weight: bolder; // Increase font weight
+          font-size: $font-size-2xl;
+          color: #0037c0;
+
+          width:100%;
+          padding:0px;
+          margin-bottom: 10px;
+          background: #F9F9F9; // Add background color
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .accent {
+          font-size: $font-size-l;
+          font-weight: $font-weight-medium;
+          margin-bottom: 10px;
+          color: #000000A1;
+        }
+
+        .description {
+          margin-top:30px;
+          font-weight: $font-weight-regular;
+          font-size: $font-size-m;
+          color: #000;
+
+
+          .bold {
+            font-weight: $font-weight-semibold;
+            color: var(--font-color-primary);
+          }
+        }
+      }
+
+      .applyButton {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        font-size: $font-size-m;
+        font-weight: $font-weight-semibold;
+        background-color: blue;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: blue;
+        }
+      }
+    }
+
+    .scrollButton {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #7E9ECD;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      color: white; // White icon color
+      font-size: 24px; // Increase icon size
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.left {
+        left: 1px;
+        margin-top: 35px;
+        z-index: 10;
+      }
+
+      &.right {
+        right: 1px;
+        margin-top: 35px;
+        z-index: 10;
+      }
+
+      &:hover {
+        background-color: blue; // Darker shade on hover
+      }
+    }
+  }
+}  

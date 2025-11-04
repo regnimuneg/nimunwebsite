@@ -1,0 +1,465 @@
+.container {
+  text-align: center;
+  background-color: #f8f9fa;
+  height: auto;
+  padding: 5rem 0;
+  
+  h1 {
+    font-size: 3rem;
+    padding: 5rem 5rem 2rem 5rem;
+    text-align: left;
+    color: #0037c0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Bionix';
+  }
+
+  .floatingShape {
+    position: absolute;
+    top: 150px; // Move it lower (adjust value as needed)
+    left: -350px; // Adjust this if you want it further or closer to the right
+    width: 500px; // Ensure size consistency
+    rotate: 35deg;
+    height: auto; // Maintain aspect ratio
+    z-index: 2; // Keep it above other elements
+    pointer-events: none; // Prevent interaction if necessary
+  }
+
+  .floatingShapeRight {
+    position: absolute;
+    top: -150px; // Move it lower (adjust value as needed)
+    right: -400px; // Adjust this if you want it further or closer to the right
+    width: 600px; // Ensure size consistency
+    height: auto; // Maintain aspect ratio
+    z-index: 2; // Keep it above other elements
+    rotate: 35deg;
+    pointer-events: none; // Prevent interaction if necessary
+  }
+
+  .image-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .content-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #0037c0;
+    color: white;
+    height: 100%;
+    font-size: 4rem;
+  }
+
+
+
+  .MissionHead {
+    font-size: 2rem; // Make the title larger
+    padding-left: 0px;
+    font-weight: bold;
+    margin-bottom: 1rem; // Add spacing below the title
+    font-family: 'Montserrat';
+    text-align: left; // Align the title to the left
+    hyphens: auto;
+    word-spacing: normal;
+    letter-spacing: normal;
+  }
+
+  .VisionHead {
+    font-size: 2rem; // Make the title larger
+    padding-left: 0px;
+    font-weight: bold;
+    margin-bottom: 1rem; // Add spacing below the title
+    font-family: 'Montserrat';
+    text-align: left; // Align the title to the left
+  }
+
+  .MissionTxt {
+    font-size: 20px;
+    text-align: justify;
+  }
+
+  .VisionTxt {
+    font-size: 20px;
+    text-align: justify;
+  }
+
+
+}
+
+.milestonesContainer {
+  padding: 6rem 5rem;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.milestonesHeading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #0037c0;
+  margin-bottom: 2rem;
+  text-align: left;
+  font-family: 'Montserrat' ;
+  padding-left: 0px;
+  
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  border: 69px solid #0037c0;
+  border-width: 69px 14px 14px 14px;
+  padding: 3rem;
+  background-color: #fff;
+}
+.floatingShapeRightM {
+  position: absolute;
+  top: 1100px; // Move it lower (adjust value as needed)
+  right: -250px; // Adjust this if you want it further or closer to the right
+  width: 500px; // Ensure size consistency
+  height: auto; // Maintain aspect ratio
+  rotate: -15deg;
+  z-index: 2; // Keep it above other elements
+  pointer-events: none; // Prevent interaction if necessary
+}
+
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.milestoneYear {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-right: 50px;
+  color: black;
+  font-family: 'Bionix' !important;
+  width: 100px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.verticalLine {
+  width: 20px;
+  height: 150px;
+  margin-top: 22px;
+  background-color: #0037c0;
+  align-self: center;
+}
+
+.milestoneText {
+  font-size: 1.5rem;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 80%;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.decorativeLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -5px 0 30px 0;
+  position: relative;
+  width: 20%;
+  height: 4px;
+  background-color: #0037c0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: #0037c0;
+    border-radius: 50%;
+  }
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 600px) {
+  .container {
+    text-align: center;
+    padding: 2rem rem; /* Adjust padding for smaller screens */
+
+    h1 {
+      font-size: 2rem; /* Smaller font size for headings */
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center; /* Center-align for small screens */
+    }
+
+    .floatingShape {
+      top: 350px; /* Adjust positioning for smaller screens */
+      left: -120px; /* Adjust as needed */
+      width: 200px; /* Reduce size */
+    }
+
+    .floatingShapeRight {
+      top: -50px; /* Adjust positioning for smaller screens */
+      right: -290px; /* Adjust as needed */
+      width: 350px; /* Reduce size */
+    }
+
+    .floatingShapeRightM {
+      top: 1450px; /* Adjust lower positioning */
+      right: -200px; /* Move closer */
+      width: 300px; /* Resize */
+    }
+
+    .MissionHead {
+      text-align: center;
+    }
+
+    .VisionHead {
+      text-align: center;
+    }
+
+    .MissionTxt {
+      hyphens: auto;
+    }
+
+    .VisionTxt {
+      hyphens: auto;
+    }
+  }
+
+  .milestonesContainer {
+    padding: 3rem 2.2rem; /* Reduce padding */
+  }
+
+  .milestonesHeading {
+    font-size: 2rem; /* Smaller font size */
+    text-align: left; /* Center-align */
+  }
+
+  .timeline {
+    border-width: 40px 14px 14px 14px; /* Adjust border thickness */
+    padding: 2rem 1.2rem; /* Reduce padding */
+  }
+
+  .milestone {
+    flex-direction: column; /* Stack content vertically */
+    gap: 0.5rem; /* Reduce gap between elements */
+    align-items: center; /* Center-align */
+  }
+
+  .milestoneYear {
+    font-size: 1.8rem; /* Adjust size */
+    margin-right: 0; /* Remove margin for stacked layout */
+    text-align: center;
+  }
+
+  .verticalLine {
+    width: 80%; /* Thinner vertical line */
+    height: 10px; /* Adjust height */
+    margin-top: -15px;
+    align-self: center;
+  }
+
+  .milestoneText {
+    font-size: 1.2rem; /* Smaller font size */
+    max-width: 80%; /* Allow text to take full width */
+    text-align: center; /* Center-align */
+  }
+
+  .decorativeLine {
+    width: 70%; /* Adjust width */
+    height: 3px; /* Adjust thickness */
+    margin: -5px 0 20px 0; /* Adjust margins */
+  }
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .container {
+    text-align: center;
+    padding: 2rem rem; /* Adjust padding for smaller screens */
+
+    h1 {
+      font-size: 2rem; /* Smaller font size for headings */
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center; /* Center-align for small screens */
+    }
+
+    .floatingShape {
+      top: 300px; /* Adjust positioning for smaller screens */
+      left: -100px; /* Adjust as needed */
+      width: 200px; /* Reduce size */
+    }
+
+    .floatingShapeRight {
+      top: -50px; /* Adjust positioning for smaller screens */
+      right: -290px; /* Adjust as needed */
+      width: 350px; /* Reduce size */
+    }
+
+    .floatingShapeRightM {
+      top: 1250px; /* Adjust lower positioning */
+      right: -120px; /* Move closer */
+      width: 300px; /* Resize */
+    }
+
+    .MissionHead {
+      text-align: center;
+    }
+
+    .VisionHead {
+      text-align: center;
+    }
+
+    .MissionTxt {
+      hyphens: auto;
+    }
+
+    .VisionTxt {
+      hyphens: auto;
+    }
+  }
+
+  .milestonesContainer {
+    padding: 3rem 1.1rem; /* Reduce padding */
+  }
+
+  .milestonesHeading {
+    font-size: 2rem; /* Smaller font size */
+    text-align: left; /* Center-align */
+  }
+
+  .timeline {
+    border-width: 40px 13px 13px 13px; /* Adjust border thickness */
+    padding: 1.5rem 1.2rem; /* Reduce padding */
+  }
+
+  .milestone {
+    flex-direction: row; /* Stack content vertically */
+    gap: 0.5rem; /* Reduce gap between elements */
+    align-items: center; /* Center-align */
+  }
+
+  .milestoneYear {
+    font-size: 1.8rem; /* Adjust size */
+    margin: 0; /* Vertical spacing */
+    margin-top: -20px;
+    text-align: left; /* Align text content to the left */
+    flex-shrink: 0; /* Prevent the year from resizing in flex layout */
+  }
+  
+
+
+  .verticalLine {
+    width: 3px; /* Thinner vertical line */
+    height: 100px; /* Adjust height */
+    margin-left: 20px;
+    margin-top: 8px;
+  }
+
+  .milestoneText {
+    font-size: 1.2rem; /* Smaller font size */
+    max-width: 65%; /* Allow text to take full width */
+    text-align: right; /* Center-align */
+    margin-left: 20px;
+  }
+
+  .decorativeLine {
+    width: 15%; /* Adjust width */
+    height: 3px; /* Adjust thickness */
+    margin: -20px 0 20px 0; /* Adjust margins */
+  }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1000px) {
+  .container {
+    text-align: center;
+    padding: 2rem rem; /* Adjust padding for smaller screens */
+
+    h1 {
+      font-size: 2.5rem; /* Smaller font size for headings */
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center; /* Center-align for small screens */
+    }
+
+    .floatingShape {
+      top: 300px; /* Adjust positioning for smaller screens */
+      left: -100px; /* Adjust as needed */
+      width: 200px; /* Reduce size */
+    }
+
+    .floatingShapeRight {
+      top: -50px; /* Adjust positioning for smaller screens */
+      right: -290px; /* Adjust as needed */
+      width: 350px; /* Reduce size */
+    }
+
+    .floatingShapeRightM {
+      top: 690px; /* Adjust lower positioning */
+      right: -140px; /* Move closer */
+      width: 400px; /* Resize */
+    }
+
+
+    .MissionTxt {
+      hyphens: auto;
+    }
+
+    .VisionTxt {
+      hyphens: auto;
+    }
+  }
+
+  .milestonesContainer {
+    padding: 3rem 4rem; /* Reduce padding */
+  }
+
+  .milestonesHeading {
+    font-size: 3.3rem; /* Smaller font size */
+    text-align: left; /* Center-align */
+  }
+
+  .timeline {
+    border-width: 69px 20px 20px 20px; /* Adjust border thickness */
+    padding: 2rem 2rem; /* Reduce padding */
+    
+  }
+
+  .milestone {
+    flex-direction: row; /* Stack content vertically */
+    gap: 3.5rem; /* Reduce gap between elements */
+    align-items: center; /* Center-align */
+  }
+
+  .milestoneYear {
+    font-size: 2rem; /* Adjust size */
+    margin: 20px 0; /* Vertical spacing */
+    text-align: left; /* Align text content to the left */
+    flex-shrink: 0; /* Prevent the year from resizing in flex layout */
+  }
+  
+
+
+  .verticalLine {
+    width: 30px; /* Thinner vertical line */
+    height: 100px; /* Adjust height */
+    margin-top: 50px;
+  }
+
+  .milestoneText {
+    font-size: 1.5rem; /* Smaller font size */
+    max-width: 80%; /* Allow text to take full width */
+    text-align: left; /* Center-align */
+    margin-left: 20px;
+  }
+
+  .decorativeLine {
+    width: 40%; /* Adjust width */
+    height: 3px; /* Adjust thickness */
+    margin: -20px 0 20px 0; /* Adjust margins */
+  }
+} 
+

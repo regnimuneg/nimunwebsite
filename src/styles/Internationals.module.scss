@@ -1,0 +1,79 @@
+@import '@/styles/animations.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/globals.scss';
+
+.container {
+  text-align: center;
+  background-color: #f8f9fa;
+  height: auto;
+  padding: 5rem;
+
+  h1 {
+    font-size: 3rem;
+    padding: 5rem 0 0 0;
+    text-align: center;
+    color: #0037c0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Bionix';
+  }
+}
+
+.applyButton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 40px;
+  margin-bottom: 10px;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  background-color: #7e9ecd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0037c0;
+  }
+}
+
+.applyButton2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 40px;
+  margin-bottom: 10px;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  background-color: #7e9ecd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0037c0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    padding: 50px;
+    h1 {
+      font-size: 1.75rem;
+      text-align: center;
+    }
+  }
+
+  .applyButton {
+    margin-top: 80px;
+    padding: 10px 20px;
+  }
+
+  .applyButton2 {
+    padding: 10px 20px;    
+  }
+}

@@ -1,0 +1,105 @@
+@import '@/styles/colors.scss';
+@import '@/styles/animations.scss';
+@import '@/styles/mixins.scss';
+@import '@/styles/globals.scss';
+@import '@/styles/splitted-container.scss';
+@import '@/styles/swiper.scss';
+@font-face {
+  font-family: 'Bionix';
+  src: url('/fonts/Bionix.otf') format('opentype'); /* Correct relative path */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Add other font weights and styles as needed */
+
+:root {
+  --font-family: 'Bionix' !important;
+}
+
+body {
+  font-family: var(--font-family) !important;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.width-fix {
+  margin: 0 auto;
+}
+
+.animated-container {
+  will-change: transform, opacity;
+}
+
+.animated-container-reverse {
+  will-change: transform, opacity;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+#__next {
+  position: relative;
+  max-width: 100vw;
+}
+
+html body {
+  background-color: #ffff;
+  font-size: $font-size-g-desktop;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--body-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--contrast-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--transparent-background);
+}
+
+@media screen and (max-width: 800px) {
+  html body {
+    font-size: $font-size-g-mobile;
+  }
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}

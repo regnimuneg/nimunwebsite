@@ -1,0 +1,229 @@
+.page {
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  text-align: center;
+  padding-top: 100px;
+
+}
+
+.PageTitle {
+  font-family: 'Bionix';
+  color: #0037c0;
+  font-size: 50px;
+}
+
+.sectionTitle {
+  font-family: 'Montserrat';
+  font-weight: 800;
+}
+
+.personImage {
+  width: 100%;
+  gap: 0px;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.personCircleContainer {
+  display: flex;
+  gap: 100px;
+
+  // flex-wrap: wrap; /* Enable wrapping */
+  justify-content: center;
+  // gap: 20px; /* Add gap between circles */
+}
+
+.AcContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* First row: 5 columns */
+  gap: 40px; /* Add gap between circles */
+  justify-content: center !important; /* Center items horizontally */
+  align-items: center !important; /* Center items vertically */
+  text-align: center !important; /* Center text within circles */
+}
+
+.RestAcContainer {
+  display: grid;
+  margin-top: 35px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 100px; /* Add gap between circles */
+  margin-left: 0px;
+  padding: 0px;
+}
+
+.organizingCommitteeContainer {
+  display: block;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.personCircle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  // margin:30px;
+}
+.floatingShapeLeft {
+  position: absolute;
+  top: 100px; // Move it lower (adjust value as needed)
+  left: -150px; // Adjust this if you want it further or closer to the right
+  width: 400px; // Ensure size consistency
+  height: auto; // Maintain aspect ratio
+  z-index: 2; // Keep it above other elements
+  pointer-events: none; // Prevent interaction if necessary
+}
+.floatingShapeRight {
+  position: absolute;
+  top: 2400px; // Move it lower (adjust value as needed)
+  right: -100px; // Adjust this if you want it further or closer to the right
+  width: 400px; // Ensure size consistency
+  height: auto; // Maintain aspect ratio
+  z-index: 2; // Keep it above other elements
+  pointer-events: none; // Prevent interaction if necessary
+}
+.blueCircle {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  background-color: #e6e6e6;
+  border: 7px solid #0037c0;
+}
+
+.whiteCircle {
+  background-color: #e6e6e6;
+  width: 190px; /* Adjust this value to resize the image container */
+  height: 190px; /* Same value for square shape */
+  display: flex; /* Center the image inside */
+  position: relative;
+  overflow: hidden; /* Ensure images don't overflow the whiteCircle */
+}
+
+.personDetails {
+  text-align: center;
+  font-family: 'Montserrat';
+}
+
+.personName {
+  font-weight: bold;
+  font-family: 'Montserrat';
+  font-size: medium;
+}
+
+.personPosition {
+  font-weight: normal;
+  font-size: small;
+  font-family: 'Montserrat';
+
+}
+
+.sectionTitle {
+  margin-top: 30px;
+  padding: 40px;
+  font-size: 1.5rem;
+  font-family: 'Montserrat';
+
+}
+
+.committeeSection {
+  margin-bottom: 40px;
+}
+
+.committeeTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  margin-bottom: 30px;
+}
+
+.divider {
+  display: flex;
+  align-self: center;
+  margin: 20px 0;
+  border: 0;
+  border-top: 2px solid #0037c0;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    padding-top: 50px; /* Adjust top padding */
+    padding-bottom: 50px; /* Adjust bottom padding */
+  }
+
+  .PageTitle {
+    margin-top: 30px;
+    padding-top: 50px;
+    font-size: 30px;
+  }
+
+  .divider {
+    align-self: center;
+  }
+
+  .floatingShapeLeft {
+    left: -50px; /* Reposition for smaller screens */
+    top: 180px; /* Adjust top spacing */
+    width: 150px; /* Resize shape */
+  }
+
+  .floatingShapeRight {
+    right: -40px; /* Reposition for smaller screens */
+    top: 4700px; /* Adjust top spacing */
+    width: 150px; /* Resize shape */
+  }
+  .blueCircle {
+    width: 200px;
+    height: 200px;
+    background-color: #e6e6e6;
+    border-radius: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: white;
+  }
+  .whiteCircle {
+    background-color: #e6e6e6;
+    width: 190px;
+    height: 190px;
+    border-radius: none;
+    position: relative; /* Added for absolute positioning of images */
+  }
+  .personCircle {
+    // margin:0px;
+  }
+  .personCircleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Add gap between circles */
+  }
+
+  .AcContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Add gap between circles */
+  }
+  .RestAcContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 40px; /* Add gap between circles */
+  }
+}

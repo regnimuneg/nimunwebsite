@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'Bionix';
+  src: url('/fonts/Bionix.otf') format('opentype'); /* Correct relative path */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Heavitas';
+  src: url('/fonts/Heavitas.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Heavitas';
+  src: url('/fonts/Heavitas.ttf') format('truetype'); /* Correct relative path */
+  font-weight: normal;
+  font-style: normal;
+}
+
+$border-radius-global: 10px;
+$max-width-global: 1300px;
+$padding-global: 20px;
+$font-size-g-desktop: 16px;
+$font-size-g-mobile: 12px;
+$font-size-es: 0.8rem;
+$font-size-s: 0.9rem;
+$font-size-r: 0.95rem;
+$font-size-m: 1rem;
+$font-size-em: 1.07rem;
+$font-size-l: 1.2rem;
+$font-size-el: 1.3rem;
+$font-size-xl: 1.4rem;
+$font-size-exl: 1.5rem;
+$font-size-2xl: 1.6rem;
+$font-size-3xl: 1.8rem;
+$font-size-4xl: 2rem;
+$font-size-5xl: 2.3rem;
+$font-size-6xl: 2.6rem;
+$font-size-7xl: 2.9rem;
+$font-size-8xl: 3.2rem;
+$font-size-9xl: 3.5rem;
+$font-size-10xl: 3.9rem;
+
+$font-weight-thinner: 100;
+$font-weight-thin: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 550;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+$transition-vs: 750ms;
+$transition-s: 500ms;
+$transition-m: 300ms;
+$transition-f: 200ms;
+$transition-vf: 80ms;
+
+$transition-ease: cubic-bezier(0.16, 1, 0.3, 1);
