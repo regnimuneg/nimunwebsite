@@ -182,7 +182,7 @@
 }
 
 .summarySection {
-  background: #0037c0;
+  background: transparent;
   border-radius: 0 0 0 0;
   padding: 0px 0 0 0;
   margin: 0;
@@ -198,14 +198,18 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 0;
+  padding-top: 60px;
+  padding-bottom: 30px;
+  background: linear-gradient(to bottom, rgba(0, 55, 192, 0.2) 5%, rgba(0, 55, 192, 0.5) 40%, #0037c0 100%);
+  position: relative;
 }
 .summaryTitle {
   color: #fff;
   font-size: 2.8rem;
   font-weight: 900;
   letter-spacing: 2px;
-  margin: 0 24px;
+  margin: 0;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
@@ -215,46 +219,59 @@
   background: #fff;
 }
 
-.summaryCard {
+.imageSection {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  background: transparent;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0037c0;
+  padding: 40px 20px 40px 20px;
+  margin-top: 0;
+}
+
+.summaryImageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.summaryImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 32px;
+  border: 4px solid #fff;
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 40px rgba(255, 255, 255, 0.4),
+    0 0 60px rgba(255, 255, 255, 0.2);
+}
+
+.summaryTextBlock {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  border-radius: 32px;
-  padding: 32px;
-  gap: 40px;
-  align-items: flex-start;
-  min-height: 350px;
-  justify-content: center;
-}
-
-.summaryTextBlock,
-.summaryImageWrapper {
-  width: 100%;
-  max-width: 600px;
-  min-width: 0;
-  flex: 0 0 600px;
+  padding: 40px 32px;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .summaryText {
-  color: #fff;
-  font-size: 1.25rem;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  line-height: 2.1rem;
+  color: #0037c0;
+  font-size: 2.1rem;
+  font-family: 'Montserrat';
+  font-weight: $font-weight-semibold;
+  // line-height: 2.1rem;
   margin: 0;
-  text-align: left;
-}
-.summaryImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 32px;
+  text-align: center;
+  max-width: 900px;
 }
 
 .summaryFooter {
@@ -264,7 +281,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px 16px 32px;
+  padding: 24px 32px;
+  background: #0037c0;
 }
 .footerLeft,
 .footerCenter,
@@ -281,12 +299,20 @@
   height: 58px;
   width: auto;
 }
+.footerLabel {
+  color: #fff;
+  font-family: 'Montserrat';
+  font-weight: bolder;
+  font-size: 3rem;
+  // letter-spacing: 0.16em;
+}
 .footerLine {
   width: 100%;
   height: 4px;
   background: #fff;
   border-radius: 2px;
-  margin-bottom: 12px;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 .footerLogos {
   display: flex;
@@ -297,67 +323,83 @@
 }
 .nimunLogo {
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Bionix';
   font-weight: 900;
-  font-size: 3rem;
+  font-size: 4rem;
   letter-spacing: 2px;
+}
+
+.paginationDots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a4a3a3;
+  display: inline-block;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+  cursor: pointer;
+}
+.active {
+  background: #fff;
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 0 2px #0037c0;
+  transform: scale(1.2);
 }
 
 // Responsive styles
 @media (max-width: 900px) {
-  .summaryCard {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 24px;
-    padding: 24px 8px;
-    max-width: 98vw;
-  }
-  .summaryTextBlock,
-  .summaryImageWrapper {
-    max-width: 98vw;
-    width: 100%;
-    flex: 1 1 100%;
+  .imageSection {
+    padding: 30px 15px;
   }
   .summaryImageWrapper {
-    min-width: 220px;
-    min-height: 180px;
+    max-width: 95%;
+  }
+  .summaryTextBlock {
+    padding: 30px 20px;
+  }
+  .summaryText {
+    font-size: 1.1rem;
+    line-height: 1.8rem;
   }
 }
 @media (max-width: 600px) {
   .summarySection {
-    padding: 18px;
-    border-width: 4px;
+    padding: 0;
   }
   .summaryTitle {
-    font-size: 1.3rem;
-    margin: 0 8px;
+    font-size: 1.5rem;
+    margin: 0;
+    padding-top: 30px;
   }
-  .line {
-    min-width: 18px;
-    height: 3px;
+  .imageSection {
+    padding: 20px 10px;
   }
-  .summaryCard {
-    padding: 12px 2px;
-    gap: 10px;
-    max-width: 100vw;
-  }
-  .summaryTextBlock,
   .summaryImageWrapper {
-    max-width: 100vw;
-    width: 100%;
-    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .summaryImage {
+    border-radius: 20px;
+    border: 3px solid #fff;
+    box-shadow: 
+      0 0 15px rgba(255, 255, 255, 0.6),
+      0 0 30px rgba(255, 255, 255, 0.4);
+  }
+  .summaryTextBlock {
+    padding: 25px 15px;
   }
   .summaryText {
     font-size: 0.95rem;
-    line-height: 1.4rem;
-  }
-  .summaryImageWrapper {
-    min-width: 120px;
-    min-height: 80px;
-  }
-  .summaryImage {
-    border-radius: 16px;
-    max-width: 98vw;
+    line-height: 1.5rem;
   }
 
   .footerLine {
@@ -366,13 +408,11 @@
   .summaryFooter {
     padding: 0 8px 8px 8px;
   }
-  .j25Logo {
-    height: 32px;
+  .footerLabel {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
   }
   .nimunLogo {
-    font-size: 2.5rem;
-  }
-  .nuLogo {
-    height: 32px;
+    font-size: 2rem;
   }
 }

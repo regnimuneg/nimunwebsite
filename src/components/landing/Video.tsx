@@ -6,7 +6,7 @@ export default function Languages() {
       <div id="languages" className={`animated-container ${styles.container}`}>
         <div className={styles.summaryTitleRow}>
           <div className={styles.line}></div>
-          <h2 className={styles.summaryTitle}>OUR 2ND JUNIORS’ CONFERENCE</h2>
+          <h2 className={styles.summaryTitle}>6TH INTERNATIONAL CONFERENCE</h2>
           <div className={styles.line}></div>
         </div>
         <div className={styles.videoWrapper}>
