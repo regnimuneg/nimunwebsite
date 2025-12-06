@@ -37,7 +37,7 @@ export default function Package({ item, isLast = false }: Props) {
         </ul>
       </div>
       <a
-        href="https://forms.gle/4Q63CVL8C8eCdFVg9"
+        href="https://forms.gle/UjrhYGUejY3G8ByX6"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.applyButton}
