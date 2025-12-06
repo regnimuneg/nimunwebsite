@@ -5,6 +5,19 @@
   align-items: center;
   padding: 10px; /* Add some padding for mobile */
   margin-top: 50px;
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) !important;
+  will-change: auto !important;
+  position: relative;
+}
+
+// Prevent GSAP animation on this container
+.container.no-animation,
+.no-animation {
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) !important;
+  will-change: auto !important;
+  animation: none !important;
 }
 
 .header {
@@ -21,6 +34,15 @@
   width: 77%; /* Adjust this to control the size of the video */
   padding-bottom: 45%; /* Adjust this to control the aspect ratio */
   height: 0;
+  border: 12px solid #0037c0;
+  border-radius: 2.5vw;
+  box-shadow: 
+    0 0 8px rgba(0, 55, 192, 0.9),
+    0 0 16px rgba(0, 55, 192, 0.8),
+    0 0 24px rgba(0, 55, 192, 0.7),
+    0 0 32px rgba(0, 55, 192, 0.6),
+    0 0 48px rgba(0, 55, 192, 0.5);
+  overflow: visible; // Allow decorative element to show
 }
 
 .videoWrapper iframe {
@@ -28,8 +50,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  border-radius: 2.5vw;
-  height: 90%;
+  border-radius: calc(2.5vw - 12px); /* Account for border thickness */
+  height: 100%;
 }
 
 /* Mobile styles */
@@ -82,5 +104,30 @@
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
+
+// At the bottom left of the video: 44.png
+.bottomLeftVideo {
+  position: absolute;
+  bottom: -100px;
+  // left: -100px
+  right: -200px;
+  width: 250px;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  
+  @media (max-width: 1200px) {
+    width: 200px;
+    left: -60px;
+    bottom: -50px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 150px;
+    left: -40px;
+    bottom: -30px;
+  }
+}
+
 
 

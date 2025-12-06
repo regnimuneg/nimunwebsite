@@ -40,6 +40,11 @@ body {
   will-change: transform, opacity;
 }
 
+// Prevent animations on elements with no-animation class
+.no-animation {
+  will-change: auto !important;
+}
+
 html,
 body {
   overflow-x: hidden;

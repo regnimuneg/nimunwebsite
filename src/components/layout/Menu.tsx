@@ -130,26 +130,22 @@ export default function Menu({ onNavigate }: MenuProps) {
           onMouseEnter={() => handleMouseEnter(link.id)}
           onMouseLeave={handleMouseLeave}
         >
-          <Link href={link.href} passHref legacyBehavior>
-            <a
-              className={`${styles.navLink} ${link.submenu ? styles.hasSubmenu : ''} ${link.id === 'about' ? styles.aboutLink : ''}`}
-              onClick={(e) => handleClick(e, link)}
-              aria-haspopup={!!link.submenu}
-              aria-expanded={openDropdown === link.id}
-              // Add role="button" if it primarily acts as a button, especially on mobile
-              role={isTabletOrMobile && link.submenu ? 'button' : undefined}
-              // Prevent tabbing to the '#' link if it's purely for hover/toggle
-              tabIndex={link.id === 'about' ? -1 : undefined}
+          <Link
+            href={link.href}
+            className={`${styles.navLink} ${link.submenu ? styles.hasSubmenu : ''} ${link.id === 'about' ? styles.aboutLink : ''}`}
+            onClick={(e) => handleClick(e, link)}
+            aria-haspopup={!!link.submenu}
+            aria-expanded={openDropdown === link.id}
+            role={isTabletOrMobile && link.submenu ? 'button' : undefined}
+            tabIndex={link.id === 'about' ? -1 : undefined}
+          >
+            <StyledButton
+              className={styles.navButton}
+              fontFamily={'Montserrat'}
             >
-              <StyledButton
-                className={styles.navButton} // Keep visual styles on the button
-                fontFamily={'Montserrat'}
-              >
-                {link.text}
-                {link.submenu && <span className={styles.dropdownIndicator}></span>}
-              </StyledButton>
-            </a>
-            
+              {link.text}
+              {link.submenu && <span className={styles.dropdownIndicator}></span>}
+            </StyledButton>
           </Link>
           {link.submenu && openDropdown === link.id && (
             <div
@@ -158,16 +154,16 @@ export default function Menu({ onNavigate }: MenuProps) {
               onMouseLeave={handleDropdownMouseLeave}
             >
               {link.submenu.map((subItem) => (
-                <Link key={subItem.id} href={subItem.href} passHref legacyBehavior>
-                  <a
-                    className={styles.dropdownItem}
-                    onClick={() => {
-                      setOpenDropdown(null)
-                      if (onNavigate) onNavigate()
-                    }}
-                  >
-                    {subItem.text}
-                  </a>
+                <Link
+                  key={subItem.id}
+                  href={subItem.href}
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    setOpenDropdown(null)
+                    if (onNavigate) onNavigate()
+                  }}
+                >
+                  {subItem.text}
                 </Link>
               ))}
             </div>

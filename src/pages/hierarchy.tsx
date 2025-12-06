@@ -4,9 +4,9 @@ import Image from 'next/image'
 import type { StaticImageData } from 'next/image'
 import gsap from 'gsap'
 
-import Zein from '@public/image/People/HB/NIMUN25/Zein.png'
-import Ali from '@public/image/People/HB/NIMUN25/AliKamal.png'
-import Haneen from '@public/image/People/HB/NIMUN25/Haneen.png'
+import Zein from 'public/image/People/HB/NIMUN25/Zein.png'
+import Ali from 'public/image/People/HB/NIMUN25/AliKamal.png'
+import Haneen from 'public/image/People/HB/NIMUN25/Haneen.png'
 
 import Adham from '@public/image/People/OC/NIMUN25/Adham.png'
 import Farah from '@public/image/People/OC/NIMUN25/Farah.png'
@@ -20,19 +20,6 @@ import Yasmina from '@public/image/People/OC/NIMUN25/Yasmina.png'
 import Nour from '@public/image/People/OC/NIMUN25/Nour.png'
 import Abdallah from '@public/image/People/OC/NIMUN25/Abdallah.png'
 
-import ZeinRaafat from '@public/image/People/AC/ZeinRaafat.png'
-import KarenEffat from '@public/image/People/AC/KarenEffat.png'
-import MariamKabbany from '@public/image/People/AC/MariamKabbany.png'
-import AliaNafea from '@public/image/People/AC/AliaNafea.png'
-import MohabHegazy from '@public/image/People/AC/MohabHegazy.png'
-import NizarAmer from '@public/image/People/AC/NizarAmer.png'
-import KareemTantawi from '@public/image/People/AC/KareemTantawi.png'
-import RawyaNabil from '@public/image/People/AC/RawyaNabil.png'
-import RanaAboElHassan from '@public/image/People/AC/RanaAboElHassan.png'
-import FarahGhaly from '@public/image/People/AC/FarahGhaly.png'
-import AdhamAhmed from '@public/image/People/AC/AdhamAhmed.png'
-import AmeenaYahya from '@public/image/People/AC/AmeenaYehia.png'
-import OmarAkl from '@public/image/People/AC/OmarAkl.png'
 
 interface Person {
   name: string
@@ -80,49 +67,49 @@ const OrganizingCommittee: Person[] = [
   },
 ]
 
-const AcademicCommittees: { council: string; members: Person[] }[] = [
-  {
-    council: 'ICJ',
-    members: [
-      { name: 'Zein Raafat', position: 'President', image: ZeinRaafat },
-      { name: 'Omar Awad', position: 'Vice President', image: OmarAkl },
-    ],
-  },
-  {
-    council: 'SPECPOL',
-    members: [
-      { name: 'Farah Ghaly', position: 'President', image: FarahGhaly },
-      { name: 'Adham Ahmed', position: 'Director', image: AdhamAhmed },
-      { name: 'Ameena Yehia', position: 'Rapporteur', image: AmeenaYahya },
-    ],
-  },
-  {
-    council: 'UNFCCC COP',
-    members: [
-      { name: 'Rana Aboelhassan', position: 'Chair', image: RanaAboElHassan },
-      { name: 'Rawya Nabil', position: 'Co-chair', image: RawyaNabil },
-    ],
-  },
-  {
-    council: 'UNESCO',
-    members: [
-      { name: 'Mohab Hegazy', position: 'Chair', image: MohabHegazy },
-      { name: 'Alia Nafea', position: 'Co-chair', image: AliaNafea },
-    ],
-  },
-  {
-    council: 'UNHRC',
-    members: [
-      { name: 'Nizar Amer', position: 'President', image: NizarAmer },
-      { name: 'Kareem Tantawy', position: 'Director', image: KareemTantawi },
-      { name: 'Mariam Kabbany', position: 'Rapporteur', image: MariamKabbany },
-    ],
-  },
-  {
-    council: 'Press Head',
-    members: [{ name: 'Karen Effat', image: KarenEffat }],
-  },
-]
+// const AcademicCommittees: { council: string; members: Person[] }[] = [
+//   {
+//     council: 'ICJ',
+//     members: [
+//       { name: 'Zein Raafat', position: 'President', image: ZeinRaafat },
+//       { name: 'Omar Awad', position: 'Vice President', image: OmarAkl },
+//     ],
+//   },
+//   {
+//     council: 'SPECPOL',
+//     members: [
+//       { name: 'Farah Ghaly', position: 'President', image: FarahGhaly },
+//       { name: 'Adham Ahmed', position: 'Director', image: AdhamAhmed },
+//       { name: 'Ameena Yehia', position: 'Rapporteur', image: AmeenaYahya },
+//     ],
+//   },
+//   {
+//     council: 'UNFCCC COP',
+//     members: [
+//       { name: 'Rana Aboelhassan', position: 'Chair', image: RanaAboElHassan },
+//       { name: 'Rawya Nabil', position: 'Co-chair', image: RawyaNabil },
+//     ],
+//   },
+//   {
+//     council: 'UNESCO',
+//     members: [
+//       { name: 'Mohab Hegazy', position: 'Chair', image: MohabHegazy },
+//       { name: 'Alia Nafea', position: 'Co-chair', image: AliaNafea },
+//     ],
+//   },
+//   {
+//     council: 'UNHRC',
+//     members: [
+//       { name: 'Nizar Amer', position: 'President', image: NizarAmer },
+//       { name: 'Kareem Tantawy', position: 'Director', image: KareemTantawi },
+//       { name: 'Mariam Kabbany', position: 'Rapporteur', image: MariamKabbany },
+//     ],
+//   },
+//   {
+//     council: 'Press Head',
+//     members: [{ name: 'Karen Effat', image: KarenEffat }],
+//   },
+// ]
 
 const Hierarchy: React.FC = () => {
   const leftShapeRef = useRef<HTMLImageElement>(null)
@@ -157,7 +144,7 @@ const Hierarchy: React.FC = () => {
       <div id="hierarchy" className={styles.container}>
         <img
           ref={leftShapeRef}
-          src="/image/png/3dshape5.avif"
+          src="/image/png/31.png"
           alt="Floating 3D Shape Left"
           className={styles.floatingShapeLeft}
         />
@@ -312,7 +299,7 @@ const Hierarchy: React.FC = () => {
       </section> */}
         <img
           ref={rightShapeRef}
-          src="/image/png/3dshape5.avif"
+          src="/image/png/37.png"
           alt="Floating 3D Shape Right"
           className={styles.floatingShapeRight}
         />

@@ -5,6 +5,7 @@ import raf from '@studio-freight/tempus'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { useEffect } from 'react'
 
 if (typeof window !== 'undefined') {
@@ -24,10 +25,15 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <LenisProvider>
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
-    </LenisProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </Head>
+      <LenisProvider>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+      </LenisProvider>
+    </>
   )
 }

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { singlePackagesData, doublePackagesData } from '@/data/packages'
 import Package from '@/components/landing/Package'
 import styles from '@/styles/landing/Packages.module.scss'
@@ -37,9 +37,11 @@ export default function Packages() {
         </button>
       </div>
 
-      <div className={styles.packageGrid}>
+      <div 
+        className={`${styles.packageGrid} ${displayedPackages.length === 4 ? styles.fourCards : styles.twoCards}`}
+      >
         {displayedPackages.map((item, index) => (
-          <Package key={index} item={item} />
+          <Package key={index} item={item} isLast={index === displayedPackages.length - 1} />
         ))}
       </div>
     </div>

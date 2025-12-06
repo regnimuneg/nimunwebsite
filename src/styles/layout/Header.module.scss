@@ -14,14 +14,19 @@ $header-border-radius: 30px;
   top: 20px; // Position below the top edge
   left: 50%;
   transform: translateX(-50%);
-  width: 90%; // Adjust width as needed
+  width: 80%; // Adjust width as needed
   max-width: 1400px; // Max width for large screens
+  margin-top: 20px; // Add top margin
   transition: box-shadow $transition-s $transition-ease; // Only transition shadow now
   background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background ALWAYS
   backdrop-filter: blur(10px);
   height: auto;
   border-radius: $header-border-radius; // Rounded ALWAYS
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Initial shadow
+  box-shadow: 
+    0 0 15px rgba(0, 55, 192, 0.6),
+    0 0 25px rgba(0, 55, 192, 0.5),
+    0 0 35px rgba(0, 55, 192, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.05); // Harder, more solid blue glow with less dispersion
 
   .fix {
     @include flex-row;
@@ -47,7 +52,7 @@ $header-border-radius: 30px;
 
     .logo {
       margin-right: 15px;
-      height: $height;
+      height: 45px; // Shrunk from default
       width: auto;
       flex-shrink: 0; // Prevent logo from shrinking
     }
@@ -76,75 +81,61 @@ $header-border-radius: 30px;
   // Navigation bar itself (inside leftSideContainer on desktop)
   .navbar {
     @include flex-row;
-    gap: 25px; // Gap between nav buttons
+    gap: 60px; // Increased spacing between nav buttons
     align-items: center;
     margin: 0;
-    .navButton {
-      color: #333;
-      padding: 8px 18px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid transparent;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-      white-space: nowrap;
-
-      &:hover {
-        background-color: #fff;
-        color: #0037c0;
-        border-color: #eee;
-      }
-    }
+    margin-left: 50px; // Move buttons to the right while keeping logo in place
   }
 
-  // Container for the right-side elements (NIMUN text, Apply button)
+  // Container for the right-side elements (Apply button)
   .rightSideContainer {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: white;
+    background-color: transparent;
     border-radius: 100px;
-
-    padding-right: 0px; // Add some padding on the right
-  }
-
-  .nimunText {
-    color: #000; // Black text
-    font-family: 'Bionix';
-    font-weight: bold; // Bold
-    font-size: 1.2rem;
-    display: flex; // To center text vertically
-    align-items: center;
-    padding-left: 20px;
     padding-right: 0px;
-    background-color: transparent; // Ensure no extra background
   }
+
   .applyButton {
-    background-color: #0037c0;
-    color: #fff;
-    padding: 8px 20px;
+    background-color: #fff;
+    color: #000;
+    font-family: 'Bionix';
+    padding: 3px 20px;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    border: none;
+    border: 2px solid rgba(0, 55, 192, 0.3);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 
+      0 0 0 1px rgba(0, 55, 192, 0.4),
+      0 0 10px rgba(0, 55, 192, 0.3),
+      0 0 20px rgba(0, 55, 192, 0.2);
+    transition: 
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
     white-space: nowrap;
 
     &:hover {
-      background-color: #002ca6;
+      background-color: #fff;
+      border-color: rgba(0, 55, 192, 0.5);
+      box-shadow: 
+        0 0 0 1px rgba(0, 55, 192, 0.5),
+        0 0 15px rgba(0, 55, 192, 0.4),
+        0 0 30px rgba(0, 55, 192, 0.3);
     }
   }
 }
 
 // Styles for the sticky header state - ONLY add shadow, keep other styles the same
 .header.stick {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); // Slightly stronger shadow when sticky
+  box-shadow: 
+    0 0 15px rgba(0, 55, 192, 0.6),
+    0 0 25px rgba(0, 55, 192, 0.5),
+    0 0 35px rgba(0, 55, 192, 0.4),
+    0 6px 20px rgba(0, 0, 0, 0.1); // Harder, more solid blue glow with less dispersion when sticky
   // REMOVED: top, width, background-color, border-radius changes
 }
 
@@ -213,32 +204,35 @@ $header-border-radius: 30px;
     align-items: center; // Center items vertically
     justify-content: center; // Center horizontally
     gap: 10px; // Match desktop gap
-    background-color: white; // White background
+    background-color: transparent; // Transparent background
     border-radius: 100px; // Rounded corners like desktop
     padding: 5px; // Add padding
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); // Subtle shadow
     width: 90%; // Not full width
     margin-left: auto;
     margin-right: auto;
 
-    .nimunText {
-      text-align: center;
-      padding-left: 15px; // Add padding
-      font-size: 1.1rem; // Slightly smaller than desktop
-    }
-
     .applyButton {
       text-align: center;
-      background-color: #0037c0;
-      color: #fff;
+      background-color: #fff;
+      color: #000;
       padding: 8px 20px;
       border-radius: 20px;
       font-size: 1rem;
       font-weight: 600;
-      display: inline-block; // Ensure proper display
+      display: inline-block;
+      border: 2px solid rgba(0, 55, 192, 0.3);
+      box-shadow: 
+        0 0 0 1px rgba(0, 55, 192, 0.4),
+        0 0 10px rgba(0, 55, 192, 0.3),
+        0 0 20px rgba(0, 55, 192, 0.2);
 
       &:hover {
-        background-color: #002ca6;
+        background-color: #fff;
+        border-color: rgba(0, 55, 192, 0.5);
+        box-shadow: 
+          0 0 0 1px rgba(0, 55, 192, 0.5),
+          0 0 15px rgba(0, 55, 192, 0.4),
+          0 0 30px rgba(0, 55, 192, 0.3);
       }
     }
   }
@@ -271,10 +265,15 @@ $header-border-radius: 30px;
   .header {
     width: 90%; // Match desktop width percentage
     top: 10px; // Position slightly below top like desktop
+    margin-top: 20px; // Add top margin
     border-radius: $header-border-radius; // Keep rounded corners like desktop
     background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background like desktop
     backdrop-filter: blur(10px); // Blur effect like desktop
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Same shadow as desktop
+    box-shadow: 
+      0 0 15px rgba(0, 55, 192, 0.6),
+      0 0 25px rgba(0, 55, 192, 0.5),
+      0 0 35px rgba(0, 55, 192, 0.4),
+      0 4px 15px rgba(0, 0, 0, 0.05); // Harder, more solid blue glow with less dispersion
 
     .fix {
       padding: 5px 10px;
@@ -311,13 +310,23 @@ $header-border-radius: 30px;
   text-decoration: none; // Remove default underline
   color: inherit; // Inherit text color
   cursor: pointer; // Use pointer cursor
+  border-radius: 20px;
+  border: 2px solid rgba(0, 55, 192, 0.3);
+  box-shadow: 
+    0 0 0 1px rgba(0, 55, 192, 0.4),
+    0 0 10px rgba(0, 55, 192, 0.3),
+    0 0 20px rgba(0, 55, 192, 0.2);
+  transition: 
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 
-  // Apply hover effect to the link wrapper for a larger hover area (optional)
-  // &:hover {
-  //   .navButton { // Target the button inside on hover
-  //     opacity: 0.8;
-  //   }
-  // }
+  &:hover {
+    border-color: rgba(0, 55, 192, 0.5);
+    box-shadow: 
+      0 0 0 1px rgba(0, 55, 192, 0.5),
+      0 0 15px rgba(0, 55, 192, 0.4),
+      0 0 30px rgba(0, 55, 192, 0.3);
+  }
 }
 
 // Style for the dropdown menu itself
@@ -440,6 +449,24 @@ $header-border-radius: 30px;
   .navLink {
     display: block; // Make link take full width
     width: 100%;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    border: 2px solid rgba(0, 55, 192, 0.3);
+    box-shadow: 
+      0 0 0 1px rgba(0, 55, 192, 0.4),
+      0 0 10px rgba(0, 55, 192, 0.3),
+      0 0 20px rgba(0, 55, 192, 0.2);
+    transition: 
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      border-color: rgba(0, 55, 192, 0.5);
+      box-shadow: 
+        0 0 0 1px rgba(0, 55, 192, 0.5),
+        0 0 15px rgba(0, 55, 192, 0.4),
+        0 0 30px rgba(0, 55, 192, 0.3);
+    }
   }
   .navButton {
     width: 100%;

@@ -4,30 +4,31 @@ import clsx from 'clsx'
 
 interface Props {
   item: PackageInterface
-  // Removed index and className as they weren't used in the updated Packages.tsx logic
+  isLast?: boolean
 }
 
-export default function Package({ item }: Props) {
+export default function Package({ item, isLast = false }: Props) {
+  // Only show badge for Platinum (last card with isPopular)
+  const showBadge = item.isPopular && isLast && item.title === 'Platinum'
+  
   return (
-    <div className={clsx(styles.packageCard, item.isPopular && styles.popular)}>
-      {' '}
-      {/* Renamed from projectCard */}
-      {item.isPopular && <div className={styles.popularBadge}>MOST POPULAR</div>}
+    <div className={clsx(styles.packageCard, item.isPopular && styles.popular, isLast && styles.lastCard)}>
+      {showBadge && <div className={styles.popularBadge}>MOST POPULAR</div>}
       <div className={styles.cardHeader}>
-        {' '}
-        {/* New container for title and price */}
-        <div className={styles.title} style={{ color: item.titleColor }}>
-          {item.title}
+        <div className={styles.titleRow}>
+          <div className={styles.titleLine} style={{ backgroundColor: item.titleColor }}></div>
+          <div className={styles.title} style={{ color: item.titleColor }}>
+            {item.title}
+          </div>
+          <div className={styles.titleLine} style={{ backgroundColor: item.titleColor }}></div>
         </div>
         <div className={styles.priceContainer}>
-          <span className={styles.priceValue}>${item.price}</span>
+          <span className={styles.priceValue}>Price ${item.price}</span>
         </div>
         {item.groupInfo && <div className={styles.groupInfo}>{item.groupInfo}</div>}
       </div>
       <div className={styles.descriptionContainer}>
         <ul className={styles.descriptionList}>
-          {' '}
-          {/* Use ul directly */}
           {item.description.map((feature, idx) => (
             <li key={idx} className={styles.descriptionItem}>
               {feature}

@@ -6,7 +6,6 @@ import { useLenis } from '@/lib/lenis'
 import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import styles from '@/styles/layout/Header.module.scss'
-import logo from '@public/image/png/logo24.svg'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Link from 'next/link' // Import Link for Apply button if it's a link
@@ -56,9 +55,8 @@ export default function Header(): JSX.Element {
   // Right side elements component
   const RightSideElements = () => (
     <div className={styles.rightSideContainer}>
-      <span className={styles.nimunText}>NIMUN</span>
       <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLScrVEKoYhayW42Sk2j4MNnKyIOpCqOzEj0B60fikL3KTigArQ/viewform"
+        href="https://forms.gle/D4hFPj934aVtpemw5"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.applyButton}
@@ -81,14 +79,12 @@ export default function Header(): JSX.Element {
               className={styles.logoWrapper}
               aria-label="Nile International Model United Nations Home"
             >
-              <Image
-                quality={40}
-                width={100}
-                height={45}
+              <img
+                src="/image/png/logo24.png"
                 alt="NIMUN Logo"
-                src={logo}
                 className={styles.logo}
-                priority
+                width={80}
+                height={36}
               />
             </a>
             {/* Render Menu component only on desktop, directly after logo */}

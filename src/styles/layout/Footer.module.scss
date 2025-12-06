@@ -6,7 +6,7 @@
   width: 100%;
   padding: 30px;
   font-family: 'Bionix';
-  font-size: 2rem;
+  font-size: 3rem;
   background-color: #0037c0;
 
   .fix {
@@ -17,7 +17,7 @@
   .copyrights {
     @include flex-row;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     gap: 12px;
     color: var(--font-color-primary);
 

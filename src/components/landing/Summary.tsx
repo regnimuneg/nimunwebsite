@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from '@/styles/landing/Summary.module.scss'
 import Image from 'next/image'
 import { summary } from '@/data/summary'
+import gsap from 'gsap'
 
 export default function Summary() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const rightShapeRef = useRef<HTMLImageElement>(null)
+  const leftShapeRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,8 +16,39 @@ export default function Summary() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    if (rightShapeRef.current) {
+      gsap.to(rightShapeRef.current, {
+        y: -20,
+        repeat: -1,
+        yoyo: true,
+        duration: 2,
+        ease: 'power1.inOut',
+        delay: 0.4,
+      })
+    }
+    if (leftShapeRef.current) {
+      gsap.to(leftShapeRef.current, {
+        y: -20,
+        repeat: -1,
+        yoyo: true,
+        duration: 2,
+        ease: 'power1.inOut',
+        delay: 0.6,
+      })
+    }
+  }, [])
+
   return (
     <section className={styles.summarySection}>
+      {/* To the right, between summary and images: 39.png */}
+      <img
+        ref={rightShapeRef}
+        src="/image/png/39.png"
+        alt="Decorative 3D Element"
+        className={styles.rightBetweenSummary}
+      />
+      
       <div className={styles.summaryTitleRow}>
         <h2 className={styles.summaryTitle}>A LIFE CHANGING EXPERIENCE</h2>
       </div>
@@ -50,6 +84,13 @@ export default function Summary() {
       </div>
       <div className={styles.footerLine}></div>
       <div className={styles.summaryFooter}>
+        {/* To the left, just above IC'26: 40.png */}
+        <img
+          ref={leftShapeRef}
+          src="/image/png/40.png"
+          alt="Decorative 3D Element"
+          className={styles.leftAboveIC26}
+        />
         <div className={styles.footerLeft}>
           <span className={styles.footerLabel}>IC'26</span>
         </div>

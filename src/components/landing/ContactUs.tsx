@@ -1,10 +1,34 @@
 import styles from '@/styles/landing/ContactUs.module.scss'
 import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
 import { FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 export default function ContactUs() {
+  const topLeftShapeRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    if (topLeftShapeRef.current) {
+      gsap.to(topLeftShapeRef.current, {
+        y: -20,
+        repeat: -1,
+        yoyo: true,
+        duration: 2,
+        ease: 'power1.inOut',
+        delay: 0.5,
+      })
+    }
+  }, [])
+
   return (
     <div id="contact" className={styles.container}>
+      {/* To the top left of the contact us box: 35.png */}
+      <img
+        ref={topLeftShapeRef}
+        src="/image/png/35.png"
+        alt="Decorative 3D Element"
+        className={styles.topLeftContact}
+      />
       <div className={styles.card}>
         <h2 className={styles.title}>CONTACT US</h2>
         <div className={styles.content}>
@@ -59,7 +83,7 @@ export default function ContactUs() {
               <div className={styles.contactItem}>
                 <FaWhatsapp className={styles.icon} />
                 <span>
-                  <strong>Phone:</strong> +20 102 682 0506
+                  <strong>Phone:</strong> +20 101 083 7570
                 </span>
               </div>
               <div className={styles.contactItem}>
