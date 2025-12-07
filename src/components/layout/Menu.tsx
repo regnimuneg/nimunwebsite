@@ -21,7 +21,7 @@ interface MainLink {
 
 // Define the main navigation links with the new 'ABOUT US' submenu
 const mainLinks: MainLink[] = [
-  { id: 'JNIMUN', text: 'IC', href: '/JNIMUN' },
+  { id: 'IC7', text: 'IC', href: '/IC7' },
   {
     id: 'about',
     text: 'ABOUT US',

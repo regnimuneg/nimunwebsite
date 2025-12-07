@@ -6,8 +6,8 @@
   
   h1 {
     font-size: 3rem;
-    padding: 5rem 5rem 2rem 5rem;
-    text-align: left;
+    padding: 5rem 5rem 2rem 5rem;  
+    text-align: center;
     color: #0037c0;
     text-transform: uppercase;
     font-weight: bold;
@@ -87,7 +87,68 @@
     text-align: justify;
   }
 
+  // CSS Grid Layout
+  .contentGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, auto);
+    }
+  }
+
+  .imageContainer {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      min-height: 300px;
+    }
+  }
+
+  .missionImage,
+  .visionImage {
+    object-fit: cover;
+  }
+
+  .missionTextBlock {
+    background-color: #0037c0;
+    color: #fff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 400px;
+
+    @media (max-width: 768px) {
+      padding: 30px 20px;
+      min-height: auto;
+    }
+  }
+
+  .visionTextBlock {
+    background-color: #0037c0;
+    color: #fff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 400px;
+
+    @media (max-width: 768px) {
+      padding: 30px 20px;
+      min-height: auto;
+    }
+  }
 }
 
 .milestonesContainer {
@@ -97,7 +158,7 @@
 }
 
 .milestonesHeading {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: bold;
   color: #0037c0;
   margin-bottom: 2rem;

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import { Grid, Typography, Box } from '@mui/material'
 import Image from 'next/image'
 import styles from '@/styles/MissionHistory.module.scss' // Import SCSS module
 import firstImage from '@public/image/png/Mission1.png'
@@ -31,25 +30,19 @@ const MilestonesSection = () => {
     <div className={styles.milestonesContainer}>
       <img
         ref={rightShapeRefM}
-        src="/image/png/3dshape4.avif"
+        src="/image/png/37.png"
         alt="Floating 3D Shape Left"
         className={styles.floatingShapeRightM}
       />
-      <Typography variant="h4" align="center" className={styles.milestonesHeading}>
-        Milestones
-      </Typography>
+      <h2 className={styles.milestonesHeading}>Milestones</h2>
       <div className={`${styles.decorativeLine} ${styles.animateLine}`}></div>
 
       <div className={styles.timeline}>
         {milestones.map((milestone, index) => (
           <div key={index} className={styles.milestone}>
-            <Typography variant="h5" className={styles.milestoneYear}>
-              {milestone.year}
-            </Typography>
+            <h3 className={styles.milestoneYear}>{milestone.year}</h3>
             <div className={styles.verticalLine}></div>
-            <Typography variant="body1" className={styles.milestoneText}>
-              {milestone.text}
-            </Typography>
+            <p className={styles.milestoneText}>{milestone.text}</p>
           </div>
         ))}
       </div>
@@ -91,7 +84,7 @@ const MissionHistory = () => {
     <div className={styles.container}>
       <img
         ref={leftShapeRef}
-        src="/image/png/3dshape3.avif"
+        src="/image/png/31.png"
         alt="Floating 3D Shape Left"
         className={styles.floatingShape}
       />
@@ -101,95 +94,47 @@ const MissionHistory = () => {
         alt="Floating 3D Shape Right"
         className={styles.floatingShapeRight}
       />
-      <Typography
-        variant="h4"
-        component="h1"
-        className={styles.heading}
-        align="center"
-        gutterBottom
-      >
-        Mission & History
-      </Typography>
-      <Grid container spacing={0} style={{ height: '100%' }}>
+      <h1 className={styles.heading}>Mission & History</h1>
+      
+      <div className={styles.contentGrid}>
         {/* Top-left: Image */}
-        <Grid item xs={12} md={6} style={{ display: 'flex', alignItems: 'stretch' }}>
-          <Box style={{ width: '100%', display: 'flex' }}>
-            <Image
-              src={firstImage}
-              alt="Mission Image"
-              style={{
-                objectFit: 'cover',
-                width: '100%',
-                height: 'auto',
-              }}
-            />
-          </Box>
-        </Grid>
+        <div className={styles.imageContainer}>
+          <Image
+            src={firstImage}
+            alt="Mission Image"
+            fill
+            className={styles.missionImage}
+          />
+        </div>
 
         {/* Top-right: Text (Mission) */}
-        <Grid
-          item
-          xs={12}
-          md={6}
-          style={{
-            backgroundColor: '#0037C0',
-            color: '#fff',
-            padding: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Box>
-            <div className={styles.MissionHead}>
-              Our Mission
-            </div>
-            <div className={styles.MissionTxt}>
+        <div className={styles.missionTextBlock}>
+          <div className={styles.MissionHead}>Our Mission</div>
+          <div className={styles.MissionTxt}>
             Our mission is to empower students by providing an immersive and engaging platform for learning diplomacy, leadership, and negotiation through Model United Nations simulations.
             By hosting international conferences and fostering a diverse community, we aim to cultivate critical thinking, cross-cultural understanding, and collaboration among participants as they tackle the world's most pressing challenges.
-            </div>
-          </Box>
-        </Grid>
+          </div>
+        </div>
 
         {/* Bottom-left: Text (Vision) */}
-        <Grid
-          item
-          xs={12}
-          md={6}
-          style={{
-            backgroundColor: '#0037C0',
-            color: '#fff',
-            padding: '20px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Box>
-          <div className={styles.VisionHead}>
-              Our Vision
-          </div>
-            <div className={styles.VisionTxt}>
+        <div className={styles.visionTextBlock}>
+          <div className={styles.VisionHead}>Our Vision</div>
+          <div className={styles.VisionTxt}>
             To provide NIMUN members and participants with a life-changing experience that leaves a lasting impact on each individual, empowering them to become globally minded leaders and changemakers dedicated to building a more compassionate and cooperative world.
-            </div>
-          </Box>
-        </Grid>
+          </div>
+        </div>
 
         {/* Bottom-right: Image */}
-        <Grid item xs={12} md={6} style={{ display: 'flex', alignItems: 'stretch' }}>
-          <Box style={{ width: '100%', display: 'flex' }}>
-            <Image
-              src={secondImage}
-              alt="Vision Image"
-              style={{
-                objectFit: 'cover',
-                width: '100%',
-                height: 'auto',
-              }}
-            />
-          </Box>
-        </Grid>
-      </Grid>
+        <div className={styles.imageContainer}>
+          <Image
+            src={secondImage}
+            alt="Vision Image"
+            fill
+            className={styles.visionImage}
+          />
+        </div>
+      </div>
+      
       {/* New Milestones Section */}
       <MilestonesSection />
     </div>

@@ -11,22 +11,16 @@ import { milestones } from '../data/milestones' // Import milestones data
 const Numbers = () => {
   return (
     <div className={styles.container}>
-      <Image
-        src="/image/png/NumbersGroup.png" // Correct image path
-        alt="NIMUN Group"
-        layout="responsive"
-        width={720}
-        height={360}
-      />
-      <Typography
-        variant="h4"
-        component="h1"
-        className={styles.heading}
-        align="center"
-        gutterBottom
-      >
-        By the Numbers
-      </Typography>
+      <div className={styles.heroImageContainer}>
+        <Image
+          src="/image/png/NumbersGroup.png"
+          alt="NIMUN Group"
+          fill
+          className={styles.heroImage}
+          priority
+        />
+      </div>
+      <h1 className={styles.heading}>By the Numbers</h1>
 
       {/* ///////////////////////////////// */}
       <div className={styles.descriptionContainer}>

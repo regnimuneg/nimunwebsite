@@ -7,6 +7,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { Montserrat } from 'next/font/google'
+import { useRouter } from 'next/router'
 import { useRef, useEffect } from 'react'
 
 if (typeof window !== 'undefined') {
@@ -26,6 +27,8 @@ interface Props {
 export default function MainLayout({ children }: Props) {
   const main = useRef<HTMLDivElement>(null)
   const isMobile = useWindowSize()
+  const router = useRouter()
+  const isIC7Page = router.pathname === '/IC7'
 
   useGSAP(
     () => {
@@ -104,10 +107,10 @@ export default function MainLayout({ children }: Props) {
       {/* <WebGLParticles size={isMobile ? 260 : 200} /> */}
       <main className={font.className}>
         <div id="full-size-image-slider"></div>
-        <Header />
+        {!isIC7Page && <Header />}
         <div className="width-fix" ref={main}>
           {children}
-          <Footer />
+          {!isIC7Page && <Footer />}
         </div>
       </main>
     </>
