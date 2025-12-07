@@ -102,8 +102,8 @@ const IC7: NextPage = () => {
               </div>
             )}
           </div>
-          <Link href="/#contact" className={styles.navButton}>
-            Contact us
+          <Link href="/" className={styles.navButton}>
+            Home
           </Link>
         </nav>
 
@@ -302,7 +302,7 @@ const IC7: NextPage = () => {
                 ))}
               </div>
               <a
-                href="https://forms.gle/4Q63CVL8C8eCdFVg9"
+                href="https://forms.gle/gHozmUdgzG9z6XdG9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.packageButton}
