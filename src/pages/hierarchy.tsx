@@ -64,7 +64,7 @@ const OrganizingCommittee: Person[] = [
     viceHeadImage: Omar,
     viceHeadImagePosition: "center top",
     viceHead2Image: Rana,
-    viceHead2ImagePosition: "center 10% ",
+    viceHead2ImagePosition: "center 10%",
   },
   {
     name: 'Operations & Logistics',
@@ -107,7 +107,7 @@ const OrganizingCommittee: Person[] = [
     head: 'Mostafa Salama',
     viceHead: 'Lina Amr',
     headImage: Tifa,
-    headImagePosition: "center 30S%",
+    headImagePosition: "center 30%",
     viceHeadImage: Lina,
     viceHeadImagePosition: "center 25%",
   },
