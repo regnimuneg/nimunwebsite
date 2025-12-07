@@ -4,21 +4,28 @@ import Image from 'next/image'
 import type { StaticImageData } from 'next/image'
 import gsap from 'gsap'
 
-import Zein from 'public/image/People/HB/NIMUN25/Zein.png'
-import Ali from 'public/image/People/HB/NIMUN25/AliKamal.png'
-import Haneen from 'public/image/People/HB/NIMUN25/Haneen.png'
+// High Board imports from 26 folder
+import FarahHB from '@public/image/People/HB/26/Farah.png'
+import Rawya from '@public/image/People/HB/26/Rawya.png'
+import DSG from '@public/image/People/HB/26/DSG.png'
+import CM from '@public/image/People/HB/26/CM.png'
 
-import Adham from '@public/image/People/OC/NIMUN25/Adham.png'
-import Farah from '@public/image/People/OC/NIMUN25/Farah.png'
-import Malak from '@public/image/People/OC/NIMUN25/Malak.png'
-import Seif from '@public/image/People/OC/NIMUN25/Seif.png'
-import Zeina from '@public/image/People/OC/NIMUN25/Zeina.png'
-import Maram from '@public/image/People/OC/NIMUN25/Maram.png'
-import Moaz from '@public/image/People/OC/NIMUN25/Moaz.png'
-import Mostafa from '@public/image/People/OC/NIMUN25/Mostafa.png'
-import Yasmina from '@public/image/People/OC/NIMUN25/Yasmina.png'
-import Nour from '@public/image/People/OC/NIMUN25/Nour.png'
-import Abdallah from '@public/image/People/OC/NIMUN25/Abdallah.png'
+// Organizing Committee imports from NIMUN26 folder
+import Adham from '@public/image/People/OC/NIMUN26/Adham.png'
+import Omar from '@public/image/People/OC/NIMUN26/Omar.png'
+import Asmar from '@public/image/People/OC/NIMUN26/Asmar.png'
+import Tifa from '@public/image/People/OC/NIMUN26/Tifa.png'
+import Rana from '@public/image/People/OC/NIMUN26/Rana.png'
+import Yassine from '@public/image/People/OC/NIMUN26/Yassine.png'
+import Kabbani from '@public/image/People/OC/NIMUN26/Kabbani.png'
+import Lina from '@public/image/People/OC/NIMUN26/Lina.png'
+import FC from '@public/image/People/OC/NIMUN26/FC.png'
+import Hossam from '@public/image/People/OC/NIMUN26/Hossam.png'
+import Fallal from '@public/image/People/OC/NIMUN26/Fallal.png'
+import Amina from '@public/image/People/OC/NIMUN26/Amina.png'
+import Wafa from '@public/image/People/OC/NIMUN26/Wafa.png'
+import Engy from '@public/image/People/OC/NIMUN26/Engy.png'
+import MalakK from '@public/image/People/OC/NIMUN26/Malak K.png'
 
 
 interface Person {
@@ -31,39 +38,85 @@ interface Person {
   headImage?: string | StaticImageData | undefined // Include undefined as a type
   viceHeadImage?: string | StaticImageData | undefined // Include undefined as a type
   viceHead2Image?: string | StaticImageData | undefined // Include undefined as a type
+  isCoordinator?: boolean // Flag for coordinator positions
+  // Custom image positioning (e.g., 'center top', 'center 30%', 'center bottom')
+  imagePosition?: string
+  headImagePosition?: string
+  viceHeadImagePosition?: string
+  viceHead2ImagePosition?: string
 }
 
-const HighBoard: Person[] = [{ name: 'Zein Raafat', position: 'Secretary General', image: Zein }]
+const HighBoard: Person[] = [
+  { name: 'Rawya Nabil', position: 'Academic Director', image: Rawya, imagePosition: "center 10%" },
+  { name: 'Farah Ghaly', position: 'Secretary General', image: FarahHB, imagePosition: "center 30%" },
+  { name: 'Nizar Amer', position: 'Deputy Secretary General', image: DSG, imagePosition: "center 30%" },
+  { name: 'Seif Elnahas', position: 'Conference Manager', image: CM }
+]
 
 const OrganizingCommittee: Person[] = [
   {
-    name: 'Operations & Logistics',
-    head: 'Moaz El Shahed',
-    headImage: Moaz,
+    name: 'Registration Affairs',
+    head: 'Adham Abdelaal',
+    viceHead: 'Omar Sherif',
+    viceHead2: 'Rana Shafik',
+    headImage: Adham,
+    headImagePosition: "center 10%",
+    viceHeadImage: Omar,
+    viceHeadImagePosition: "center top",
+    viceHead2Image: Rana,
+    viceHead2ImagePosition: "center 10% ",
   },
   {
-    name: 'Registration Affairs',
-    head: 'Farah Abdullah',
-    viceHead: 'Adham Abdelaal',
-    headImage: Farah,
-    viceHeadImage: Adham,
+    name: 'Operations & Logistics',
+    head: 'Mohamed Abuelwafa',
+    viceHead: 'Yassine Mohamed',
+    viceHead2: 'Hana Elfallal',
+    headImage: Wafa,
+    headImagePosition: "center 40%",
+    viceHeadImage: Yassine,
+    viceHead2Image: Fallal,
+    viceHeadImagePosition: "center 10%",
+    viceHead2ImagePosition: "center 50%",
   },
   {
     name: 'Public Relations',
-    head: 'Seif EL Nahas',
-    viceHead: 'Zeina Youssef',
-    headImage: Seif,
-    viceHeadImage: Zeina,
+    head: 'Ali Kabbani',
+    viceHead: 'Amina Kamal',
+    viceHead2: 'Malak Khaled',
+    headImage: Kabbani,
+    headImagePosition: "center 30%",
+    viceHeadImage: Amina,
+    viceHead2Image: MalakK,
+    viceHeadImagePosition: "center 20%",
+    viceHead2ImagePosition: "center 40%",
   },
   {
     name: 'Media & Design',
-    head: 'Abdallah Emam',
-    headImage: Abdallah,
+    head: 'Hossam Aqeel',
+    viceHead: 'Seif alasmar',
+    viceHead2: 'Engy Lutfi',
+    headImage: Hossam,
+    headImagePosition: "center 17%",
+    viceHeadImage: Asmar, 
+    viceHeadImagePosition: "center 20%",
+    viceHead2Image: Engy,
+    viceHead2ImagePosition: "center 30%",
   },
   {
     name: 'Socials & Events',
     head: 'Mostafa Salama',
-    headImage: Mostafa,
+    viceHead: 'Lina Amr',
+    headImage: Tifa,
+    headImagePosition: "center 30S%",
+    viceHeadImage: Lina,
+    viceHeadImagePosition: "center 25%",
+  },
+  {
+    name: 'Financial Coordinator',
+    head: 'Belal Amer',
+    headImage: FC,
+    headImagePosition: "center 30%",
+    isCoordinator: true, // Flag to indicate this is a coordinator, not a head
   },
 ]
 
@@ -163,7 +216,10 @@ const Hierarchy: React.FC = () => {
                         alt={person.name}
                         className={styles.personImage}
                         fill
-                        style={{ objectFit: 'cover' }}
+                        style={{ 
+                          objectFit: 'cover', 
+                          objectPosition: person.imagePosition || 'center top' 
+                        }}
                       />
                     )}
                   </div>
@@ -185,79 +241,144 @@ const Hierarchy: React.FC = () => {
             <div key={index} className={styles.committeeSection}>
               <h3 className={styles.committeeTitle}>{committee.name}</h3>
               <div className={styles.personCircleContainer}>
-                {/* Render Head */}
-                {committee.head && (
-                  <div className={styles.personCircle}>
-                    <div className={styles.blueCircle}>
-                      <div className={styles.whiteCircle}>
-                        {/* Display head image if available */}
-                        {committee.headImage && (
-                          <Image
-                            src={committee.headImage}
-                            alt={committee.head}
-                            className={styles.personImage}
-                            fill
-                            style={{ objectFit: 'cover' }}
-                          />
-                        )}
+                {/* If there are 2 vice heads: Render V1, H, V2 */}
+                {committee.viceHead2 ? (
+                  <>
+                    {/* Render Vice Head 1 first */}
+                    {committee.viceHead && (
+                      <div className={styles.personCircle}>
+                        <div className={styles.blueCircle}>
+                          <div className={styles.whiteCircle}>
+                            {committee.viceHeadImage && (
+                              <Image
+                                src={committee.viceHeadImage}
+                                alt={committee.viceHead}
+                                className={styles.personImage}
+                                fill
+                                style={{ 
+                                  objectFit: 'cover', 
+                                  objectPosition: committee.viceHeadImagePosition || 'center top' 
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.personDetails}>
+                          <p className={styles.personName}>{committee.viceHead}</p>
+                          <p className={styles.personPosition}>Vice Head</p>
+                        </div>
                       </div>
-                    </div>
-                    {/* Display head name and position */}
-                    <div className={styles.personDetails}>
-                      <p className={styles.personName}>{committee.head}</p>
-                      <p className={styles.personPosition}>Head</p>
-                    </div>
-                  </div>
-                )}
+                    )}
 
-                {/* Render Vice Head */}
-                {committee.viceHead && (
-                  <div className={styles.personCircle}>
-                    <div className={styles.blueCircle}>
-                      <div className={styles.whiteCircle}>
-                        {/* Display vice head image if available */}
-                        {committee.viceHeadImage && (
-                          <Image
-                            src={committee.viceHeadImage}
-                            alt={committee.viceHead}
-                            className={styles.personImage}
-                            fill
-                            style={{ objectFit: 'cover' }}
-                          />
-                        )}
+                    {/* Render Head in the middle */}
+                    {committee.head && (
+                      <div className={styles.personCircle}>
+                        <div className={styles.blueCircle}>
+                          <div className={styles.whiteCircle}>
+                            {committee.headImage && (
+                              <Image
+                                src={committee.headImage}
+                                alt={committee.head}
+                                className={styles.personImage}
+                                fill
+                                style={{ 
+                                  objectFit: 'cover', 
+                                  objectPosition: committee.headImagePosition || 'center top' 
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.personDetails}>
+                          <p className={styles.personName}>{committee.head}</p>
+                          {/* Only show "Head" if not a coordinator */}
+                          {!committee.isCoordinator && <p className={styles.personPosition}>Head</p>}
+                        </div>
                       </div>
-                    </div>
-                    {/* Display vice head name and position */}
-                    <div className={styles.personDetails}>
-                      <p className={styles.personName}>{committee.viceHead}</p>
-                      <p className={styles.personPosition}>Vice Head</p>
-                    </div>
-                  </div>
-                )}
+                    )}
 
-                {/* Render Vice Head 2 (ADDED THIS PART) */}
-                {committee.viceHead2 && (
-                  <div className={styles.personCircle}>
-                    <div className={styles.blueCircle}>
-                      <div className={styles.whiteCircle}>
-                        {/* Display second vice head image if available */}
-                        {committee.viceHead2Image && (
-                          <Image
-                            src={committee.viceHead2Image}
-                            alt={committee.viceHead2}
-                            className={styles.personImage}
-                            fill
-                            style={{ objectFit: 'cover' }}
-                          />
-                        )}
+                    {/* Render Vice Head 2 last */}
+                    {committee.viceHead2 && (
+                      <div className={styles.personCircle}>
+                        <div className={styles.blueCircle}>
+                          <div className={styles.whiteCircle}>
+                            {committee.viceHead2Image && (
+                              <Image
+                                src={committee.viceHead2Image}
+                                alt={committee.viceHead2}
+                                className={styles.personImage}
+                                fill
+                                style={{ 
+                                  objectFit: 'cover', 
+                                  objectPosition: committee.viceHead2ImagePosition || 'center top' 
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.personDetails}>
+                          <p className={styles.personName}>{committee.viceHead2}</p>
+                          <p className={styles.personPosition}>Vice Head</p>
+                        </div>
                       </div>
-                    </div>
-                    {/* Display second vice head name and position */}
-                    <div className={styles.personDetails}>
-                      <p className={styles.personName}>{committee.viceHead2}</p>
-                      <p className={styles.personPosition}>Vice Head</p>
-                    </div>
-                  </div>
+                    )}
+                  </>
+                ) : (
+                  /* If only 1 vice head or no vice head: Render H, V */
+                  <>
+                    {/* Render Head first */}
+                    {committee.head && (
+                      <div className={styles.personCircle}>
+                        <div className={styles.blueCircle}>
+                          <div className={styles.whiteCircle}>
+                            {committee.headImage && (
+                              <Image
+                                src={committee.headImage}
+                                alt={committee.head}
+                                className={styles.personImage}
+                                fill
+                                style={{ 
+                                  objectFit: 'cover', 
+                                  objectPosition: committee.headImagePosition || 'center top' 
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.personDetails}>
+                          <p className={styles.personName}>{committee.head}</p>
+                          {/* Only show "Head" if not a coordinator */}
+                          {!committee.isCoordinator && <p className={styles.personPosition}>Head</p>}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Render Vice Head second */}
+                    {committee.viceHead && (
+                      <div className={styles.personCircle}>
+                        <div className={styles.blueCircle}>
+                          <div className={styles.whiteCircle}>
+                            {committee.viceHeadImage && (
+                              <Image
+                                src={committee.viceHeadImage}
+                                alt={committee.viceHead}
+                                className={styles.personImage}
+                                fill
+                                style={{ 
+                                  objectFit: 'cover', 
+                                  objectPosition: committee.viceHeadImagePosition || 'center top' 
+                                }}
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.personDetails}>
+                          <p className={styles.personName}>{committee.viceHead}</p>
+                          <p className={styles.personPosition}>Vice Head</p>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>

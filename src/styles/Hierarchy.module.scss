@@ -3,18 +3,22 @@
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding-bottom: 100px;
+  max-width: 1400px; // Increased to fit all members
+  margin-top: 50px;
+  // margin: 0 auto;
+  padding: clamp(50px, 8vw, 100px) clamp(20px, 4vw, 40px);
   text-align: center;
-  padding-top: 100px;
-
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; // Prevent horizontal scroll
 }
 
 .PageTitle {
   font-family: 'Bionix';
   color: #0037c0;
-  font-size: 50px;
+  font-size: clamp(2rem, 5vw, 50px); // Responsive typography
+  margin-bottom: clamp(20px, 3vw, 40px);
 }
 
 .sectionTitle {
@@ -24,21 +28,25 @@
 
 .personImage {
   width: 100%;
-  gap: 0px;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; // Cover to fill the circle
+  object-position: center top; // Position to show faces (top of image centered)
   position: absolute;
   top: 0;
   left: 0;
+  // Scale larger to fill more of the circle
+  transform: scale(1.2); // Increased scale to fill more space
+  transform-origin: center;
 }
 
 .personCircleContainer {
   display: flex;
-  gap: 100px;
-
-  // flex-wrap: wrap; /* Enable wrapping */
+  flex-wrap: wrap; // Enable wrapping for responsiveness
+  gap: clamp(20px, 4vw, 60px); // Responsive gap
   justify-content: center;
-  // gap: 20px; /* Add gap between circles */
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
 }
 
 .AcContainer {
@@ -76,41 +84,48 @@
 }
 .floatingShapeLeft {
   position: absolute;
-  top: 100px; // Move it lower (adjust value as needed)
-  left: -150px; // Adjust this if you want it further or closer to the right
-  width: 400px; // Ensure size consistency
-  height: auto; // Maintain aspect ratio
-  z-index: 2; // Keep it above other elements
-  pointer-events: none; // Prevent interaction if necessary
+  top: clamp(50px, 8vw, 100px);
+  left: clamp(-200px, -10vw, -150px); // Move further left and away
+  width: clamp(150px, 20vw, 250px); // Much smaller
+  height: auto;
+  z-index: 300; // Behind content
+  pointer-events: none;
+  // opacity: 0.6; // Slightly transparent to not interfere
 }
 .floatingShapeRight {
   position: absolute;
-  top: 2400px; // Move it lower (adjust value as needed)
-  right: -100px; // Adjust this if you want it further or closer to the right
-  width: 400px; // Ensure size consistency
-  height: auto; // Maintain aspect ratio
-  z-index: 2; // Keep it above other elements
-  pointer-events: none; // Prevent interaction if necessary
+  top: clamp(2000px, 150vw, 2400px); // Responsive positioning
+  right: clamp(-150px, -7vw, -100px); // Move further right
+  width: clamp(150px, 400vw, 250px); // Much smaller
+  height: auto;
+  z-index: 1; // Behind content
+  pointer-events: none;
+  // opacity: 0.6; // Slightly transparent
 }
 .blueCircle {
-  width: 200px;
-  height: 200px;
+  width: clamp(120px, 15vw, 200px); // Responsive sizing
+  height: clamp(120px, 15vw, 200px);
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
   font-size: 2rem;
-  background-color: #e6e6e6;
-  border: 7px solid #0037c0;
+  background-color: #e6e6e6; // Remove background
+  border: clamp(4px, 0.8vw, 7px) solid #0037c0;
+  flex-shrink: 0; // Prevent shrinking
+  position: relative; // For absolute positioning of image
+  overflow: hidden; // Clip image to border
 }
 
 .whiteCircle {
-  background-color: #e6e6e6;
-  width: 190px; /* Adjust this value to resize the image container */
-  height: 190px; /* Same value for square shape */
-  display: flex; /* Center the image inside */
+  width: 100%; // Fill the blue circle
+  height: 100%; // Fill the blue circle
+  display: flex;
   position: relative;
-  overflow: hidden; /* Ensure images don't overflow the whiteCircle */
+  overflow: hidden; // Clip to circle bounds
+  background-color: transparent; // Remove white background
+  // Ensure image fits completely
+  border-radius: 0; // Square shape to match blueCircle
 }
 
 .personDetails {
@@ -121,33 +136,34 @@
 .personName {
   font-weight: bold;
   font-family: 'Montserrat';
-  font-size: medium;
+  font-size: clamp(0.875rem, 1.5vw, 1rem); // Responsive typography
+  margin-bottom: 4px;
+  word-wrap: break-word;
 }
 
 .personPosition {
   font-weight: normal;
-  font-size: small;
+  font-size: clamp(0.75rem, 1.2vw, 0.875rem); // Responsive typography
   font-family: 'Montserrat';
-
+  word-wrap: break-word;
 }
 
 .sectionTitle {
-  margin-top: 30px;
-  padding: 40px;
-  font-size: 1.5rem;
+  margin-top: clamp(20px, 3vw, 30px);
+  padding: clamp(20px, 3vw, 40px);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem); // Responsive typography
   font-family: 'Montserrat';
-
 }
 
 .committeeSection {
-  margin-bottom: 40px;
+  margin-bottom: clamp(30px, 4vw, 40px);
+  width: 100%;
 }
 
 .committeeTitle {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem); // Responsive typography
   font-weight: bold;
-
-  margin-bottom: 30px;
+  margin-bottom: clamp(20px, 3vw, 30px);
 }
 
 .divider {
@@ -158,72 +174,64 @@
   border-top: 2px solid #0037c0;
 }
 
-@media screen and (max-width: 1200px) {
+// Tablet styles
+@media screen and (max-width: 1024px) {
   .container {
-    padding-top: 50px; /* Adjust top padding */
-    padding-bottom: 50px; /* Adjust bottom padding */
+    max-width: 100%;
+    padding: clamp(40px, 6vw, 60px) clamp(15px, 3vw, 30px);
   }
 
-  .PageTitle {
-    margin-top: 30px;
-    padding-top: 50px;
-    font-size: 30px;
-  }
-
-  .divider {
-    align-self: center;
+  .personCircleContainer {
+    gap: clamp(15px, 3vw, 40px);
   }
 
   .floatingShapeLeft {
-    left: -50px; /* Reposition for smaller screens */
-    top: 180px; /* Adjust top spacing */
-    width: 150px; /* Resize shape */
+    left: clamp(-120px, -10vw, -80px);
+    width: clamp(100px, 15vw, 180px);
   }
 
   .floatingShapeRight {
-    right: -40px; /* Reposition for smaller screens */
-    top: 4700px; /* Adjust top spacing */
-    width: 150px; /* Resize shape */
+    right: clamp(-80px, -8vw, -60px);
+    width: clamp(100px, 15vw, 180px);
   }
-  .blueCircle {
-    width: 200px;
-    height: 200px;
-    background-color: #e6e6e6;
-    border-radius: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    font-size: 2rem;
-    color: white;
+}
+
+// Mobile styles
+@media screen and (max-width: 768px) {
+  .container {
+    padding: clamp(30px, 5vw, 50px) clamp(10px, 2vw, 20px);
   }
-  .whiteCircle {
-    background-color: #e6e6e6;
-    width: 190px;
-    height: 190px;
-    border-radius: none;
-    position: relative; /* Added for absolute positioning of images */
-  }
-  .personCircle {
-    // margin:0px;
-  }
+
   .personCircleContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* Add gap between circles */
+    gap: clamp(15px, 2.5vw, 30px);
   }
 
-  .AcContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px; /* Add gap between circles */
+  .floatingShapeLeft {
+    left: clamp(-80px, -8vw, -50px);
+    top: clamp(30px, 5vw, 50px);
+    width: clamp(80px, 12vw, 120px);
+    opacity: 0.4; // Even more transparent on mobile
   }
-  .RestAcContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 
-    gap: 40px; /* Add gap between circles */
+  .floatingShapeRight {
+    right: clamp(-60px, -6vw, -40px);
+    width: clamp(80px, 12vw, 120px);
+    opacity: 0.4; // Even more transparent on mobile
+  }
+
+  .personCircle {
+    margin-bottom: clamp(15px, 2vw, 20px);
+  }
+}
+
+// Small mobile styles
+@media screen and (max-width: 480px) {
+  .personCircleContainer {
+    gap: clamp(10px, 2vw, 20px);
+  }
+
+  .floatingShapeLeft,
+  .floatingShapeRight {
+    display: none; // Hide on very small screens to save space
   }
 }
