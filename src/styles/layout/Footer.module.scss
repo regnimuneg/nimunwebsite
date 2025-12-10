@@ -61,6 +61,7 @@
 @media screen and (max-width: 530px) {
   .footer {
     overflow-x: hidden; // Prevent horizontal overflow
+    font-size: 1 rem;
 
     .copyrights {
       font-size: $font-size-s; // Adjust font size on small screens

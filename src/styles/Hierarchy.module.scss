@@ -84,21 +84,21 @@
 }
 .floatingShapeLeft {
   position: absolute;
-  top: clamp(50px, 8vw, 100px);
-  left: clamp(-200px, -10vw, -150px); // Move further left and away
-  width: clamp(150px, 20vw, 250px); // Much smaller
+  top: clamp(40px, 7vw, 90px);
+  left: clamp(-220px, -12vw, -120px); // Move further left and away
+  width: clamp(180px, 26vw, 300px); // size tuned for metallic element
   height: auto;
-  z-index: 300; // Behind content
+  z-index: 5; // Above background but behind content
   pointer-events: none;
   // opacity: 0.6; // Slightly transparent to not interfere
 }
 .floatingShapeRight {
   position: absolute;
-  top: clamp(2000px, 150vw, 2400px); // Responsive positioning
-  right: clamp(-150px, -7vw, -100px); // Move further right
-  width: clamp(150px, 400vw, 250px); // Much smaller
+  top: clamp(1600px, 140vw, 2100px); // Responsive positioning
+  right: clamp(-200px, -12vw, -90px); // Move further right
+  width: clamp(200px, 30vw, 320px); // size tuned for metallic element
   height: auto;
-  z-index: 1; // Behind content
+  z-index: 3; // Behind content
   pointer-events: none;
   // opacity: 0.6; // Slightly transparent
 }
@@ -186,13 +186,13 @@
   }
 
   .floatingShapeLeft {
-    left: clamp(-120px, -10vw, -80px);
-    width: clamp(100px, 15vw, 180px);
+    left: clamp(-180px, -12vw, -90px);
+    width: clamp(150px, 20vw, 240px);
   }
 
   .floatingShapeRight {
-    right: clamp(-80px, -8vw, -60px);
-    width: clamp(100px, 15vw, 180px);
+    right: clamp(-160px, -12vw, -80px);
+    width: clamp(160px, 22vw, 260px);
   }
 }
 
@@ -207,15 +207,15 @@
   }
 
   .floatingShapeLeft {
-    left: clamp(-80px, -8vw, -50px);
-    top: clamp(30px, 5vw, 50px);
-    width: clamp(80px, 12vw, 120px);
+    left: clamp(-160px, -18vw, -70px);
+    top: clamp(24px, 6vw, 44px);
+    width: clamp(140px, 32vw, 220px);
     opacity: 0.4; // Even more transparent on mobile
   }
 
   .floatingShapeRight {
-    right: clamp(-60px, -6vw, -40px);
-    width: clamp(80px, 12vw, 120px);
+    right: clamp(-140px, -16vw, -60px);
+    width: clamp(150px, 34vw, 230px);
     opacity: 0.4; // Even more transparent on mobile
   }
 

@@ -16,22 +16,22 @@
 
   .floatingShape {
     position: absolute;
-    top: 150px; // Move it lower (adjust value as needed)
-    left: -350px; // Adjust this if you want it further or closer to the right
-    width: 500px; // Ensure size consistency
+    top: clamp(80px, 12vw, 180px); // Move it lower (adjust value as needed)
+    left: clamp(-260px, -18vw, -120px); // Adjust this if you want it further or closer to the right
+    width: clamp(320px, 30vw, 520px); // Ensure size consistency
     rotate: 35deg;
     height: auto; // Maintain aspect ratio
-    z-index: 2; // Keep it above other elements
+    z-index: 4; // Keep it above other elements
     pointer-events: none; // Prevent interaction if necessary
   }
 
   .floatingShapeRight {
     position: absolute;
-    top: -150px; // Move it lower (adjust value as needed)
-    right: -400px; // Adjust this if you want it further or closer to the right
-    width: 600px; // Ensure size consistency
+    top: clamp(-120px, -10vw, -40px); // Move it lower (adjust value as needed)
+    right: clamp(-260px, -18vw, -140px); // Adjust this if you want it further or closer to the right
+    width: clamp(360px, 34vw, 560px); // Ensure size consistency
     height: auto; // Maintain aspect ratio
-    z-index: 2; // Keep it above other elements
+    z-index: 4; // Keep it above other elements
     rotate: 35deg;
     pointer-events: none; // Prevent interaction if necessary
   }
@@ -179,12 +179,12 @@
 }
 .floatingShapeRightM {
   position: absolute;
-  top: 1100px; // Move it lower (adjust value as needed)
-  right: -250px; // Adjust this if you want it further or closer to the right
-  width: 500px; // Ensure size consistency
+  top: clamp(900px, 90vw, 1200px); // Move it lower (adjust value as needed)
+  right: clamp(-220px, -16vw, -120px); // Adjust this if you want it further or closer to the right
+  width: clamp(320px, 30vw, 520px); // Ensure size consistency
   height: auto; // Maintain aspect ratio
   rotate: -15deg;
-  z-index: 2; // Keep it above other elements
+  z-index: 4; // Keep it above other elements
   pointer-events: none; // Prevent interaction if necessary
 }
 
@@ -257,21 +257,21 @@
     }
 
     .floatingShape {
-      top: 350px; /* Adjust positioning for smaller screens */
-      left: -120px; /* Adjust as needed */
-      width: 200px; /* Reduce size */
+      top: clamp(180px, 32vw, 240px); /* Adjust positioning for smaller screens */
+      left: clamp(-180px, -24vw, -70px); /* Adjust as needed */
+      width: clamp(220px, 44vw, 320px); /* Reduce size */
     }
 
     .floatingShapeRight {
-      top: -50px; /* Adjust positioning for smaller screens */
-      right: -290px; /* Adjust as needed */
-      width: 350px; /* Reduce size */
+      top: clamp(-40px, -6vw, -10px); /* Adjust positioning for smaller screens */
+      right: clamp(-220px, -24vw, -80px); /* Adjust as needed */
+      width: clamp(240px, 46vw, 340px); /* Reduce size */
     }
 
     .floatingShapeRightM {
-      top: 1450px; /* Adjust lower positioning */
-      right: -200px; /* Move closer */
-      width: 300px; /* Resize */
+      top: clamp(1050px, 150vw, 1380px); /* Adjust lower positioning */
+      right: clamp(-180px, -22vw, -60px); /* Move closer */
+      width: clamp(220px, 46vw, 340px); /* Resize */
     }
 
     .MissionHead {
@@ -350,21 +350,21 @@
     }
 
     .floatingShape {
-      top: 300px; /* Adjust positioning for smaller screens */
-      left: -100px; /* Adjust as needed */
-      width: 200px; /* Reduce size */
+      top: clamp(160px, 24vw, 220px); /* Adjust positioning for smaller screens */
+      left: clamp(-180px, -20vw, -70px); /* Adjust as needed */
+      width: clamp(240px, 38vw, 360px); /* Reduce size */
     }
 
     .floatingShapeRight {
-      top: -50px; /* Adjust positioning for smaller screens */
-      right: -290px; /* Adjust as needed */
-      width: 350px; /* Reduce size */
+      top: clamp(-40px, -8vw, -10px); /* Adjust positioning for smaller screens */
+      right: clamp(-220px, -18vw, -90px); /* Adjust as needed */
+      width: clamp(260px, 42vw, 380px); /* Reduce size */
     }
 
     .floatingShapeRightM {
-      top: 1250px; /* Adjust lower positioning */
-      right: -120px; /* Move closer */
-      width: 300px; /* Resize */
+      top: clamp(980px, 120vw, 1280px); /* Adjust lower positioning */
+      right: clamp(-160px, -18vw, -70px); /* Move closer */
+      width: clamp(240px, 42vw, 380px); /* Resize */
     }
 
     .MissionHead {
@@ -447,21 +447,21 @@
     }
 
     .floatingShape {
-      top: 300px; /* Adjust positioning for smaller screens */
-      left: -100px; /* Adjust as needed */
-      width: 200px; /* Reduce size */
+      top: clamp(140px, 22vw, 200px); /* Adjust positioning for smaller screens */
+      left: clamp(-160px, -18vw, -70px); /* Adjust as needed */
+      width: clamp(240px, 34vw, 360px); /* Reduce size */
     }
 
     .floatingShapeRight {
-      top: -50px; /* Adjust positioning for smaller screens */
-      right: -290px; /* Adjust as needed */
-      width: 350px; /* Reduce size */
+      top: clamp(-60px, -10vw, -20px); /* Adjust positioning for smaller screens */
+      right: clamp(-220px, -18vw, -90px); /* Adjust as needed */
+      width: clamp(260px, 38vw, 380px); /* Reduce size */
     }
 
     .floatingShapeRightM {
-      top: 690px; /* Adjust lower positioning */
-      right: -140px; /* Move closer */
-      width: 400px; /* Resize */
+      top: clamp(620px, 96vw, 760px); /* Adjust lower positioning */
+      right: clamp(-160px, -16vw, -60px); /* Move closer */
+      width: clamp(260px, 40vw, 400px); /* Resize */
     }
 
 

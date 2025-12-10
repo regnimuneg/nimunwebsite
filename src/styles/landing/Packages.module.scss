@@ -9,7 +9,8 @@
   flex-direction: column;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
-  overflow: visible; // Allow badge to overflow
+  overflow-x: hidden; // Prevent horizontal overflow
+  overflow-y: visible; // Allow badge to overflow vertically
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
@@ -23,6 +24,7 @@
   letter-spacing: 1px;
   margin-bottom: 8px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 // Main title style
@@ -56,6 +58,102 @@
   flex-grow: 1;
   height: 10px; // Thinner line
   background: #0036bf;
+}
+
+// Container for single package type pill
+.packagePillContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  padding: 0 clamp(10px, 2vw, 20px);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; // Prevent horizontal overflow
+}
+
+// Wrapper for the pill (one big pill container)
+.packagePillWrapper {
+  display: flex;
+  position: relative;
+  --pill-color: #0036bf;
+  border: 2px solid #dee2e6;
+  border-radius: 25px;
+  background-color: #fff;
+  padding: 4px;
+  min-width: 0; // Allow shrinking
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (min-width: 480px) {
+    min-width: 300px;
+    max-width: 600px;
+  }
+}
+
+// Sliding indicator pill (smaller pill that moves)
+.slidingPill {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(25% - 4px);
+  height: calc(100% - 8px);
+  border-radius: 20px;
+  background-color: var(--pill-color, #0036bf); // Package-specific color
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+// Package button (invisible overlay for clicking)
+.packagePillButton {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background-color: transparent;
+  color: #495057;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-width: 0; // Allow flex shrinking
+  overflow: hidden; // Prevent text overflow
+  text-overflow: ellipsis; // Show ellipsis if text is too long
+
+  &:hover {
+    color: var(--btn-color, var(--pill-color, #0036bf));
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--btn-color, var(--pill-color, #0036bf)) !important; // On hover, use the hovered package color
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 8px;
+    font-size: 0.8rem;
+    white-space: normal; // Allow wrapping on very small screens
+    word-break: break-word;
+  }
+}
+
+// Active button (when sliding pill is behind it)
+.activePillButton {
+  color: #fff !important;
+  font-weight: 700;
+
+  &:hover {
+    color: #fff !important;
+  }
 }
 
 // Container for the toggle buttons
@@ -123,6 +221,16 @@
       grid-template-columns: repeat(4, minmax(250px, 280px));
     }
   }
+
+  // For 1 card (Gold/Platinum) - centered
+  &.oneCard {
+    justify-items: center;
+    @media (min-width: 769px) {
+      grid-template-columns: 1fr;
+      max-width: 280px;
+      margin: 0 auto; // Center the grid container
+    }
+  }
 }
 
 // Individual package card style
@@ -143,6 +251,7 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
   box-sizing: border-box;
+  height: 100%; // Ensure consistent height
 
   &:hover {
     transform: translateY(-5px);
@@ -188,8 +297,8 @@
 // Header section within the card (title, price)
 .cardHeader {
   text-align: center;
-  margin-bottom: 20px;
-  min-height: 140px; // Ensure consistent height for all cards (accommodates groupInfo)
+  margin-bottom: 0;
+  min-height: auto; // Remove fixed height to eliminate extra space
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -218,6 +327,14 @@
   font-weight: 700;
   white-space: nowrap;
   // Color is set dynamically via inline style
+}
+
+// Room type label (e.g., " - Single" or " - Double")
+.roomTypeLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-left: 5px;
 }
 
 // Price container
@@ -253,11 +370,12 @@
 // Description container
 .descriptionContainer {
   flex: 1 1 auto;
-  margin-bottom: 25px;
-  margin-top: 0; // Ensure consistent top position
+  margin-bottom: 0; // Remove bottom margin so button is right after description
+  margin-top: 15px; // Small spacing from header
   display: flex;
   flex-direction: column;
   align-items: flex-start; // Align to start for consistent bullet alignment
+  min-height: 0; // Allow flex shrinking
 }
 
 // Description list style
@@ -314,10 +432,12 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   width: 100%; // Make button full width
-  margin-top: auto; // Push button to the bottom
+  margin-top: 15px; // Small spacing right after description
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0; // Prevent button from shrinking
+  margin-bottom: 0; // Remove any bottom margin
 
   &:hover {
     background: #002ca6; // Darker blue on hover
@@ -378,5 +498,18 @@
   .applyButton {
     padding: 10px 25px;
     font-size: 0.9rem;
+  }
+  
+  .packagePillContainer {
+    padding: 0 10px;
+  }
+  
+  .packagePillWrapper {
+    padding: 3px;
+  }
+  
+  .slidingPill {
+    width: calc(25% - 3px);
+    height: calc(100% - 6px);
   }
 }

@@ -7,21 +7,27 @@
   position: absolute;
   top: -20px;
   right: -100px;
-  width: 400px;
+  width: clamp(320px, 28vw, 520px);
   height: auto;
-  z-index: 1; // Behind navbar (z-index: 10)
+  z-index: 2; // Layer above background shapes but below content
   pointer-events: none;
   
   @media (max-width: 1200px) {
-    width: 200px;
-    right: -50px;
-    top: 60px;
+    width: clamp(220px, 24vw, 360px);
+    right: clamp(-70px, -6vw, -40px);
+    top: 50px;
   }
   
   @media (max-width: 768px) {
-    width: clamp(80px, 12vw, 150px);
-    right: clamp(-30px, -4vw, -30px);
-    top: 50px;
+    width: clamp(150px, 40vw, 240px);
+    right: clamp(-40px, -6vw, -12px);
+    top: 35px;
+  }
+
+  @media (max-width: 480px) {
+    width: clamp(170px, 35vw, 240px);
+    right: clamp(-220px, -25vw, -60px);
+    // top: 90%;
   }
 }
 
@@ -29,21 +35,29 @@
 .leftOfCardShape {
   position: absolute;
   top: 80%;
-  left: -200px;
-  width: 400px;
+  left: -220px;
+  width: clamp(340px, 32vw, 540px);
   height: auto;
-  z-index: 2;
+  z-index: 5; // Sit above other shapes but below hero content
   pointer-events: none;
   transform: translateY(-10%) rotate(45deg);
   
   @media (max-width: 1200px) {
-    width: 250px;
-    left: -120px;
+    width: clamp(260px, 32vw, 420px);
+    left: clamp(-190px, -20vw, -110px);
+    top: clamp(70%, 75%, 80%);
   }
   
   @media (max-width: 768px) {
-    width: clamp(100px, 15vw, 200px);
-    left: clamp(-80px, -12vw, -100px);
+    width: clamp(180px, 40vw, 320px);
+    left: clamp(-200px, -20vw, -60px);
+    top: 70%;
+  }
+
+  @media (max-width: 480px) {
+    width: clamp(170px, 35vw, 240px);
+    left: clamp(-250px, -20vw, -60px);
+    top: 90%;
   }
 }
 
@@ -124,6 +138,17 @@
   pointer-events: none; // Prevent interaction if necessary
 }
 @media screen and (max-width: 600px) {
+  .heroWrapper {
+    min-height: auto;
+    padding-top: clamp(12px, 3vw, 16px);
+    padding-bottom: clamp(18px, 5vw, 28px);
+  }
+
+  // .heroBanner {
+  //   min-height: auto;
+  //   align-items: flex-start;
+  // }
+
   .container {
     position: absolute;
     bottom: 80px;
@@ -147,6 +172,10 @@
   .header {
     font-size: clamp(2rem, 10vw, 60px);
     text-align: center;
+  }
+
+  .heroContent {
+    padding-top: clamp(22px, 8vw, 42px); // Reduce excess space above blue card
   }
 
   .floatingShape {
@@ -229,10 +258,10 @@
     height: 8px;
   }
 
-  .heroBanner {
-    min-height: 100vh;
-    height: 100vh;
-  }
+  // .heroBanner {
+  //   min-height: 100vh;
+  //   height: 100vh;
+  // }
 
   .overlay {
     height: 60%;
@@ -240,7 +269,7 @@
 
   // Mobile responsive styles for enlarged hero
   .heroContent {
-    padding-top: calc(10px + 50px + 30px); // Adjusted for mobile header
+    padding-top: clamp(36px, 10vw, 56px); // Tighter spacing for small screens
   }
 
   .heroSubtitle {
@@ -256,8 +285,8 @@
     max-width: 90%;
     padding: 20px 15px 15px;
     border-radius: 12px;
-    margin-top: 20px;
-    margin-bottom: 60px;
+    margin-top: clamp(6px, 3vw, 12px);
+    margin-bottom: clamp(16px, 5vw, 26px);
     box-shadow: 0 0 8px 8px rgba(0, 55, 192, 0.4);
   }
 
@@ -351,7 +380,7 @@
 .heroWrapper {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  // min-height: 100vh;
   overflow: visible;
   background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8f0 50%, #d8d8e8 100%);
   // padding-bottom: 200px;
@@ -433,7 +462,7 @@
 .heroBanner {
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  // min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -461,7 +490,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  z-index: 3;
+  z-index: 4; // Keep content above decorative shapes
   padding: clamp(15px, 2.5vw, 20px) clamp(12px, 2vw, 16px);
   padding-top: calc(clamp(15px, 2.5vw, 20px) + 60px + clamp(30px, 4vw, 40px));
   box-sizing: border-box;
@@ -469,8 +498,8 @@
 }
 .heroTitleBlock {
   text-align: center;
-  margin-bottom: 32px;
-  margin-top: 15px; // Remove top margin since padding handles spacing
+  margin-bottom: clamp(16px, 4vw, 28px);
+  margin-top: clamp(8px, 3vw, 16px); // Remove top margin since padding handles spacing
   // width: 45%;
 }
 .heroSubtitle {

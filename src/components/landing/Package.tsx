@@ -19,6 +19,7 @@ export default function Package({ item, isLast = false }: Props) {
           <div className={styles.titleLine} style={{ backgroundColor: item.titleColor }}></div>
           <div className={styles.title} style={{ color: item.titleColor }}>
             {item.title}
+            {item.roomType && <span className={styles.roomTypeLabel}> - {item.roomType} -</span>}
           </div>
           <div className={styles.titleLine} style={{ backgroundColor: item.titleColor }}></div>
         </div>

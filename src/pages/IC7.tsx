@@ -3,14 +3,47 @@ import styles from '@/styles/IC7.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
-import { singlePackagesData, doublePackagesData } from '@/data/packages'
+import { packagesData } from '@/data/packages'
+import clsx from 'clsx'
 
 const IC7: NextPage = () => {
-  const [packageType, setPackageType] = useState<'Single' | 'Double'>('Double')
+  const [selectedPackage, setSelectedPackage] = useState<string>('Regular')
   const [openDropdown, setOpenDropdown] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const displayedPackages = packageType === 'Single' ? singlePackagesData : doublePackagesData
+  
+  const currentPackage = packagesData.find(pkg => pkg.packageName === selectedPackage)
+  
+  // Get cards to display based on selected package
+  const getDisplayCards = () => {
+    if (!currentPackage) return []
+    
+    if (currentPackage.hasRoomTypes && currentPackage.roomOptions) {
+      // For Regular and Silver, show both Single and Double cards
+      return currentPackage.roomOptions.map(option => ({
+        title: currentPackage.packageName,
+        price: option.price,
+        description: option.description,
+        titleColor: currentPackage.titleColor,
+        isPopular: currentPackage.isPopular,
+        groupInfo: option.priceNote,
+        roomType: option.roomType,
+      }))
+    } else {
+      // For Gold and Platinum, show single card
+      return [{
+        title: currentPackage.packageName,
+        price: currentPackage.price || '',
+        description: currentPackage.description || [],
+        titleColor: currentPackage.titleColor,
+        isPopular: currentPackage.isPopular,
+        groupInfo: currentPackage.priceNote,
+        roomType: undefined,
+      }]
+    }
+  }
+
+  const displayCards = getDisplayCards()
 
   const aboutSubmenu = [
     { id: 'team', text: 'Our team', href: '/hierarchy' },
@@ -275,43 +308,63 @@ const IC7: NextPage = () => {
       <section className={styles.packagesSection}>
         <h2 className={styles.packagesTitle}>International delegates' packages</h2>
         
-        {/* Toggle Buttons */}
-        <div className={styles.toggleContainer}>
-          <button
-            className={`${styles.toggleButton} ${packageType === 'Single' ? styles.activeToggle : ''}`}
-            onClick={() => setPackageType('Single')}
-          >
-            Single
-          </button>
-          <button
-            className={`${styles.toggleButton} ${packageType === 'Double' ? styles.activeToggle : ''}`}
-            onClick={() => setPackageType('Double')}
-          >
-            Double
-          </button>
+        {/* Package Type Pill - Changes color based on selection */}
+        <div className={styles.packagePillContainer}>
+          <div className={styles.packagePillWrapper}>
+          {/* Sliding indicator pill */}
+          <div 
+            className={styles.slidingPill}
+            style={{
+              transform: `translateX(${packagesData.findIndex(pkg => pkg.packageName === selectedPackage) * 100}%)`,
+            }}
+          />
+            {/* Package buttons */}
+            {packagesData.map((pkg) => (
+              <button
+                key={pkg.packageName}
+                className={clsx(
+                  styles.packagePillButton,
+                  selectedPackage === pkg.packageName && styles.activePillButton
+                )}
+                onClick={() => setSelectedPackage(pkg.packageName)}
+              >
+                {pkg.packageName}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Package Cards */}
-        <div className={styles.packagesGrid}>
-          {displayedPackages.map((item, index) => (
-            <div key={index} className={styles.packageCard}>
-              <div className={styles.packagePrice}>${item.price}</div>
-              <div className={styles.packageDescription}>
-                {item.description.map((feature, idx) => (
-                  <div key={idx} className={styles.packageFeature}>{feature}</div>
-                ))}
+        {displayCards.length > 0 && (
+          <div className={clsx(
+            styles.packagesGrid,
+            displayCards.length === 2 ? styles.twoCards : styles.oneCard
+          )}>
+            {displayCards.map((item, index) => (
+              <div key={index} className={styles.packageCard}>
+                <div className={styles.packageTitle}>
+                  {item.title}
+                  {item.roomType && <span className={styles.roomTypeLabel}> - {item.roomType}</span>}
+                </div>
+                <div className={styles.packagePrice}>${item.price}</div>
+                {item.groupInfo && <div className={styles.groupInfo}>{item.groupInfo}</div>}
+                <div className={styles.packageDescription}>
+                  {item.description.map((feature, idx) => (
+                    <div key={idx} className={styles.packageFeature}>{feature}</div>
+                  ))}
+                </div>
+                <a
+                  href="https://forms.gle/gHozmUdgzG9z6XdG9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.packageButton}
+                >
+                  APPLY
+                </a>
               </div>
-              <a
-                href="https://forms.gle/gHozmUdgzG9z6XdG9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.packageButton}
-              >
-                APPLY
-              </a>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Footer */}
         <div className={styles.packagesFooter}>
