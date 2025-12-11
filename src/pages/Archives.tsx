@@ -90,7 +90,7 @@ const ConferenceArchives = () => {
 
             <div className={styles.imageCard}>
               <Image
-                src="/image/png/photo2.png"
+                src="/image/png/photo11.jpg"
                 alt="UNSC"
                 width={500}
                 height={300}
