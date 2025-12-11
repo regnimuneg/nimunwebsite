@@ -104,6 +104,70 @@ $ic7-black: #101010;
     margin-top: 8px;
     box-shadow: 2px 2px 0px $ic7-black;
   }
+
+  &.mobileMenu {
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      right: 0; // Slide from right
+      bottom: 0;
+      width: 320px !important; // Partial width like main sidebar
+      max-width: 85vw !important; // Max 85% of viewport width
+      height: 100vh;
+      border-radius: 15px 0 0 0; // Rounded top-left corner (sidebar on right)
+      border: none;
+      border-right: 3px solid $ic7-black; // Border on right side
+      margin: 0;
+      padding: 20px 0;
+      z-index: 9999;
+      overflow-y: auto;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15); // Shadow for depth
+      background-color: rgba(255, 255, 255, 0.98); // Semi-transparent
+      backdrop-filter: blur(10px); // Blur effect
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Smooth slide
+    }
+  }
+}
+
+// Backdrop for IC7 mobile menu
+.mobileMenuBackdrop {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); // Dimmed backdrop
+    z-index: 9998; // Below menu but above content
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.backButton {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: $ic7-black;
+    color: $ic7-white;
+    border: none;
+    border-bottom: 3px solid $ic7-black;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 8px;
+    
+    &:hover {
+      background-color: $ic7-blue;
+    }
+  }
 }
 
 .dropdownItem {
@@ -154,6 +218,53 @@ $ic7-black: #101010;
   grid-template-rows: repeat(4, auto);
   border-top: 5px solid $ic7-black;
   border-bottom: 5px solid $ic7-black;
+
+  @media (max-width: 768px) {
+    grid-template-rows: auto;
+  }
+}
+
+// Mobile Unified Title
+.mobileUnifiedTitle {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(20px, 4vw, 40px) clamp(15px, 3vw, 30px);
+    gap: clamp(20px, 4vw, 30px);
+    border-bottom: clamp(2px, 1vw, 8px) solid $ic7-black;
+  }
+}
+
+.unifiedTitleText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(8px, 2vw, 12px);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  flex-wrap: wrap;
+}
+
+.mobileApplyButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktopGrid {
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .gridRow {
@@ -217,8 +328,8 @@ $ic7-black: #101010;
 }
 
 .heroWord {
-  // Fluid typography using clamp() - scales smoothly from 320px to 1440px+
-  font-size: clamp(2rem, 8vw, 8rem); // 2rem (320px) to 8rem (1440px+)
+  // Fluid typography using clamp() - scales smoothly from 320px to 1440px+ - LARGER
+  font-size: clamp(2.5rem, 10vw, 10rem); // LARGER - 2.5rem (320px) to 10rem (1440px+)
   font-weight: 700; // Extra Bold
   color: $ic7-black;
   line-height: 1;
@@ -228,8 +339,8 @@ $ic7-black: #101010;
 }
 
 .heroSubtext {
-  // Fluid typography - scales from mobile to desktop
-  font-size: clamp(0.875rem, 2.5vw, 2.2rem); // 0.875rem (320px) to 2.2rem (1440px+)
+  // Fluid typography - scales from mobile to desktop - LARGER
+  font-size: clamp(1.1rem, 3vw, 2.8rem); // LARGER - 1.1rem (320px) to 2.8rem (1440px+)
   font-weight: 700;
   color: $ic7-blue;
   line-height: 1.2;
@@ -282,13 +393,13 @@ $ic7-black: #101010;
 }
 
 .heroApplyButton {
-  // Fluid padding and font size
-  padding: clamp(8px, 1.5vw, 12px) clamp(24px, 8vw, 60px);
+  // Fluid padding and font size - BIGGER on smaller screens
+  padding: clamp(12px, 2vw, 16px) clamp(32px, 10vw, 80px);
   border: clamp(4px, 1vw, 8px) solid $ic7-black;
   border-radius: 9999px; // rounded-full
   color: $ic7-blue;
   text-decoration: none;
-  font-size: clamp(0.875rem, 5vw, 4rem); // Scales from 0.875rem to 4rem
+  font-size: clamp(1.5rem, 7vw, 4rem); // BIGGER on small screens - Scales from 1.5rem (mobile) to 4rem (desktop)
   font-weight: 800;
   background-color: $ic7-white;
   cursor: pointer;
@@ -297,6 +408,12 @@ $ic7-black: #101010;
   display: inline-block;
   max-width: 100%;
   box-sizing: border-box;
+
+  // Even bigger on very small screens
+  @media (max-width: 480px) {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    padding: clamp(14px, 3vw, 18px) clamp(36px, 12vw, 90px);
+  }
 
   @media (hover: hover) {
     &:hover {
@@ -349,11 +466,13 @@ $ic7-black: #101010;
   width: 100%; // Fixed: was 150% causing overflow
   max-width: 100%;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10; // Above dots and logo
   
   p {
-    // Fluid typography
-    font-size: clamp(0.825rem, 3.3vw, 2.2rem);
-    line-height: 1.3;
+    // Fluid typography - SMALLER on larger screens to fit next to pharaoh
+    font-size: clamp(1.5rem, 3vw, 2rem); // SMALLER - 1rem (320px) to 1.6rem (1440px+) - reduced from 2.8rem
+    line-height: 1.4; // Slightly increased for readability
     color: $ic7-black;
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -382,9 +501,10 @@ $ic7-black: #101010;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 1;
+  z-index: 0; // Lower z-index to be behind text
   overflow: hidden;
   max-width: 100%;
+  opacity: 0.3; // Make it less prominent
 }
 
 .logoBlock {
@@ -397,7 +517,7 @@ $ic7-black: #101010;
   display: block;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 1; // Above dots but below text
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -516,7 +636,8 @@ $ic7-black: #101010;
 }
 
 .gridImage {
-  object-fit: cover;
+  object-fit: cover; // Cover to fill the box
+  object-position: top center; // Prioritize top of image, crop from bottom
   width: 100%;
   height: 100%;
 }

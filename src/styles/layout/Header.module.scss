@@ -1,3 +1,4 @@
+/* placeholder to avoid missing import if not existing */
 @import '../animations.scss';
 @import '../mixins.scss';
 @import '../globals.scss';
@@ -148,11 +149,26 @@ $header-border-radius: 30px;
 
 // Mobile Drawer Styles - ENHANCED
 .drawerPaper {
-  width: 280px; // Slightly wider for better appearance
-  background-color: rgba(255, 255, 255, 0.95); // Semi-transparent background
+  width: 320px !important; // Partial width instead of full screen
+  max-width: 85vw !important; // Max 85% of viewport width
+  background-color: rgba(255, 255, 255, 0.98); // Semi-transparent background
   backdrop-filter: blur(10px); // Blur effect like desktop header
-  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1); // Add shadow for depth
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15); // Add shadow for depth
   border-radius: 0 0 0 15px; // Rounded bottom-left corner
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important; // Smooth slide animation
+  will-change: transform; // Optimize animation performance
+}
+
+// Global MUI Drawer styles for smooth animation
+:global(.MuiDrawer-root) {
+  .MuiBackdrop-root {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
+  .MuiPaper-root {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
 }
 
 .drawerContent {
@@ -361,6 +377,31 @@ $header-border-radius: 30px;
     display: flex; // Use flex for vertical stacking
     flex-direction: column;
     align-items: flex-start; // Align items to the start
+  }
+}
+
+.backButton {
+  display: none;
+  
+  @media (max-width: 1050px) {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #0037c0;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 5px;
+    border-radius: 8px 8px 0 0;
+    
+    &:hover {
+      background-color: #002c9b;
+    }
   }
 }
 

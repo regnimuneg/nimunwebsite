@@ -1,10 +1,14 @@
 import { type ColorType } from '@/lib/types'
 import styles from '@/styles/landing/Summary.module.scss'
-import image1 from '@public/image/png/image1.png'
-import image2 from '@public/image/png/image2.png'
-import image3 from '@public/image/png/image4.png'
-import image4 from '@public/image/png/image5.png'
-import image5 from '@public/image/png/image6.png'
+import adham from '@public/image/png/Adham.jpg'
+import ccpCJ26 from '@public/image/png/CCPCJ\'26.jpg'
+import group from '@public/image/png/Group.jpg'
+import henry from '@public/image/png/henry.jpg'
+import plac from '@public/image/png/plac.jpg'
+import plac2 from '@public/image/png/plac2.jpg'
+import press26 from '@public/image/png/Press\'26.jpg'
+import pr from '@public/image/png/pr.jpg'
+import salama from '@public/image/png/salama.jpg'
 
 import type { StaticImageData } from 'next/image'
 
@@ -23,7 +27,7 @@ export interface SummaryLinkInterface {
 }
 
 export const summary: SummaryInterface = {
-  images: [image1, image2, image3, image4, image5], // Array of images
+  images: [adham, ccpCJ26, group, henry, plac, plac2, press26, pr, salama], // Array of new images
   content: (
     <>
       <span className={styles.bold}>

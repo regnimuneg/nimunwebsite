@@ -62,8 +62,8 @@ export default function Hero() {
               <p className={styles.heroCardTitle}>IC'26</p>
               <p className={styles.heroCardSubtitle}>IS OFFICALLY HERE!!</p>
               <div className={styles.learnMoreWrapper}>
-                <a href="/IC7" className={styles.learnMoreBtn}>
-                  <span className={styles.learnMoreText}>LEARN MORE!</span>
+                <a href="/apply" className={styles.learnMoreBtn}>
+                  <span className={styles.learnMoreText}>APPLY NOW!</span>
                 </a>
               </div>
             </div>

@@ -49,6 +49,12 @@ html,
 body {
   overflow-x: hidden;
   height: 100%;
+  // Allow pull-to-refresh on mobile
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
+  // Ensure zoom works
+  touch-action: pan-y pinch-zoom !important;
+  -webkit-text-size-adjust: 100%;
 }
 
 #__next {
@@ -95,10 +101,14 @@ html.lenis {
 
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
+  // Allow zoom gestures
+  touch-action: pan-y pinch-zoom !important;
 }
 
 .lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+  overscroll-behavior: auto; // Changed from contain to auto to allow pull-to-refresh
+  // Allow zoom even on prevented elements
+  touch-action: pan-y pinch-zoom !important;
 }
 
 .lenis.lenis-stopped {
@@ -107,4 +117,62 @@ html.lenis {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+// Double-tap zoom support for pages (not images)
+main,
+.width-fix {
+  // Enable smooth zoom transitions
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  
+  // Ensure zoom doesn't break layout
+  transform-origin: center center;
+  
+  // Allow scrolling when zoomed
+  &.zoomed {
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+}
+
+// Disable magnifying cursor and drag on images only (but allow page zoom)
+img,
+image,
+[role="img"],
+picture img,
+span img {
+  // Prevent zoom/magnifying cursor - always show default cursor
+  cursor: default !important;
+  // Disable image drag (which can cause zoom on some browsers)
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+  // Prevent image selection
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  // Allow page zoom to work even when tapping on images (but no magnifying cursor)
+  touch-action: pan-y pinch-zoom;
+  // Prevent context menu on long press (mobile)
+  -webkit-touch-callout: none !important;
+  // Prevent image from being treated as interactive
+  pointer-events: auto;
+}
+
+// Disable zoom cursor on Next.js Image components and their containers
+span[style*="position: relative"],
+span[style*="display: block"],
+div[style*="position: relative"] {
+  img {
+    cursor: default !important;
+    -webkit-user-drag: none !important;
+    user-drag: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
 }

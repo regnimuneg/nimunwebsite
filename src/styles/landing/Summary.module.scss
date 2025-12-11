@@ -301,25 +301,72 @@
 
 .summaryImageWrapper {
   position: relative;
-  width: 100%;
-  max-width: min(800px, 90vw);
+  width: min(800px, 90vw); // Fixed width
+  height: min(600px, 67.5vw); // Fixed height (maintains 4:3 aspect ratio)
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: clamp(15px, 2.5vw, 20px);
   box-sizing: border-box;
-}
-
-.summaryImage {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  overflow: hidden; // Hide overflow
   border-radius: 32px;
   border: 10px solid #fff;
   box-shadow: 
     0 0 20px rgba(255, 255, 255, 0.6),
     0 0 30px rgba(255, 255, 255, 0.4),
     0 0 40px rgba(255, 255, 255, 0.2);
+  cursor: zoom-in;
+  transition: transform 0.3s ease-in-out;
+  
+  &.zoomed {
+    cursor: zoom-out;
+    transform: scale(2);
+    z-index: 1000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    width: min(800px, 90vw);
+    height: min(600px, 67.5vw);
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+}
+
+.summaryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // Scale to fill the fixed box
+  object-position: center; // Center the image
+  border-radius: 22px; // Slightly smaller to account for border
+  transition: transform 0.3s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.zoomIndicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-family: 'Montserrat', sans-serif;
+  z-index: 1001;
+  pointer-events: none;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
 }
 
 .summaryTextBlock {
@@ -484,12 +531,30 @@
   .summaryImageWrapper {
     max-width: 100%;
   }
-  .summaryImage {
+  .summaryImageWrapper {
+    width: min(95vw, 600px); // Fixed width on mobile
+    height: min(71.25vw, 450px); // Fixed height (4:3 ratio)
     border-radius: 20px;
     border: 3px solid #fff;
     box-shadow: 
       0 0 15px rgba(255, 255, 255, 0.6),
       0 0 30px rgba(255, 255, 255, 0.4);
+    
+    &.zoomed {
+      transform: translate(-50%, -50%) scale(2.5);
+      width: min(95vw, 600px);
+      height: min(71.25vw, 450px);
+    }
+  }
+  
+  .summaryImage {
+    border-radius: 17px; // Account for border
+  }
+  
+  .zoomIndicator {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    bottom: 15px;
   }
   .summaryTextBlock {
     padding: 25px 15px;

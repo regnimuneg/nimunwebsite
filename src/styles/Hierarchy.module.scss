@@ -4,14 +4,15 @@
 
 .container {
   max-width: 1400px; // Increased to fit all members
-  margin-top: 50px;
+  // margin-top: px;
   // margin: 0 auto;
-  padding: clamp(50px, 8vw, 100px) clamp(20px, 4vw, 40px);
+  padding: clamp(120px, 8vw, 150px) clamp(20px, 4vw, 40px) clamp(50px, 8vw, 100px); // Top padding to appear below navbar
   text-align: center;
   position: relative;
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden; // Prevent horizontal scroll
+
 }
 
 .PageTitle {
@@ -47,6 +48,47 @@
   align-items: flex-start;
   width: 100%;
   max-width: 100%;
+
+  // On mobile, ensure Head appears first (top) when there are vices
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    
+    // For committees with vices, show Head first, then vices in a row
+    &:has(.personCircle:nth-child(2)) {
+      flex-direction: column;
+      
+      .personCircle:first-child {
+        order: 1; // Head first
+      }
+      
+      .personCircle:not(:first-child) {
+        order: 2; // Vices after
+        display: flex;
+      }
+    }
+  }
+}
+
+// High Board Grid - 4 columns on desktop, 2x2 on smaller screens
+.highBoardGrid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr); // 4 columns on desktop
+  grid-template-rows: auto;
+  gap: clamp(20px, 4vw, 60px);
+  max-width: 1400px;
+  margin: 0 auto;
+  
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); // 2x2 grid on smaller screens
+    grid-template-rows: repeat(2, auto);
+    max-width: 800px;
+  }
+  
+  // @media screen and (max-width: 768px) {
+  //   grid-template-columns: 1fr;
+  //   grid-template-rows: auto;
+  // }
 }
 
 .AcContainer {
@@ -158,6 +200,108 @@
 .committeeSection {
   margin-bottom: clamp(30px, 4vw, 40px);
   width: 100%;
+}
+
+.committeeContainer {
+  // Desktop layout
+  @media (min-width: 769px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 3vw, 40px);
+    
+    // Head always first
+    .headCircle {
+      order: 1;
+    }
+    
+    // Vices come after
+    .viceCircle {
+      order: 2;
+    }
+  }
+  
+  // Two vices: Head on top, vices below side by side
+  &.twoVices {
+    @media (min-width: 769px) {
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(15px, 2vw, 25px);
+      
+      .headCircle {
+        order: 1;
+      }
+      
+      .vicesContainer {
+        order: 2;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(20px, 4vw, 60px);
+      }
+    }
+    
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      
+      .headCircle {
+        order: 1;
+        margin-bottom: clamp(15px, 3vw, 25px);
+      }
+      
+      .vicesContainer {
+        order: 2;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(15px, 3vw, 30px);
+      }
+    }
+  }
+  
+  // Vices container for side-by-side display
+  .vicesContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(20px, 4vw, 60px);
+  }
+  
+  // One vice: Head and vice side by side (on all screens)
+  &.oneVice {
+    @media (min-width: 769px) {
+      flex-direction: row;
+      justify-content: center;
+      gap: clamp(20px, 4vw, 60px);
+      
+      .headCircle {
+        order: 1;
+      }
+      
+      .viceCircle {
+        order: 2;
+      }
+    }
+    
+    @media screen and (max-width: 768px) {
+      flex-direction: row; // Side by side on mobile too
+      justify-content: center;
+      gap: clamp(15px, 3vw, 30px);
+      
+      .headCircle {
+        order: 1;
+        margin-bottom: 0; // Remove margin since they're side by side
+      }
+      
+      .viceCircle {
+        order: 2;
+      }
+    }
+  }
 }
 
 .committeeTitle {

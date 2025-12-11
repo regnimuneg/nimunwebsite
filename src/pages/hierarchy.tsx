@@ -47,10 +47,10 @@ interface Person {
 }
 
 const HighBoard: Person[] = [
-  { name: 'Rawya Nabil', position: 'Academic Director', image: Rawya, imagePosition: "center 10%" },
   { name: 'Farah Ghaly', position: 'Secretary General', image: FarahHB, imagePosition: "center 30%" },
   { name: 'Nizar Amer', position: 'Deputy Secretary General', image: DSG, imagePosition: "center 30%" },
-  { name: 'Seif Elnahas', position: 'Conference Manager', image: CM }
+  { name: 'Seif Elnahas', position: 'Conference Manager', image: CM },
+  { name: 'Rawya Nabil', position: 'Academic Director', image: Rawya, imagePosition: "center 10%" }
 ]
 
 const OrganizingCommittee: Person[] = [
@@ -205,7 +205,7 @@ const Hierarchy: React.FC = () => {
         <section>
           <div className={styles.PageTitle}>MEET OUR TEAM</div>
           <div className={styles.sectionTitle}>HIGH BOARD</div>
-          <div className={styles.personCircleContainer}>
+          <div className={`${styles.personCircleContainer} ${styles.highBoardGrid}`}>
             {HighBoard.map((person, index) => (
               <div key={index} className={styles.personCircle}>
                 <div className={styles.blueCircle}>
@@ -240,13 +240,41 @@ const Hierarchy: React.FC = () => {
           {OrganizingCommittee.map((committee, index) => (
             <div key={index} className={styles.committeeSection}>
               <h3 className={styles.committeeTitle}>{committee.name}</h3>
-              <div className={styles.personCircleContainer}>
-                {/* If there are 2 vice heads: Render V1, H, V2 */}
+              <div className={`${styles.personCircleContainer} ${styles.committeeContainer} ${committee.viceHead2 ? styles.twoVices : committee.viceHead ? styles.oneVice : ''}`}>
+                {/* Always render Head first, then Vice Heads */}
+                {/* Render Head first */}
+                {committee.head && (
+                  <div className={`${styles.personCircle} ${styles.headCircle}`}>
+                    <div className={styles.blueCircle}>
+                      <div className={styles.whiteCircle}>
+                        {committee.headImage && (
+                          <Image
+                            src={committee.headImage}
+                            alt={committee.head}
+                            className={styles.personImage}
+                            fill
+                            style={{ 
+                              objectFit: 'cover', 
+                              objectPosition: committee.headImagePosition || 'center top' 
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <div className={styles.personDetails}>
+                      <p className={styles.personName}>{committee.head}</p>
+                      {/* Only show "Head" if not a coordinator */}
+                      {!committee.isCoordinator && <p className={styles.personPosition}>Head</p>}
+                    </div>
+                  </div>
+                )}
+
+                {/* Render Vice Heads after Head */}
                 {committee.viceHead2 ? (
-                  <>
-                    {/* Render Vice Head 1 first */}
+                  // If 2 vices: wrap them in a container to display side by side
+                  <div className={styles.vicesContainer}>
                     {committee.viceHead && (
-                      <div className={styles.personCircle}>
+                      <div className={`${styles.personCircle} ${styles.viceCircle}`}>
                         <div className={styles.blueCircle}>
                           <div className={styles.whiteCircle}>
                             {committee.viceHeadImage && (
@@ -269,37 +297,8 @@ const Hierarchy: React.FC = () => {
                         </div>
                       </div>
                     )}
-
-                    {/* Render Head in the middle */}
-                    {committee.head && (
-                      <div className={styles.personCircle}>
-                        <div className={styles.blueCircle}>
-                          <div className={styles.whiteCircle}>
-                            {committee.headImage && (
-                              <Image
-                                src={committee.headImage}
-                                alt={committee.head}
-                                className={styles.personImage}
-                                fill
-                                style={{ 
-                                  objectFit: 'cover', 
-                                  objectPosition: committee.headImagePosition || 'center top' 
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.personDetails}>
-                          <p className={styles.personName}>{committee.head}</p>
-                          {/* Only show "Head" if not a coordinator */}
-                          {!committee.isCoordinator && <p className={styles.personPosition}>Head</p>}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Render Vice Head 2 last */}
                     {committee.viceHead2 && (
-                      <div className={styles.personCircle}>
+                      <div className={`${styles.personCircle} ${styles.viceCircle}`}>
                         <div className={styles.blueCircle}>
                           <div className={styles.whiteCircle}>
                             {committee.viceHead2Image && (
@@ -322,63 +321,33 @@ const Hierarchy: React.FC = () => {
                         </div>
                       </div>
                     )}
-                  </>
+                  </div>
                 ) : (
-                  /* If only 1 vice head or no vice head: Render H, V */
-                  <>
-                    {/* Render Head first */}
-                    {committee.head && (
-                      <div className={styles.personCircle}>
-                        <div className={styles.blueCircle}>
-                          <div className={styles.whiteCircle}>
-                            {committee.headImage && (
-                              <Image
-                                src={committee.headImage}
-                                alt={committee.head}
-                                className={styles.personImage}
-                                fill
-                                style={{ 
-                                  objectFit: 'cover', 
-                                  objectPosition: committee.headImagePosition || 'center top' 
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.personDetails}>
-                          <p className={styles.personName}>{committee.head}</p>
-                          {/* Only show "Head" if not a coordinator */}
-                          {!committee.isCoordinator && <p className={styles.personPosition}>Head</p>}
+                  // If only 1 vice: render it directly
+                  committee.viceHead && (
+                    <div className={`${styles.personCircle} ${styles.viceCircle}`}>
+                      <div className={styles.blueCircle}>
+                        <div className={styles.whiteCircle}>
+                          {committee.viceHeadImage && (
+                            <Image
+                              src={committee.viceHeadImage}
+                              alt={committee.viceHead}
+                              className={styles.personImage}
+                              fill
+                              style={{ 
+                                objectFit: 'cover', 
+                                objectPosition: committee.viceHeadImagePosition || 'center top' 
+                              }}
+                            />
+                          )}
                         </div>
                       </div>
-                    )}
-
-                    {/* Render Vice Head second */}
-                    {committee.viceHead && (
-                      <div className={styles.personCircle}>
-                        <div className={styles.blueCircle}>
-                          <div className={styles.whiteCircle}>
-                            {committee.viceHeadImage && (
-                              <Image
-                                src={committee.viceHeadImage}
-                                alt={committee.viceHead}
-                                className={styles.personImage}
-                                fill
-                                style={{ 
-                                  objectFit: 'cover', 
-                                  objectPosition: committee.viceHeadImagePosition || 'center top' 
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.personDetails}>
-                          <p className={styles.personName}>{committee.viceHead}</p>
-                          <p className={styles.personPosition}>Vice Head</p>
-                        </div>
+                      <div className={styles.personDetails}>
+                        <p className={styles.personName}>{committee.viceHead}</p>
+                        <p className={styles.personPosition}>Vice Head</p>
                       </div>
-                    )}
-                  </>
+                    </div>
+                  )
                 )}
               </div>
             </div>

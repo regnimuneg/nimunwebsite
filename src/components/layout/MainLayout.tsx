@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header'
 import CustomHead from '@/components/utils/CustomHead'
 // Removed WebGLParticles import since it's not used
 import useWindowSize from '@/lib/useWindowSize'
+import { useDoubleTapZoom } from '@/lib/useDoubleTapZoom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
@@ -28,7 +29,10 @@ export default function MainLayout({ children }: Props) {
   const main = useRef<HTMLDivElement>(null)
   const isMobile = useWindowSize()
   const router = useRouter()
-  const isIC7Page = router.pathname === '/IC7'
+  const isIC26Page = router.pathname === '/IC26'
+  
+  // Enable double-tap zoom on all pages (but not on images)
+  useDoubleTapZoom()
 
   useGSAP(
     () => {
@@ -107,10 +111,10 @@ export default function MainLayout({ children }: Props) {
       {/* <WebGLParticles size={isMobile ? 260 : 200} /> */}
       <main className={font.className}>
         <div id="full-size-image-slider"></div>
-        {!isIC7Page && <Header />}
+        {!isIC26Page && <Header />}
         <div className="width-fix" ref={main}>
           {children}
-          {!isIC7Page && <Footer />}
+          {!isIC26Page && <Footer />}
         </div>
       </main>
     </>

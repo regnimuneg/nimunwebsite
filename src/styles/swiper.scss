@@ -7,7 +7,16 @@
 
 body {
   font-family: 'Bionix' !important;
-  .swiper {
+  // Smoother transitions for image slider
+.swiper {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  .swiper-slide {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+}
+
+.swiper {
     width: 100%;
     height: 100%;
     padding-bottom: 20px;
@@ -85,10 +94,15 @@ body {
   }
 
   .swiper.image-slider {
+    // Smoother animation transitions
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
     .swiper-slide {
       @include background-cover;
       background-position: top center;
       border-radius: 8px;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      will-change: transform;
 
       .image {
         width: 100%;
@@ -96,6 +110,7 @@ body {
         object-fit: cover;
         object-position: top;
         border-radius: $border-radius-global;
+        transition: opacity 0.3s ease-in-out;
       }
     }
   }

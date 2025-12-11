@@ -6,8 +6,11 @@ import gsap from 'gsap'
 
 export default function Summary() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isZoomed, setIsZoomed] = useState(false)
+  const imageWrapperRef = useRef<HTMLDivElement>(null)
   const rightShapeRef = useRef<HTMLImageElement>(null)
   const leftShapeRef = useRef<HTMLImageElement>(null)
+  const lastTapRef = useRef(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,6 +42,43 @@ export default function Summary() {
     }
   }, [])
 
+  // Disabled zoom functionality - no zoom on images
+  const handleDoubleTap = (e: React.TouchEvent | React.MouseEvent) => {
+    // Do nothing - zoom disabled
+  }
+
+  // Disabled zoom functionality - no zoom on images
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    // Do nothing - zoom disabled
+  }
+
+  // Close zoom when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isZoomed) return
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsZoomed(false)
+      }
+    }
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (imageWrapperRef.current && !imageWrapperRef.current.contains(e.target as Node)) {
+        setIsZoomed(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [isZoomed])
+
   return (
     <section className={styles.summarySection}>
       {/* To the right, between summary and images: 39.png */}
@@ -54,14 +94,60 @@ export default function Summary() {
       </div>
       <div className={styles.footerLine}></div>
       <div className={styles.imageSection}>
-        <div className={styles.summaryImageWrapper}>
-          <Image
-            src={summary.images[currentImageIndex] || ''}
-            alt="Summary photo"
-            className={styles.summaryImage}
-            width={800}
-            height={600}
+        {/* Backdrop overlay when zoomed */}
+        {isZoomed && (
+          <div 
+            className={styles.zoomBackdrop}
+            onClick={() => setIsZoomed(false)}
           />
+        )}
+        <div 
+          ref={imageWrapperRef}
+          className={`${styles.summaryImageWrapper} ${isZoomed ? styles.zoomed : ''}`}
+          onTouchStart={handleDoubleTap}
+          onDoubleClick={handleDoubleClick}
+          data-no-double-tap-zoom
+        >
+          {/* Display current image */}
+          {summary.images[currentImageIndex] && (
+            <Image
+              src={summary.images[currentImageIndex]!}
+              alt="Summary photo"
+              className={styles.summaryImage}
+              fill
+              priority={currentImageIndex === 0}
+              quality={85}
+              fetchPriority={currentImageIndex === 0 ? 'high' : 'auto'}
+            />
+          )}
+          {/* Preload all images in background for instant transitions */}
+          {summary.images.map((img, idx) => 
+            idx !== currentImageIndex && (
+              <Image
+                key={`preload-${idx}`}
+                src={img}
+                alt=""
+                fill
+                className={styles.summaryImage}
+                style={{ 
+                  position: 'absolute', 
+                  top: 0, 
+                  left: 0, 
+                  opacity: 0, 
+                  pointerEvents: 'none',
+                  zIndex: -1 
+                }}
+                loading="eager"
+                quality={85}
+              />
+            )
+          )}
+          {/* Zoom indicator */}
+          {isZoomed && (
+            <div className={styles.zoomIndicator}>
+              Double tap/click to zoom out
+            </div>
+          )}
         </div>
         <div className={styles.paginationDots}>
           {summary.images.map((_, idx) => (

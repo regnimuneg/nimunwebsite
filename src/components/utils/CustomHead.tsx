@@ -37,7 +37,7 @@ export default function CustomHead(props: CustomHeadProps) {
   return (
     <Head>
       {/* Primary Meta Tags */}
-      <meta name="viewport" content="width=device-width, height=device-height" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5, user-scalable=yes" />
       <title>{seo.title}</title>
       <meta name="title" content={seo.title} />
       <meta name="description" content={seo.description} />

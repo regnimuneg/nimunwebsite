@@ -55,14 +55,9 @@ export default function Header(): JSX.Element {
   // Right side elements component
   const RightSideElements = () => (
     <div className={styles.rightSideContainer}>
-      <a
-        href="https://forms.gle/D4hFPj934aVtpemw5"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.applyButton}
-      >
+      <Link href="/apply" className={styles.applyButton}>
         APPLY
-      </a>
+      </Link>
     </div>
   )
 
@@ -110,6 +105,12 @@ export default function Header(): JSX.Element {
               >
                 {/* Drawer content: includes Menu and RightSideElements */}
                 <div className={styles.drawerContent}>
+                  <button 
+                    className={styles.backButton} 
+                    onClick={toggleDrawer(false)}
+                  >
+                    ← Back
+                  </button>
                   <Menu onNavigate={() => setDrawerOpen(false)} />
                   <RightSideElements />
                 </div>

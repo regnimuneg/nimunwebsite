@@ -114,8 +114,8 @@ export const packagesData: PackageData[] = [
     packageName: 'Platinum',
     titleColor: '#5AC8FA', // Platinum blue
     hasRoomTypes: false,
-    price: '3,680',
-    priceNote: '$460 per person (Groups of 8 + Supervisor) - Save $80!',
+    price: '3,599',
+    priceNote: '$450 per person (Groups of 8 + Supervisor) - Save $90!',
     description: [
       'Accommodation',
       'Conference fees',

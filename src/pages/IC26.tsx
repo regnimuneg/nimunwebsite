@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from 'react'
 import { packagesData } from '@/data/packages'
 import clsx from 'clsx'
 
-const IC7: NextPage = () => {
+const IC26: NextPage = () => {
   const [selectedPackage, setSelectedPackage] = useState<string>('Regular')
   const [openDropdown, setOpenDropdown] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -305,7 +305,7 @@ const IC7: NextPage = () => {
         <div className={styles.heroImageContainer}>
           <Image
             src="/image/png/IC7 Hero.png"
-            alt="IC7 Hero"
+            alt="IC'26 Hero"
             fill
             className={styles.heroImage}
             priority
@@ -331,7 +331,7 @@ const IC7: NextPage = () => {
           <div className={styles.logoBlock}>
             <Image
               src="/image/png/NIMUN-Logo-IC7.png"
-              alt="NIMUN Logo IC7"
+              alt="NIMUN Logo IC'26"
               fill
               className={styles.logoImage}
             />
@@ -389,7 +389,7 @@ const IC7: NextPage = () => {
         <div className={styles.bottomImageContainer}>
           <Image
             src="/image/png/IC7 Bottom.png"
-            alt="IC7 Bottom"
+            alt="IC'26 Bottom"
             fill
             className={styles.bottomImage}
           />
@@ -473,5 +473,5 @@ const IC7: NextPage = () => {
   )
 }
 
-export default IC7
+export default IC26
 

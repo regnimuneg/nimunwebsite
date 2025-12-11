@@ -91,13 +91,14 @@ export default function ImageSlider({ className, title, accent, images, thumbnai
             >
               {images.map((item, index) => {
                 return (
-                  <SwiperSlide key={index}>
+                  <SwiperSlide key={index} data-no-double-tap-zoom>
                     <Image
                       quality={85}
                       placeholder="blur"
                       className="image"
                       alt={`slide-${index}`}
                       src={item}
+                      data-no-double-tap-zoom
                     />
                   </SwiperSlide>
                 )
@@ -111,7 +112,7 @@ export default function ImageSlider({ className, title, accent, images, thumbnai
 
   return (
     <>
-      <div className={`${styles.container} ${className}`}>
+      <div className={`${styles.container} ${className}`} data-no-double-tap-zoom>
         <Swiper
           effect={'coverflow'}
           autoplay={{
@@ -122,23 +123,35 @@ export default function ImageSlider({ className, title, accent, images, thumbnai
           centeredSlides
           loop
           spaceBetween={10}
+          speed={800} // Smoother animation speed
           pagination={{
             clickable: true,
           }}
           modules={[EffectCoverflow, Pagination, Autoplay]}
-          coverflowEffect={{ rotate: 10, stretch: 0, depth: 200, slideShadows: true }}
+          coverflowEffect={{ 
+            rotate: 10, 
+            stretch: 0, 
+            depth: 200, 
+            slideShadows: true,
+            modifier: 1.5 // Smoother transition
+          }}
           className={`swiper image-slider`}
           data-lenis-prevent-touch
+          data-no-double-tap-zoom
         >
           {slides.map((item, index) => {
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} data-no-double-tap-zoom>
                 <Image
-                  quality={68}
+                  quality={75} // Increased quality slightly
                   placeholder="blur"
                   className="image"
                   alt={`slide-${index}`}
                   src={item}
+                  priority={index < 3} // Priority load first 3 images
+                  loading={index < 3 ? 'eager' : 'lazy'}
+                  sizes="(max-width: 768px) 100vw, 50vw" // Optimize sizes
+                  data-no-double-tap-zoom
                 />
               </SwiperSlide>
             )

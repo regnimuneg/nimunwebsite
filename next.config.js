@@ -1,10 +1,45 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  // Use default server/SSR output so API routes work
   trailingSlash: true,
   images: {
     unoptimized: true,
     qualities: [40, 75, 85],
+  },
+  // Redirect hidden pages to 404
+  async redirects() {
+    return [
+      {
+        source: '/IC7',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/IC7/',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/JNIMUN',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/JNIMUN/',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/Internationals',
+        destination: '/404',
+        permanent: false,
+      },
+      {
+        source: '/Internationals/',
+        destination: '/404',
+        permanent: false,
+      },
+    ];
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

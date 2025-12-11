@@ -18,11 +18,43 @@ export function LenisProvider(props: LenisProviderProps) {
     const lenis = new Lenis({
       syncTouch: true,
       duration: 2,
+      touchMultiplier: 1.5,
+      wheelMultiplier: 1,
+      infinite: false,
+      // Allow zoom gestures
+      gestureOrientation: 'vertical',
     })
+    
+    // Ensure Lenis doesn't interfere with pinch-zoom
+    const handleWheel = (e: WheelEvent) => {
+      // Allow zoom with Ctrl/Cmd + wheel
+      if (e.ctrlKey || e.metaKey) {
+        return // Let browser handle zoom
+      }
+    }
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      // Allow pinch zoom (2 touches)
+      if (e.touches.length === 2) {
+        return // Let browser handle pinch zoom
+      }
+    }
+    
+    if (typeof window !== 'undefined') {
+      window.addEventListener('wheel', handleWheel, { passive: true })
+      window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    }
+    
     setLenis(lenis)
-
+    
     return () => {
-      lenis.destroy()
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('wheel', handleWheel)
+        window.removeEventListener('touchstart', handleTouchStart)
+      }
+      if (lenis) {
+        lenis.destroy()
+      }
       setLenis(null)
     }
   }, [])

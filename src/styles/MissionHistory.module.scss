@@ -2,11 +2,11 @@
   text-align: center;
   background-color: #f8f9fa;
   height: auto;
-  padding: 5rem 0;
+  padding: clamp(100px, 12vw, 120px) 0 5rem 0; // Top padding to appear below navbar
   
   h1 {
     font-size: 3rem;
-    padding: 5rem 5rem 2rem 5rem;  
+    padding: 2rem 5rem 2rem 5rem; // Reduced top padding since container has it
     text-align: center;
     color: #0037c0;
     text-transform: uppercase;
