@@ -301,8 +301,8 @@
 
 .summaryImageWrapper {
   position: relative;
-  width: min(800px, 90vw); // Fixed width
-  height: min(600px, 67.5vw); // Fixed height (maintains 4:3 aspect ratio)
+  width: min(720px, 85vw); // Slightly smaller on large screens
+  height: min(540px, 63.75vw); // Maintains 4:3 aspect ratio
   display: flex;
   align-items: center;
   justify-content: center;
@@ -317,6 +317,7 @@
     0 0 40px rgba(255, 255, 255, 0.2);
   cursor: zoom-in;
   transition: transform 0.3s ease-in-out;
+  touch-action: pan-y; // Allow vertical scroll while enabling horizontal swipe
   
   &.zoomed {
     cursor: zoom-out;
@@ -326,8 +327,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(2);
-    width: min(800px, 90vw);
-    height: min(600px, 67.5vw);
+    width: min(720px, 85vw);
+    height: min(540px, 63.75vw);
     max-width: 95vw;
     max-height: 95vh;
   }
@@ -342,6 +343,82 @@
   transition: transform 0.3s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
+}
+
+.summaryImageInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+}
+
+.swipeNext {
+  animation-name: swipeNext;
+}
+
+.swipePrev {
+  animation-name: swipePrev;
+}
+
+@keyframes swipeNext {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes swipePrev {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  line-height: 1;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.97);
+  }
+
+  &.left {
+    left: 12px;
+  }
+
+  &.right {
+    right: 12px;
+  }
 }
 
 .zoomIndicator {

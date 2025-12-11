@@ -11,6 +11,9 @@ export default function Summary() {
   const rightShapeRef = useRef<HTMLImageElement>(null)
   const leftShapeRef = useRef<HTMLImageElement>(null)
   const lastTapRef = useRef(0)
+  const startXRef = useRef<number | null>(null)
+  const hasSwipedRef = useRef(false)
+  const [swipeDirection, setSwipeDirection] = useState<'next' | 'prev' | null>(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,6 +54,41 @@ export default function Summary() {
   const handleDoubleClick = (e: React.MouseEvent) => {
     // Do nothing - zoom disabled
   }
+
+  const swipeTo = (direction: 'next' | 'prev') => {
+    setSwipeDirection(direction)
+    setCurrentImageIndex((prevIndex) => {
+      const nextIndex = direction === 'next' ? prevIndex + 1 : prevIndex - 1
+      return (nextIndex + summary.images.length) % summary.images.length
+    })
+  }
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    startXRef.current = e.clientX
+    hasSwipedRef.current = false
+  }
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (startXRef.current === null || hasSwipedRef.current || isZoomed) return
+    const deltaX = e.clientX - startXRef.current
+    const threshold = 40
+
+    if (Math.abs(deltaX) > threshold) {
+      swipeTo(deltaX > 0 ? 'prev' : 'next')
+      hasSwipedRef.current = true
+    }
+  }
+
+  const handlePointerUp = () => {
+    startXRef.current = null
+    hasSwipedRef.current = false
+  }
+
+  useEffect(() => {
+    if (!swipeDirection) return
+    const timer = setTimeout(() => setSwipeDirection(null), 400)
+    return () => clearTimeout(timer)
+  }, [swipeDirection])
 
   // Close zoom when clicking outside or pressing Escape
   useEffect(() => {
@@ -106,19 +144,35 @@ export default function Summary() {
           className={`${styles.summaryImageWrapper} ${isZoomed ? styles.zoomed : ''}`}
           onTouchStart={handleDoubleTap}
           onDoubleClick={handleDoubleClick}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={handlePointerUp}
+          onPointerCancel={handlePointerUp}
           data-no-double-tap-zoom
         >
           {/* Display current image */}
           {summary.images[currentImageIndex] && (
-            <Image
-              src={summary.images[currentImageIndex]!}
-              alt="Summary photo"
-              className={styles.summaryImage}
-              fill
-              priority={currentImageIndex === 0}
-              quality={85}
-              fetchPriority={currentImageIndex === 0 ? 'high' : 'auto'}
-            />
+            <div
+              key={currentImageIndex}
+              className={`${styles.summaryImageInner} ${
+                swipeDirection === 'next'
+                  ? styles.swipeNext
+                  : swipeDirection === 'prev'
+                  ? styles.swipePrev
+                  : ''
+              }`}
+            >
+              <Image
+                src={summary.images[currentImageIndex]!}
+                alt="Summary photo"
+                className={styles.summaryImage}
+                fill
+                priority={currentImageIndex === 0}
+                quality={85}
+                fetchPriority={currentImageIndex === 0 ? 'high' : 'auto'}
+              />
+            </div>
           )}
           {/* Preload all images in background for instant transitions */}
           {summary.images.map((img, idx) => 
@@ -142,6 +196,22 @@ export default function Summary() {
               />
             )
           )}
+          <button
+            className={`${styles.navButton} ${styles.left}`}
+            aria-label="Previous image"
+            onClick={() => swipeTo('prev')}
+            type="button"
+          >
+            ‹
+          </button>
+          <button
+            className={`${styles.navButton} ${styles.right}`}
+            aria-label="Next image"
+            onClick={() => swipeTo('next')}
+            type="button"
+          >
+            ›
+          </button>
           {/* Zoom indicator */}
           {isZoomed && (
             <div className={styles.zoomIndicator}>
