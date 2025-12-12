@@ -8,12 +8,22 @@ type CouncilOption = 'HRC' | 'DISEC' | 'ICJ'
 type CouncilSecondOption = 'PRESS' | 'HRC' | 'DISEC' | 'ICJ'
 
 const COUNCIL_OPTIONS: CouncilOption[] = ['HRC', 'DISEC', 'ICJ']
+// Order must match Google Sheet: PRESS -> HRC -> DISEC -> ICJ
 const SECOND_CHOICES: CouncilSecondOption[] = ['PRESS', 'HRC', 'DISEC', 'ICJ']
 
+// Map first preference to the entry ID where second preference should be submitted
+// This is because Google Forms uses conditional logic - the 2nd preference question
+// changes based on the 1st preference selection
+// Column order in Google Sheet: PRESS (S) | HRC (T) | DISEC (U) | ICJ (V)
+// Mapping requirements:
+//   - HRC (1st pref) → DISEC column (entry.786866403)
+//   - DISEC (1st pref) → ICJ column (entry.2026186254)
+//   - ICJ (1st pref) → PRESS column (entry.54217108)
+//   - HRC column (entry.380010027) always stays empty
 const SECOND_PREF_ENTRY: Record<CouncilOption, string> = {
-  HRC: '380010027',
-  DISEC: '786866403',
-  ICJ: '2026186254',
+  HRC: '786866403',      // HRC (1st pref) → DISEC column
+  DISEC: '2026186254',   // DISEC (1st pref) → ICJ column
+  ICJ: '54217108',       // ICJ (1st pref) → PRESS column
 }
 
 const ELEVEN_DIGITS = /^\d{11}$/
@@ -398,13 +408,16 @@ export default function Apply() {
     const entries: Record<string, string> = {}
     entries['entry.828105202'] = values.firstName.trim()
     entries['entry.1987124113'] = values.lastName.trim()
-    entries['entry.65033571'] = values.phone.trim()
+    // Prefix phone number with single quote to force text interpretation in Google Forms/Sheets and preserve leading zeros
+    // The single quote is not displayed but ensures the value is treated as text
+    entries['entry.65033571'] = "'" + values.phone.trim()
     entries['entry.655757607'] = values.gender
     entries['entry.1544800612'] = values.dob.trim()
     entries['entry.510479275'] = values.email.trim()
     if (values.emergencyName) entries['entry.1206770724'] = values.emergencyName.trim()
     if (values.emergencyRelation) entries['entry.1006162298'] = values.emergencyRelation.trim()
-    if (values.emergencyPhone) entries['entry.589948682'] = values.emergencyPhone.trim()
+    // Prefix emergency phone number with single quote to force text interpretation and preserve leading zeros
+    if (values.emergencyPhone) entries['entry.589948682'] = "'" + values.emergencyPhone.trim()
 
     if (values.isNuStudent) entries['entry.1747482760'] = values.isNuStudent
     if (values.isNuStudent === 'Yes') {
@@ -425,9 +438,19 @@ export default function Apply() {
     }
 
     if (values.firstPreference) entries['entry.321846360'] = values.firstPreference
+    // Submit second preference to the entry ID corresponding to the first preference
+    // Google Forms uses conditional logic where the 2nd preference question changes based on 1st preference
     if (values.secondPreference && values.firstPreference) {
       const entryId = SECOND_PREF_ENTRY[values.firstPreference]
-      entries[`entry.${entryId}`] = values.secondPreference
+      if (entryId) {
+        entries[`entry.${entryId}`] = values.secondPreference
+        console.log(`Setting second preference: ${values.secondPreference} to entry.${entryId} (based on first preference: ${values.firstPreference})`)
+      } else {
+        console.error(`No entry ID found for first preference: ${values.firstPreference}`)
+      }
+    } else {
+      if (!values.secondPreference) console.warn('No second preference selected')
+      if (!values.firstPreference) console.warn('No first preference selected')
     }
 
     if (values.hasMedical) entries['entry.1094557964'] = values.hasMedical
@@ -467,9 +490,38 @@ export default function Apply() {
     setStatus('submitting')
     const entries = buildFormData()
 
+    // Verify second preference is in entries before submitting
+    const secondPrefKeys = Object.keys(entries).filter(key => 
+      key.includes('54217108') || key.includes('380010027') || 
+      key.includes('786866403') || key.includes('2026186254')
+    )
+    if (values.secondPreference && secondPrefKeys.length === 0) {
+      console.error('ERROR: Second preference selected but no entry ID found in entries object!')
+      setErrorMsg('Error: Second preference could not be submitted. Please try again.')
+      setStatus('error')
+      return
+    }
+    
     console.log('Submitting entries to webhook:', entries)
+    console.log('Second preference debug:', {
+      firstPreference: values.firstPreference,
+      secondPreference: values.secondPreference,
+      mappedEntryId: values.firstPreference ? SECOND_PREF_ENTRY[values.firstPreference] : 'N/A',
+      allSecondPrefEntries: Object.keys(entries).filter(key => 
+        key.includes('54217108') || key.includes('380010027') || 
+        key.includes('786866403') || key.includes('2026186254')
+      ).map(key => ({ [key]: entries[key] })),
+      fullEntriesObject: entries
+    })
 
     try {
+      // Final verification before sending
+      const secondPrefEntry = Object.keys(entries).find(key => 
+        key.includes('54217108') || key.includes('380010027') || 
+        key.includes('786866403') || key.includes('2026186254')
+      )
+      console.log('Final check - Second preference entry being sent:', secondPrefEntry ? { [secondPrefEntry]: entries[secondPrefEntry] } : 'NONE FOUND!')
+      
       const response = await fetch('/api/submit-apply', {
         method: 'POST',
         headers: {

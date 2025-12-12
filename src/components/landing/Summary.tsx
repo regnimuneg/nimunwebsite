@@ -12,10 +12,8 @@ export default function Summary() {
   const leftShapeRef = useRef<HTMLImageElement>(null)
   const lastTapRef = useRef(0)
   const startXRef = useRef<number | null>(null)
-  const startYRef = useRef<number | null>(null)
   const hasSwipedRef = useRef(false)
   const [swipeDirection, setSwipeDirection] = useState<'next' | 'prev' | null>(null)
-  const pullTriggeredRef = useRef(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -67,38 +65,23 @@ export default function Summary() {
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     startXRef.current = e.clientX
-    startYRef.current = e.clientY
     hasSwipedRef.current = false
-    pullTriggeredRef.current = false
   }
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (startXRef.current === null || startYRef.current === null || isZoomed) return
+    if (startXRef.current === null || hasSwipedRef.current || isZoomed) return
     const deltaX = e.clientX - startXRef.current
-    const deltaY = e.clientY - startYRef.current
     const threshold = 40
 
-    // Horizontal swipe for navigation
-    if (!hasSwipedRef.current && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
+    if (Math.abs(deltaX) > threshold) {
       swipeTo(deltaX > 0 ? 'prev' : 'next')
       hasSwipedRef.current = true
-    }
-
-    // Pull down to refresh (once per gesture)
-    const pullThreshold = 80
-    if (!pullTriggeredRef.current && deltaY > Math.abs(deltaX) && deltaY > pullThreshold) {
-      pullTriggeredRef.current = true
-      if (typeof window !== 'undefined') {
-        window.location.reload()
-      }
     }
   }
 
   const handlePointerUp = () => {
     startXRef.current = null
-    startYRef.current = null
     hasSwipedRef.current = false
-    pullTriggeredRef.current = false
   }
 
   useEffect(() => {
@@ -237,23 +220,13 @@ export default function Summary() {
           )}
         </div>
         <div className={styles.paginationDots}>
-          {(() => {
-            const total = summary.images.length
-            const targets =
-              total > 0
-                ? [0, Math.floor(total / 2), Math.max(total - 1, 0)]
-                : [0, 0, 0]
-            const range = total > 0 ? total / 3 : 1
-            const activeDot = total > 0 ? Math.min(2, Math.floor(currentImageIndex / range)) : 0
-
-            return targets.map((target, idx) => (
-              <span
-                key={`dot-${idx}`}
-                className={`${styles.dot} ${activeDot === idx ? styles.active : ''}`}
-                onClick={() => setCurrentImageIndex(target)}
-              />
-            ))
-          })()}
+          {summary.images.map((_, idx) => (
+            <span
+              key={idx}
+              className={`${styles.dot} ${currentImageIndex === idx ? styles.active : ''}`}
+              onClick={() => setCurrentImageIndex(idx)}
+            />
+          ))}
         </div>
       </div>
       <div className={styles.summaryTextBlock}>
