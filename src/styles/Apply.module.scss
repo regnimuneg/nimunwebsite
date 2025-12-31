@@ -2,21 +2,37 @@
 
 .container {
   min-height: 100vh;
-  // margin-top: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(120px, 16vw, 180px) clamp(20px, 5vw, 50px) clamp(40px, 8vw, 80px);
+  // Top padding: navbar height (100px desktop, 80px mobile) + spacing (20px)
+  padding: clamp(120px, 10vw, 120px) clamp(20px, 5vw, 50px) clamp(40px, 8vw, 80px);
   background: linear-gradient(180deg, #f7f9ff 0%, #eef2ff 100%);
   box-sizing: border-box;
+  
+  @media screen and (max-width: 1050px) {
+    padding-top: clamp(90px, 10vw, 100px); // Tablet: navbar ~65px + spacing
+  }
+  
+  @media screen and (max-width: 600px) {
+    padding-top: clamp(100px, 12vw, 110px); // Mobile: navbar ~80px + spacing
+  }
 }
 
 .successContainer {
-  padding: clamp(96px, 14vw, 140px) clamp(16px, 5vw, 40px) !important;
+  padding: clamp(120px, 10vw, 120px) clamp(16px, 5vw, 40px) !important;
   min-height: 100vh !important;
   align-items: center;
   justify-content: center;
+  
+  @media screen and (max-width: 1050px) {
+    padding-top: clamp(90px, 10vw, 100px) !important;
+  }
+  
+  @media screen and (max-width: 600px) {
+    padding-top: clamp(100px, 12vw, 110px) !important;
+  }
 }
 
 .card {

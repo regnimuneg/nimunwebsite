@@ -1,18 +1,29 @@
 .page {
   background-color: #f8f8f8;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden; // Prevent horizontal scroll
+  box-sizing: border-box;
 }
 
 .container {
-  max-width: 1400px; // Increased to fit all members
-  // margin-top: px;
-  // margin: 0 auto;
-  padding: clamp(120px, 8vw, 150px) clamp(20px, 4vw, 40px) clamp(50px, 8vw, 100px); // Top padding to appear below navbar
+  max-width: 1600px; // Increased to prevent cutoff on larger screens
+  margin: 0 auto; // Center the container
+  // Top padding: navbar height (100px desktop, 80px mobile) + spacing (20px)
+  padding: clamp(120px, 10vw, 120px) clamp(20px, 4vw, 40px) clamp(50px, 8vw, 100px);
   text-align: center;
   position: relative;
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden; // Prevent horizontal scroll
-
+  
+  @media screen and (max-width: 1050px) {
+    padding-top: clamp(90px, 10vw, 100px); // Tablet: navbar ~65px + spacing
+  }
+  
+  @media screen and (max-width: 600px) {
+    padding-top: clamp(100px, 12vw, 110px); // Mobile: navbar ~80px + spacing
+  }
 }
 
 .PageTitle {
@@ -30,14 +41,19 @@
 .personImage {
   width: 100%;
   height: 100%;
-  object-fit: cover; // Cover to fill the circle
+  object-fit: cover; // Cover to fill the square
   object-position: center top; // Position to show faces (top of image centered)
   position: absolute;
   top: 0;
   left: 0;
-  // Scale larger to fill more of the circle
-  transform: scale(1.2); // Increased scale to fill more space
+  transform: scale(1.1); // Reduced scale to prevent cutoff
   transform-origin: center;
+  transition: transform 0.3s ease; // Smooth transition on hover
+  
+  // Ensure images don't overflow on small screens
+  @media screen and (max-width: 480px) {
+    transform: scale(1.05); // Slightly less scale on very small screens
+  }
 }
 
 .personCircleContainer {
@@ -48,47 +64,38 @@
   align-items: flex-start;
   width: 100%;
   max-width: 100%;
-
-  // On mobile, ensure Head appears first (top) when there are vices
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    
-    // For committees with vices, show Head first, then vices in a row
-    &:has(.personCircle:nth-child(2)) {
-      flex-direction: column;
-      
-      .personCircle:first-child {
-        order: 1; // Head first
-      }
-      
-      .personCircle:not(:first-child) {
-        order: 2; // Vices after
-        display: flex;
-      }
-    }
-  }
+  box-sizing: border-box;
 }
 
-// High Board Grid - 4 columns on desktop, 2x2 on smaller screens
+// High Board Grid - 4 columns on desktop, 2x2 on tablet, 1 column on mobile
 .highBoardGrid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr); // 4 columns on desktop
   grid-template-rows: auto;
   gap: clamp(20px, 4vw, 60px);
-  max-width: 1400px;
+  max-width: 100%; // Use full container width to prevent cutoff
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
   
   @media screen and (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr); // 2x2 grid on smaller screens
+    grid-template-columns: repeat(2, 1fr); // 2x2 grid on tablet
     grid-template-rows: repeat(2, auto);
-    max-width: 800px;
+    max-width: 100%;
+    gap: clamp(20px, 3vw, 40px);
   }
   
-  // @media screen and (max-width: 768px) {
-  //   grid-template-columns: 1fr;
-  //   grid-template-rows: auto;
-  // }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); // Keep 2 columns on mobile
+    grid-template-rows: auto;
+    gap: clamp(15px, 3vw, 30px);
+    max-width: 100%;
+  }
+  
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr; // Single column on very small screens
+    gap: clamp(20px, 4vw, 30px);
+  }
 }
 
 .AcContainer {
@@ -122,7 +129,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  // margin:30px;
+  flex-shrink: 0; // Prevent shrinking
+  min-width: 0; // Allow text to wrap properly
 }
 .floatingShapeLeft {
   position: absolute;
@@ -152,27 +160,34 @@
   align-items: center;
   margin-bottom: 10px;
   font-size: 2rem;
-  background-color: #e6e6e6; // Remove background
+  background-color: #e6e6e6;
   border: clamp(4px, 0.8vw, 7px) solid #0037c0;
+  border-radius: 0; // Make it square
   flex-shrink: 0; // Prevent shrinking
   position: relative; // For absolute positioning of image
   overflow: hidden; // Clip image to border
 }
 
 .whiteCircle {
-  width: 100%; // Fill the blue circle
-  height: 100%; // Fill the blue circle
+  width: 100%; // Fill the blue square
+  height: 100%; // Fill the blue square
   display: flex;
   position: relative;
-  overflow: hidden; // Clip to circle bounds
+  overflow: hidden; // Clip to square bounds
   background-color: transparent; // Remove white background
-  // Ensure image fits completely
-  border-radius: 0; // Square shape to match blueCircle
+  border-radius: 0; // Make it square to match blueCircle
 }
 
 .personDetails {
   text-align: center;
   font-family: 'Montserrat';
+  width: 100%;
+  max-width: 200px; // Prevent text from being too wide
+  margin-top: 8px;
+  
+  @media screen and (max-width: 480px) {
+    max-width: 150px;
+  }
 }
 
 .personName {
@@ -181,6 +196,9 @@
   font-size: clamp(0.875rem, 1.5vw, 1rem); // Responsive typography
   margin-bottom: 4px;
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.3;
 }
 
 .personPosition {
@@ -188,6 +206,10 @@
   font-size: clamp(0.75rem, 1.2vw, 0.875rem); // Responsive typography
   font-family: 'Montserrat';
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.4;
+  color: #555;
 }
 
 .sectionTitle {
@@ -200,64 +222,72 @@
 .committeeSection {
   margin-bottom: clamp(30px, 4vw, 40px);
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .committeeContainer {
-  // Desktop layout
-  @media (min-width: 769px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(20px, 3vw, 40px);
-    
-    // Head always first
-    .headCircle {
-      order: 1;
-    }
-    
-    // Vices come after
-    .viceCircle {
-      order: 2;
-    }
+  width: 100%;
+  max-width: 100%; // Prevent cutoff on larger screens
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 40px);
+  box-sizing: border-box;
+  
+  // Head always first
+  .headCircle {
+    order: 1;
+  }
+  
+  // Vices come after
+  .viceCircle {
+    order: 2;
   }
   
   // Two vices: Head on top, vices below side by side
   &.twoVices {
-    @media (min-width: 769px) {
-      flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(15px, 2vw, 25px);
+    
+    .headCircle {
+      order: 1;
+    }
+    
+    .vicesContainer {
+      order: 2;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
       align-items: center;
-      gap: clamp(15px, 2vw, 25px);
-      
-      .headCircle {
-        order: 1;
-      }
-      
-      .vicesContainer {
-        order: 2;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: clamp(20px, 4vw, 60px);
-      }
+      gap: clamp(20px, 4vw, 60px);
+      width: 100%;
+      max-width: 100%;
+      flex-wrap: wrap;
+      box-sizing: border-box;
     }
     
     @media screen and (max-width: 768px) {
-      flex-direction: column;
-      align-items: center;
+      gap: clamp(15px, 3vw, 25px);
       
       .headCircle {
-        order: 1;
-        margin-bottom: clamp(15px, 3vw, 25px);
+        margin-bottom: clamp(10px, 2vw, 20px);
       }
       
       .vicesContainer {
-        order: 2;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap: clamp(15px, 3vw, 30px);
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      .vicesContainer {
+        flex-direction: column; // Stack vices vertically on very small screens
+        gap: clamp(15px, 3vw, 25px);
       }
     }
   }
@@ -269,38 +299,45 @@
     justify-content: center;
     align-items: center;
     gap: clamp(20px, 4vw, 60px);
+    flex-wrap: wrap;
   }
   
-  // One vice: Head and vice side by side (on all screens)
+  // One vice: Head and vice side by side
   &.oneVice {
-    @media (min-width: 769px) {
-      flex-direction: row;
-      justify-content: center;
-      gap: clamp(20px, 4vw, 60px);
-      
-      .headCircle {
-        order: 1;
-      }
-      
-      .viceCircle {
-        order: 2;
-      }
+    flex-direction: row;
+    justify-content: center;
+    gap: clamp(20px, 4vw, 60px);
+    flex-wrap: wrap;
+    
+    .headCircle {
+      order: 1;
+    }
+    
+    .viceCircle {
+      order: 2;
     }
     
     @media screen and (max-width: 768px) {
-      flex-direction: row; // Side by side on mobile too
-      justify-content: center;
       gap: clamp(15px, 3vw, 30px);
       
       .headCircle {
-        order: 1;
-        margin-bottom: 0; // Remove margin since they're side by side
-      }
-      
-      .viceCircle {
-        order: 2;
+        margin-bottom: 0;
       }
     }
+    
+    @media screen and (max-width: 480px) {
+      flex-direction: column; // Stack on very small screens
+      gap: clamp(15px, 3vw, 25px);
+      
+      .headCircle {
+        margin-bottom: clamp(10px, 2vw, 15px);
+      }
+    }
+  }
+  
+  // No vice: Just head centered
+  &:not(.oneVice):not(.twoVices) {
+    justify-content: center;
   }
 }
 
@@ -311,9 +348,9 @@
 }
 
 .divider {
-  display: flex;
-  align-self: center;
-  margin: 20px 0;
+  width: 100%;
+  max-width: 800px;
+  margin: clamp(20px, 3vw, 40px) auto;
   border: 0;
   border-top: 2px solid #0037c0;
 }
@@ -322,7 +359,7 @@
 @media screen and (max-width: 1024px) {
   .container {
     max-width: 100%;
-    padding: clamp(40px, 6vw, 60px) clamp(15px, 3vw, 30px);
+    padding: clamp(100px, 10vw, 130px) clamp(15px, 3vw, 30px) clamp(40px, 6vw, 80px);
   }
 
   .personCircleContainer {
@@ -332,18 +369,25 @@
   .floatingShapeLeft {
     left: clamp(-180px, -12vw, -90px);
     width: clamp(150px, 20vw, 240px);
+    opacity: 0.5;
   }
 
   .floatingShapeRight {
     right: clamp(-160px, -12vw, -80px);
     width: clamp(160px, 22vw, 260px);
+    opacity: 0.5;
+  }
+  
+  .blueCircle {
+    width: clamp(130px, 18vw, 180px);
+    height: clamp(130px, 18vw, 180px);
   }
 }
 
 // Mobile styles
 @media screen and (max-width: 768px) {
   .container {
-    padding: clamp(30px, 5vw, 50px) clamp(10px, 2vw, 20px);
+    padding: clamp(100px, 12vw, 120px) clamp(15px, 3vw, 25px) clamp(40px, 6vw, 60px);
   }
 
   .personCircleContainer {
@@ -354,28 +398,77 @@
     left: clamp(-160px, -18vw, -70px);
     top: clamp(24px, 6vw, 44px);
     width: clamp(140px, 32vw, 220px);
-    opacity: 0.4; // Even more transparent on mobile
+    opacity: 0.3; // More transparent on mobile
   }
 
   .floatingShapeRight {
     right: clamp(-140px, -16vw, -60px);
     width: clamp(150px, 34vw, 230px);
-    opacity: 0.4; // Even more transparent on mobile
+    opacity: 0.3; // More transparent on mobile
   }
 
   .personCircle {
     margin-bottom: clamp(15px, 2vw, 20px);
   }
+  
+  .committeeSection {
+    margin-bottom: clamp(25px, 4vw, 35px);
+  }
+  
+  .committeeTitle {
+    margin-bottom: clamp(15px, 3vw, 25px);
+  }
+  
+  .sectionTitle {
+    margin-top: clamp(15px, 3vw, 25px);
+    padding: clamp(15px, 3vw, 30px);
+  }
+  
+  .divider {
+    margin: clamp(15px, 3vw, 25px) 0;
+  }
 }
 
 // Small mobile styles
 @media screen and (max-width: 480px) {
+  .container {
+    padding: clamp(90px, 10vw, 110px) clamp(10px, 2vw, 20px) clamp(30px, 5vw, 50px);
+  }
+  
+  .PageTitle {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: clamp(15px, 3vw, 25px);
+  }
+
   .personCircleContainer {
     gap: clamp(10px, 2vw, 20px);
+  }
+  
+  .blueCircle {
+    width: clamp(100px, 25vw, 150px);
+    height: clamp(100px, 25vw, 150px);
   }
 
   .floatingShapeLeft,
   .floatingShapeRight {
     display: none; // Hide on very small screens to save space
+  }
+  
+  .personName {
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+  }
+  
+  .personPosition {
+    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: clamp(10px, 2vw, 20px);
+  }
+  
+  .committeeTitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    margin-bottom: clamp(12px, 2.5vw, 20px);
   }
 }

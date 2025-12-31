@@ -15,15 +15,6 @@ export default async function handler(
   }
 
   try {
-    // Log what we're sending, especially second preference entries
-    const entries = req.body?.entries || {}
-    const secondPrefEntries = Object.keys(entries).filter(key => 
-      key.includes('54217108') || key.includes('380010027') || 
-      key.includes('786866403') || key.includes('2026186254')
-    )
-    console.log('API: Second preference entries being sent:', secondPrefEntries.map(key => ({ [key]: entries[key] })))
-    console.log('API: Full entries object:', entries)
-    
     const response = await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: {

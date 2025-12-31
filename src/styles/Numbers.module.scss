@@ -8,8 +8,17 @@
   text-align: center;
   background-color: #f8f9fa;
   height: auto;
-  padding-top: clamp(100px, 12vw, 120px); // Top padding to appear below navbar
+  // Top padding: navbar height (100px desktop, 80px mobile) + spacing (20px)
+  padding-top: clamp(120px, 10vw, 120px);
   margin-top: 0;
+  
+  @media screen and (max-width: 1050px) {
+    padding-top: clamp(90px, 10vw, 100px); // Tablet: navbar ~65px + spacing
+  }
+  
+  @media screen and (max-width: 600px) {
+    padding-top: clamp(100px, 12vw, 110px); // Mobile: navbar ~80px + spacing
+  }
 
   h1 {
     font-size: 3rem;
