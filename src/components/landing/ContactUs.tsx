@@ -83,7 +83,7 @@ export default function ContactUs() {
               <div className={styles.contactItem}>
                 <FaWhatsapp className={styles.icon} />
                 <span>
-                  <strong>Phone:</strong> +20 127 019 9110
+                  <strong>Phone:</strong> +20 100 986 3946
                 </span>
               </div>
               <div className={styles.contactItem}>
