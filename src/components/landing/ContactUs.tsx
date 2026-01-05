@@ -47,7 +47,7 @@ export default function ContactUs() {
           <div className={styles.contactDetails}>
             <div className={styles.contactIcons}>
               <a
-                href="mailto:Nimuneg@gmail.com"
+                href="mailto:nimun.nu@gmail.com"
                 className={styles.iconLink}
                 target="_blank"
                 rel="noopener noreferrer"
