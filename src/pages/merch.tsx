@@ -378,7 +378,7 @@ export default function Merch() {
                 <div className={styles.content}>
                     <h1 className={styles.pageTitle}>NIMUN Merch Store</h1>
                     <p className={styles.pageSubtitle}>
-                        Select items individually or pick a bundle for a great deal!
+                        Select items individually or pick a bundle for a great deal!<br></br><br></br>Click on any image to enlarge it!
                     </p>
 
                     {/* Products Grid */}
