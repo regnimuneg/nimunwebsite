@@ -20,7 +20,7 @@ const PRODUCTS = [
     { id: 'poster-4', name: 'Poster 4 (A4 Framed)', type: 'poster', price: 100, image: '/image/png/merch/4.png' },
     // Magnets
     { id: 'fridge-magnet-design1', name: 'Fridge Magnet (Design 1)', type: 'fridge-magnet', price: 35, image: '/image/png/merch/Fridge Magnet.png' },
-    { id: 'fridge-magnet-design2', name: 'Fridge Magnet (Design 2)', type: 'fridge-magnet', price: 35, image: '/image/png/merch/Fridge Magnet 2.png' },
+    { id: 'fridge-magnet-design2', name: 'Fridge Magnet (Design 2)', type: 'fridge-magnet', price: 35, image: '/image/png/merch/Fridge magnet 2.png' },
 ]
 
 // Map ID to Type for quick lookups
