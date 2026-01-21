@@ -105,8 +105,8 @@ export default function Header(): JSX.Element {
               >
                 {/* Drawer content: includes Menu and RightSideElements */}
                 <div className={styles.drawerContent}>
-                  <button 
-                    className={styles.backButton} 
+                  <button
+                    className={styles.backButton}
                     onClick={toggleDrawer(false)}
                   >
                     ← Back

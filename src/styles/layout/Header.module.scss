@@ -23,7 +23,7 @@ $header-border-radius: 30px;
   backdrop-filter: blur(10px);
   height: auto;
   border-radius: $header-border-radius; // Rounded ALWAYS
-  box-shadow: 
+  box-shadow:
     0 0 15px rgba(0, 55, 192, 0.6),
     0 0 25px rgba(0, 55, 192, 0.5),
     0 0 35px rgba(0, 55, 192, 0.4),
@@ -98,6 +98,30 @@ $header-border-radius: 30px;
     padding-right: 0px;
   }
 
+  .portalButton {
+    background-color: transparent;
+    color: #0037c0;
+    font-family: 'Bionix';
+    padding: 3px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 2px solid rgba(0, 55, 192, 0.4);
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: rgba(0, 55, 192, 0.1);
+      border-color: rgba(0, 55, 192, 0.6);
+      color: #0037c0;
+    }
+  }
+
   .applyButton {
     background-color: #fff;
     color: #000;
@@ -109,11 +133,11 @@ $header-border-radius: 30px;
     font-weight: 600;
     border: 2px solid rgba(0, 55, 192, 0.3);
     cursor: pointer;
-    box-shadow: 
+    box-shadow:
       0 0 0 1px rgba(0, 55, 192, 0.4),
       0 0 10px rgba(0, 55, 192, 0.3),
       0 0 20px rgba(0, 55, 192, 0.2);
-    transition: 
+    transition:
       background-color 0.3s ease,
       border-color 0.3s ease,
       box-shadow 0.3s ease;
@@ -122,7 +146,7 @@ $header-border-radius: 30px;
     &:hover {
       background-color: #fff;
       border-color: rgba(0, 55, 192, 0.5);
-      box-shadow: 
+      box-shadow:
         0 0 0 1px rgba(0, 55, 192, 0.5),
         0 0 15px rgba(0, 55, 192, 0.4),
         0 0 30px rgba(0, 55, 192, 0.3);
@@ -132,7 +156,7 @@ $header-border-radius: 30px;
 
 // Styles for the sticky header state - ONLY add shadow, keep other styles the same
 .header.stick {
-  box-shadow: 
+  box-shadow:
     0 0 15px rgba(0, 55, 192, 0.6),
     0 0 25px rgba(0, 55, 192, 0.5),
     0 0 35px rgba(0, 55, 192, 0.4),
@@ -165,7 +189,7 @@ $header-border-radius: 30px;
     background-color: rgba(0, 0, 0, 0.3) !important;
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
-  
+
   .MuiPaper-root {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
@@ -176,11 +200,9 @@ $header-border-radius: 30px;
   display: flex;
   flex-direction: column;
   gap: 1rem; // Increased gap between elements
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.8),
-    rgba(240, 240, 250, 0.8)
-  ); // Subtle gradient background
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.8),
+      rgba(240, 240, 250, 0.8)); // Subtle gradient background
   height: 100%; // Full height
   border-left: 1px solid rgba(230, 230, 250, 0.5); // Subtle border
 
@@ -237,7 +259,7 @@ $header-border-radius: 30px;
       font-weight: 600;
       display: inline-block;
       border: 2px solid rgba(0, 55, 192, 0.3);
-      box-shadow: 
+      box-shadow:
         0 0 0 1px rgba(0, 55, 192, 0.4),
         0 0 10px rgba(0, 55, 192, 0.3),
         0 0 20px rgba(0, 55, 192, 0.2);
@@ -245,7 +267,7 @@ $header-border-radius: 30px;
       &:hover {
         background-color: #fff;
         border-color: rgba(0, 55, 192, 0.5);
-        box-shadow: 
+        box-shadow:
           0 0 0 1px rgba(0, 55, 192, 0.5),
           0 0 15px rgba(0, 55, 192, 0.4),
           0 0 30px rgba(0, 55, 192, 0.3);
@@ -256,27 +278,33 @@ $header-border-radius: 30px;
 
 // Media Queries
 @media screen and (max-width: 1050px) {
+
   // Tablet breakpoint
   .header {
     width: 95%;
     top: 10px;
+
     .fix {
       padding: 5px 10px;
       min-height: 55px;
     }
+
     // Hide desktop nav links container
-    .leftSideContainer > .navbar {
+    .leftSideContainer>.navbar {
       display: none;
     }
+
     // Hide desktop right side container
     .rightSideContainer {
       display: none;
     }
   }
+
   // Hamburger is displayed via Header.tsx logic
 }
 
 @media screen and (max-width: 600px) {
+
   // Mobile breakpoint - UPDATED to match desktop styling
   .header {
     width: 90%; // Match desktop width percentage
@@ -285,7 +313,7 @@ $header-border-radius: 30px;
     border-radius: $header-border-radius; // Keep rounded corners like desktop
     background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background like desktop
     backdrop-filter: blur(10px); // Blur effect like desktop
-    box-shadow: 
+    box-shadow:
       0 0 15px rgba(0, 55, 192, 0.6),
       0 0 25px rgba(0, 55, 192, 0.5),
       0 0 35px rgba(0, 55, 192, 0.4),
@@ -295,15 +323,19 @@ $header-border-radius: 30px;
       padding: 5px 10px;
       min-height: 50px;
     }
+
     .leftSideContainer {
       gap: 15px; // Reduce gap on mobile if needed
     }
+
     .logoWrapper {
       .logo {
         height: 35px;
         margin-right: 10px;
       }
+
       .textWrapper {
+
         .mainText,
         .subText {
           font-size: 0.8rem;
@@ -311,6 +343,7 @@ $header-border-radius: 30px;
       }
     }
   }
+
   // Drawer styles are defined above
 }
 
@@ -328,17 +361,17 @@ $header-border-radius: 30px;
   cursor: pointer; // Use pointer cursor
   border-radius: 20px;
   border: 2px solid rgba(0, 55, 192, 0.3);
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(0, 55, 192, 0.4),
     0 0 10px rgba(0, 55, 192, 0.3),
     0 0 20px rgba(0, 55, 192, 0.2);
-  transition: 
+  transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
 
   &:hover {
     border-color: rgba(0, 55, 192, 0.5);
-    box-shadow: 
+    box-shadow:
       0 0 0 1px rgba(0, 55, 192, 0.5),
       0 0 15px rgba(0, 55, 192, 0.4),
       0 0 30px rgba(0, 55, 192, 0.3);
@@ -382,7 +415,7 @@ $header-border-radius: 30px;
 
 .backButton {
   display: none;
-  
+
   @media (max-width: 1050px) {
     display: block;
     width: 100%;
@@ -398,7 +431,7 @@ $header-border-radius: 30px;
     text-align: left;
     margin-bottom: 5px;
     border-radius: 8px 8px 0 0;
-    
+
     &:hover {
       background-color: #002c9b;
     }
@@ -487,28 +520,30 @@ $header-border-radius: 30px;
     display: block; // Stack items vertically
     width: 100%;
   }
+
   .navLink {
     display: block; // Make link take full width
     width: 100%;
     border-radius: 20px;
     margin-bottom: 10px;
     border: 2px solid rgba(0, 55, 192, 0.3);
-    box-shadow: 
+    box-shadow:
       0 0 0 1px rgba(0, 55, 192, 0.4),
       0 0 10px rgba(0, 55, 192, 0.3),
       0 0 20px rgba(0, 55, 192, 0.2);
-    transition: 
+    transition:
       border-color 0.3s ease,
       box-shadow 0.3s ease;
 
     &:hover {
       border-color: rgba(0, 55, 192, 0.5);
-      box-shadow: 
+      box-shadow:
         0 0 0 1px rgba(0, 55, 192, 0.5),
         0 0 15px rgba(0, 55, 192, 0.4),
         0 0 30px rgba(0, 55, 192, 0.3);
     }
   }
+
   .navButton {
     width: 100%;
     text-align: left;
@@ -516,6 +551,7 @@ $header-border-radius: 30px;
     font-size: 1.1rem;
     justify-content: flex-start; // Align text left in drawer
   }
+
   .dropdownMenu {
     // Styles already adjusted via media query above
     padding-left: 15px; // Indent submenu items in drawer

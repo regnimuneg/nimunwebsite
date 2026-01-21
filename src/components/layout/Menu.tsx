@@ -34,6 +34,7 @@ const mainLinks: MainLink[] = [
     ],
   },
   { id: 'contact', text: 'CONTACT US', href: '/#contact' },
+  { id: 'portal', text: 'PORTAL', href: 'https://portal.nimuneg.org' },
 ]
 
 interface MenuProps {

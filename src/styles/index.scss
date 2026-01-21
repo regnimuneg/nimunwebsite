@@ -4,9 +4,11 @@
 @import '@/styles/globals.scss';
 @import '@/styles/splitted-container.scss';
 @import '@/styles/swiper.scss';
+
 @font-face {
   font-family: 'Bionix';
-  src: url('/fonts/Bionix.otf') format('opentype'); /* Correct relative path */
+  src: url('/fonts/Bionix.otf') format('opentype');
+  /* Correct relative path */
   font-weight: normal;
   font-style: normal;
 }
@@ -120,16 +122,11 @@ html.lenis {
 }
 
 // Double-tap zoom support for pages (not images)
-main,
+// NOTE: Removed will-change: transform from main as it breaks position: fixed on header
 .width-fix {
-  // Enable smooth zoom transitions
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  
   // Ensure zoom doesn't break layout
   transform-origin: center center;
-  
+
   // Allow scrolling when zoomed
   &.zoomed {
     overflow-x: auto;
