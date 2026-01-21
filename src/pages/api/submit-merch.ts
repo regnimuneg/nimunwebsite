@@ -200,9 +200,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             phone: orderData.phone,
             council: orderData.council,
             bundle: orderData.bundle || 'Custom Order',
+            items: itemsListHtml, // Full list of items
             posterChoice: orderData.posterChoice || '',
             magnetChoice: orderData.magnetChoice || '',
-            items: itemsListHtml, // Full list of items
             total: orderData.total,
             paymentMethod: orderData.paymentMethod,
             paymentConfirmationUrl: orderData.paymentConfirmationUrl,
