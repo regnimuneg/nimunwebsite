@@ -63,6 +63,9 @@ const BUNDLES = [
 ]
 
 const COUNCILS = ['PRESS', 'HRC', 'DISEC', 'ICJ']
+const COMMITTEES = ['Registration Affairs', 'Socials & Events', 'Operations & Logistics', 'Media & Design', 'Public Relations', 'NIMUN Executive']
+const ROLES = ['Delegate', 'NIMUN Member'] as const
+type Role = typeof ROLES[number]
 
 export default function Merch() {
     const [cart, setCart] = useState<Record<string, number>>({})
@@ -103,6 +106,7 @@ export default function Merch() {
         lastName: '',
         email: '',
         phone: '',
+        role: '' as Role | '',
         council: '',
         paymentMethod: '',
     })
@@ -156,7 +160,12 @@ export default function Merch() {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target
-        setFormData((prev) => ({ ...prev, [name]: value }))
+        // If role changes, reset council selection
+        if (name === 'role') {
+            setFormData((prev) => ({ ...prev, role: value as Role | '', council: '' }))
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }))
+        }
         if (errors[name]) {
             setErrors((prev) => ({ ...prev, [name]: '' }))
         }
@@ -235,7 +244,8 @@ export default function Merch() {
         if (!formData.phone.trim()) {
             newErrors.phone = 'Phone number is required'
         }
-        if (!formData.council) newErrors.council = 'Council is required'
+        if (!formData.role) newErrors.role = 'Role is required'
+        if (!formData.council) newErrors.council = formData.role === 'Delegate' ? 'Council is required' : 'Committee is required'
         if (!formData.paymentMethod) newErrors.paymentMethod = 'Payment method is required'
 
         if (!paymentConfirmation.url) {
@@ -592,19 +602,38 @@ export default function Merch() {
                                 {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
                             </div>
 
+                            <div className={`${styles.field} ${errors.role ? styles.fieldError : ''}`}>
+                                <label htmlFor="role">I am a... *</label>
+                                <select id="role" name="role" value={formData.role} onChange={handleInputChange} required>
+                                    <option value="">Select Role</option>
+                                    {ROLES.map((role) => (
+                                        <option key={role} value={role}>
+                                            {role}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.role && <span className={styles.errorText}>{errors.role}</span>}
+                            </div>
+                        </div>
+
+                        {formData.role && (
                             <div className={`${styles.field} ${errors.council ? styles.fieldError : ''}`}>
-                                <label htmlFor="council">Council *</label>
+                                <label htmlFor="council">
+                                    {formData.role === 'Delegate' ? 'Council' : 'Committee'} *
+                                </label>
                                 <select id="council" name="council" value={formData.council} onChange={handleInputChange} required>
-                                    <option value="">Select Council</option>
-                                    {COUNCILS.map((council) => (
-                                        <option key={council} value={council}>
-                                            {council}
+                                    <option value="">
+                                        Select {formData.role === 'Delegate' ? 'Council' : 'Committee'}
+                                    </option>
+                                    {(formData.role === 'Delegate' ? COUNCILS : COMMITTEES).map((item) => (
+                                        <option key={item} value={item}>
+                                            {item}
                                         </option>
                                     ))}
                                 </select>
                                 {errors.council && <span className={styles.errorText}>{errors.council}</span>}
                             </div>
-                        </div>
+                        )}
 
                         {/* Payment Confirmation Upload */}
                         <div className={`${styles.field} ${errors.paymentConfirmation ? styles.fieldError : ''}`}>
@@ -663,20 +692,22 @@ export default function Merch() {
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
+                </div >
+            </div >
 
             {/* Image Modal - Using Portal for proper fixed positioning */}
-            {expandedImage && typeof document !== 'undefined' && createPortal(
-                <div className={styles.imageModal} onClick={() => setExpandedImage(null)}>
-                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                        <button className={styles.closeModal} onClick={() => setExpandedImage(null)}>×</button>
-                        <img src={expandedImage.src} alt={expandedImage.alt} />
-                        <p className={styles.modalCaption}>{expandedImage.alt}</p>
-                    </div>
-                </div>,
-                document.body
-            )}
+            {
+                expandedImage && typeof document !== 'undefined' && createPortal(
+                    <div className={styles.imageModal} onClick={() => setExpandedImage(null)}>
+                        <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                            <button className={styles.closeModal} onClick={() => setExpandedImage(null)}>×</button>
+                            <img src={expandedImage.src} alt={expandedImage.alt} />
+                            <p className={styles.modalCaption}>{expandedImage.alt}</p>
+                        </div>
+                    </div>,
+                    document.body
+                )
+            }
         </>
     )
 }
