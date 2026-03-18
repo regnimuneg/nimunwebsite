@@ -4,75 +4,68 @@
 
 .footer {
   width: 100%;
-  padding: 30px;
-  font-family: 'Bionix';
-  font-size: 3rem;
-  background-color: #0037c0;
+  margin-top: 48px;
+  padding: 34px 20px 42px;
+  background: linear-gradient(90deg, #0037c0 0 12px, transparent 12px 100%),
+    linear-gradient(135deg, #050b17 0%, #081225 55%, #0e1b35 100%);
+  color: #f8fbff;
+  border-top: 2px solid rgba(0, 55, 192, 0.34);
+}
 
-  .fix {
-    @include flex-column;
-    @include width-fix;
+.footerInner {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brandBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(248, 251, 255, 0.62);
+}
+
+.name {
+  font-family: 'Bionix';
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.16em;
+}
+
+.copyrights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 16px;
+  color: rgba(248, 251, 255, 0.74);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .footer {
+    margin-top: 36px;
+    padding: 28px 16px 34px;
+  }
+
+  .footerInner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .copyrights {
-    @include flex-row;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: var(--font-color-primary);
-
-    .name {
-      @include flex-row-inline;
-      gap: 10px;
-      align-items: center;
-      font-weight: $font-weight-medium;
-
-      .logo {
-        @include background-contain;
-        align-items: center;
-        justify-content: center;
-        height: 32px;
-        width: auto;
-        border-radius: 50%;
-      }
-    }
-
-    .container {
-      @include flex-row-inline;
-      gap: 6px;
-      align-items: center;
-
-      .link {
-        @include flex-row;
-        align-items: center;
-        color: var(--white-color);
-        font-family: 'Montserrat';
-        font-size: $font-size-m;
-
-        .icon {
-          font-size: $font-size-xl;
-          margin-right: 3px;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 530px) {
-  .footer {
-    overflow-x: hidden; // Prevent horizontal overflow
-    font-size: 1 rem;
-
-    .copyrights {
-      font-size: $font-size-s; // Adjust font size on small screens
-
-      .container {
-        gap: 10px; // Adjust gap for smaller screens
-      }
-    }
-
-    .fix {
-      width: 100%; // Ensure it's fully contained within the footer width
-    }
+    justify-content: flex-start;
+    gap: 10px 14px;
+    font-size: 0.82rem;
   }
 }

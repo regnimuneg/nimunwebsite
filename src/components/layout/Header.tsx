@@ -1,19 +1,16 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Drawer from '@mui/material/Drawer'
-import Menu from '@/components/layout/Menu' // Updated Menu component
-import { useLenis } from '@/lib/lenis'
+import Menu from '@/components/layout/Menu'
 import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import styles from '@/styles/layout/Header.module.scss'
-import Image from 'next/image'
 import React, { useState } from 'react'
-import Link from 'next/link' // Import Link for Apply button if it's a link
+import Link from 'next/link'
 
 export default function Header(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const isMobile = useWindowSize(1050) // Tablet and mobile breakpoint
-  // Keep track of scroll state for potential minor adjustments (e.g., shadow), even if background stays transparent
   const [isScrolling, setIsScrolling] = React.useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const router = useRouter()
@@ -52,8 +49,7 @@ export default function Header(): JSX.Element {
     }
   }
 
-  // Right side elements component
-  const RightSideElements = () => (
+  const rightSideElements = (
     <div className={styles.rightSideContainer}>
       <Link href="/apply" className={styles.applyButton}>
         APPLY
@@ -63,10 +59,8 @@ export default function Header(): JSX.Element {
 
   return (
     <>
-      {/* Apply stick class based on scroll, but SCSS will control appearance */}
       <header className={`${styles.header} ${isScrolling ? styles.stick : ''}`} ref={containerRef}>
         <div className={styles.fix}>
-          {/* Left side container: Logo + Main Nav */}
           <div className={styles.leftSideContainer}>
             <a
               href={isHomePage ? '#top' : '/'}
@@ -81,12 +75,14 @@ export default function Header(): JSX.Element {
                 width={80}
                 height={36}
               />
+              <div className={styles.textWrapper}>
+                <span className={styles.mainText}>Nile International</span>
+                <span className={styles.subText}>Model United Nations</span>
+              </div>
             </a>
-            {/* Render Menu component only on desktop, directly after logo */}
             {!isMobile && <Menu />}
           </div>
 
-          {/* Right side elements / Mobile hamburger */}
           {isMobile ? (
             <>
               <IconButton
@@ -103,22 +99,17 @@ export default function Header(): JSX.Element {
                 classes={{ paper: styles.drawerPaper }}
                 ModalProps={{ keepMounted: true }}
               >
-                {/* Drawer content: includes Menu and RightSideElements */}
                 <div className={styles.drawerContent}>
-                  <button
-                    className={styles.backButton}
-                    onClick={toggleDrawer(false)}
-                  >
+                  <button className={styles.backButton} onClick={toggleDrawer(false)}>
                     ← Back
                   </button>
                   <Menu onNavigate={() => setDrawerOpen(false)} />
-                  <RightSideElements />
+                  {rightSideElements}
                 </div>
               </Drawer>
             </>
           ) : (
-            // Render RightSideElements directly on desktop
-            <RightSideElements />
+            rightSideElements
           )}
         </div>
       </header>

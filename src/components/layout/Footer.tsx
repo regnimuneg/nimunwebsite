@@ -1,24 +1,20 @@
 import { footer } from '@/data/footer'
 import styles from '@/styles/layout/Footer.module.scss'
-import { Icon } from '@iconify-icon/react'
 
 export default function Footer() {
   return (
-    <>
-      <div className={styles.footer}>
+    <footer className={styles.footer}>
+      <div className={styles.footerInner}>
+        <div className={styles.brandBlock}>
+          <span className={styles.eyebrow}>Nile University, Cairo</span>
+          <span className={styles.name}>{footer.text}</span>
+        </div>
         <div className={styles.copyrights}>
-          <span className={styles.name}>
-            {/* <Image quality={40} placeholder="blur" alt="logo" src={logo} className={styles.logo} /> */}
-          </span>
-          <span className={styles.container}>
-            {footer.text}
-            {/* <a href={footer.link} target="_blank" className={styles.link}>
-              <Icon icon={footer.icon} className={styles.icon} />
-              {footer.name}
-            </a> */}
-          </span>
+          <span>International Conference&apos;26</span>
+          <span>Designed for a cleaner delegate experience</span>
+          <span>{new Date().getFullYear()}</span>
         </div>
       </div>
-    </>
+    </footer>
   )
 }

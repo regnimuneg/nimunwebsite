@@ -1,59 +1,51 @@
 :root {
-  --gradient-main: linear-gradient(90deg, #0037c0 0%, #0037c0 100%);
-  --gradient-main-loop: linear-gradient(
-    90deg,
-    #0037c0 0%,
-    #e9e9e9 35%,
-    #0037c0 50%,
-    #0037c0 65%,
-    #0037c0 100%
-  );
-
-  :root {
-    --font-family: 'Bionix';
-  }
-
-  body {
-    font-family: var(--font-family) !important;
-  }
-
+  --gradient-main: linear-gradient(135deg, #0037c0 0%, #0d4fff 100%);
+  --gradient-main-loop: linear-gradient(90deg, #0037c0 0%, #f8fbff 40%, #0037c0 100%);
   --gradient-green: linear-gradient(90deg, #40c463 0%, #6afb90 100%);
   --gradient-blue: linear-gradient(90deg, #0037c0, #72aaff);
   --gradient-aqua: linear-gradient(90deg, #00aaff, hsl(170, 100%, 67%));
   --gradient-purple: linear-gradient(90deg, #b721ff, #d16fff);
   --gradient-pink: linear-gradient(90deg, #ff21e9, #ff6ff3);
-  --gradient-white: linear-gradient(90deg, #c8c8c8, #e9e9e9);
+  --gradient-white: linear-gradient(90deg, #eef4ff, #ffffff);
   --gradient-yellow: linear-gradient(90deg, #fff421, #fdff6f);
   --gradient-red: linear-gradient(90deg, #ff3021, #ff796f);
   --gradient-orange: linear-gradient(90deg, #ff9421, #ffbe6f);
 
   --primary-color: #0037c0;
-  --primary-color-light: #0037c0;
-  --primary-color-transparent: #0037c0;
-  --primary-color-more-transparent: rgba(255, 255, 255, 0.25);
+  --primary-color-light: #0e54ff;
+  --primary-color-transparent: rgba(0, 55, 192, 0.2);
+  --primary-color-more-transparent: rgba(0, 55, 192, 0.08);
 
   --green-color: #40c463;
   --purple-color: #c851ff;
   --blue-color: #0037c0;
   --bluee-color: #0037c0;
   --aqua-color: #5fdfff;
-  --white-color: #e9e9e9;
+  --white-color: #f8fbff;
   --pink-color: #da3dca;
   --yellow-color: #dbd341;
   --red-color: #d34339;
   --orange-color: #ff9421;
-}
 
-@media (prefers-color-scheme: light), (prefers-color-scheme: dark) {
-  :root {
-    --body-color: #0037c0;
-    --contrast-color: #30363d;
-    --transparent-background: hsla(0, 0%, 80%, 0.15);
-    --more-transparent-background: hsla(0, 0%, 80%, 0.08);
-    --card-background: #161b22d0;
-    --dark-card-background: #0e1115d0;
-    --font-color-primary: #f4f4f4;
-    --font-color-secondary: #f4f4f4;
-    --outline-color: #beb8ca;
-  }
+  --surface-0: #ffffff;
+  --surface-1: #f8fbff;
+  --surface-2: #eef4ff;
+  --surface-3: #dce8ff;
+  --ink-strong: #050b17;
+  --ink-soft: #465774;
+  --ink-muted: #73819a;
+  --border-soft: rgba(0, 55, 192, 0.12);
+  --border-strong: rgba(5, 11, 23, 0.12);
+  --shadow-soft: 0 20px 60px rgba(5, 11, 23, 0.08);
+  --shadow-blue: 0 24px 80px rgba(0, 55, 192, 0.18);
+
+  --body-color: #f8fbff;
+  --contrast-color: #10203a;
+  --transparent-background: rgba(5, 11, 23, 0.08);
+  --more-transparent-background: rgba(5, 11, 23, 0.04);
+  --card-background: rgba(255, 255, 255, 0.78);
+  --dark-card-background: rgba(5, 11, 23, 0.9);
+  --font-color-primary: #050b17;
+  --font-color-secondary: #465774;
+  --outline-color: rgba(0, 55, 192, 0.18);
 }

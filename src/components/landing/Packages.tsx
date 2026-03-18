@@ -7,16 +7,16 @@ import clsx from 'clsx'
 export default function Packages() {
   const [selectedPackage, setSelectedPackage] = useState<string>('Regular')
 
-  const currentPackage = packagesData.find(pkg => pkg.packageName === selectedPackage)
+  const currentPackage = packagesData.find((pkg) => pkg.packageName === selectedPackage)
   const activeColor = currentPackage?.titleColor || '#0036bf'
-  
+
   // Get cards to display based on selected package
   const getDisplayCards = () => {
     if (!currentPackage) return []
-    
+
     if (currentPackage.hasRoomTypes && currentPackage.roomOptions) {
       // For Regular and Silver, show both Single and Double cards
-      return currentPackage.roomOptions.map(option => ({
+      return currentPackage.roomOptions.map((option) => ({
         title: currentPackage.packageName,
         price: option.price,
         description: option.description,
@@ -27,45 +27,43 @@ export default function Packages() {
       }))
     } else {
       // For Gold and Platinum, show single card
-      return [{
-        title: currentPackage.packageName,
-        price: currentPackage.price || '',
-        description: currentPackage.description || [],
-        titleColor: currentPackage.titleColor,
-        isPopular: currentPackage.isPopular,
-        groupInfo: currentPackage.priceNote,
-        roomType: undefined, // No room type for Gold/Platinum
-      }]
+      return [
+        {
+          title: currentPackage.packageName,
+          price: currentPackage.price || '',
+          description: currentPackage.description || [],
+          titleColor: currentPackage.titleColor,
+          isPopular: currentPackage.isPopular,
+          groupInfo: currentPackage.priceNote,
+          roomType: undefined, // No room type for Gold/Platinum
+        },
+      ]
     }
   }
 
   const displayCards = getDisplayCards()
 
   return (
-    <div id="packages" className={styles.container}>
-      <h3 className={styles.subHeading}>PICK THE PACKAGE TAILORED FOR YOU</h3>
-      <h2 className={styles.mainTitle}>INTERNATIONAL DELEGATES'</h2>
-      <div className={styles.titleRow}>
-        <div className={styles.line}></div>
-        <h2 className={styles.mainTitle}>PACKAGES</h2>
-        <div className={styles.line}></div>
+    <section id="packages" className={`${styles.container} animated-container`}>
+      <div className={styles.headingBlock}>
+        <span className={styles.subHeading}>International Delegates</span>
+        <h2 className={styles.mainTitle}>
+          Packages tailored for how you want to experience IC&apos;26.
+        </h2>
+        <p className={styles.supportingText}>
+          The pricing stays the same. The way it is presented now feels clearer, faster, and more
+          premium.
+        </p>
       </div>
 
-      {/* Single Package Type Pill - Changes color based on selection */}
       <div className={styles.packagePillContainer}>
-        <div
-          className={styles.packagePillWrapper}
-          style={{ ['--pill-color' as any]: activeColor }}
-        >
-          {/* Sliding indicator pill */}
-          <div 
+        <div className={styles.packagePillWrapper} style={{ ['--pill-color' as any]: activeColor }}>
+          <div
             className={styles.slidingPill}
             style={{
-              // Use the active color for the pill background
-              transform: `translateX(${packagesData.findIndex(pkg => pkg.packageName === selectedPackage) * 100}%)`,
+              transform: `translateX(${packagesData.findIndex((pkg) => pkg.packageName === selectedPackage) * 100}%)`,
             }}
           />
-          {/* Package buttons */}
           {packagesData.map((pkg) => (
             <button
               key={pkg.packageName}
@@ -82,21 +80,18 @@ export default function Packages() {
         </div>
       </div>
 
-      {/* Package Cards */}
       {displayCards.length > 0 && (
-        <div className={clsx(
-          styles.packageGrid,
-          displayCards.length === 2 ? styles.twoCards : styles.oneCard
-        )}>
+        <div
+          className={clsx(
+            styles.packageGrid,
+            displayCards.length === 2 ? styles.twoCards : styles.oneCard
+          )}
+        >
           {displayCards.map((item, index) => (
-            <Package 
-              key={index}
-              item={item} 
-              isLast={index === displayCards.length - 1} 
-            />
+            <Package key={index} item={item} isLast={index === displayCards.length - 1} />
           ))}
         </div>
       )}
-    </div>
+    </section>
   )
 }

@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="theme-color" content="#0d1117" />
+        <meta name="theme-color" content="#f8fbff" />
         <link rel="shortcut icon" href="/favicon2.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
