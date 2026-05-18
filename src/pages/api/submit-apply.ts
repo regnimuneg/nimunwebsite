@@ -29,6 +29,10 @@ export default async function handler(
       return res.status(response.status).json({ ok: false, error: data.error || 'Submission failed' })
     }
 
+    if (data?.ok === false) {
+      return res.status(400).json({ ok: false, error: data.error || 'Submission failed' })
+    }
+
     return res.status(200).json({ ok: true, data })
   } catch (error) {
     console.error('Webhook submission error:', error)

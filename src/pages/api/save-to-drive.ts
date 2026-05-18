@@ -12,18 +12,16 @@ export default async function handler(
     return res.status(405).json({ ok: false, error: 'Method not allowed' })
   }
 
-  // If Drive webhook is not configured, just return success (optional feature)
   if (!DRIVE_WEBHOOK_URL) {
-    console.log('Google Drive webhook not configured, skipping Drive upload')
-    return res.status(200).json({ ok: true, message: 'Drive not configured' })
+    return res.status(500).json({ ok: false, error: 'Drive webhook URL not configured' })
   }
 
   try {
-    const { fileUrl, fileName, fileType } = req.body
+    const { fileUrl, fileName, fileType, folderKey, fieldTitle } = req.body
 
-    if (!fileUrl || !fileName) {
-      console.error('Missing fileUrl or fileName:', { fileUrl: !!fileUrl, fileName: !!fileName })
-      return res.status(400).json({ ok: false, error: 'Missing fileUrl or fileName' })
+    if (!fileUrl || !fileName || !folderKey) {
+      console.error('Missing Drive upload fields:', { fileUrl: !!fileUrl, fileName: !!fileName, folderKey: !!folderKey })
+      return res.status(400).json({ ok: false, error: 'Missing fileUrl, fileName, or folderKey' })
     }
 
     console.log('Attempting to save to Drive:', { fileName, fileType, fileUrl: fileUrl.substring(0, 50) + '...' })
@@ -38,6 +36,8 @@ export default async function handler(
         fileUrl,
         fileName,
         fileType: fileType || 'application/octet-stream',
+        folderKey,
+        fieldTitle,
       }),
     })
 
@@ -47,11 +47,9 @@ export default async function handler(
 
     if (!response.ok) {
       console.error('Drive webhook error:', response.status, responseText)
-      // Don't fail the request if Drive save fails
-      return res.status(200).json({ 
-        ok: false, 
-        message: 'File uploaded to Cloudinary, but Drive save failed',
-        error: responseText.substring(0, 200)
+      return res.status(response.status).json({
+        ok: false,
+        error: responseText.substring(0, 200) || 'Drive save failed',
       })
     }
 
@@ -62,14 +60,19 @@ export default async function handler(
       responseData = { ok: true, message: responseText }
     }
 
+    if (responseData?.ok === false) {
+      return res.status(400).json({
+        ok: false,
+        error: responseData.error || 'Drive save failed',
+      })
+    }
+
     console.log('Drive save successful:', responseData)
     return res.status(200).json({ ok: true, data: responseData })
   } catch (error) {
     console.error('Drive webhook error:', error)
-    // Don't fail the request if Drive save fails
-    return res.status(200).json({
+    return res.status(500).json({
       ok: false,
-      message: 'File uploaded to Cloudinary, but Drive save failed',
       error: error instanceof Error ? error.message : 'Unknown error',
     })
   }
