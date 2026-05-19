@@ -456,62 +456,56 @@ export default function Apply() {
         throw new Error('Cloudinary configuration missing')
       }
 
-      // 1. Upload to Cloudinary as a fallback
+      // 1. Prepare Cloudinary Promise
       const uploadFormData = new FormData()
       uploadFormData.append('file', file)
       uploadFormData.append('upload_preset', uploadPreset)
       uploadFormData.append('cloud_name', cloudName)
 
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+      const cloudinaryPromise = fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
         method: 'POST',
         body: uploadFormData,
-      })
-      const data = await response.json()
+      }).then(res => res.json().then(data => {
+        if (!res.ok) throw new Error(data.error?.message || 'Upload failed')
+        return data.secure_url as string
+      }))
 
-      if (!response.ok) {
-        throw new Error(data.error?.message || 'Upload failed')
-      }
+      // 2. Prepare Drive Promise
+      let drivePromise: Promise<string | null> = Promise.resolve(null)
 
-      let uploadedUrl = data.secure_url
-
-      // 2. Try to save Base64 directly to Drive
       if (question.driveFolderKey) {
-        try {
-          const base64Data = await new Promise<string>((resolve, reject) => {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = () => {
-              const result = reader.result as string
-              resolve(result.split(',')[1] || '')
-            }
-            reader.onerror = (error) => reject(error)
-          })
-
-          const driveResponse = await fetch('/api/save-to-drive', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              fileContent: base64Data,
-              fileName: file.name,
-              fileType: file.type || 'application/octet-stream',
-              folderKey: question.driveFolderKey,
-              fieldTitle: question.title,
-            }),
-          })
-
-          const driveResult = await driveResponse.json().catch(() => null)
-
+        drivePromise = new Promise<string>((resolve, reject) => {
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = () => resolve((reader.result as string).split(',')[1] || '')
+          reader.onerror = (error) => reject(error)
+        }).then(base64Data => fetch('/api/save-to-drive', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fileContent: base64Data,
+            fileName: file.name,
+            fileType: file.type || 'application/octet-stream',
+            folderKey: question.driveFolderKey,
+            fieldTitle: question.title,
+          }),
+        })).then(res => res.json()).then(driveResult => {
           const finalFileUrl = driveResult?.data?.fileUrl || driveResult?.data?.data?.fileUrl
-
-          if (driveResponse.ok && driveResult?.ok !== false && finalFileUrl) {
-            uploadedUrl = finalFileUrl
-          } else {
-            console.warn('Drive save returned error, falling back to Cloudinary URL:', driveResult)
+          if (driveResult?.ok !== false && finalFileUrl) {
+            return finalFileUrl
           }
-        } catch (driveError) {
-          console.warn('Drive save failed completely, falling back to Cloudinary URL:', driveError)
-        }
+          console.warn('Drive save returned error, falling back to Cloudinary URL:', driveResult)
+          return null
+        }).catch(err => {
+          console.warn('Drive save failed completely, falling back to Cloudinary URL:', err)
+          return null
+        })
       }
+
+      // 3. Execute concurrently! (Cuts upload wait time in half)
+      const [cloudinaryUrl, driveUrl] = await Promise.all([cloudinaryPromise, drivePromise])
+
+      const uploadedUrl = driveUrl || cloudinaryUrl
 
       setUploads((previous) => ({ ...previous, [key]: { file, url: uploadedUrl, uploading: false } }))
       setAnswer(key, uploadedUrl)
