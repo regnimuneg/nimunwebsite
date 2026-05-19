@@ -55,7 +55,7 @@ body {
   overscroll-behavior-y: auto;
   -webkit-overflow-scrolling: touch;
   // Ensure zoom works
-  touch-action: pan-y pinch-zoom !important;
+  touch-action: manipulation !important;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -104,13 +104,13 @@ html.lenis {
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
   // Allow zoom gestures
-  touch-action: pan-y pinch-zoom !important;
+  touch-action: manipulation !important;
 }
 
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: auto; // Changed from contain to auto to allow pull-to-refresh
   // Allow zoom even on prevented elements
-  touch-action: pan-y pinch-zoom !important;
+  touch-action: manipulation !important;
 }
 
 .lenis.lenis-stopped {
