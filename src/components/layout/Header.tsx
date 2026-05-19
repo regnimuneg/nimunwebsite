@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton'
 import Drawer from '@mui/material/Drawer'
 import Menu from '@/components/layout/Menu' // Updated Menu component
 import { useLenis } from '@/lib/lenis'
+import { jnimun26Asset } from '@/lib/jnimun26Brand'
 import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import styles from '@/styles/layout/Header.module.scss'
@@ -57,6 +58,12 @@ export default function Header(): JSX.Element {
     <div className={styles.rightSideContainer}>
       <Link href="/apply" className={styles.applyButton}>
         APPLY
+        <img
+          src={jnimun26Asset('laptop.png')}
+          alt=""
+          className={styles.applyLaptop}
+          aria-hidden="true"
+        />
       </Link>
     </div>
   )

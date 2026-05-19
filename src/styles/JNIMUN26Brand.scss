@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Anton';
+  src: url('/fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Berlin Sans FB';
+  src: url('/fonts/BRLNSB.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// JNIMUN'26 design tokens
+$jnimun-pink: #ff639b;
+$jnimun-teal: #3cbf96;
+$jnimun-off-white: #f2f2f2;
+$jnimun-yellow: #ffdf51;
+$jnimun-red: #ff4040;
+$jnimun-blue: #2e90cf;
+$jnimun-black: #000000;
+
+$jnimun-font-display: 'Anton', sans-serif;
+$jnimun-font-body: 'Berlin Sans FB', sans-serif;

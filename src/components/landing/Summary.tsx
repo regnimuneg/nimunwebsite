@@ -240,7 +240,7 @@ export default function Summary() {
       </div>
       <div className={styles.footerLine}></div>
       <div className={styles.summaryFooter}>
-        {/* To the left, just above IC'26: 40.png */}
+        {/* To the left, just above JNIMUN'26: 40.png */}
         <img
           ref={leftShapeRef}
           src="/image/png/40.png"
@@ -248,7 +248,7 @@ export default function Summary() {
           className={styles.leftAboveIC26}
         />
         <div className={styles.footerLeft}>
-          <span className={styles.footerLabel}>IC'26</span>
+          <span className={styles.footerLabel}>JNIMUN&apos;26</span>
         </div>
         <div className={styles.footerCenter}>
           <span className={styles.nimunLogo}>NIMUN</span>

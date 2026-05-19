@@ -1,3 +1,5 @@
+import ApplyDecorations from '@/components/apply/ApplyDecorations'
+import ApplyNavbar from '@/components/apply/ApplyNavbar'
 import Head from 'next/head'
 import { useMemo, useState, useEffect } from 'react'
 import styles from '@/styles/Apply.module.scss'
@@ -50,15 +52,14 @@ JNIMUN'26 is almost Here!
 
 Apply now as a delegate! In this form, you'll find all the information needed for the Conference Councils. Please select your preferences (1st and 2nd) according to the council you feel will suit you best.
 
-Our Conference will be held starting 27th of June.
-
 NIMUN Delegate Package Includes:
     - 4 days of intensive training sessions
-    - Access to the Opening Ceremony and Performance Day
+    - Opening Ceremony and Performance Day
     - 3 full days of conference sessions
-    - Entry to the Closing Ceremony and final party
-    - Daily dinner throughout the event
-    - Breakfast provided on all conference days`
+    - Entry to the Closing Ceremony
+    - Dinners throughout the event
+    - Breakfast provided on all conference days
+    - Giveaways!`
 
 const SECTIONS: Section[] = [
   {
@@ -309,7 +310,7 @@ const getNextSectionIndex = (currentIndex: number, answers: Record<string, strin
     if (question.type === 'MULTIPLE_CHOICE') {
       const selectedAnswer = answers[fieldKey(section.sectionTitle, question.title)]
       const selectedOption = question.options?.find((option) => option.text === selectedAnswer)
-      
+
       if (selectedOption?.branchesTo?.startsWith('GO_TO_PAGE:')) {
         const targetTitle = selectedOption.branchesTo.replace('GO_TO_PAGE:', '').trim()
         return sectionIndexByTitle[targetTitle] ?? currentIndex + 1
@@ -343,7 +344,10 @@ export default function Apply() {
   }, [errors.submit])
 
   const currentSection = (SECTIONS[currentSectionIndex] || SECTIONS[0]) as Section
-  const progress = useMemo(() => Math.round(((currentSectionIndex + 1) / SECTIONS.length) * 100), [currentSectionIndex])
+  const progress = useMemo(() => {
+    if (SECTIONS.length <= 1) return 0
+    return Math.round((currentSectionIndex / (SECTIONS.length - 1)) * 100)
+  }, [currentSectionIndex])
 
   const setAnswer = (key: string, value: string | Record<string, string>) => {
     setAnswers((previous) => ({ ...previous, [key]: value }))
@@ -524,7 +528,7 @@ export default function Apply() {
         const otherKey = fieldKey(section.sectionTitle, question.title, 'Other')
         const otherValue = String(answers[otherKey] || '').trim()
         const finalValue = value === 'Other' && otherValue ? `Other: ${otherValue}` : value
-        
+
         const plainKey = getPlainKey(question.title)
         if (finalValue !== '' || !flatAnswers[plainKey]) {
           flatAnswers[plainKey] = finalValue
@@ -683,9 +687,8 @@ export default function Apply() {
             {question.isRequired && ' *'}
           </span>
           <div
-            className={`${styles.fileUploadArea} ${upload?.uploading ? styles.uploading : ''} ${
-              upload?.url ? styles.uploaded : ''
-            } ${errors[key] ? styles.fieldError : ''}`}
+            className={`${styles.fileUploadArea} ${upload?.uploading ? styles.uploading : ''} ${upload?.url ? styles.uploaded : ''
+              } ${errors[key] ? styles.fieldError : ''}`}
           >
             {!upload?.file && !upload?.uploading && (
               <label htmlFor={key} className={styles.uploadPrompt}>
@@ -767,37 +770,49 @@ export default function Apply() {
     )
   }
 
+  const pageTitle = (
+    <>
+      JNIMUN<span className={styles.accent}>&apos;26</span> Delegate Application
+    </>
+  )
+
   if (submitted) {
     return (
-      <>
+      <div className={styles.pageShell}>
+        <ApplyNavbar />
         <Head>
-          <title>Application Submitted | NIMUN</title>
+          <title>Application Submitted | JNIMUN&apos;26</title>
         </Head>
         <div className={`${styles.container} ${styles.successContainer}`}>
           <div className={styles.card}>
+            <ApplyDecorations />
             <svg className={styles.successIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <h1 className={styles.title}>Application Submitted</h1>
+            <h1 className={styles.title}>
+              Application <span className={styles.accent}>Submitted</span>
+            </h1>
             <p className={styles.subtitle}>
               Thank you for applying to JNIMUN&apos;26. We&apos;ve received your application and will review it soon.
             </p>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 
   return (
-    <>
+    <div className={styles.pageShell}>
+      <ApplyNavbar />
       <Head>
-        <title>{FORM_TITLE} | NIMUN</title>
+        <title>{FORM_TITLE} | JNIMUN&apos;26</title>
       </Head>
       <div className={styles.container}>
         <div className={styles.card}>
+          <ApplyDecorations />
           <div className={styles.formHeader}>
             <p className={styles.kicker}>Delegate Registration</p>
-            <h1 className={styles.title}>{FORM_TITLE}</h1>
+            <h1 className={styles.title}>{pageTitle}</h1>
             {currentSectionIndex === 0 && <p className={styles.description}>{FORM_DESCRIPTION}</p>}
           </div>
 
@@ -855,6 +870,6 @@ export default function Apply() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   )
 }

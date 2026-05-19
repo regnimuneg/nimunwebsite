@@ -1,6 +1,7 @@
 @import '@/styles/animations.scss';
 @import '@/styles/mixins.scss';
 @import '@/styles/globals.scss';
+@import '@/styles/JNIMUN26Brand.scss';
 
 // To the right, between summary and images: 39.png
 .rightBetweenSummary {
@@ -516,8 +517,8 @@
 
 .footerLabel {
   color: #fff;
-  font-family: 'Montserrat';
-  font-weight: bolder;
+  font-family: $jnimun-font-body;
+  font-weight: 700;
   // Fluid typography
   font-size: clamp(1rem, 3.5vw, 2.6rem);
   margin: 0; // Remove negative margin

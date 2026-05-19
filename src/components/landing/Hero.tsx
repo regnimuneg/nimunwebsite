@@ -1,70 +1,88 @@
 import styles from '@/styles/landing/Hero.module.scss'
-import Image from 'next/image'
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
+import { jnimun26Asset } from '@/lib/jnimun26Brand'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+const JNIMUN_TARGET_DATE = new Date('2026-06-27T09:00:00+03:00').getTime()
+
+const getCountdown = () => {
+  const distance = Math.max(JNIMUN_TARGET_DATE - Date.now(), 0)
+
+  return {
+    days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((distance / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((distance / (1000 * 60)) % 60),
+    seconds: Math.floor((distance / 1000) % 60),
+  }
+}
 
 export default function Hero() {
-  const leftShapeRef = useRef<HTMLImageElement>(null)
-  const topRightShapeRef = useRef<HTMLImageElement>(null)
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  })
 
   useEffect(() => {
-    if (leftShapeRef.current) {
-      gsap.to(leftShapeRef.current, {
-        y: -20,
-        repeat: -1,
-        yoyo: true,
-        duration: 2,
-        ease: 'power1.inOut',
-        delay: 0.2,
-      })
-    }
-    if (topRightShapeRef.current) {
-      gsap.to(topRightShapeRef.current, {
-        y: -20,
-        repeat: -1,
-        yoyo: true,
-        duration: 2,
-        ease: 'power1.inOut',
-        delay: 0,
-      })
+    const updateCountdown = () => setCountdown(getCountdown())
+    const initialCountdownTimer = window.setTimeout(updateCountdown, 0)
+    const countdownTimer = window.setInterval(updateCountdown, 1000)
+
+    return () => {
+      window.clearTimeout(initialCountdownTimer)
+      window.clearInterval(countdownTimer)
     }
   }, [])
 
+  const countdownItems = [
+    { label: 'Days', value: countdown.days },
+    { label: 'Hours', value: countdown.hours },
+    { label: 'Minutes', value: countdown.minutes },
+    { label: 'Seconds', value: countdown.seconds },
+  ]
+
   return (
     <>
-      {/* Top right behind the navbar: 37.png */}
-      <img
-        ref={topRightShapeRef}
-        src="/image/png/37.png"
-        alt="Decorative 3D Element"
-        className={styles.topRightShape}
-      />
       <div className={styles.heroWrapper}>
         <div className={styles.heroBanner}>
           <div className={styles.heroOverlay} />
 
-          {/* To the left of the blue card: 31.png */}
-          <img
-            ref={leftShapeRef}
-            src="/image/png/31.png"
-            alt="Decorative 3D Element"
-            className={styles.leftOfCardShape}
-          />
-
           <div className={styles.heroContent}>
-            <div className={styles.heroTitleBlock}>
-              <p className={styles.heroSubtitle}>NILE INTERNATIONAL</p>
-              <p className={styles.heroSubtitle}>MODEL UNITED NATIONS</p>
-              <div className={styles.heroUnderline} />
-            </div>
+            <div className={styles.countdownCard}>
+              {/* Stickers scattered around the card */}
+              <img src={jnimun26Asset('rays.png')} alt="" className={`${styles.sticker} ${styles.stickerRays}`} aria-hidden="true" />
+              <img src={jnimun26Asset('stars.png')} alt="" className={`${styles.sticker} ${styles.stickerStars}`} aria-hidden="true" />
+              <img src={jnimun26Asset('megaphone.png')} alt="" className={`${styles.sticker} ${styles.stickerMegaphone}`} aria-hidden="true" />
+              <img src={jnimun26Asset('sand_clock.png')} alt="" className={`${styles.sticker} ${styles.stickerHourglass}`} aria-hidden="true" />
+              <img src={jnimun26Asset('big_star.png')} alt="" className={`${styles.sticker} ${styles.stickerBigStar}`} aria-hidden="true" />
+              <img src={jnimun26Asset('small_stars.png')} alt="" className={`${styles.sticker} ${styles.stickerSmallStars}`} aria-hidden="true" />
+              <img src={jnimun26Asset('lens.png')} alt="" className={`${styles.sticker} ${styles.stickerLens}`} aria-hidden="true" />
+              <img src={jnimun26Asset('pencil.png')} alt="" className={`${styles.sticker} ${styles.stickerPencil}`} aria-hidden="true" />
+              <img src={jnimun26Asset('bulb.png')} alt="" className={`${styles.sticker} ${styles.stickerBulb}`} aria-hidden="true" />
+              <img src={jnimun26Asset('exclamation.png')} alt="" className={`${styles.sticker} ${styles.stickerExclamation}`} aria-hidden="true" />
+              <img src={jnimun26Asset('thumbs_up.png')} alt="" className={`${styles.sticker} ${styles.stickerThumbsUp}`} aria-hidden="true" />
+              <img src={jnimun26Asset('clip.png')} alt="" className={`${styles.sticker} ${styles.stickerClip}`} aria-hidden="true" />
 
-            <div className={styles.heroCard}>
-              <p className={styles.heroCardTitle}>IC'26</p>
-              <p className={styles.heroCardSubtitle}>IS OFFICALLY HERE!!</p>
-              <div className={styles.learnMoreWrapper}>
-                <a href="/apply" className={styles.learnMoreBtn}>
-                  <span className={styles.learnMoreText}>APPLY NOW!</span>
-                </a>
+              <p className={styles.countdownEyebrow}>
+                <span>JNIMUN</span>
+                <span className={styles.countdownYear}>&apos;26</span>
+                <span> is approaching</span>
+              </p>
+              <div className={styles.countdownGrid} aria-label="Countdown to JNIMUN'26">
+                {countdownItems.map((item) => (
+                  <div className={styles.countdownItem} key={item.label}>
+                    <span className={styles.countdownValue}>
+                      {item.value.toString().padStart(2, '0')}
+                    </span>
+                    <span className={styles.countdownLabel}>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className={styles.heroActions}>
+                <Link href="/apply" className={styles.applyNowBtn}>
+                  APPLY NOW
+                </Link>
               </div>
             </div>
           </div>

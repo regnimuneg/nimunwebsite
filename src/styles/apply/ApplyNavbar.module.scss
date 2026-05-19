@@ -1,0 +1,250 @@
+@import '@/styles/JNIMUN26Brand.scss';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(46, 144, 207, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8px clamp(16px, 4vw, 32px);
+  min-height: 80px;
+}
+
+.brandCluster {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 18px);
+  text-decoration: none;
+}
+
+.logo {
+  height: clamp(56px, 10vw, 78px);
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brandTitle {
+  font-family: $jnimun-font-body;
+  font-size: clamp(1.75rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: $jnimun-off-white;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.brandYear {
+  color: $jnimun-pink;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(20px, 3vw, 42px);
+}
+
+.navItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navLink {
+  font-family: $jnimun-font-display;
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  font-weight: 400;
+  text-decoration: none;
+  color: $jnimun-off-white;
+  -webkit-text-stroke: 1.2px $jnimun-black;
+  paint-order: stroke fill;
+  letter-spacing: 0.15em;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $jnimun-yellow;
+    background: transparent;
+  }
+}
+
+.chevron {
+  display: inline-block;
+  margin-left: 6px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  vertical-align: middle;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 240px;
+  background: $jnimun-off-white;
+  border: 2px solid $jnimun-black;
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 4px 4px 0 $jnimun-black;
+  z-index: 20;
+}
+
+.dropdownMobile {
+  position: static;
+  transform: none;
+  margin-top: 8px;
+  width: 100%;
+  box-shadow: none;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: $jnimun-black;
+  font-family: $jnimun-font-body;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0;
+
+  &:hover {
+    background: rgba(46, 144, 207, 0.15);
+    color: $jnimun-blue;
+  }
+}
+
+.menuBtn {
+  color: $jnimun-off-white !important;
+}
+
+.drawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(320px, 88vw);
+  height: 100%;
+  background: rgba(46, 144, 207, 0.95);
+  backdrop-filter: blur(12px);
+  border-left: 3px solid $jnimun-black;
+  padding: 20px 16px 32px;
+  overflow-y: auto;
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(242, 242, 242, 0.25);
+}
+
+.drawerLogo {
+  height: 48px;
+  width: auto;
+}
+
+.closeBtn {
+  color: $jnimun-off-white !important;
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  color: $jnimun-off-white;
+  -webkit-text-stroke: 1.2px $jnimun-black;
+  paint-order: stroke fill;
+  font-family: $jnimun-font-display;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+
+  &:hover {
+    background: transparent;
+    color: $jnimun-yellow;
+  }
+}
+
+.drawerAbout {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .inner {
+    min-height: 72px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+}

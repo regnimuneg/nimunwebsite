@@ -30,6 +30,8 @@ export default function MainLayout({ children }: Props) {
   const isMobile = useWindowSize()
   const router = useRouter()
   const isIC26Page = router.pathname === '/IC26'
+  const isApplyPage = router.pathname === '/apply'
+  const hideSiteChrome = isIC26Page || isApplyPage
   
   // Enable double-tap zoom on all pages (but not on images)
   useDoubleTapZoom()
@@ -111,10 +113,10 @@ export default function MainLayout({ children }: Props) {
       {/* <WebGLParticles size={isMobile ? 260 : 200} /> */}
       <main className={font.className}>
         <div id="full-size-image-slider"></div>
-        {!isIC26Page && <Header />}
+        {!hideSiteChrome && <Header />}
         <div className="width-fix" ref={main}>
           {children}
-          {!isIC26Page && <Footer />}
+          {!hideSiteChrome && <Footer />}
         </div>
       </main>
     </>
