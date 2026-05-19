@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 const WEBHOOK_URL = process.env.NEXT_PUBLIC_APPLY_WEBHOOK
 
+export const maxDuration = 60
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

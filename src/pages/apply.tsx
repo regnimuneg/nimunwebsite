@@ -43,6 +43,7 @@ type FileUploadState = {
   file: File | null
   url: string
   uploading: boolean
+  progress?: number
 }
 
 const FORM_TITLE = "JNIMUN'26 Delegate Application"
@@ -458,70 +459,112 @@ export default function Apply() {
     setUploads((previous) => ({ ...previous, [key]: { file, url: '', uploading: true } }))
 
     try {
-      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-
-      if (!cloudName || !uploadPreset) {
-        throw new Error('Cloudinary configuration missing')
+      if (!question.driveFolderKey) {
+        throw new Error('Upload configuration missing for this field.')
       }
 
-      // 1. Prepare Cloudinary Promise
-      const uploadFormData = new FormData()
-      uploadFormData.append('file', file)
-      uploadFormData.append('upload_preset', uploadPreset)
-      uploadFormData.append('cloud_name', cloudName)
+      let base64Data = ''
 
-      const cloudinaryPromise = fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
-        method: 'POST',
-        body: uploadFormData,
-      }).then(res => res.json().then(data => {
-        if (!res.ok) throw new Error(data.error?.message || 'Upload failed')
-        return data.secure_url as string
-      }))
+      if (file.type.startsWith('image/')) {
+        base64Data = await new Promise<string>((resolve, reject) => {
+          const img = new Image()
+          img.onload = () => {
+            const canvas = document.createElement('canvas')
+            let width = img.width
+            let height = img.height
+            const maxDim = 1200
 
-      // 2. Prepare Drive Promise
-      let drivePromise: Promise<string | null> = Promise.resolve(null)
+            if (width > height && width > maxDim) {
+              height = Math.round(height * (maxDim / width))
+              width = maxDim
+            } else if (height > maxDim) {
+              width = Math.round(width * (maxDim / height))
+              height = maxDim
+            }
 
-      if (question.driveFolderKey) {
-        drivePromise = new Promise<string>((resolve, reject) => {
+            canvas.width = width
+            canvas.height = height
+
+            const ctx = canvas.getContext('2d')
+            if (!ctx) return reject(new Error('Canvas not supported'))
+
+            ctx.drawImage(img, 0, 0, width, height)
+            resolve(canvas.toDataURL('image/jpeg', 0.6).split(',')[1] || '')
+          }
+          img.onerror = () => reject(new Error('Failed to process image'))
+
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            img.src = e.target?.result as string
+          }
+          reader.readAsDataURL(file)
+        })
+      } else {
+        base64Data = await new Promise<string>((resolve, reject) => {
           const reader = new FileReader()
           reader.readAsDataURL(file)
           reader.onload = () => resolve((reader.result as string).split(',')[1] || '')
           reader.onerror = (error) => reject(error)
-        }).then(base64Data => fetch('/api/save-to-drive', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fileContent: base64Data,
-            fileName: file.name,
-            fileType: file.type || 'application/octet-stream',
-            folderKey: question.driveFolderKey,
-            fieldTitle: question.title,
-          }),
-        })).then(res => res.json()).then(driveResult => {
-          const finalFileUrl = driveResult?.data?.fileUrl || driveResult?.data?.data?.fileUrl
-          if (driveResult?.ok !== false && finalFileUrl) {
-            return finalFileUrl
-          }
-          console.warn('Drive save returned error, falling back to Cloudinary URL:', driveResult)
-          return null
-        }).catch(err => {
-          console.warn('Drive save failed completely, falling back to Cloudinary URL:', err)
-          return null
         })
       }
 
-      // 3. Execute concurrently! (Cuts upload wait time in half)
-      const [cloudinaryUrl, driveUrl] = await Promise.all([cloudinaryPromise, drivePromise])
+      const isImage = file.type.startsWith('image/')
+      const finalFileName = isImage ? file.name.replace(/\.[^/.]+$/, "") + '.jpg' : file.name
+      const finalFileType = isImage ? 'image/jpeg' : (file.type || 'application/octet-stream')
 
-      const uploadedUrl = driveUrl || cloudinaryUrl
+      const driveResult = await new Promise<any>((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.open('POST', '/api/save-to-drive', true)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-      setUploads((previous) => ({ ...previous, [key]: { file, url: uploadedUrl, uploading: false } }))
-      setAnswer(key, uploadedUrl)
+        xhr.upload.onprogress = (event) => {
+          if (event.lengthComputable) {
+            const percentComplete = Math.round((event.loaded / event.total) * 95) // Cap at 95% while waiting for Google Drive processing
+            setUploads((previous) => ({
+              ...previous,
+              [key]: { file, url: '', uploading: true, progress: percentComplete },
+            }))
+          }
+        }
+
+        xhr.onload = () => {
+          try {
+            const result = JSON.parse(xhr.responseText)
+            if (xhr.status >= 200 && xhr.status < 300) {
+              resolve(result)
+            } else {
+              reject(new Error(result?.error || result?.message || 'Failed to save file to Drive'))
+            }
+          } catch (e) {
+            reject(new Error('Invalid response from server'))
+          }
+        }
+
+        xhr.onerror = () => {
+          reject(new Error('Network error during upload'))
+        }
+
+        xhr.send(JSON.stringify({
+          fileContent: base64Data,
+          fileName: finalFileName,
+          fileType: finalFileType,
+          folderKey: question.driveFolderKey,
+          fieldTitle: question.title,
+        }))
+      })
+
+      const finalFileUrl = driveResult?.data?.fileUrl || driveResult?.data?.data?.fileUrl
+
+      if (driveResult?.ok === false || !finalFileUrl) {
+        throw new Error(driveResult?.error || driveResult?.message || 'Failed to save file to Drive')
+      }
+
+      setUploads((previous) => ({ ...previous, [key]: { file, url: finalFileUrl, uploading: false } }))
+      setAnswer(key, finalFileUrl)
     } catch (error) {
       console.error('Upload error:', error)
       setUploads((previous) => ({ ...previous, [key]: { file: null, url: '', uploading: false } }))
-      setErrors((previous) => ({ ...previous, [key]: 'Failed to upload file. Please try again.' }))
+      setErrors((previous) => ({ ...previous, [key]: error instanceof Error ? error.message : 'Failed to upload file. Please try again.' }))
     }
   }
 
@@ -762,7 +805,7 @@ export default function Apply() {
             {upload?.uploading && (
               <div className={styles.uploadStatus}>
                 <div className={styles.spinner}></div>
-                <span>Uploading...</span>
+                <span>Uploading... {upload.progress ? `${upload.progress}%` : ''}</span>
               </div>
             )}
 

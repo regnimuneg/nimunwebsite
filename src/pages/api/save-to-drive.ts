@@ -4,6 +4,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 // The actual Drive upload is handled in Apps Script for simplicity and security
 const DRIVE_WEBHOOK_URL = process.env.NEXT_PUBLIC_DRIVE_WEBHOOK_URL
 
+export const maxDuration = 60
+
 export const config = {
   api: {
     bodyParser: {
