@@ -84,7 +84,7 @@ const SECTIONS: Section[] = [
       {
         title: "Please Upload your National ID\n(If you don't have one, please upload your Birth Certificate)",
         type: 'FILE_UPLOAD',
-        isRequired: false,
+        isRequired: true,
         driveFolderKey: 'delegate_national_id',
       },
       { title: 'Guardian personal Name ', type: 'TEXT', isRequired: true },
@@ -99,7 +99,7 @@ const SECTIONS: Section[] = [
         allowOther: true,
       },
       { title: 'Guardian Phone Number', type: 'TEXT', isRequired: true },
-      { title: "Guardian's National ID", type: 'FILE_UPLOAD', isRequired: false, driveFolderKey: 'guardian_national_id' },
+      { title: "Guardian's National ID", type: 'FILE_UPLOAD', isRequired: true, driveFolderKey: 'guardian_national_id' },
       { title: 'School Name', type: 'TEXT', isRequired: true },
       {
         title: 'Education Type',
@@ -277,7 +277,7 @@ const SECTIONS: Section[] = [
     sectionDescription: 'Please send the payment to the account: @nimuneg',
     nextAction: 'SUBMIT',
     questions: [
-      { title: 'Please upload proof of Payment', type: 'FILE_UPLOAD', isRequired: false, driveFolderKey: 'telda_payment_proofs' },
+      { title: 'Please upload proof of Payment', type: 'FILE_UPLOAD', isRequired: true, driveFolderKey: 'telda_payment_proofs' },
     ],
   },
   {
@@ -286,7 +286,7 @@ const SECTIONS: Section[] = [
     nextAction: 'SUBMIT',
     questions: [
       { title: 'Scan this QR code for payment', type: 'IMAGE', isRequired: false, imageAlt: 'Instapay QR code' },
-      { title: 'Please upload proof of Payment ', type: 'FILE_UPLOAD', isRequired: false, driveFolderKey: 'instapay_payment_proofs' },
+      { title: 'Please upload proof of Payment ', type: 'FILE_UPLOAD', isRequired: true, driveFolderKey: 'instapay_payment_proofs' },
     ],
   },
 ]
