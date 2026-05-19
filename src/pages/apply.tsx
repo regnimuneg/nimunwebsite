@@ -301,8 +301,16 @@ const SECTIONS: Section[] = [
       { title: 'Scan this QR code for payment', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/InstaPay%20QR%20Code.jpg", imageAlt: 'Instapay QR code' },
       { title: 'Please upload proof of Payment ', type: 'FILE_UPLOAD', isRequired: true, driveFolderKey: 'instapay_payment_proofs' },
     ],
-  },
 ]
+
+const allImagesToPreload: string[] = []
+SECTIONS.forEach((section) => {
+  section.questions.forEach((question) => {
+    if (question.type === 'IMAGE' && question.imageSrc) {
+      allImagesToPreload.push(question.imageSrc)
+    }
+  })
+})
 
 const sectionIndexByTitle = SECTIONS.reduce<Record<string, number>>((acc, section, index) => {
   acc[section.sectionTitle] = index
@@ -878,6 +886,9 @@ export default function Apply() {
       <ApplyNavbar />
       <Head>
         <title>{FORM_TITLE} | JNIMUN&apos;26</title>
+        {allImagesToPreload.map((src) => (
+          <link key={src} rel="preload" href={src} as="image" />
+        ))}
       </Head>
       <div className={styles.container}>
         <div className={styles.card}>
