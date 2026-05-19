@@ -13,13 +13,13 @@ export default function Document() {
         />
         <style>{`
           html {
-            touch-action: pan-y pinch-zoom !important;
+            touch-action: manipulation;
             overscroll-behavior-y: auto;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
           }
           body {
-            touch-action: pan-y pinch-zoom !important;
+            touch-action: manipulation;
             overscroll-behavior-y: auto;
             -webkit-user-select: text;
             user-select: text;
@@ -27,19 +27,22 @@ export default function Document() {
           * {
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
           }
-          /* Disable zoom cursor and drag on images only - but allow page zoom */
+          /* Prevent double-tap zoom on interactive elements */
+          button, a, input, select, textarea, label, [role="button"] {
+            touch-action: manipulation;
+          }
+          /* Disable zoom cursor and drag on images only */
           img, image, [role="img"] {
             cursor: default !important;
             -webkit-user-drag: none;
             user-drag: none;
             -webkit-user-select: none;
             user-select: none;
-            /* Allow page zoom to work even when tapping on images */
-            touch-action: pan-y pinch-zoom;
+            touch-action: manipulation;
           }
           /* Prevent Lenis from blocking zoom gestures */
           .lenis.lenis-smooth {
-            touch-action: pan-y pinch-zoom !important;
+            touch-action: manipulation !important;
           }
         `}</style>
       </Head>

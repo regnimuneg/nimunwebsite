@@ -442,25 +442,29 @@ export default function Apply() {
       let uploadedUrl = data.secure_url
 
       if (question.driveFolderKey) {
-        const driveResponse = await fetch('/api/save-to-drive', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fileUrl: data.secure_url,
-            fileName: file.name,
-            fileType: file.type || 'application/octet-stream',
-            folderKey: question.driveFolderKey,
-            fieldTitle: question.title,
-          }),
-        })
+        try {
+          const driveResponse = await fetch('/api/save-to-drive', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fileUrl: data.secure_url,
+              fileName: file.name,
+              fileType: file.type || 'application/octet-stream',
+              folderKey: question.driveFolderKey,
+              fieldTitle: question.title,
+            }),
+          })
 
-        const driveResult = await driveResponse.json()
+          const driveResult = await driveResponse.json().catch(() => null)
 
-        if (!driveResponse.ok || driveResult?.ok === false) {
-          throw new Error(driveResult?.error || 'Failed to save file to Drive')
+          if (driveResponse.ok && driveResult?.ok !== false && driveResult?.data?.fileUrl) {
+            uploadedUrl = driveResult.data.fileUrl
+          } else {
+            console.warn('Drive save returned error, continuing with Cloudinary URL:', driveResult)
+          }
+        } catch (driveError) {
+          console.warn('Drive save failed, continuing with Cloudinary URL:', driveError)
         }
-
-        uploadedUrl = driveResult?.data?.fileUrl || data.secure_url
       }
 
       setUploads((previous) => ({ ...previous, [key]: { file, url: uploadedUrl, uploading: false } }))
