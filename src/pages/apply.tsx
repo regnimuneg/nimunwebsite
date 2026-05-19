@@ -33,8 +33,9 @@ type Question = {
 
 type Section = {
   sectionTitle: string
-  sectionDescription: string
+  sectionDescription: React.ReactNode
   nextAction: 'CONTINUE' | 'SUBMIT'
+  branchesTo?: string
   questions: Question[]
 }
 
@@ -164,7 +165,11 @@ const SECTIONS: Section[] = [
     sectionTitle: 'Conference Timeline',
     sectionDescription: '',
     nextAction: 'CONTINUE',
-    questions: [],
+    questions: [
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/JNIMUN%2726%20Timeline_page-0001.jpg", imageAlt: 'Timeline Page 1' },
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/JNIMUN%2726%20Timeline_page-0002.jpg", imageAlt: 'Timeline Page 2' },
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/JNIMUN%2726%20Timeline_page-0003.jpg", imageAlt: 'Timeline Page 3' },
+    ],
   },
   {
     sectionTitle: 'Councils',
@@ -250,8 +255,8 @@ const SECTIONS: Section[] = [
     sectionDescription: 'Kindly follow our payment policy and choose the payment method that suits you best. ',
     nextAction: 'CONTINUE',
     questions: [
-      { title: '', type: 'IMAGE', isRequired: false, imageAlt: 'Fees policy' },
-      { title: 'Terms and Conditions', type: 'IMAGE', isRequired: false, imageAlt: 'Terms and Conditions' },
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png", imageAlt: 'Fees policy' },
+      { title: 'Terms and Conditions', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Back.png", imageAlt: 'Terms and Conditions' },
       {
         title: 'Amount Paid',
         type: 'MULTIPLE_CHOICE',
@@ -282,10 +287,18 @@ const SECTIONS: Section[] = [
   },
   {
     sectionTitle: 'Instapay',
-    sectionDescription: 'Please scan the QR code to complete your payment.',
+    sectionDescription: (
+      <>
+        Please scan the QR code to complete your payment, or use the link below.
+        <br /><br />
+        <a href="https://ipn.eg/S/belal3amer/instapay/4CFWsE" target="_blank" rel="noopener noreferrer" style={{ color: '#2e90cf', textDecoration: 'underline', fontWeight: 'bold' }}>
+          InstaPay Payment Link
+        </a>
+      </>
+    ),
     nextAction: 'SUBMIT',
     questions: [
-      { title: 'Scan this QR code for payment', type: 'IMAGE', isRequired: false, imageAlt: 'Instapay QR code' },
+      { title: 'Scan this QR code for payment', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/InstaPay%20QR%20Code.jpg", imageAlt: 'Instapay QR code' },
       { title: 'Please upload proof of Payment ', type: 'FILE_UPLOAD', isRequired: true, driveFolderKey: 'instapay_payment_proofs' },
     ],
   },
@@ -316,6 +329,11 @@ const getNextSectionIndex = (currentIndex: number, answers: Record<string, strin
         return sectionIndexByTitle[targetTitle] ?? currentIndex + 1
       }
     }
+  }
+
+  if (section.branchesTo?.startsWith('GO_TO_PAGE:')) {
+    const targetTitle = section.branchesTo.replace('GO_TO_PAGE:', '').trim()
+    return sectionIndexByTitle[targetTitle] ?? currentIndex + 1
   }
 
   return currentIndex + 1
@@ -405,7 +423,21 @@ export default function Apply() {
     }
 
     setErrors(nextErrors)
-    return Object.keys(nextErrors).length === 0
+
+    if (Object.keys(nextErrors).length > 0) {
+      setTimeout(() => {
+        const firstErrorKey = Object.keys(nextErrors)[0]
+        const element = document.getElementById(`${firstErrorKey}-container`)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          const input = element.querySelector('input, textarea, select') as HTMLElement
+          if (input) input.focus()
+        }
+      }, 50)
+      return false
+    }
+
+    return true
   }
 
   const uploadFile = async (key: string, file: File, question: Question) => {
@@ -424,6 +456,7 @@ export default function Apply() {
         throw new Error('Cloudinary configuration missing')
       }
 
+      // 1. Upload to Cloudinary as a fallback
       const uploadFormData = new FormData()
       uploadFormData.append('file', file)
       uploadFormData.append('upload_preset', uploadPreset)
@@ -441,13 +474,24 @@ export default function Apply() {
 
       let uploadedUrl = data.secure_url
 
+      // 2. Try to save Base64 directly to Drive
       if (question.driveFolderKey) {
         try {
+          const base64Data = await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => {
+              const result = reader.result as string
+              resolve(result.split(',')[1])
+            }
+            reader.onerror = (error) => reject(error)
+          })
+
           const driveResponse = await fetch('/api/save-to-drive', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              fileUrl: data.secure_url,
+              fileContent: base64Data,
               fileName: file.name,
               fileType: file.type || 'application/octet-stream',
               folderKey: question.driveFolderKey,
@@ -457,13 +501,15 @@ export default function Apply() {
 
           const driveResult = await driveResponse.json().catch(() => null)
 
-          if (driveResponse.ok && driveResult?.ok !== false && driveResult?.data?.fileUrl) {
-            uploadedUrl = driveResult.data.fileUrl
+          const finalFileUrl = driveResult?.data?.fileUrl || driveResult?.data?.data?.fileUrl
+
+          if (driveResponse.ok && driveResult?.ok !== false && finalFileUrl) {
+            uploadedUrl = finalFileUrl
           } else {
-            console.warn('Drive save returned error, continuing with Cloudinary URL:', driveResult)
+            console.warn('Drive save returned error, falling back to Cloudinary URL:', driveResult)
           }
         } catch (driveError) {
-          console.warn('Drive save failed, continuing with Cloudinary URL:', driveError)
+          console.warn('Drive save failed completely, falling back to Cloudinary URL:', driveError)
         }
       }
 
@@ -572,13 +618,14 @@ export default function Apply() {
     }
   }
 
-  const renderQuestion = (question: Question) => {
-    const key = fieldKey(currentSection.sectionTitle, question.title)
-    const answer = answers[key]
+  const renderQuestion = (question: Question, index: number) => {
+    const baseKey = fieldKey(currentSection.sectionTitle, question.title)
+    const key = `${baseKey}::${index}`
+    const answer = answers[baseKey]
 
     if (question.type === 'IMAGE') {
       return (
-        <div className={styles.imageQuestion} key={key}>
+        <div className={styles.imageQuestion} key={key} id={`${key}-container`}>
           {question.title && <h3>{question.title}</h3>}
           {question.imageSrc ? (
             <img src={question.imageSrc} alt={question.imageAlt || question.title} />
@@ -593,7 +640,7 @@ export default function Apply() {
       const gridAnswer = (answer as Record<string, string>) || {}
 
       return (
-        <div className={`${styles.field} ${errors[key] ? styles.fieldError : ''}`} key={key}>
+        <div className={`${styles.field} ${errors[baseKey] ? styles.fieldError : ''}`} key={key} id={`${key}-container`}>
           <span>
             {question.title}
             {question.isRequired && ' *'}
@@ -611,7 +658,7 @@ export default function Apply() {
                         nextGridAnswer[otherRow] = ''
                       }
                     })
-                    setAnswer(key, nextGridAnswer)
+                    setAnswer(baseKey, nextGridAnswer)
                   }}
                   required={question.isRequired}
                 >
@@ -632,7 +679,7 @@ export default function Apply() {
               </label>
             ))}
           </div>
-          {errors[key] && <small className={styles.errorText}>{errors[key]}</small>}
+          {errors[baseKey] && <small className={styles.errorText}>{errors[baseKey]}</small>}
         </div>
       )
     }
@@ -641,7 +688,7 @@ export default function Apply() {
       const otherKey = fieldKey(currentSection.sectionTitle, question.title, 'Other')
 
       return (
-        <div className={`${styles.field} ${errors[key] ? styles.fieldError : ''}`} key={key}>
+        <div className={`${styles.field} ${errors[baseKey] ? styles.fieldError : ''}`} key={key} id={`${key}-container`}>
           <span>
             {question.title}
             {question.isRequired && ' *'}
@@ -651,11 +698,11 @@ export default function Apply() {
               <label className={styles.choice} key={option.text}>
                 <input
                   type="radio"
-                  name={key}
+                  name={baseKey}
                   value={option.text}
                   checked={answer === option.text}
                   onChange={(event) => {
-                    setAnswer(key, event.target.value)
+                    setAnswer(baseKey, event.target.value)
                     if (event.target.value !== 'Other') setAnswer(otherKey, '')
                   }}
                   required={question.isRequired}
@@ -664,7 +711,7 @@ export default function Apply() {
               </label>
             ))}
           </div>
-          {errors[key] && <small className={styles.errorText}>{errors[key]}</small>}
+          {errors[baseKey] && <small className={styles.errorText}>{errors[baseKey]}</small>}
           {question.allowOther && answer === 'Other' && (
             <label className={`${styles.otherField} ${errors[otherKey] ? styles.fieldError : ''}`}>
               <span>Please specify</span>
@@ -682,20 +729,20 @@ export default function Apply() {
     }
 
     if (question.type === 'FILE_UPLOAD') {
-      const upload = uploads[key]
+      const upload = uploads[baseKey]
 
       return (
-        <div className={`${styles.field} ${errors[key] ? styles.fieldError : ''}`} key={key}>
+        <div className={`${styles.field} ${errors[baseKey] ? styles.fieldError : ''}`} key={key} id={`${key}-container`}>
           <span>
             {question.title}
             {question.isRequired && ' *'}
           </span>
           <div
             className={`${styles.fileUploadArea} ${upload?.uploading ? styles.uploading : ''} ${upload?.url ? styles.uploaded : ''
-              } ${errors[key] ? styles.fieldError : ''}`}
+              } ${errors[baseKey] ? styles.fieldError : ''}`}
           >
             {!upload?.file && !upload?.uploading && (
-              <label htmlFor={key} className={styles.uploadPrompt}>
+              <label htmlFor={baseKey} className={styles.uploadPrompt}>
                 <svg className={styles.uploadIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -723,25 +770,25 @@ export default function Apply() {
                 </svg>
                 <span>Upload complete</span>
                 <p className={styles.fileName}>{upload.file?.name}</p>
-                <button type="button" onClick={() => removeFile(key)} className={styles.removeFileBtn}>
+                <button type="button" onClick={() => removeFile(baseKey)} className={styles.removeFileBtn}>
                   Remove
                 </button>
               </div>
             )}
 
             <input
-              id={key}
+              id={baseKey}
               className={styles.fileInput}
               type="file"
               accept="image/*,.pdf"
               disabled={upload?.uploading || !!upload?.url}
               onChange={(event) => {
                 const file = event.target.files?.[0]
-                if (file) uploadFile(key, file, question)
+                if (file) uploadFile(baseKey, file, question)
               }}
             />
           </div>
-          {errors[key] && <small className={styles.errorText}>{errors[key]}</small>}
+          {errors[baseKey] && <small className={styles.errorText}>{errors[baseKey]}</small>}
         </div>
       )
     }
@@ -749,7 +796,7 @@ export default function Apply() {
     const inputType = question.type === 'DATE' ? 'date' : question.title.toLowerCase().includes('email') ? 'email' : 'text'
 
     return (
-      <label className={`${styles.field} ${errors[key] ? styles.fieldError : ''}`} key={key}>
+      <label className={`${styles.field} ${errors[baseKey] ? styles.fieldError : ''}`} key={key} id={`${key}-container`}>
         <span>
           {question.title}
           {question.isRequired && ' *'}
@@ -757,7 +804,7 @@ export default function Apply() {
         {question.type === 'PARAGRAPH_TEXT' ? (
           <textarea
             value={String(answer || '')}
-            onChange={(event) => setAnswer(key, event.target.value)}
+            onChange={(event) => setAnswer(baseKey, event.target.value)}
             rows={5}
             required={question.isRequired}
           />
@@ -765,11 +812,11 @@ export default function Apply() {
           <input
             type={inputType}
             value={String(answer || '')}
-            onChange={(event) => setAnswer(key, event.target.value)}
+            onChange={(event) => setAnswer(baseKey, event.target.value)}
             required={question.isRequired}
           />
         )}
-        {errors[key] && <small className={styles.errorText}>{errors[key]}</small>}
+        {errors[baseKey] && <small className={styles.errorText}>{errors[baseKey]}</small>}
       </label>
     )
   }
@@ -779,6 +826,33 @@ export default function Apply() {
       JNIMUN<span className={styles.accent}>&apos;26</span> Delegate Application
     </>
   )
+
+  const isFormOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
+
+  if (!isFormOpen) {
+    return (
+      <div className={styles.pageShell}>
+        <ApplyNavbar />
+        <Head>
+          <title>Applications Paused | JNIMUN&apos;26</title>
+        </Head>
+        <div className={`${styles.container} ${styles.successContainer}`}>
+          <div className={styles.card}>
+            <ApplyDecorations />
+            <svg className={styles.successIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h1 className={styles.title}>
+              Applications <span className={styles.accent}>Paused</span>
+            </h1>
+            <p className={styles.subtitle}>
+              Applications are temporarily paused as the current wave has reached its seat limit. Please check back soon!
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (submitted) {
     return (
@@ -822,9 +896,6 @@ export default function Apply() {
 
           <div className={styles.progressWrap} aria-label={`Form progress: ${progress}%`}>
             <div className={styles.progressMeta}>
-              <span>
-                Section {currentSectionIndex + 1} of {SECTIONS.length}
-              </span>
               <span>{progress}%</span>
             </div>
             <div className={styles.progressTrack}>

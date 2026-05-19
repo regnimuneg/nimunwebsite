@@ -4,6 +4,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 // The actual Drive upload is handled in Apps Script for simplicity and security
 const DRIVE_WEBHOOK_URL = process.env.NEXT_PUBLIC_DRIVE_WEBHOOK_URL
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '20mb',
+    },
+  },
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -17,23 +25,23 @@ export default async function handler(
   }
 
   try {
-    const { fileUrl, fileName, fileType, folderKey, fieldTitle } = req.body
+    const { fileContent, fileName, fileType, folderKey, fieldTitle } = req.body
 
-    if (!fileUrl || !fileName || !folderKey) {
-      console.error('Missing Drive upload fields:', { fileUrl: !!fileUrl, fileName: !!fileName, folderKey: !!folderKey })
-      return res.status(400).json({ ok: false, error: 'Missing fileUrl, fileName, or folderKey' })
+    if (!fileContent || !fileName || !folderKey) {
+      console.error('Missing Drive upload fields:', { fileContent: !!fileContent, fileName: !!fileName, folderKey: !!folderKey })
+      return res.status(400).json({ ok: false, error: 'Missing fileContent, fileName, or folderKey' })
     }
 
-    console.log('Attempting to save to Drive:', { fileName, fileType, fileUrl: fileUrl.substring(0, 50) + '...' })
+    console.log('Attempting to save to Drive:', { fileName, fileType })
 
-    // Send file info to Apps Script webhook which will download and save to Drive
+    // Send file info and base64 content to Apps Script webhook which will save directly to Drive
     const response = await fetch(DRIVE_WEBHOOK_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fileUrl,
+        fileContent,
         fileName,
         fileType: fileType || 'application/octet-stream',
         folderKey,
@@ -68,7 +76,7 @@ export default async function handler(
     }
 
     console.log('Drive save successful:', responseData)
-    return res.status(200).json({ ok: true, data: responseData })
+    return res.status(200).json(responseData)
   } catch (error) {
     console.error('Drive webhook error:', error)
     return res.status(500).json({
