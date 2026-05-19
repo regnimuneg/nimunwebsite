@@ -301,6 +301,7 @@ const SECTIONS: Section[] = [
       { title: 'Scan this QR code for payment', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/InstaPay%20QR%20Code.jpg", imageAlt: 'Instapay QR code' },
       { title: 'Please upload proof of Payment ', type: 'FILE_UPLOAD', isRequired: true, driveFolderKey: 'instapay_payment_proofs' },
     ],
+  },
 ]
 
 const allImagesToPreload: string[] = []
