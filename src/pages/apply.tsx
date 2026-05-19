@@ -482,7 +482,7 @@ export default function Apply() {
             reader.readAsDataURL(file)
             reader.onload = () => {
               const result = reader.result as string
-              resolve(result.split(',')[1])
+              resolve(result.split(',')[1] || '')
             }
             reader.onerror = (error) => reject(error)
           })
