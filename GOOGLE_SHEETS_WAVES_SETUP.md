@@ -46,7 +46,11 @@ function doPost(e) {
     const payload = JSON.parse(e.postData.contents);
     const answers = payload.answers || {};
     
-    // Check if form is open and get active wave info
+    // HARDCODED WAVE 3 — dynamic wave checking commented out
+    // Re-enable getActiveWaveInfo() when you want dynamic wave switching again
+    const waveInfo = { isOpen: true, activeWave: "Wave 3" };
+    
+    /* --- Dynamic wave checking (commented out) ---
     const waveInfo = getActiveWaveInfo();
     if (!waveInfo.isOpen) {
       return ContentService.createTextOutput(JSON.stringify({ 
@@ -66,6 +70,7 @@ function doPost(e) {
         message: 'Your form loaded details for ' + sessionWave + ' but we are now in ' + waveInfo.activeWave + '. Please refresh the page to get the updated pricing.'
       })).setMimeType(ContentService.MimeType.JSON);
     }
+    --- End dynamic wave checking --- */
     
     const ss = getSpreadsheet();
     // Use "Applications" sheet or the first sheet in the spreadsheet
