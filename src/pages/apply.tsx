@@ -256,15 +256,15 @@ const SECTIONS: Section[] = [
     sectionDescription: 'Kindly follow our payment policy and choose the payment method that suits you best. ',
     nextAction: 'CONTINUE',
     questions: [
-      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png", imageAlt: 'Fees policy' },
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%203.png", imageAlt: 'Fees policy' },
       { title: 'Terms and Conditions', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Back.png", imageAlt: 'Terms and Conditions' },
       {
         title: 'Amount Paid',
         type: 'MULTIPLE_CHOICE',
         isRequired: true,
         options: [
-          { text: '650', branchesTo: 'Next Section' },
-          { text: '1300', branchesTo: 'Next Section' },
+          { text: '750', branchesTo: 'Next Section' },
+          { text: '1500', branchesTo: 'Next Section' },
         ],
       },
       {
