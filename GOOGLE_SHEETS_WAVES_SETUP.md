@@ -11,7 +11,20 @@ To support automatic form closing and wave-specific pricing, you need to update 
 3. Replace the code with the following upgraded script:
 
 ```javascript
-// Upgraded Webhook with Cumulative Wave limits & Dynamic Settings
+// Upgraded Webhook with Cumulative Wave limits, Dynamic Settings, & Leading Zero Protection
+
+const SPREADSHEET_ID = '1SYTajCxjmDt8r01d-I4lsx-nxBRJU6qWs_FAAT6JmKY';
+const SHEET_GID = 898388453;
+const DUPLICATE_CHECK_COLUMNS = ['Email Address', 'Phone Number'];
+
+// Helper to open the spreadsheet safely
+function getSpreadsheet() {
+  try {
+    return SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.openById(SPREADSHEET_ID);
+  } catch (e) {
+    return SpreadsheetApp.openById(SPREADSHEET_ID);
+  }
+}
 
 function doGet(e) {
   try {
@@ -42,9 +55,17 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ss = getSpreadsheet();
     // Use "Applications" sheet or the first sheet in the spreadsheet
     let sheet = ss.getSheetByName("Applications") || ss.getSheets()[0];
+    
+    // Duplicate check validation
+    if (isDuplicateSubmission(sheet, answers)) {
+      return ContentService.createTextOutput(JSON.stringify({ 
+        ok: false, 
+        error: 'An application with this Email Address or Phone Number has already been submitted.' 
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
     
     // Get existing headers
     let headers = [];
@@ -52,34 +73,59 @@ function doPost(e) {
       headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     }
     
-    // Ensure "Timestamp" and "Submission Wave" columns are in headers
+    // Create lowercase, trimmed list of existing headers for flexible matching
+    const cleanHeaders = headers.map(function(h) {
+      return String(h).trim().toLowerCase();
+    });
+    
+    // 1. Find new answer keys and add them to headers if they don't exist (trimmed/case-insensitive match)
+    const newKeys = Object.keys(answers);
+    newKeys.forEach(function(key) {
+      const cleanKey = key.trim().toLowerCase();
+      if (cleanHeaders.indexOf(cleanKey) === -1 && key !== "Timestamp" && key !== "Submission Wave") {
+        headers.push(key);
+        cleanHeaders.push(cleanKey);
+      }
+    });
+    
+    // 2. Ensure "Timestamp" is present
     if (headers.indexOf("Timestamp") === -1) {
       headers.unshift("Timestamp");
     }
+    
+    // 3. Ensure "Submission Wave" is present at the end
     if (headers.indexOf("Submission Wave") === -1) {
       headers.push("Submission Wave");
     }
-    
-    // Find any new answer keys and add them to headers
-    const newKeys = Object.keys(answers);
-    newKeys.forEach(key => {
-      if (headers.indexOf(key) === -1 && key !== "Timestamp" && key !== "Submission Wave") {
-        headers.push(key);
-      }
-    });
     
     // Write headers back to ensure they are up to date
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     
     // Build row values matching headers
-    const rowValues = headers.map(header => {
+    const rowValues = headers.map(function(header) {
       if (header === "Timestamp") {
         return new Date();
       }
       if (header === "Submission Wave") {
         return waveInfo.activeWave;
       }
-      return answers[header] !== undefined ? answers[header] : "";
+      
+      // Look up answer by exact header or trimmed/case-insensitive match
+      let val = answers[header];
+      if (val === undefined) {
+        const cleanHeader = header.trim().toLowerCase();
+        const foundKey = Object.keys(answers).find(function(k) {
+          return k.trim().toLowerCase() === cleanHeader;
+        });
+        val = foundKey ? answers[foundKey] : "";
+      }
+      
+      // Preserve leading zeros for phone numbers and IDs
+      if (typeof val === 'string' && /^0[0-9\s\-+]+$/.test(val)) {
+        return "'" + val; // Prepend a single quote to force plain text format
+      }
+      
+      return val;
     });
     
     sheet.appendRow(rowValues);
@@ -98,16 +144,50 @@ function doPost(e) {
   }
 }
 
+// Duplicate checking helper logic
+function isDuplicateSubmission(sheet, answers) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return false;
+  
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const data = sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn()).getValues();
+  
+  // Map our target columns to their sheet indices
+  const indicesToCheck = DUPLICATE_CHECK_COLUMNS.map(function(colName) {
+    return headers.indexOf(colName);
+  }).filter(function(idx) {
+    return idx !== -1;
+  });
+  
+  if (indicesToCheck.length === 0) return false;
+  
+  for (let i = 0; i < data.length; i++) {
+    const row = data[i];
+    for (let j = 0; j < indicesToCheck.length; j++) {
+      const colIdx = indicesToCheck[j];
+      const headerName = headers[colIdx];
+      
+      const newAnswer = String(answers[headerName] || '').trim().toLowerCase();
+      const existingValue = String(row[colIdx] || '').trim().toLowerCase();
+      
+      if (newAnswer && newAnswer === existingValue) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 // Helper to load configurations and compute active wave
 function getActiveWaveInfo() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = getSpreadsheet();
   
   // 1. Get or create WaveConfig sheet
   let configSheet = ss.getSheetByName("WaveConfig");
   if (!configSheet) {
     configSheet = ss.insertSheet("WaveConfig");
     configSheet.appendRow(["Wave Name", "Quantity", "Amounts", "Policy Image"]);
-    configSheet.appendRow(["Wave 1", 18, "650, 1300", "/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png"]);
+    configSheet.appendRow(["Wave 1", 11, "650, 1300", "/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png"]);
     configSheet.appendRow(["Wave 2", 34, "700, 1400", "/image/png/JNIMUN%2726/Form%20Docs/Wave%202.png"]);
     configSheet.appendRow(["Wave 3", 99, "750, 1500", "/image/png/JNIMUN%2726/Form%20Docs/Wave%203.png"]);
     configSheet.appendRow(["Wave 4", 27, "800, 1600", "/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png"]);
@@ -117,7 +197,6 @@ function getActiveWaveInfo() {
   const configData = configSheet.getDataRange().getValues();
   const waves = [];
   
-  // Parse wave configurations (skip header row)
   for (let i = 1; i < configData.length; i++) {
     const name = String(configData[i][0]).trim();
     const qty = Number(configData[i][1]);
@@ -125,7 +204,6 @@ function getActiveWaveInfo() {
     const policyImg = String(configData[i][3]).trim();
     
     if (name && !isNaN(qty)) {
-      // Parse amounts list (comma-separated, e.g. "700, 1400" -> ["700", "1400"])
       const amounts = rawAmounts.split(",")
         .map(function(val) { return val.trim(); })
         .filter(Boolean);
@@ -146,7 +224,6 @@ function getActiveWaveInfo() {
     };
   }
   
-  // Calculate cumulative limits
   let cumulative = 0;
   const wavesWithCumulative = waves.map(function(w) {
     cumulative += w.limit;
@@ -159,13 +236,10 @@ function getActiveWaveInfo() {
     };
   });
   
-  // 2. Count total applications currently logged
   const mainSheet = ss.getSheetByName("Applications") || ss.getSheets()[0];
   const lastRow = mainSheet.getLastRow();
-  // Subtract 1 for the header row
   const totalCount = lastRow > 0 ? lastRow - 1 : 0;
   
-  // Find which wave is active
   let activeWave = null;
   for (let i = 0; i < wavesWithCumulative.length; i++) {
     if (totalCount < wavesWithCumulative[i].cumulativeLimit) {
@@ -174,7 +248,6 @@ function getActiveWaveInfo() {
     }
   }
   
-  // If count exceeds all cumulative limits, form is closed
   if (!activeWave) {
     const lastWave = wavesWithCumulative[wavesWithCumulative.length - 1];
     return {
@@ -185,7 +258,6 @@ function getActiveWaveInfo() {
     };
   }
   
-  // Return the active wave parameters
   return {
     isOpen: true,
     activeWave: activeWave.name,
