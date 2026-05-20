@@ -674,6 +674,7 @@ export default function Apply() {
     return {
       source: 'website',
       answers: flatAnswers,
+      sessionWave: activeWaveName,
     }
   }
 
@@ -689,6 +690,14 @@ export default function Apply() {
       const result = await response.json()
 
       if (!response.ok) {
+        // Handle wave mismatch — force reload to get fresh wave details
+        if (result.error === 'WAVE_MISMATCH') {
+          alert(
+            `Pricing has been updated! The form will now reload with the latest ${result.data?.expectedWave || 'wave'} details. Your answers are saved — just re-submit.`
+          )
+          window.location.reload()
+          return
+        }
         setErrors({ submit: result.error || 'Submission failed' })
         return
       }

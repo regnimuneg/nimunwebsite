@@ -55,6 +55,18 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
+    // Session wave validation — reject if user loaded stale wave details
+    const sessionWave = payload.sessionWave;
+    if (sessionWave && sessionWave !== waveInfo.activeWave) {
+      return ContentService.createTextOutput(JSON.stringify({ 
+        ok: false, 
+        error: 'WAVE_MISMATCH',
+        expectedWave: waveInfo.activeWave,
+        sessionWave: sessionWave,
+        message: 'Your form loaded details for ' + sessionWave + ' but we are now in ' + waveInfo.activeWave + '. Please refresh the page to get the updated pricing.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
     const ss = getSpreadsheet();
     // Use "Applications" sheet or the first sheet in the spreadsheet
     let sheet = ss.getSheetByName("Applications") || ss.getSheets()[0];

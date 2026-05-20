@@ -32,7 +32,7 @@ export default async function handler(
     }
 
     if (data?.ok === false) {
-      return res.status(400).json({ ok: false, error: data.error || 'Submission failed' })
+      return res.status(400).json({ ok: false, error: data.error || 'Submission failed', data })
     }
 
     return res.status(200).json({ ok: true, data })
