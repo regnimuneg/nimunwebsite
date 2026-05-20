@@ -111,7 +111,7 @@ function doPost(e) {
     // Write headers back to ensure they are up to date
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     
-    // Build row values matching headers
+    // Build row values matching headers (default to empty string)
     const rowValues = headers.map(function(header) {
       if (header === "Timestamp") {
         return new Date();
@@ -122,23 +122,37 @@ function doPost(e) {
       if (header === "Source") {
         return payload.source || "website";
       }
+      return "";
+    });
+    
+    // Now map incoming answers to the best matching header index
+    Object.keys(answers).forEach(function(key) {
+      const val = answers[key];
       
-      // Look up answer by exact header or trimmed/case-insensitive match
-      let val = answers[header];
-      if (val === undefined) {
-        const cleanHeader = header.trim().toLowerCase();
-        const foundKey = Object.keys(answers).find(function(k) {
-          return k.trim().toLowerCase() === cleanHeader;
-        });
-        val = foundKey ? answers[foundKey] : "";
+      // 1. Try exact match first
+      let idx = headers.indexOf(key);
+      
+      // 2. If no exact match, try trimmed case-insensitive match
+      if (idx === -1) {
+        const cleanKey = key.trim().toLowerCase();
+        for (let i = 0; i < headers.length; i++) {
+          const cleanHeader = headers[i].trim().toLowerCase();
+          // Ensure we don't map to dynamic wave, source, or timestamp
+          if (cleanHeader === cleanKey && headers[i] !== "Timestamp" && headers[i] !== "Source" && headers[i] !== "Submission Wave") {
+            idx = i;
+            break;
+          }
+        }
       }
       
-      // Preserve leading zeros for phone numbers and IDs
-      if (typeof val === 'string' && /^0[0-9\s\-+]+$/.test(val)) {
-        return "'" + val; // Prepend a single quote to force plain text format
+      if (idx !== -1) {
+        let formattedVal = val;
+        // Preserve leading zeros for phone numbers and IDs
+        if (typeof val === 'string' && /^0[0-9\s\-+]+$/.test(val)) {
+          formattedVal = "'" + val; // Prepend a single quote to force plain text format
+        }
+        rowValues[idx] = formattedVal;
       }
-      
-      return val;
     });
     
     sheet.appendRow(rowValues);

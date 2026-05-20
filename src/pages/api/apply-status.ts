@@ -12,6 +12,14 @@ export default async function handler(
     return res.status(405).json({ ok: false, error: 'Method not allowed' })
   }
 
+  // Set Cache-Control headers to prevent Next.js, Vercel, and browsers from caching this response
+  res.setHeader(
+    'Cache-Control',
+    'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0'
+  )
+  res.setHeader('Pragma', 'no-cache')
+  res.setHeader('Expires', '0')
+
   // If webhook URL is missing, fall back to environment variable status
   if (!WEBHOOK_URL) {
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
@@ -28,8 +36,13 @@ export default async function handler(
   }
 
   try {
-    const response = await fetch(WEBHOOK_URL, {
+    // Append a unique timestamp to bypass any Google Apps Script proxy caching
+    const response = await fetch(`${WEBHOOK_URL}?t=${Date.now()}`, {
       method: 'GET',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
     })
 
     if (!response.ok) {
@@ -46,8 +59,7 @@ export default async function handler(
   } catch (error) {
     console.error('Error fetching form status from webhook:', error)
     
-    // In case of any error querying Google Sheets, fall back to local settings
-    // This ensures registration availability is NEVER completely blocked due to external downtime
+    // Fallback to local settings in case of downtime
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
     return res.status(200).json({
       ok: false,

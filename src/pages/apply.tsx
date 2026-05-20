@@ -366,7 +366,12 @@ export default function Apply() {
   useEffect(() => {
     async function checkFormStatus() {
       try {
-        const response = await fetch('/api/apply-status')
+        const response = await fetch(`/api/apply-status?t=${Date.now()}`, {
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        })
         const data = await response.json()
         
         if (data && typeof data.isOpen === 'boolean') {
