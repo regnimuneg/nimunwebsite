@@ -11,7 +11,7 @@ To support automatic form closing and wave-specific pricing, you need to update 
 3. Replace the code with the following upgraded script:
 
 ```javascript
-// Upgraded Webhook with Cumulative Wave limits, Dynamic Settings, & Leading Zero Protection
+// Upgraded Webhook with Cumulative Wave limits, Dynamic Settings, Source, & Leading Zero Protection
 
 const SPREADSHEET_ID = '1SYTajCxjmDt8r01d-I4lsx-nxBRJU6qWs_FAAT6JmKY';
 const SHEET_GID = 898388453;
@@ -82,18 +82,28 @@ function doPost(e) {
     const newKeys = Object.keys(answers);
     newKeys.forEach(function(key) {
       const cleanKey = key.trim().toLowerCase();
-      if (cleanHeaders.indexOf(cleanKey) === -1 && key !== "Timestamp" && key !== "Submission Wave") {
+      if (cleanHeaders.indexOf(cleanKey) === -1 && key !== "Timestamp" && key !== "Source" && key !== "Submission Wave") {
         headers.push(key);
         cleanHeaders.push(cleanKey);
       }
     });
     
-    // 2. Ensure "Timestamp" is present
+    // 2. Ensure "Timestamp" is present at the beginning
     if (headers.indexOf("Timestamp") === -1) {
       headers.unshift("Timestamp");
     }
     
-    // 3. Ensure "Submission Wave" is present at the end
+    // 3. Ensure "Source" is present, placed right before "Submission Wave"
+    let waveIndex = headers.indexOf("Submission Wave");
+    if (headers.indexOf("Source") === -1) {
+      if (waveIndex !== -1) {
+        headers.splice(waveIndex, 0, "Source");
+      } else {
+        headers.push("Source");
+      }
+    }
+    
+    // 4. Ensure "Submission Wave" is present at the very end
     if (headers.indexOf("Submission Wave") === -1) {
       headers.push("Submission Wave");
     }
@@ -108,6 +118,9 @@ function doPost(e) {
       }
       if (header === "Submission Wave") {
         return waveInfo.activeWave;
+      }
+      if (header === "Source") {
+        return payload.source || "website";
       }
       
       // Look up answer by exact header or trimmed/case-insensitive match
