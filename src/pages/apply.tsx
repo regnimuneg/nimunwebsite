@@ -359,11 +359,17 @@ export default function Apply() {
   const [submitted, setSubmitted] = useState(false)
 
   const [isFormOpen, setIsFormOpen] = useState<boolean | null>(null)
-  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['700', '1400'])
-  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%202.png")
-  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 2')
+  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['750', '1500'])
+  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%203.png")
+  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 3')
 
+  // HARDCODED WAVE 3 — dynamic fetching commented out
+  // Re-enable this useEffect when you want dynamic wave switching again
   useEffect(() => {
+    // Set form open based on env var only (no dynamic fetch)
+    setIsFormOpen(process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false')
+
+    /* --- Dynamic wave fetching (commented out) ---
     async function checkFormStatus() {
       try {
         const response = await fetch(`/api/apply-status?t=${Date.now()}`, {
@@ -395,6 +401,7 @@ export default function Apply() {
     }
     
     checkFormStatus()
+    --- End dynamic wave fetching --- */
   }, [])
 
   useEffect(() => {
