@@ -359,9 +359,9 @@ export default function Apply() {
   const [submitted, setSubmitted] = useState(false)
 
   const [isFormOpen, setIsFormOpen] = useState<boolean | null>(null)
-  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['650', '1300'])
-  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png")
-  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 1')
+  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['700', '1400'])
+  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%202.png")
+  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 2')
 
   useEffect(() => {
     async function checkFormStatus() {

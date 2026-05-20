@@ -20,17 +20,17 @@ export default async function handler(
   res.setHeader('Pragma', 'no-cache')
   res.setHeader('Expires', '0')
 
-  // If webhook URL is missing, fall back to environment variable status
+  // If webhook URL is missing, fall back to Wave 2 details
   if (!WEBHOOK_URL) {
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
     return res.status(200).json({
       ok: true,
       isOpen: defaultIsOpen,
-      activeWave: 'Wave 1',
-      limit: 18,
+      activeWave: 'Wave 2',
+      limit: 34,
       totalCount: 0,
-      amounts: ['650', '1300'],
-      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png',
+      amounts: ['700', '1400'],
+      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%202.png',
       source: 'env-fallback'
     })
   }
@@ -59,16 +59,16 @@ export default async function handler(
   } catch (error) {
     console.error('Error fetching form status from webhook:', error)
     
-    // Fallback to local settings in case of downtime
+    // Fallback to Wave 2 local settings in case of downtime
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
     return res.status(200).json({
       ok: false,
       isOpen: defaultIsOpen,
-      activeWave: 'Wave 1',
-      limit: 18,
+      activeWave: 'Wave 2',
+      limit: 34,
       totalCount: 0,
-      amounts: ['650', '1300'],
-      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png',
+      amounts: ['700', '1400'],
+      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%202.png',
       source: 'local-fallback',
       error: error instanceof Error ? error.message : 'Unknown network error'
     })
