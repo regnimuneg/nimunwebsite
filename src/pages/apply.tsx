@@ -358,6 +358,40 @@ export default function Apply() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  const [isFormOpen, setIsFormOpen] = useState<boolean | null>(null)
+  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['650', '1300'])
+  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%201.png")
+  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 1')
+
+  useEffect(() => {
+    async function checkFormStatus() {
+      try {
+        const response = await fetch('/api/apply-status')
+        const data = await response.json()
+        
+        if (data && typeof data.isOpen === 'boolean') {
+          setIsFormOpen(data.isOpen)
+          if (data.amounts && Array.isArray(data.amounts) && data.amounts.length > 0) {
+            setDynamicAmounts(data.amounts)
+          }
+          if (data.policyImage) {
+            setDynamicPolicyImage(data.policyImage)
+          }
+          if (data.activeWave) {
+            setActiveWaveName(data.activeWave)
+          }
+        } else {
+          setIsFormOpen(process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false')
+        }
+      } catch (error) {
+        console.error('Error fetching form status:', error)
+        setIsFormOpen(process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false')
+      }
+    }
+    
+    checkFormStatus()
+  }, [])
+
   useEffect(() => {
     if (errors.submit) {
       const timer = setTimeout(() => {
@@ -670,11 +704,14 @@ export default function Apply() {
     const answer = answers[baseKey]
 
     if (question.type === 'IMAGE') {
+      const isFeesPolicy = question.imageAlt === 'Fees policy'
+      const imageSrc = isFeesPolicy ? dynamicPolicyImage : question.imageSrc
+
       return (
         <div className={styles.imageQuestion} key={key} id={`${key}-container`}>
           {question.title && <h3>{question.title}</h3>}
-          {question.imageSrc ? (
-            <img src={question.imageSrc} alt={question.imageAlt || question.title} />
+          {imageSrc ? (
+            <img src={imageSrc} alt={question.imageAlt || question.title} />
           ) : (
             <div className={styles.imagePlaceholder}>{question.imageAlt || question.title || 'Form image'}</div>
           )}
@@ -733,6 +770,14 @@ export default function Apply() {
     if (question.type === 'MULTIPLE_CHOICE') {
       const otherKey = fieldKey(currentSection.sectionTitle, question.title, 'Other')
 
+      let optionsList = question.options || []
+      if (question.title === 'Amount Paid' && dynamicAmounts.length > 0) {
+        optionsList = dynamicAmounts.map(amount => ({
+          text: amount,
+          branchesTo: 'Next Section'
+        }))
+      }
+
       return (
         <div className={`${styles.field} ${errors[baseKey] ? styles.fieldError : ''}`} key={key} id={`${key}-container`}>
           <span>
@@ -740,7 +785,7 @@ export default function Apply() {
             {question.isRequired && ' *'}
           </span>
           <div className={styles.choiceGroup}>
-            {[...(question.options || []), ...(question.allowOther ? [{ text: 'Other' }] : [])].map((option) => (
+            {[...optionsList, ...(question.allowOther ? [{ text: 'Other' }] : [])].map((option) => (
               <label className={styles.choice} key={option.text}>
                 <input
                   type="radio"
@@ -873,7 +918,25 @@ export default function Apply() {
     </>
   )
 
-  const isFormOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
+  if (isFormOpen === null) {
+    return (
+      <div className={styles.pageShell}>
+        <ApplyNavbar />
+        <Head>
+          <title>Loading... | JNIMUN&apos;26</title>
+        </Head>
+        <div className={`${styles.container} ${styles.successContainer}`}>
+          <div className={styles.card} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '300px' }}>
+            <ApplyDecorations />
+            <div className={styles.spinner} style={{ width: '48px', height: '48px', borderWidth: '4px', marginBottom: '16px' }}></div>
+            <p className={styles.subtitle} style={{ fontWeight: 'bold', letterSpacing: '0.05em' }}>
+              CHECKING SEAT AVAILABILITY...
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (!isFormOpen) {
     return (
