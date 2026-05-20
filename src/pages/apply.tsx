@@ -657,7 +657,7 @@ export default function Apply() {
         const value = String(answers[key] || '')
         const otherKey = fieldKey(section.sectionTitle, question.title, 'Other')
         const otherValue = String(answers[otherKey] || '').trim()
-        const finalValue = value === 'Other' && otherValue ? `Other: ${otherValue}` : value
+        const finalValue = value === 'Other' && otherValue ? otherValue : value
 
         const plainKey = getPlainKey(question.title)
         if (finalValue !== '' || !flatAnswers[plainKey]) {
