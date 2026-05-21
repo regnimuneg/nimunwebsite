@@ -46,9 +46,14 @@ function doPost(e) {
     const payload = JSON.parse(e.postData.contents);
     const answers = payload.answers || {};
     
-    // HARDCODED WAVE 3 — dynamic wave checking commented out
-    // Re-enable getActiveWaveInfo() when you want dynamic wave switching again
+    // HARDCODED WAVE 3 — change isOpen to false to instantly block all submissions
     const waveInfo = { isOpen: true, activeWave: "Wave 3" };
+    if (!waveInfo.isOpen) {
+      return ContentService.createTextOutput(JSON.stringify({ 
+        ok: false, 
+        error: 'Applications for Wave 3 have closed. Thank you for your interest in JNIMUN\'26!'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
     
     /* --- Dynamic wave checking (commented out) ---
     const waveInfo = getActiveWaveInfo();
