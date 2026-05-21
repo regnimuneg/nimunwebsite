@@ -184,9 +184,7 @@ const SECTIONS: Section[] = [
         isRequired: true,
         rows: ['1st Preference', '2nd Preference'],
         columns: [
-          'United Nations Security Council (UNSC) (Advanced)',
           'Crisis Committee (Advanced)',
-          'United Nations Office on Drugs and Crime (UNODC) (Intermediate)',
           'International Maritime Organization (IMO) (Intermediate)',
           'United Nations High Commissioner for Refugees (UNHCR) (Beginner)',
           'International Press Committee (Beginner)',
@@ -256,15 +254,15 @@ const SECTIONS: Section[] = [
     sectionDescription: 'Kindly follow our payment policy and choose the payment method that suits you best. ',
     nextAction: 'CONTINUE',
     questions: [
-      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%203.png", imageAlt: 'Fees policy' },
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%204.png", imageAlt: 'Fees policy' },
       { title: 'Terms and Conditions', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Back.png", imageAlt: 'Terms and Conditions' },
       {
         title: 'Amount Paid',
         type: 'MULTIPLE_CHOICE',
         isRequired: true,
         options: [
-          { text: '750', branchesTo: 'Next Section' },
-          { text: '1500', branchesTo: 'Next Section' },
+          { text: '800', branchesTo: 'Next Section' },
+          { text: '1600', branchesTo: 'Next Section' },
         ],
       },
       {
@@ -359,9 +357,9 @@ export default function Apply() {
   const [submitted, setSubmitted] = useState(false)
 
   const [isFormOpen, setIsFormOpen] = useState<boolean | null>(null)
-  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['750', '1500'])
-  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%203.png")
-  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 3')
+  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['800', '1600'])
+  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%204.png")
+  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 4')
 
   // HARDCODED WAVE 3 — dynamic fetching commented out
   // Re-enable this useEffect when you want dynamic wave switching again
@@ -700,7 +698,7 @@ export default function Apply() {
         // Handle wave mismatch — force reload to get fresh wave details
         if (result.error === 'WAVE_MISMATCH') {
           alert(
-            `Pricing has been updated! The form will now reload with the latest ${result.data?.expectedWave || 'wave'} details. Your answers are saved — just re-submit.`
+            `Pricing has been updated! The form will now reload with the latest ${result.data?.expectedWave || 'wave'} details. You will need to fill out the form again with the updated information.`
           )
           window.location.reload()
           return
