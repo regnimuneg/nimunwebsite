@@ -46,21 +46,12 @@ function doPost(e) {
     const payload = JSON.parse(e.postData.contents);
     const answers = payload.answers || {};
     
-    // HARDCODED WAVE 3 — change isOpen to false to instantly block all submissions
-    const waveInfo = { isOpen: true, activeWave: "Wave 3" };
+    // HARDCODED WAVE 5 — change isOpen to false to instantly block all submissions
+    const waveInfo = { isOpen: true, activeWave: "Wave 5" };
     if (!waveInfo.isOpen) {
       return ContentService.createTextOutput(JSON.stringify({ 
         ok: false, 
-        error: 'Applications for Wave 3 have closed. Thank you for your interest in JNIMUN\'26!'
-      })).setMimeType(ContentService.MimeType.JSON);
-    }
-    
-    /* --- Dynamic wave checking (commented out) ---
-    const waveInfo = getActiveWaveInfo();
-    if (!waveInfo.isOpen) {
-      return ContentService.createTextOutput(JSON.stringify({ 
-        ok: false, 
-        error: waveInfo.reason || 'The application limit for ' + waveInfo.activeWave + ' has been reached.'
+        error: 'Applications for Wave 5 have closed. Thank you for your interest in JNIMUN\'26!'
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
@@ -73,6 +64,15 @@ function doPost(e) {
         expectedWave: waveInfo.activeWave,
         sessionWave: sessionWave,
         message: 'Your form loaded details for ' + sessionWave + ' but we are now in ' + waveInfo.activeWave + '. Please refresh the page to get the updated pricing.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+                      
+    /* --- Dynamic wave checking (commented out) ---
+    const waveInfo = getActiveWaveInfo();
+    if (!waveInfo.isOpen) {
+      return ContentService.createTextOutput(JSON.stringify({ 
+        ok: false, 
+        error: waveInfo.reason || 'The application limit for ' + waveInfo.activeWave + ' has been reached.'
       })).setMimeType(ContentService.MimeType.JSON);
     }
     --- End dynamic wave checking --- */

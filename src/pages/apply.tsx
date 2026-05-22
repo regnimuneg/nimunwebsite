@@ -254,15 +254,15 @@ const SECTIONS: Section[] = [
     sectionDescription: 'Kindly follow our payment policy and choose the payment method that suits you best. ',
     nextAction: 'CONTINUE',
     questions: [
-      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%204.png", imageAlt: 'Fees policy' },
+      { title: '', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png", imageAlt: 'Fees policy' },
       { title: 'Terms and Conditions', type: 'IMAGE', isRequired: false, imageSrc: "/image/png/JNIMUN%2726/Form%20Docs/Back.png", imageAlt: 'Terms and Conditions' },
       {
         title: 'Amount Paid',
         type: 'MULTIPLE_CHOICE',
         isRequired: true,
         options: [
-          { text: '800', branchesTo: 'Next Section' },
-          { text: '1600', branchesTo: 'Next Section' },
+          { text: '850', branchesTo: 'Next Section' },
+          { text: '1700', branchesTo: 'Next Section' },
         ],
       },
       {
@@ -357,11 +357,11 @@ export default function Apply() {
   const [submitted, setSubmitted] = useState(false)
 
   const [isFormOpen, setIsFormOpen] = useState<boolean | null>(null)
-  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['800', '1600'])
-  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%204.png")
-  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 4')
+  const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['850', '1700'])
+  const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png")
+  const [activeWaveName, setActiveWaveName] = useState<string>('Wave 5')
 
-  // HARDCODED WAVE 3 — dynamic fetching commented out
+  // HARDCODED WAVE 5 — dynamic fetching commented out
   // Re-enable this useEffect when you want dynamic wave switching again
   useEffect(() => {
     // Set form open based on env var only (no dynamic fetch)
