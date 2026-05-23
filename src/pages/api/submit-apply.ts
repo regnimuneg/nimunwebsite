@@ -17,6 +17,28 @@ export default async function handler(
   }
 
   try {
+    // Check current count before submitting to enforce the 200 limit
+    try {
+      const statusResponse = await fetch(`${WEBHOOK_URL}?t=${Date.now()}`, {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      })
+      if (statusResponse.ok) {
+        const data = await statusResponse.json()
+        if (data && typeof data.totalCount === 'number' && data.totalCount >= 200) {
+          return res.status(400).json({
+            ok: false,
+            error: 'Applications have closed as we have reached the maximum limit of responses. Thank you for your interest!'
+          })
+        }
+      }
+    } catch (err) {
+      console.error('Error pre-checking submission count limit:', err)
+    }
+
     const response = await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: {

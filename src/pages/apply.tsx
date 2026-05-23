@@ -360,14 +360,9 @@ export default function Apply() {
   const [dynamicAmounts, setDynamicAmounts] = useState<string[]>(['850', '1700'])
   const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png")
   const [activeWaveName, setActiveWaveName] = useState<string>('Wave 5')
+  const [formCloseReason, setFormCloseReason] = useState<string>('')
 
-  // HARDCODED WAVE 5 — dynamic fetching commented out
-  // Re-enable this useEffect when you want dynamic wave switching again
   useEffect(() => {
-    // Set form open based on env var only (no dynamic fetch)
-    setIsFormOpen(process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false')
-
-    /* --- Dynamic wave fetching (commented out) ---
     async function checkFormStatus() {
       try {
         const response = await fetch(`/api/apply-status?t=${Date.now()}`, {
@@ -380,6 +375,9 @@ export default function Apply() {
         
         if (data && typeof data.isOpen === 'boolean') {
           setIsFormOpen(data.isOpen)
+          if (data.reason) {
+            setFormCloseReason(data.reason)
+          }
           if (data.amounts && Array.isArray(data.amounts) && data.amounts.length > 0) {
             setDynamicAmounts(data.amounts)
           }
@@ -399,19 +397,14 @@ export default function Apply() {
     }
     
     checkFormStatus()
-    --- End dynamic wave fetching --- */
   }, [])
 
   useEffect(() => {
     if (errors.submit) {
-      const timer = setTimeout(() => {
-        setErrors((prev) => {
-          const next = { ...prev }
-          delete next.submit
-          return next
-        })
-      }, 5000)
-      return () => clearTimeout(timer)
+      const reloadTimer = setTimeout(() => {
+        window.location.reload()
+      }, 10000)
+      return () => clearTimeout(reloadTimer)
     }
   }, [errors.submit])
 
@@ -958,11 +951,12 @@ export default function Apply() {
   }
 
   if (!isFormOpen) {
+    const isClosed = formCloseReason.toLowerCase().includes('closed')
     return (
       <div className={styles.pageShell}>
         <ApplyNavbar />
         <Head>
-          <title>Applications Paused | JNIMUN&apos;26</title>
+          <title>{isClosed ? 'Applications Closed' : 'Applications Paused'} | JNIMUN&apos;26</title>
         </Head>
         <div className={`${styles.container} ${styles.successContainer}`}>
           <div className={styles.card}>
@@ -971,10 +965,10 @@ export default function Apply() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <h1 className={styles.title}>
-              Applications <span className={styles.accent}>Paused</span>
+              Applications <span className={styles.accent}>{isClosed ? 'Closed' : 'Paused'}</span>
             </h1>
             <p className={styles.subtitle}>
-              Applications are temporarily paused as the current wave has reached its seat limit. Please check back soon!
+              {formCloseReason || 'Applications are temporarily paused as the current wave has reached its seat limit. Please check back soon!'}
             </p>
           </div>
         </div>

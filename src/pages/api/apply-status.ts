@@ -50,15 +50,28 @@ export default async function handler(
     }
 
     const data = await response.json()
-    
+
     if (data && data.ok) {
-      return res.status(200).json(data)
+      const totalCount = typeof data.totalCount === 'number' ? data.totalCount : 0
+      const isLimitReached = totalCount >= 200
+      const isOpen = !isLimitReached && process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
+
+      return res.status(200).json({
+        ok: true,
+        isOpen,
+        activeWave: 'Wave 5',
+        limit: 200,
+        totalCount,
+        amounts: ['850', '1700'],
+        policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png',
+        reason: isLimitReached ? 'Applications have closed as we have reached the maximum limit of responses. Thank you for your interest!' : undefined
+      })
     } else {
       throw new Error(data.error || 'Invalid response from Google Webhook')
     }
   } catch (error) {
     console.error('Error fetching form status from webhook:', error)
-    
+
     // Fallback to Wave 5 local settings in case of downtime
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
     return res.status(200).json({
