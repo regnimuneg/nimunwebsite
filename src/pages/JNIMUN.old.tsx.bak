@@ -58,224 +58,55 @@ const JNIMUN: NextPage = () => {
   return (
     <main className={styles.main}>
       <div className={styles.heroSection}>
-        <div className={styles.heroCopy}>
-          <h1 className={styles.heroTitle}>
-            JNIMUN<span>&apos;26</span>
-          </h1>
-          <p className={styles.heroLead}>
-            JNIMUN turns students into future diplomats, where they debate world issues, defend
-            their countries, and create real solutions.
-          </p>
-        </div>
-
-        <div className={styles.stickerCluster} aria-hidden="true">
-          <Image
-            src="/image/png/monochrome_globe_sticker_illustration.png?v=2"
-            alt=""
-            width={430}
-            height={430}
-            className={`${styles.heroSticker} ${styles.stickerGlobe}`}
-            priority
-          />
-        </div>
+        <Image
+          src="/image/png/JNIMUN_Hero.jpg" // Make sure this path is correct in your project
+          alt="JNIMUN Hero"
+          fill
+          className={styles.heroImage}
+          priority
+          objectFit="cover"
+        />
 
         {/* LEARN MORE Button with decorative icons */}
         <div className={styles.learnMoreWrapper}>
+          <img src="/image/png/A+.png" alt="A+" className={styles.iconAPlus} />
+          <img src="/image/png/coin.png" alt="Coin" className={styles.iconCoin} />
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLScrVEKoYhayW42Sk2j4MNnKyIOpCqOzEj0B60fikL3KTigArQ/viewform"
             className={styles.learnMoreBtn}
           >
-            <span className={styles.learnMoreText}>APPLY NOW</span>
+            <span className={styles.learnMoreText}>APPLY NOW!</span>
           </a>
+          <img src="/image/png/bubble.png" alt="Bubble" className={styles.iconBubble} />
+          <img src="/image/png/nefertiti.png" alt="Nefertiti" className={styles.iconNefertiti} />
         </div>
-
-        <Image
-          src="/image/png/JNIMUN%2726/big_star.png"
-          alt=""
-          width={300}
-          height={300}
-          className={styles.cornerStar}
-          aria-hidden="true"
-        />
-        <Image
-          src="/image/png/JNIMUN%2726/basic/megaphone.png"
-          alt=""
-          width={120}
-          height={120}
-          className={styles.cornerMegaphone}
-          aria-hidden="true"
-        />
-        <Image
-          src="/image/png/JNIMUN%2726/rays.png"
-          alt=""
-          width={140}
-          height={90}
-          className={styles.cornerRays}
-          aria-hidden="true"
-        />
       </div>
 
-      {/* --- Our Councils Section --- */}
-      <section className={styles.ourCouncilsSection}>
-        <div className={styles.councilsHeader}>
-          <div className={styles.councilsTitleWrapper}>
-            <h2 className={styles.councilsTitle}>
-              <span className={styles.titleOur}>OUR</span>{' '}
-              <span className={styles.titleCouncils}>COUNCILS</span>
-            </h2>
-            {/* Lines under the title */}
-            <div className={styles.titleDecorations}>
-              <div className={styles.yellowLines}>
-                <div className={styles.yellowLine1}></div>
-                <div className={styles.yellowLine2}></div>
-              </div>
-              <div className={styles.blueLine}></div>
-            </div>
-          </div>
-          <div className={styles.councilsSubtitleBox}>
-            <div className={styles.councilsSubtitleBg}></div>
-            <p className={styles.councilsSubtitleText}>
-              Explore our <span className={styles.textBlue}>councils</span> and the <span className={styles.textBlue}>leaders</span> who will guide the debate.
-            </p>
-          </div>
+      {/* --- What is JNIMUN Section --- */}
+      <section className={styles.whatIsSection}>
+        <div className={styles.titleContainer}>
+          <div className={styles.titleLineLeft}></div>
+          <h2 className={styles.titleText}>WHAT IS JNIMUN?</h2>
+          <div className={styles.titleLineRight}></div>
         </div>
-
-        <div className={styles.councilsGrid}>
-          {/* Card 1: UNSC */}
-          <div className={`${styles.councilCard} ${styles.cardPink}`}>
-            <Image src="/image/png/element_11_x731_y263_w149_h185.png" alt="" width={60} height={75} className={styles.sC1_1} />
-            <Image src="/image/png/element_04_x733_y91_w150_h147.png" alt="" width={60} height={60} className={styles.sC1_2} />
-            <div className={styles.cardInner}>
-              <div className={styles.councilHeader}>
-                <div className={styles.councilLogo}>
-                  <Image src="/image/png/security.png" alt="Security Council" width={94} height={94} className={styles.logoImg} />
-                </div>
-                <div className={styles.councilTitleDesc}>
-                  <span className={styles.levelBadge}>Advanced</span>
-                  <h3>SECURITY COUNCIL — SC</h3>
-                  <p>Address global peace, security,<br/>conflict resolution, and international crises.</p>
-                </div>
-              </div>
-              <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextPink}`}>
-                  MEET THE CHAIR
-                </button>
-              </div>
+        <div className={styles.cardBackground}>
+          <div className={styles.divider}></div>
+          <div className={styles.contentBox}>
+            <div className={styles.textBox}>
+              <p>
+                JNIMUN is dedicated to empowering high school students from over 20 schools. JNIMUN
+                provides young participants with a unique opportunity to develop their public
+                speaking, negotiation, and leadership skills.
+              </p>
             </div>
-          </div>
-
-          {/* Card 2: UNHRC */}
-          <div className={`${styles.councilCard} ${styles.cardBlue}`}>
-            <Image src="/image/png/element_15_x864_y394_w193_h210.png" alt="" width={65} height={70} className={styles.sC2_1} />
-            <Image src="/image/png/element_06_x1361_y97_w85_h187.png" alt="" width={35} height={75} className={styles.sC2_2} />
-            <div className={styles.cardInner}>
-              <div className={styles.councilHeader}>
-                <div className={styles.councilLogo}>
-                  <Image src="/image/png/crisis.png" alt="Crisis Committee" width={94} height={94} className={styles.logoImg} />
-                </div>
-                <div className={styles.councilTitleDesc}>
-                  <span className={styles.levelBadge}>Advanced</span>
-                  <h3>CRISIS COMMITTEE</h3>
-                  <p>Respond to fast-moving emergencies<br/>through strategy, negotiation, and quick decision-making.</p>
-                </div>
-              </div>
-              <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextBlue}`}>
-                  MEET THE CHAIR
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: DISEC */}
-          <div className={`${styles.councilCard} ${styles.cardYellow}`}>
-            <Image src="/image/png/element_08_x545_y129_w159_h247.png" alt="" width={50} height={77} className={styles.sC3_1} />
-            <Image src="/image/png/element_07_x1472_y63_w230_h190.png" alt="" width={75} height={60} className={styles.sC3_2} />
-            <div className={styles.cardInner}>
-              <div className={styles.councilHeader}>
-                <div className={styles.councilLogo}>
-                  <Image src="/image/png/odc.png" alt="UNODC" width={94} height={94} className={styles.logoImg} />
-                </div>
-                <div className={styles.councilTitleDesc}>
-                  <span className={styles.levelBadge}>Intermediate</span>
-                  <h3>UNITED NATIONS OFFICE ON DRUGS AND CRIME — UNODC</h3>
-                  <p>Combat crime, corruption, drug trafficking,<br/>and threats to justice worldwide.</p>
-                </div>
-              </div>
-              <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextYellow}`}>
-                  MEET THE CHAIR
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4: ECOSOC */}
-          <div className={`${styles.councilCard} ${styles.cardGreen}`}>
-            <Image src="/image/png/element_05_x1163_y67_w148_h225.png" alt="" width={45} height={68} className={styles.sC4_1} />
-            <Image src="/image/png/element_10_x329_y263_w159_h180.png" alt="" width={55} height={63} className={styles.sC4_2} />
-            <div className={styles.cardInner}>
-              <div className={styles.councilHeader}>
-                <div className={styles.councilLogo}>
-                  <Image src="/image/png/imo.png" alt="IMO" width={94} height={94} className={styles.logoImg} />
-                </div>
-                <div className={styles.councilTitleDesc}>
-                  <span className={styles.levelBadge}>Intermediate</span>
-                  <h3>INTERNATIONAL MARITIME ORGANIZATION — IMO</h3>
-                  <p>Promote safe, secure, and sustainable<br/>international shipping.</p>
-                </div>
-              </div>
-              <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextGreen}`}>
-                  MEET THE CHAIR
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 5: WHO */}
-          <div className={`${styles.councilCard} ${styles.cardOrange}`}>
-            <Image src="/image/png/element_09_x1061_y234_w205_h247.png" alt="" width={65} height={78} className={styles.sC5_1} />
-            <Image src="/image/png/element_16_x186_y420_w156_h274.png" alt="" width={50} height={85} className={styles.sC5_2} />
-            <div className={styles.cardInner}>
-              <div className={styles.councilHeader}>
-                <div className={styles.councilLogo}>
-                  <Image src="/image/png/hcr.png" alt="UNHCR" width={94} height={94} className={styles.logoImg} />
-                </div>
-                <div className={styles.councilTitleDesc}>
-                  <span className={styles.levelBadge}>Beginner</span>
-                  <h3>UNITED NATIONS HIGH COMMISSIONER FOR REFUGEES — UNHCR</h3>
-                  <p>Protect refugees, support displaced people,<br/>and promote humanitarian solutions.</p>
-                </div>
-              </div>
-              <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextOrange}`}>
-                  MEET THE CHAIR
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 6: Arab League */}
-          <div className={`${styles.councilCard} ${styles.cardTeal}`}>
-            <Image src="/image/png/element_14_x560_y415_w221_h216.png" alt="" width={65} height={64} className={styles.sC6_1} />
-            <Image src="/image/png/element_01_x268_y31_w228_h189.png" alt="" width={75} height={62} className={styles.sC6_2} />
-            <div className={styles.cardInner}>
-              <div className={styles.councilHeader}>
-                <div className={styles.councilLogo}>
-                  <Image src="/image/png/press-new.png" alt="International Press" width={94} height={94} className={styles.logoImg} />
-                </div>
-                <div className={styles.councilTitleDesc}>
-                  <span className={styles.levelBadge}>Beginner</span>
-                  <h3>INTERNATIONAL PRESS</h3>
-                  <p>Report, question, and document global events<br/>with accuracy and impact.</p>
-                </div>
-              </div>
-              <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextTeal}`}>
-                  MEET THE CHAIR
-                </button>
-              </div>
+            <div className={styles.imageBox}>
+              <Image
+                className={styles.Image} // This class now just adds border-radius via parent
+                src="/image/png/what_jnimun.jpg"
+                alt="JNIMUN Conference"
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
           </div>
         </div>

@@ -32,6 +32,7 @@ const mainLinks: MainLink[] = [
       { id: 'archives', text: 'Conference Archives', href: '/Archives' },
     ],
   },
+  { id: 'jnimun', text: "JNIMUN'26", href: '/JNIMUN' },
   { id: 'contact', text: 'CONTACT US', href: '/#contact' },
   { id: 'portal', text: 'PORTAL', href: 'https://portal.nimuneg.org' },
 ]

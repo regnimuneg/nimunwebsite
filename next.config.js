@@ -20,16 +20,6 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/JNIMUN',
-        destination: '/404',
-        permanent: false,
-      },
-      {
-        source: '/JNIMUN/',
-        destination: '/404',
-        permanent: false,
-      },
-      {
         source: '/Internationals',
         destination: '/404',
         permanent: false,
