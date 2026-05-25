@@ -53,14 +53,14 @@ export default async function handler(
 
     if (data && data.ok) {
       const totalCount = typeof data.totalCount === 'number' ? data.totalCount : 0
-      const isLimitReached = totalCount >= 210
+      const isLimitReached = totalCount >= 250
       const isOpen = !isLimitReached && process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
 
       return res.status(200).json({
         ok: true,
         isOpen,
         activeWave: 'Waitlist',
-        limit: 200,
+        limit: 250,
         totalCount,
         amounts: ['850', '1700'],
         policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Waitlist.png',
