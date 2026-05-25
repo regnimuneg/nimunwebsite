@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import Packages from '@/components/landing/Packages'
+import ApplyNavbar from '@/components/apply/ApplyNavbar'
 
 const JNIMUN: NextPage = () => {
   useEffect(() => {
@@ -57,7 +58,9 @@ const JNIMUN: NextPage = () => {
   }, [])
 
   return (
-    <main className={styles.main}>
+    <>
+      <ApplyNavbar />
+      <main className={styles.main}>
       <div className={styles.heroSection}>
         <div className={styles.heroCopy}>
           <h1 className={styles.heroTitle}>
@@ -579,6 +582,7 @@ const JNIMUN: NextPage = () => {
       </section>
       <Packages />
     </main>
+    </>
   )
 }
 
