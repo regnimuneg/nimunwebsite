@@ -753,6 +753,145 @@ $page-top-offset: 96px;
   border-radius: 8px;
 }
 
+.waitlistBanner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: $jnimun-yellow;
+  border: 2px solid $jnimun-black;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: $jnimun-black;
+  font-family: $jnimun-font-body;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 3px 3px 0 $jnimun-black;
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+.waitlistIcon {
+  color: $jnimun-black;
+  flex-shrink: 0;
+}
+
+.screamingBanner {
+  background-color: $jnimun-yellow;
+  border: 3px solid $jnimun-black;
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  color: $jnimun-black;
+  text-align: center;
+  font-family: $jnimun-font-display;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 $jnimun-black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalContent {
+  background: $jnimun-off-white;
+  border: 3px solid $jnimun-black;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 $jnimun-black;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: modalScaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+  h2 {
+    font-family: $jnimun-font-display;
+    font-size: 1.8rem;
+    color: $jnimun-black;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    font-family: $jnimun-font-body;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+@keyframes modalScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalIcon {
+  width: 60px;
+  height: 60px;
+  color: $jnimun-yellow;
+  stroke: $jnimun-black;
+  stroke-width: 2;
+  filter: drop-shadow(2px 2px 0 $jnimun-black);
+}
+
+.modalBtn {
+  background: $jnimun-pink;
+  color: $jnimun-off-white;
+  border: 2px solid $jnimun-black;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-family: $jnimun-font-display;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 $jnimun-black;
+  transition: all 0.15s;
+
+  &:hover {
+    background: $jnimun-yellow;
+    color: $jnimun-black;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 $jnimun-black;
+  }
+
+  &:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 $jnimun-black;
+  }
+}
+
 @media (max-width: 900px) {
   // Pull stickers closer on tablet since card is narrower
   .decoBulb { width: 34px; top: -14px; left: -14px; }

@@ -119,9 +119,6 @@ export default function ApplyNavbar(): JSX.Element {
               </button>
               {aboutOpen && aboutDropdown()}
             </div>
-            <Link href="/JNIMUN" className={styles.navLink}>
-              JNIMUN&apos;26
-            </Link>
             <Link href="/#contact" className={styles.navLink}>
               Contact Us
             </Link>
@@ -162,9 +159,6 @@ export default function ApplyNavbar(): JSX.Element {
                 </button>
                 {aboutOpen && aboutDropdown(true)}
               </div>
-              <Link href="/JNIMUN" className={styles.drawerLink} onClick={closeMenus}>
-                JNIMUN&apos;26
-              </Link>
               <Link href="/#contact" className={styles.drawerLink} onClick={closeMenus}>
                 Contact Us
               </Link>

@@ -20,17 +20,17 @@ export default async function handler(
   res.setHeader('Pragma', 'no-cache')
   res.setHeader('Expires', '0')
 
-  // If webhook URL is missing, fall back to Wave 5 details
+  // If webhook URL is missing, fall back to Waitlist details
   if (!WEBHOOK_URL) {
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
     return res.status(200).json({
       ok: true,
       isOpen: defaultIsOpen,
-      activeWave: 'Wave 5',
-      limit: 22,
+      activeWave: 'Waitlist',
+      limit: 250,
       totalCount: 0,
       amounts: ['850', '1700'],
-      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png',
+      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Waitlist.png',
       source: 'env-fallback'
     })
   }
@@ -53,18 +53,18 @@ export default async function handler(
 
     if (data && data.ok) {
       const totalCount = typeof data.totalCount === 'number' ? data.totalCount : 0
-      const isLimitReached = totalCount >= 200
+      const isLimitReached = totalCount >= 250
       const isOpen = !isLimitReached && process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
 
       return res.status(200).json({
         ok: true,
         isOpen,
-        activeWave: 'Wave 5',
-        limit: 200,
+        activeWave: 'Waitlist',
+        limit: 250,
         totalCount,
         amounts: ['850', '1700'],
-        policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png',
-        reason: isLimitReached ? 'Applications have closed as we have reached the maximum limit of responses. Thank you for your interest!' : undefined
+        policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Waitlist.png',
+        reason: isLimitReached ? 'Applications have closed as we have reached the maximum limit of responses for the waitlist. Thank you for your interest!' : undefined
       })
     } else {
       throw new Error(data.error || 'Invalid response from Google Webhook')
@@ -72,16 +72,16 @@ export default async function handler(
   } catch (error) {
     console.error('Error fetching form status from webhook:', error)
 
-    // Fallback to Wave 5 local settings in case of downtime
+    // Fallback to Waitlist local settings in case of downtime
     const defaultIsOpen = process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false'
     return res.status(200).json({
       ok: false,
       isOpen: defaultIsOpen,
-      activeWave: 'Wave 5',
-      limit: 22,
+      activeWave: 'Waitlist',
+      limit: 250,
       totalCount: 0,
       amounts: ['850', '1700'],
-      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png',
+      policyImage: '/image/png/JNIMUN%2726/Form%20Docs/Waitlist.png',
       source: 'local-fallback',
       error: error instanceof Error ? error.message : 'Unknown network error'
     })
