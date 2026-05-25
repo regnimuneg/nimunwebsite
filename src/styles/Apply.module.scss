@@ -778,6 +778,25 @@ $page-top-offset: 96px;
   flex-shrink: 0;
 }
 
+.screamingBanner {
+  background-color: $jnimun-yellow;
+  border: 3px solid $jnimun-black;
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  color: $jnimun-black;
+  text-align: center;
+  font-family: $jnimun-font-display;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 $jnimun-black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 @media (max-width: 900px) {
   // Pull stickers closer on tablet since card is narrower
   .decoBulb { width: 34px; top: -14px; left: -14px; }
