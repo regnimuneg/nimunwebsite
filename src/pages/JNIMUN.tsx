@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import styles from '@/styles/JNIMUN.module.scss'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect } from 'react'
 import Packages from '@/components/landing/Packages'
 
@@ -157,9 +158,9 @@ const JNIMUN: NextPage = () => {
                 </div>
               </div>
               <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextPink}`}>
-                  MEET THE CHAIR
-                </button>
+                <Link href="/JNIMUN/sc" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextPink}`}>
+                  LEARN MORE
+                </Link>
               </div>
             </div>
           </div>
@@ -180,9 +181,9 @@ const JNIMUN: NextPage = () => {
                 </div>
               </div>
               <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextBlue}`}>
-                  MEET THE CHAIR
-                </button>
+                <Link href="/JNIMUN/crisis" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextBlue}`}>
+                  LEARN MORE
+                </Link>
               </div>
             </div>
           </div>
@@ -203,9 +204,9 @@ const JNIMUN: NextPage = () => {
                 </div>
               </div>
               <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextYellow}`}>
-                  MEET THE CHAIR
-                </button>
+                <Link href="/JNIMUN/unodc" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextYellow}`}>
+                  LEARN MORE
+                </Link>
               </div>
             </div>
           </div>
@@ -226,9 +227,9 @@ const JNIMUN: NextPage = () => {
                 </div>
               </div>
               <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextGreen}`}>
-                  MEET THE CHAIR
-                </button>
+                <Link href="/JNIMUN/imo" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextGreen}`}>
+                  LEARN MORE
+                </Link>
               </div>
             </div>
           </div>
@@ -249,9 +250,9 @@ const JNIMUN: NextPage = () => {
                 </div>
               </div>
               <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextOrange}`}>
-                  MEET THE CHAIR
-                </button>
+                <Link href="/JNIMUN/unhcr" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextOrange}`}>
+                  LEARN MORE
+                </Link>
               </div>
             </div>
           </div>
@@ -272,9 +273,9 @@ const JNIMUN: NextPage = () => {
                 </div>
               </div>
               <div className={styles.ecstaticBtnWrapper}>
-                <button className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextTeal}`}>
-                  MEET THE CHAIR
-                </button>
+                <Link href="/JNIMUN/press" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextTeal}`}>
+                  LEARN MORE
+                </Link>
               </div>
             </div>
           </div>
