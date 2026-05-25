@@ -29,6 +29,11 @@ const nextConfig = {
         destination: '/404',
         permanent: false,
       },
+      {
+        source: '/JNIMUN/:path*',
+        destination: '/404',
+        permanent: false,
+      },
     ];
   },
   webpack: (config, { isServer }) => {
