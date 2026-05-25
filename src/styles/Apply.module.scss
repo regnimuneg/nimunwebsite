@@ -749,6 +749,31 @@ $page-top-offset: 96px;
   border-radius: 8px;
 }
 
+.waitlistBanner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: $jnimun-yellow;
+  border: 2px solid $jnimun-black;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: $jnimun-black;
+  font-family: $jnimun-font-body;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 3px 3px 0 $jnimun-black;
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+.waitlistIcon {
+  color: $jnimun-black;
+  flex-shrink: 0;
+}
+
 @media (max-width: 900px) {
   // Pull stickers closer on tablet since card is narrower
   .decoBulb { width: 34px; top: -14px; left: -14px; }

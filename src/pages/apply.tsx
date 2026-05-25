@@ -372,7 +372,7 @@ export default function Apply() {
           }
         })
         const data = await response.json()
-        
+
         if (data && typeof data.isOpen === 'boolean') {
           setIsFormOpen(data.isOpen)
           if (data.reason) {
@@ -395,7 +395,7 @@ export default function Apply() {
         setIsFormOpen(process.env.NEXT_PUBLIC_FORM_IS_OPEN !== 'false')
       }
     }
-    
+
     checkFormStatus()
   }, [])
 
@@ -924,11 +924,34 @@ export default function Apply() {
     )
   }
 
-  const pageTitle = (
+  const isWaitlist = activeWaveName === 'Waitlist'
+
+  const pageTitle = isWaitlist ? (
+    <>
+      JNIMUN<span className={styles.accent}>&apos;26</span> Delegate Waitlist
+    </>
+  ) : (
     <>
       JNIMUN<span className={styles.accent}>&apos;26</span> Delegate Application
     </>
   )
+
+  const formDescription = isWaitlist ? (
+    `Hello Everybody!
+
+JNIMUN'26 is almost Here!
+
+We have reached our initial capacity, but you can still join our waitlist! In this form, you'll find all the information needed for the Conference Councils. Please select your preferences (1st and 2nd) according to the council you feel will suit you best.
+
+NIMUN Delegate Package Includes:
+    - 4 days of intensive training sessions
+    - Opening Ceremony and Performance Day
+    - 3 full days of conference sessions
+    - Entry to the Closing Ceremony
+    - Dinners throughout the event
+    - Breakfast provided on all conference days
+    - Giveaways!`
+  ) : FORM_DESCRIPTION
 
   if (isFormOpen === null) {
     return (
@@ -981,7 +1004,7 @@ export default function Apply() {
       <div className={styles.pageShell}>
         <ApplyNavbar />
         <Head>
-          <title>Application Submitted | JNIMUN&apos;26</title>
+          <title>{isWaitlist ? 'Waitlist Joined' : 'Application Submitted'} | JNIMUN&apos;26</title>
         </Head>
         <div className={`${styles.container} ${styles.successContainer}`}>
           <div className={styles.card}>
@@ -990,10 +1013,21 @@ export default function Apply() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             <h1 className={styles.title}>
-              Application <span className={styles.accent}>Submitted</span>
+              {isWaitlist ? (
+                <>
+                  Waitlist <span className={styles.accent}>Joined</span>
+                </>
+              ) : (
+                <>
+                  Application <span className={styles.accent}>Submitted</span>
+                </>
+              )}
             </h1>
             <p className={styles.subtitle}>
-              Thank you for applying to JNIMUN&apos;26. We&apos;ve received your application and will review it soon.
+              {isWaitlist
+                ? "Thank you for joining the JNIMUN'26 Waitlist. We've received your request and will notify you if a spot becomes available."
+                : "Thank you for applying to JNIMUN'26. We've received your application and will review it soon."
+              }
             </p>
           </div>
         </div>
@@ -1005,7 +1039,7 @@ export default function Apply() {
     <div className={styles.pageShell}>
       <ApplyNavbar />
       <Head>
-        <title>{FORM_TITLE} | JNIMUN&apos;26</title>
+        <title>{isWaitlist ? "JNIMUN'26 Delegate Waitlist" : FORM_TITLE} | JNIMUN&apos;26</title>
         {allImagesToPreload.map((src) => (
           <link key={src} rel="preload" href={src} as="image" />
         ))}
@@ -1014,10 +1048,21 @@ export default function Apply() {
         <div className={styles.card}>
           <ApplyDecorations />
           <div className={styles.formHeader}>
-            <p className={styles.kicker}>Delegate Registration</p>
+            <p className={styles.kicker}>{isWaitlist ? 'Delegate Waitlist' : 'Delegate Registration'}</p>
             <h1 className={styles.title}>{pageTitle}</h1>
-            {currentSectionIndex === 0 && <p className={styles.description}>{FORM_DESCRIPTION}</p>}
+            {currentSectionIndex === 0 && <p className={styles.description}>{formDescription}</p>}
           </div>
+
+          {isWaitlist && (
+            <div className={styles.waitlistBanner}>
+              <svg className={styles.waitlistIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>
+                <strong>Waitlist Form:</strong> You are filling out the waitlist. The delegate seats are fully booked.
+              </span>
+            </div>
+          )}
 
           <div className={styles.progressWrap} aria-label={`Form progress: ${progress}%`}>
             <div className={styles.progressMeta}>
@@ -1064,7 +1109,11 @@ export default function Apply() {
                 Back
               </button>
               <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
-                {isSubmitting ? 'Submitting...' : currentSection.nextAction === 'SUBMIT' ? 'Submit Application' : 'Continue'}
+                {isSubmitting
+                  ? 'Submitting...'
+                  : currentSection.nextAction === 'SUBMIT'
+                    ? (isWaitlist ? 'Join Waitlist' : 'Submit Application')
+                    : 'Continue'}
               </button>
             </div>
           </form>
