@@ -81,6 +81,16 @@ export default function ContactUs() {
             </a>
           </div>
         </div>
+
+        <div className={styles.mapPanel}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.8595392178445!2d30.98428627500921!3d30.01218932009921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585754b9cba23f%3A0xdfbc09a0a87f3e86!2sNile%20University!5e0!3m2!1sen!2seg!4v1717270609235!5m2!1sen!2seg"
+            title="Nile University location map"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className={styles.mapFrame}
+          />
+        </div>
       </div>
     </section>
   )

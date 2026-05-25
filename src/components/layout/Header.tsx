@@ -5,7 +5,6 @@ import Menu from '@/components/layout/Menu' // Updated Menu component
 import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import styles from '@/styles/layout/Header.module.scss'
-import Image from 'next/image'
 import React, { useState } from 'react'
 import Link from 'next/link' // Import Link for Apply button if it's a link
 
@@ -74,13 +73,8 @@ export default function Header(): JSX.Element {
               className={styles.logoWrapper}
               aria-label="Nile International Model United Nations Home"
             >
-              <Image
-                src="/image/png/logo24.png"
-                alt="NIMUN Logo"
-                className={styles.logo}
-                width={80}
-                height={36}
-              />
+              <span className={styles.brandTitle}>NIMUN</span>
+              <span className={styles.brandSubtitle}>Nile International Model United Nations</span>
             </a>
             {/* Render Menu component only on desktop, directly after logo */}
             {!isMobile && <Menu />}

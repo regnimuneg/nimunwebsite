@@ -6,82 +6,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 $height: 55px;
-$header-border-radius: 30px;
+$header-border-radius: 0;
 
 .header {
   font-family: 'Montserrat' !important;
   position: fixed;
   z-index: 999;
-  top: 20px; // Position below the top edge
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%; // Adjust width as needed
-  max-width: 1400px; // Max width for large screens
-  margin-top: 20px; // Add top margin
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
   transition: box-shadow $transition-s $transition-ease; // Only transition shadow now
-  background-color: rgba(255, 255, 255, 0.86); // Semi-transparent background ALWAYS
-  backdrop-filter: blur(18px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
+    rgba(0, 55, 192, 0.68);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
   height: auto;
-  border-radius: $header-border-radius; // Rounded ALWAYS
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  border-radius: $header-border-radius;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.16),
+    0 14px 38px rgba(0, 20, 78, 0.18);
 
   .fix {
     @include flex-row;
     justify-content: space-between;
-    padding: 10px 20px; // Increased padding inside the header
+    padding: 24px clamp(24px, 4vw, 64px);
     margin: auto;
     align-items: center;
-    min-height: 75px; // Increased minimum height
+    min-height: 120px;
+    width: min(1920px, 100%);
   }
 
   // New container for Logo + Nav links
   .leftSideContainer {
     display: flex;
     align-items: center;
-    gap: 30px; // Gap between logo and nav links
+    justify-content: space-between;
+    gap: clamp(28px, 5vw, 78px);
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .logoWrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    align-items: flex-start;
     text-decoration: none;
-    // Removed padding-left, handled by leftSideContainer gap
+    color: #ffffff;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
 
-    .logo {
-      margin-right: 15px;
-      height: 55px; // Scaled up to match bigger header
-      width: auto;
-      flex-shrink: 0; // Prevent logo from shrinking
-    }
+  .brandTitle {
+    font-size: clamp(2.2rem, 3.2vw, 3.9rem);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
 
-    .textWrapper {
-      display: flex;
-      flex-direction: column;
-      color: #333;
-      line-height: 1.3;
-
-      .mainText {
-        font-size: 0.9rem;
-        font-weight: 600;
-        white-space: nowrap;
-      }
-
-      .subText {
-        font-size: 0.9rem;
-        font-weight: 500;
-        margin-top: 0px;
-        white-space: nowrap;
-      }
-    }
+  .brandSubtitle {
+    margin-top: 10px;
+    font-size: clamp(0.72rem, 0.95vw, 1rem);
+    font-weight: 800;
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   // Navigation bar itself (inside leftSideContainer on desktop)
   .navbar {
     @include flex-row;
-    gap: 60px; // Increased spacing between nav buttons
+    gap: clamp(28px, 3.4vw, 58px);
     align-items: center;
     margin: 0;
-    margin-left: 50px; // Move buttons to the right while keeping logo in place
+    margin-left: 0;
+    flex: 1 1 auto;
+    justify-content: center;
   }
 
   // Container for the right-side elements (Apply button)
@@ -92,6 +95,7 @@ $header-border-radius: 30px;
     background-color: transparent;
     border-radius: 100px;
     padding-right: 0px;
+    margin-left: clamp(22px, 3vw, 44px);
   }
 
   .portalButton {
@@ -123,17 +127,18 @@ $header-border-radius: 30px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #0037c0;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #0037c0;
     font-family: 'Montserrat', sans-serif;
-    padding: 12px 22px;
-    border-radius: 999px;
+    min-height: 60px;
+    padding: 0 clamp(24px, 2.4vw, 38px);
+    border-radius: 12px;
     text-decoration: none;
-    font-size: 0.78rem;
+    font-size: clamp(0.92rem, 1.1vw, 1.2rem);
     font-weight: 900;
     letter-spacing: 0;
     text-transform: uppercase;
-    border: 1px solid rgba(0, 55, 192, 0.36);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     cursor: pointer;
     box-shadow: 0 12px 24px rgba(0, 20, 78, 0.16);
     transition:
@@ -143,8 +148,8 @@ $header-border-radius: 30px;
     white-space: nowrap;
 
     &:hover {
-      background-color: #002da1;
-      box-shadow: 0 16px 28px rgba(0, 20, 78, 0.22);
+      background-color: #e5e5e5;
+      box-shadow: 0 18px 32px rgba(0, 20, 78, 0.24);
       transform: translateY(-1px);
     }
   }
@@ -152,13 +157,17 @@ $header-border-radius: 30px;
 
 // Styles for the sticky header state - ONLY add shadow, keep other styles the same
 .header.stick {
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)),
+    rgba(0, 55, 192, 0.76);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+    0 18px 46px rgba(0, 20, 78, 0.22);
   // REMOVED: top, width, background-color, border-radius changes
 }
 
 // Hamburger button for mobile
 .hamburgerButton {
-  color: #0037c0;
+  color: #ffffff;
   // Ensure it's properly positioned on the right when menu is hidden
   margin-left: auto;
 }
@@ -271,12 +280,12 @@ $header-border-radius: 30px;
 @media screen and (max-width: 1050px) {
   // Tablet breakpoint
   .header {
-    width: 95%;
-    top: 10px;
+    width: 100%;
+    top: 0;
 
     .fix {
-      padding: 5px 10px;
-      min-height: 55px;
+      padding: 18px 24px;
+      min-height: 86px;
     }
 
     // Hide desktop nav links container
@@ -296,35 +305,36 @@ $header-border-radius: 30px;
 @media screen and (max-width: 600px) {
   // Mobile breakpoint - UPDATED to match desktop styling
   .header {
-    width: 90%; // Match desktop width percentage
-    top: 10px; // Position slightly below top like desktop
-    margin-top: 20px; // Add top margin
-    border-radius: $header-border-radius; // Keep rounded corners like desktop
-    background-color: rgba(255, 255, 255, 0.8); // Semi-transparent background like desktop
-    backdrop-filter: blur(10px); // Blur effect like desktop
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    top: 0;
+    margin-top: 0;
+    border-radius: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
+      rgba(0, 55, 192, 0.72);
+    backdrop-filter: blur(18px) saturate(145%);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.16),
+      0 14px 34px rgba(0, 20, 78, 0.18);
 
     .fix {
-      padding: 5px 10px;
-      min-height: 50px;
+      padding: 16px 20px;
+      min-height: 78px;
     }
 
     .leftSideContainer {
       gap: 15px; // Reduce gap on mobile if needed
     }
 
-    .logoWrapper {
-      .logo {
-        height: 35px;
-        margin-right: 10px;
-      }
+    .brandTitle {
+      font-size: 2.2rem;
+    }
 
-      .textWrapper {
-        .mainText,
-        .subText {
-          font-size: 0.8rem;
-        }
-      }
+    .brandSubtitle {
+      max-width: 220px;
+      margin-top: 5px;
+      font-size: 0.62rem;
+      white-space: normal;
     }
   }
 
@@ -341,18 +351,15 @@ $header-border-radius: 30px;
 .navLink {
   display: inline-block; // Ensures the link takes up space correctly
   text-decoration: none; // Remove default underline
-  color: inherit; // Inherit text color
+  color: #ffffff;
   cursor: pointer; // Use pointer cursor
-  border-radius: 20px;
-  border: 2px solid rgba(0, 55, 192, 0.3);
+  border-radius: 0;
+  border: 0;
   box-shadow: none;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: opacity 0.3s ease;
 
   &:hover {
-    border-color: rgba(0, 55, 192, 0.5);
-    box-shadow: none;
+    opacity: 0.78;
   }
 }
 
@@ -477,14 +484,15 @@ $header-border-radius: 30px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 10px 15px; // Example padding
-  font-size: 1rem; // Example font size
+  padding: 10px 0;
+  font-size: clamp(0.92rem, 1.18vw, 1.28rem);
   text-transform: uppercase; // Match existing style
-  font-weight: 600; // Example weight
+  font-weight: 900;
   display: inline-flex; // Helps align text and indicator
   align-items: center;
   width: 100%; // Make button fill the link wrapper
   justify-content: space-between; // Push indicator to the right if needed, or center
+  white-space: nowrap;
 
   &:hover {
     // Define hover state if needed (or handle on .navLink hover)
