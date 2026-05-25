@@ -1,0 +1,307 @@
+@import '@/styles/globals.scss';
+@import '@/styles/mixins.scss';
+
+$jnimun-blue: #2B7DE9;
+$jnimun-dark-blue: #1a5bb8;
+$jnimun-pink: #FF4D8D;
+$jnimun-yellow: #FFD93D;
+$jnimun-white: #ffffff;
+$jnimun-light: #f0f4ff;
+
+.heroSection {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: $jnimun-blue;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doodleOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/image/png/jnimun-doodles.png');
+  background-size: 600px;
+  background-repeat: repeat;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 3;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 120px 40px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    padding: 100px 24px 80px;
+    text-align: center;
+  }
+}
+
+.heroLeft {
+  flex: 1;
+  max-width: 560px;
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.heroTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 24px;
+  line-height: 1;
+  flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
+}
+
+.jnimunText {
+  font-family: 'Heavitas', 'Montserrat', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  color: $jnimun-white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 
+    3px 3px 0 rgba(0, 0, 0, 0.15),
+    0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.yearText {
+  font-family: 'Heavitas', 'Montserrat', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  color: $jnimun-pink;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.heroSubtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.heroCTAs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $jnimun-pink;
+  color: $jnimun-white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 0;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(255, 77, 141, 0.4);
+
+  &:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(255, 77, 141, 0.5);
+    background: lighten($jnimun-pink, 5%);
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .arrow {
+    transform: translateX(4px);
+  }
+}
+
+.exploreBtn {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  color: $jnimun-white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 0;
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-left: none;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+}
+
+.ageBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
+}
+
+.ageTag {
+  display: inline-block;
+  background: $jnimun-yellow;
+  color: #1a1a2e;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.parentApproved {
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.heartIcon {
+  color: $jnimun-pink;
+  font-size: 1rem;
+}
+
+// Right side - globe sticker
+.heroRight {
+  flex: 1;
+  position: relative;
+  min-height: 420px;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 900px) {
+    min-height: 280px;
+    width: 100%;
+    max-width: 340px;
+  }
+}
+
+.globeSticker {
+  width: clamp(240px, 30vw, 360px);
+  height: auto;
+  filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.35));
+  z-index: 2;
+  position: relative;
+}
+
+// Surrounding sticker elements
+.stickerElement {
+  position: absolute;
+  width: clamp(70px, 9vw, 100px);
+  height: auto;
+  z-index: 3;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+
+  @media (max-width: 900px) {
+    width: clamp(50px, 12vw, 70px);
+  }
+}
+
+.stickerTopLeft {
+  top: 10%;
+  left: 12%;
+  transform: rotate(-12deg);
+}
+
+.stickerTopRight {
+  top: 10%;
+  right: 12%;
+  transform: rotate(10deg);
+}
+
+.stickerLeft {
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%) rotate(-8deg);
+
+  @media (max-width: 900px) {
+    left: 0%;
+  }
+}
+
+.stickerRight {
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%) rotate(8deg);
+
+  @media (max-width: 900px) {
+    right: 0%;
+  }
+}
+
+.stickerBottomLeft {
+  bottom: 10%;
+  left: 12%;
+  transform: rotate(6deg);
+}
+
+.stickerBottomRight {
+  bottom: 10%;
+  right: 12%;
+  transform: rotate(-10deg);
+}
+
+// Wave divider
+.waveDivider {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  line-height: 0;
+
+  svg {
+    width: 100%;
+    height: 80px;
+    display: block;
+  }
+}

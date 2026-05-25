@@ -12,7 +12,7 @@ $header-border-radius: 30px;
 .header {
   font-family: 'Montserrat' !important;
   position: fixed;
-  z-index: 10;
+  z-index: 999;
   top: 20px; // Position below the top edge
   left: 50%;
   transform: translateX(-50%);
@@ -29,10 +29,10 @@ $header-border-radius: 30px;
   .fix {
     @include flex-row;
     justify-content: space-between;
-    padding: 5px 15px; // Adjust padding inside the header
+    padding: 10px 20px; // Increased padding inside the header
     margin: auto;
     align-items: center;
-    min-height: 60px; // Ensure minimum height
+    min-height: 75px; // Increased minimum height
   }
 
   // New container for Logo + Nav links
@@ -50,7 +50,7 @@ $header-border-radius: 30px;
 
     .logo {
       margin-right: 15px;
-      height: 45px; // Shrunk from default
+      height: 55px; // Scaled up to match bigger header
       width: auto;
       flex-shrink: 0; // Prevent logo from shrinking
     }

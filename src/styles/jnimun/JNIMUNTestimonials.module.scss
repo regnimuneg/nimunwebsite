@@ -1,0 +1,198 @@
+@import '@/styles/globals.scss';
+@import '@/styles/mixins.scss';
+
+$jnimun-blue: #2B7DE9;
+$jnimun-pink: #FF4D8D;
+$jnimun-yellow: #FFD93D;
+
+.testimonialsSection {
+  position: relative;
+  background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
+  padding: 100px 0;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/image/png/jnimun-doodles.png');
+    background-size: 600px;
+    background-repeat: repeat;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+    filter: invert(1);
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: $jnimun-blue;
+  text-transform: uppercase;
+  background: rgba($jnimun-blue, 0.08);
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-family: 'Heavitas', 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #1a1a2e;
+  line-height: 1.2;
+}
+
+.titleAccent {
+  color: $jnimun-blue;
+}
+
+.testimonialSlider {
+  text-align: center;
+}
+
+.testimonialCard {
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  position: relative;
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    padding: 32px 24px;
+  }
+}
+
+.quoteIcon {
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba($jnimun-blue, 0.1);
+  position: absolute;
+  top: 20px;
+  left: 32px;
+}
+
+.quote {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 32px;
+  padding-top: 24px;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+
+.authorAvatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $jnimun-blue, $jnimun-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.authorName {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a1a2e;
+}
+
+.authorRole {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: $jnimun-blue;
+  font-weight: 600;
+}
+
+.authorSchool {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.sliderDots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba($jnimun-blue, 0.3);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+
+  &:hover {
+    border-color: $jnimun-blue;
+    background: rgba($jnimun-blue, 0.1);
+  }
+
+  &.active {
+    background: $jnimun-blue;
+    border-color: $jnimun-blue;
+    transform: scale(1.2);
+  }
+}

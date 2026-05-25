@@ -1,0 +1,106 @@
+.container {
+  min-height: 100vh;
+  background-color: #f7f9fc;
+  background-image: radial-gradient(#d3e2f2 1px, transparent 1px);
+  background-size: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--theme-color, #0037c0);
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  background: var(--theme-color-light, rgba(0, 55, 192, 0.1));
+  color: var(--theme-color, #0037c0);
+}
+
+.title {
+  font-family: 'Heavitas', 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+  color: #111;
+  line-height: 1.2;
+}
+
+.desc {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 30px 0;
+}
+
+.placeholderText {
+  font-size: 0.95rem;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.backBtn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 50px;
+  border: none;
+  background: #111;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
