@@ -8,7 +8,8 @@ const nextConfig = {
   },
   // Redirect hidden pages to 404
   async redirects() {
-    return [
+    const isProd = process.env.NODE_ENV === 'production';
+    const rules = [
       {
         source: '/IC7',
         destination: '/404',
@@ -29,12 +30,17 @@ const nextConfig = {
         destination: '/404',
         permanent: false,
       },
-      {
+    ];
+
+    if (isProd) {
+      rules.push({
         source: '/JNIMUN/:path*',
         destination: '/404',
         permanent: false,
-      },
-    ];
+      });
+    }
+
+    return rules;
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
