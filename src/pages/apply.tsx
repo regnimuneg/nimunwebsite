@@ -620,30 +620,27 @@ export default function Apply() {
 
     const nextIndex = getNextSectionIndex(currentSectionIndex, answers)
 
-    // Real-time seat check before entering payment sections
-    const nextSection = SECTIONS[nextIndex]
-    if (nextSection && ['Fees policy', 'Telda', 'Instapay'].includes(nextSection.sectionTitle)) {
-      setIsSubmitting(true)
-      try {
-        const response = await fetch(`/api/apply-status?t=${Date.now()}`, {
-          headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-          }
-        })
-        const data = await response.json()
-        if (data && data.isOpen === false) {
-          alert(
-            data.reason || 'We have reached the maximum limit of responses while you were filling out the form. Payments cannot be accepted at this time.'
-          )
-          window.location.reload()
-          return
+    // Real-time seat check on every step transition
+    setIsSubmitting(true)
+    try {
+      const response = await fetch(`/api/apply-status?t=${Date.now()}`, {
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
         }
-      } catch (error) {
-        console.error('Error verifying seat status before payment:', error)
-      } finally {
-        setIsSubmitting(false)
+      })
+      const data = await response.json()
+      if (data && data.isOpen === false) {
+        alert(
+          data.reason || 'We have reached the maximum limit of responses while you were filling out the form. Registration cannot proceed at this time.'
+        )
+        window.location.reload()
+        return
       }
+    } catch (error) {
+      console.error('Error verifying seat status:', error)
+    } finally {
+      setIsSubmitting(false)
     }
 
     if (nextIndex >= SECTIONS.length) {
