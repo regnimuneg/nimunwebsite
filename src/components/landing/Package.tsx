@@ -1,50 +1,41 @@
-import { type PackageInterface } from '@/data/packages' // Assuming updated data file path
+import { type PackageInterface } from '@/data/packages'
 import styles from '@/styles/landing/Packages.module.scss'
 import clsx from 'clsx'
 
 interface Props {
   item: PackageInterface
-  isLast?: boolean
 }
 
-export default function Package({ item, isLast = false }: Props) {
-  // Only show badge for Platinum (last card with isPopular)
-  const showBadge = item.isPopular && isLast && item.title === 'Platinum'
-  
+export default function Package({ item }: Props) {
   return (
-    <div className={clsx(styles.packageCard, item.isPopular && styles.popular, isLast && styles.lastCard)}>
-      {showBadge && <div className={styles.popularBadge}>MOST POPULAR</div>}
+    <article className={clsx(styles.packageCard, item.isPopular && styles.popular)}>
+      {item.isPopular && <div className={styles.popularBadge}>Most Popular</div>}
       <div className={styles.cardHeader}>
-        <div className={styles.titleRow}>
-          <div className={styles.titleLine} style={{ backgroundColor: item.titleColor }}></div>
-          <div className={styles.title} style={{ color: item.titleColor }}>
-            {item.title}
-            {item.roomType && <span className={styles.roomTypeLabel}> - {item.roomType} -</span>}
-          </div>
-          <div className={styles.titleLine} style={{ backgroundColor: item.titleColor }}></div>
+        <span className={styles.packageName}>{item.title}</span>
+        <div className={styles.priceRow}>
+          <span className={styles.currency}>$</span>
+          <span className={styles.price}>{item.price}</span>
+          {item.priceUnit && <span className={styles.unit}>/ {item.priceUnit}</span>}
         </div>
-        <div className={styles.priceContainer}>
-          <span className={styles.priceValue}>Price ${item.price}</span>
-        </div>
-        {item.groupInfo && <div className={styles.groupInfo}>{item.groupInfo}</div>}
+        {item.groupInfo && <p className={styles.groupInfo}>{item.groupInfo}</p>}
       </div>
-      <div className={styles.descriptionContainer}>
-        <ul className={styles.descriptionList}>
-          {item.description.map((feature, idx) => (
-            <li key={idx} className={styles.descriptionItem}>
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      <ul className={styles.descriptionList}>
+        {item.description.map((feature) => (
+          <li key={feature} className={styles.descriptionItem}>
+            {feature}
+          </li>
+        ))}
+      </ul>
+
       <a
         href="https://forms.gle/gHozmUdgzG9z6XdG9"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.applyButton}
       >
-        APPLY
+        CHOOSE PLAN
       </a>
-    </div>
+    </article>
   )
 }

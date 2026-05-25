@@ -2,14 +2,22 @@ import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Drawer from '@mui/material/Drawer'
 import Menu from '@/components/layout/Menu' // Updated Menu component
-import { useLenis } from '@/lib/lenis'
-import { jnimun26Asset } from '@/lib/jnimun26Brand'
 import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import styles from '@/styles/layout/Header.module.scss'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Link from 'next/link' // Import Link for Apply button if it's a link
+
+function RightSideElements() {
+  return (
+    <div className={styles.rightSideContainer}>
+      <Link href="/apply" className={styles.applyButton}>
+        APPLY NOW
+      </Link>
+    </div>
+  )
+}
 
 export default function Header(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -53,21 +61,6 @@ export default function Header(): JSX.Element {
     }
   }
 
-  // Right side elements component
-  const RightSideElements = () => (
-    <div className={styles.rightSideContainer}>
-      <Link href="/apply" className={styles.applyButton}>
-        APPLY
-        <img
-          src={jnimun26Asset('laptop.png')}
-          alt=""
-          className={styles.applyLaptop}
-          aria-hidden="true"
-        />
-      </Link>
-    </div>
-  )
-
   return (
     <>
       {/* Apply stick class based on scroll, but SCSS will control appearance */}
@@ -81,7 +74,7 @@ export default function Header(): JSX.Element {
               className={styles.logoWrapper}
               aria-label="Nile International Model United Nations Home"
             >
-              <img
+              <Image
                 src="/image/png/logo24.png"
                 alt="NIMUN Logo"
                 className={styles.logo}
@@ -112,10 +105,7 @@ export default function Header(): JSX.Element {
               >
                 {/* Drawer content: includes Menu and RightSideElements */}
                 <div className={styles.drawerContent}>
-                  <button
-                    className={styles.backButton}
-                    onClick={toggleDrawer(false)}
-                  >
+                  <button className={styles.backButton} onClick={toggleDrawer(false)}>
                     ← Back
                   </button>
                   <Menu onNavigate={() => setDrawerOpen(false)} />

@@ -1,5 +1,4 @@
 import Hero from '@/components/landing/Hero'
-import Images from '@/components/landing/Images'
 import Video from '@/components/landing/Video'
 import Summary from '@/components/landing/Summary'
 import ContactUs from '@/components/landing/ContactUs'
@@ -12,7 +11,6 @@ export default function Home() {
       <Summary />
       <Video />
       <Packages />
-      <Images />
       <ContactUs />
     </>
   )

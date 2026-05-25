@@ -1,4 +1,3 @@
-import StyledButton from '@/components/utils/StyledButton'
 import useWindowSize from '@/lib/useWindowSize'
 import Link from 'next/link'
 import styles from '@/styles/layout/Header.module.scss'
@@ -21,6 +20,7 @@ interface MainLink {
 
 // Define the main navigation links with the new 'ABOUT US' submenu
 const mainLinks: MainLink[] = [
+  { id: 'jnimun', text: 'JNIMUN', href: '/JNIMUN' },
   {
     id: 'about',
     text: 'ABOUT US',
@@ -32,9 +32,7 @@ const mainLinks: MainLink[] = [
       { id: 'archives', text: 'Conference Archives', href: '/Archives' },
     ],
   },
-  { id: 'jnimun', text: "JNIMUN'26", href: '/JNIMUN' },
   { id: 'contact', text: 'CONTACT US', href: '/#contact' },
-  { id: 'portal', text: 'PORTAL', href: 'https://portal.nimuneg.org' },
 ]
 
 interface MenuProps {
@@ -138,15 +136,11 @@ export default function Menu({ onNavigate }: MenuProps) {
             aria-haspopup={!!link.submenu}
             aria-expanded={openDropdown === link.id}
             role={isTabletOrMobile && link.submenu ? 'button' : undefined}
-            tabIndex={link.id === 'about' ? -1 : undefined}
           >
-            <StyledButton
-              className={styles.navButton}
-              fontFamily={'Montserrat'}
-            >
+            <span className={styles.navButton}>
               {link.text}
               {link.submenu && <span className={styles.dropdownIndicator}></span>}
-            </StyledButton>
+            </span>
           </Link>
           {link.submenu && openDropdown === link.id && (
             <div

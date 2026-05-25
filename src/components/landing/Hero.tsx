@@ -1,5 +1,5 @@
 import styles from '@/styles/landing/Hero.module.scss'
-import { jnimun26Asset } from '@/lib/jnimun26Brand'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -26,13 +26,10 @@ export default function Hero() {
 
   useEffect(() => {
     const updateCountdown = () => setCountdown(getCountdown())
-    const initialCountdownTimer = window.setTimeout(updateCountdown, 0)
     const countdownTimer = window.setInterval(updateCountdown, 1000)
+    updateCountdown()
 
-    return () => {
-      window.clearTimeout(initialCountdownTimer)
-      window.clearInterval(countdownTimer)
-    }
+    return () => window.clearInterval(countdownTimer)
   }, [])
 
   const countdownItems = [
@@ -43,51 +40,55 @@ export default function Hero() {
   ]
 
   return (
-    <>
-      <div className={styles.heroWrapper}>
-        <div className={styles.heroBanner}>
-          <div className={styles.heroOverlay} />
+    <section id="top" className={styles.hero}>
+      <div className={styles.heroInner}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>International Conference</p>
+          <h1 className={styles.wordmark}>NIMUN</h1>
+          <p className={styles.subtitle}>Nile International Model United Nations</p>
+          <p className={styles.intro}>
+            Nile International Model United Nations is a vibrant, student-led club dedicated to
+            inspiring global awareness, diplomacy, and leadership.
+          </p>
+          <div className={styles.actions}>
+            <Link href="/apply" className={styles.primaryButton}>
+              APPLY NOW
+            </Link>
+            <Link href="/JNIMUN" className={styles.secondaryButton}>
+              JNIMUN
+            </Link>
+          </div>
+        </div>
 
-          <div className={styles.heroContent}>
-            <div className={styles.countdownCard}>
-              {/* Stickers scattered around the card */}
-              <img src={jnimun26Asset('rays.png')} alt="" className={`${styles.sticker} ${styles.stickerRays}`} aria-hidden="true" />
-              <img src={jnimun26Asset('stars.png')} alt="" className={`${styles.sticker} ${styles.stickerStars}`} aria-hidden="true" />
-              <img src={jnimun26Asset('megaphone.png')} alt="" className={`${styles.sticker} ${styles.stickerMegaphone}`} aria-hidden="true" />
-              <img src={jnimun26Asset('sand_clock.png')} alt="" className={`${styles.sticker} ${styles.stickerHourglass}`} aria-hidden="true" />
-              <img src={jnimun26Asset('big_star.png')} alt="" className={`${styles.sticker} ${styles.stickerBigStar}`} aria-hidden="true" />
-              <img src={jnimun26Asset('small_stars.png')} alt="" className={`${styles.sticker} ${styles.stickerSmallStars}`} aria-hidden="true" />
-              <img src={jnimun26Asset('lens.png')} alt="" className={`${styles.sticker} ${styles.stickerLens}`} aria-hidden="true" />
-              <img src={jnimun26Asset('pencil.png')} alt="" className={`${styles.sticker} ${styles.stickerPencil}`} aria-hidden="true" />
-              <img src={jnimun26Asset('bulb.png')} alt="" className={`${styles.sticker} ${styles.stickerBulb}`} aria-hidden="true" />
-              <img src={jnimun26Asset('exclamation.png')} alt="" className={`${styles.sticker} ${styles.stickerExclamation}`} aria-hidden="true" />
-              <img src={jnimun26Asset('thumbs_up.png')} alt="" className={`${styles.sticker} ${styles.stickerThumbsUp}`} aria-hidden="true" />
-              <img src={jnimun26Asset('clip.png')} alt="" className={`${styles.sticker} ${styles.stickerClip}`} aria-hidden="true" />
-
-              <p className={styles.countdownEyebrow}>
-                <span>JNIMUN</span>
-                <span className={styles.countdownYear}>&apos;26</span>
-                <span> is approaching</span>
-              </p>
-              <div className={styles.countdownGrid} aria-label="Countdown to JNIMUN'26">
-                {countdownItems.map((item) => (
-                  <div className={styles.countdownItem} key={item.label}>
-                    <span className={styles.countdownValue}>
-                      {item.value.toString().padStart(2, '0')}
-                    </span>
-                    <span className={styles.countdownLabel}>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className={styles.heroActions}>
-                <Link href="/apply" className={styles.applyNowBtn}>
-                  APPLY NOW
-                </Link>
-              </div>
-            </div>
+        <div className={styles.heroVisual}>
+          <div className={styles.photoFrame}>
+            <Image
+              src="/image/png/homepage0.jpg"
+              alt="NIMUN delegates celebrating during conference"
+              fill
+              sizes="(max-width: 900px) 92vw, 48vw"
+              priority
+              className={styles.heroImage}
+            />
+          </div>
+          <div className={styles.badge}>
+            <span>NU</span>
+            <strong>Global debate</strong>
           </div>
         </div>
       </div>
-    </>
+
+      <div className={styles.countdownBar} aria-label="Countdown to JNIMUN 2026">
+        <div className={styles.timerIcon} aria-hidden="true">
+          <span />
+        </div>
+        {countdownItems.map((item) => (
+          <div className={styles.countdownItem} key={item.label}>
+            <span className={styles.countdownValue}>{item.value.toString().padStart(2, '0')}</span>
+            <span className={styles.countdownLabel}>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }
