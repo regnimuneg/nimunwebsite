@@ -410,7 +410,53 @@ export default function Apply() {
     }
   }, [errors.submit])
 
-  const currentSection = (SECTIONS[currentSectionIndex] || SECTIONS[0]) as Section
+  const currentSection = useMemo(() => {
+    const section = { ...(SECTIONS[currentSectionIndex] || SECTIONS[0]) } as Section
+    if (activeWaveName === 'Waitlist' && section.sectionTitle === 'Councils') {
+      return {
+        ...section,
+        sectionDescription: (
+          <>
+            <div style={{
+              backgroundColor: '#ffdf51',
+              border: '2px solid #000000',
+              borderRadius: '10px',
+              padding: '12px 16px',
+              marginBottom: '20px',
+              color: '#000000',
+              fontWeight: 'bold',
+              fontFamily: 'Berlin Sans FB, sans-serif',
+              fontSize: '0.95rem',
+              boxShadow: '3px 3px 0 #000000',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              <span>⚠️ <strong>Note:</strong> Since you are registering for the Waitlist, you may be assigned to another council based on council seat limits.</span>
+            </div>
+            {section.sectionDescription}
+          </>
+        ),
+        questions: section.questions.map(q => {
+          if (q.type === 'GRID' && q.title === 'Council Preferences') {
+            return {
+              ...q,
+              columns: [
+                'United Nations Security Council (UNSC) (Advanced)',
+                'Crisis Committee (Advanced)',
+                'United Nations Office on Drugs and Crime (UNODC) (Intermediate)',
+                'International Maritime Organization (IMO) (Intermediate)',
+                'United Nations High Commissioner for Refugees (UNHCR) (Beginner)',
+                'International Press Committee (Beginner)'
+              ]
+            }
+          }
+          return q
+        })
+      }
+    }
+    return section
+  }, [currentSectionIndex, activeWaveName])
   const progress = useMemo(() => {
     if (SECTIONS.length <= 1) return 0
     return Math.round((currentSectionIndex / (SECTIONS.length - 1)) * 100)
@@ -1113,7 +1159,7 @@ NIMUN Delegate Package Includes:
             <section className={styles.section}>
               <h2 className={styles.sectionTitle}>{currentSection.sectionTitle}</h2>
               {currentSection.sectionDescription && (
-                <p className={styles.sectionDescription}>{currentSection.sectionDescription}</p>
+                <div className={styles.sectionDescription}>{currentSection.sectionDescription}</div>
               )}
 
               {currentSection.questions.length ? (

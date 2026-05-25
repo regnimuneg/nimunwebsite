@@ -135,9 +135,6 @@ const IC26: NextPage = () => {
           <Link href="/Archives" className={styles.navButton}>
             Conferences
           </Link>
-          <Link href="/JNIMUN" className={styles.navButton}>
-            JNIMUN&apos;26
-          </Link>
           <div className={styles.starDivider}>
             <Image src="/image/png/NIMUN Star.png" alt="Star" width={80} height={80} className={styles.starImage} />
           </div>
