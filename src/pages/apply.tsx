@@ -361,6 +361,8 @@ export default function Apply() {
   const [dynamicPolicyImage, setDynamicPolicyImage] = useState<string>("/image/png/JNIMUN%2726/Form%20Docs/Wave%205.png")
   const [activeWaveName, setActiveWaveName] = useState<string>('Wave 5')
   const [formCloseReason, setFormCloseReason] = useState<string>('')
+  const [showClosedModal, setShowClosedModal] = useState(false)
+  const [closedModalReason, setClosedModalReason] = useState('')
 
   useEffect(() => {
     async function checkFormStatus() {
@@ -631,10 +633,10 @@ export default function Apply() {
       })
       const data = await response.json()
       if (data && data.isOpen === false) {
-        alert(
+        setClosedModalReason(
           data.reason || 'We have reached the maximum limit of responses while you were filling out the form. Registration cannot proceed at this time.'
         )
-        window.location.reload()
+        setShowClosedModal(true)
         return
       }
     } catch (error) {
@@ -1138,7 +1140,7 @@ NIMUN Delegate Package Includes:
               </button>
               <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
                 {isSubmitting
-                  ? 'Submitting...'
+                  ? (currentSection.nextAction === 'SUBMIT' ? 'Submitting...' : 'Continuing...')
                   : currentSection.nextAction === 'SUBMIT'
                     ? (isWaitlist ? 'Join Waitlist' : 'Submit Application')
                     : 'Continue'}
@@ -1147,6 +1149,26 @@ NIMUN Delegate Package Includes:
           </form>
         </div>
       </div>
+
+      {showClosedModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <svg className={styles.modalIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24" width="60" height="60">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <h2>Registration Limit Reached</h2>
+            <p>{closedModalReason}</p>
+            <button
+              onClick={() => {
+                window.location.reload()
+              }}
+              className={styles.modalBtn}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
