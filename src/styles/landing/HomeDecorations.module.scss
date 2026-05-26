@@ -1,0 +1,95 @@
+.homePage {
+  position: relative;
+  overflow: hidden;
+}
+
+.decorLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.decor {
+  position: absolute;
+  width: clamp(190px, 20vw, 420px);
+  height: auto;
+  opacity: 1;
+  filter: drop-shadow(0 22px 38px rgba(0, 20, 78, 0.18));
+  user-select: none;
+}
+
+.decorTopLeft {
+  top: clamp(340px, 27vw, 450px);
+  left: clamp(-165px, -7vw, -88px);
+  transform: rotate(-10deg);
+}
+
+.decorTopRight {
+  top: clamp(260px, 21vw, 390px);
+  right: clamp(-180px, -8vw, -96px);
+  width: clamp(210px, 22vw, 440px);
+  transform: rotate(9deg);
+}
+
+.decorMidLeft {
+  top: clamp(760px, 62vw, 980px);
+  left: clamp(-180px, -8vw, -94px);
+  width: clamp(220px, 24vw, 470px);
+  transform: rotate(7deg);
+}
+
+.decorMidRight {
+  top: clamp(980px, 78vw, 1240px);
+  right: clamp(-190px, -9vw, -106px);
+  width: clamp(220px, 23vw, 460px);
+  transform: rotate(-8deg);
+}
+
+.decorBottomLeft {
+  left: clamp(-180px, -8vw, -94px);
+  bottom: clamp(420px, 30vw, 620px);
+  width: clamp(210px, 22vw, 430px);
+  transform: rotate(-9deg);
+}
+
+.decorBottomRight {
+  right: clamp(-190px, -9vw, -104px);
+  bottom: clamp(120px, 12vw, 220px);
+  width: clamp(230px, 25vw, 500px);
+  transform: rotate(8deg);
+}
+
+@media (max-width: 900px) {
+  .decor {
+    width: 190px;
+  }
+
+  .decorTopRight,
+  .decorMidLeft,
+  .decorMidRight {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .decor {
+    width: 150px;
+  }
+
+  .decorTopLeft {
+    top: 350px;
+    left: -92px;
+  }
+
+  .decorBottomRight {
+    right: -120px;
+    bottom: 120px;
+    width: 200px;
+  }
+
+  .decorBottomLeft {
+    left: -110px;
+    bottom: 520px;
+  }
+}

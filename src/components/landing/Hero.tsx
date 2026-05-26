@@ -43,7 +43,6 @@ export default function Hero() {
     <section id="top" className={styles.hero}>
       <div className={styles.heroInner}>
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>International Conference</p>
           <h1 className={styles.wordmark}>NIMUN</h1>
           <p className={styles.subtitle}>Nile International Model United Nations</p>
           <p className={styles.intro}>
@@ -52,7 +51,15 @@ export default function Hero() {
           </p>
           <div className={styles.actions}>
             <Link href="/apply" className={styles.primaryButton}>
-              APPLY NOW
+              <span>APPLY</span>
+              <Image
+                src="/image/png/JNIMUN'26/laptop.png"
+                alt=""
+                width={74}
+                height={74}
+                className={styles.applySticker}
+                aria-hidden="true"
+              />
             </Link>
             <Link href="/JNIMUN" className={styles.secondaryButton}>
               JNIMUN
@@ -63,8 +70,8 @@ export default function Hero() {
         <div className={styles.heroVisual}>
           <div className={styles.photoFrame}>
             <Image
-              src="/image/png/homepage0.jpg"
-              alt="NIMUN delegates celebrating during conference"
+              src="/image/png/IMG_4323.png"
+              alt="NIMUN delegates celebrating with placards during conference"
               fill
               sizes="(max-width: 900px) 92vw, 48vw"
               priority
@@ -81,17 +88,83 @@ export default function Hero() {
 
       <div className={styles.countdownBar} aria-label="Countdown to JNIMUN 2026">
         <div className={styles.timerIcon} aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M16 2V6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 2V6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M3 10H21" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 14H8.01" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 14H12.01" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M16 14H16.01" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 18H8.01" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 18H12.01" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M16 18H16.01" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 2V6"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8 2V6"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3 10H21"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8 14H8.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 14H12.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 14H16.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8 18H8.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 18H12.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 18H16.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
         {countdownItems.map((item) => (
