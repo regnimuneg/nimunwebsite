@@ -43,7 +43,6 @@ export default function Hero() {
     <section id="top" className={styles.hero}>
       <div className={styles.heroInner}>
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>International Conference</p>
           <h1 className={styles.wordmark}>NIMUN</h1>
           <p className={styles.subtitle}>Nile International Model United Nations</p>
           <p className={styles.intro}>

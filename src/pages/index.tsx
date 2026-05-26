@@ -2,7 +2,6 @@ import Hero from '@/components/landing/Hero'
 import Video from '@/components/landing/Video'
 import Summary from '@/components/landing/Summary'
 import ContactUs from '@/components/landing/ContactUs'
-import Packages from '@/components/landing/Packages'
 
 export default function Home() {
   return (
@@ -10,7 +9,6 @@ export default function Home() {
       <Hero />
       <Summary />
       <Video />
-      <Packages />
       <ContactUs />
     </>
   )

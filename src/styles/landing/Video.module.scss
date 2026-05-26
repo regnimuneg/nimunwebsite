@@ -2,80 +2,32 @@ $primary-blue: #0037c0;
 $off-white: #e5e5e5;
 
 .featureSection {
-  padding: 0 clamp(18px, 5vw, 76px) clamp(58px, 8vw, 96px);
-  background: $off-white;
+  padding: 0 clamp(18px, 5vw, 76px) clamp(42px, 6vw, 70px);
+  background:
+    linear-gradient(rgba(245, 246, 248, 0.12), rgba(245, 246, 248, 0.12)),
+    url('/image/png/whiteheroupdated.png') center bottom / cover no-repeat,
+    #f5f6f8;
 }
 
 .featureBand {
   position: relative;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(18px, 3.6vw, 38px);
-  width: min(1280px, 100%);
+  width: min(1320px, 100%);
   margin: 0 auto;
-  padding: clamp(22px, 3.5vw, 34px);
+  min-height: clamp(150px, 14vw, 210px);
+  padding: clamp(22px, 3vw, 42px) clamp(24px, 4vw, 54px);
   overflow: hidden;
   border: 1px solid rgba(0, 55, 192, 0.18);
   border-radius: 24px;
   color: #ffffff;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 44%), $primary-blue;
+  background:
+    linear-gradient(90deg, rgba(0, 55, 192, 0.12), rgba(0, 55, 192, 0.02)),
+    url('/image/png/boxbg.png') center / cover no-repeat,
+    $primary-blue;
   box-shadow: 0 26px 64px rgba(0, 20, 78, 0.18);
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: clamp(20px, 6vw, 90px);
-    bottom: -24px;
-    width: min(470px, 40%);
-    height: 110px;
-    opacity: 0.24;
-    background: linear-gradient(135deg, transparent 0 45%, #ffffff 46% 47%, transparent 48%),
-      linear-gradient(90deg, transparent 0 17%, rgba(255, 255, 255, 0.75) 18% 19%, transparent 20%);
-    background-size:
-      92px 110px,
-      52px 110px;
-  }
-}
-
-.iconMark {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: clamp(62px, 9vw, 90px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(0, 55, 192, 0.12);
-
-  span {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    border-bottom: 3px solid $primary-blue;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 4px;
-      width: 2px;
-      height: 28px;
-      background: $primary-blue;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 10px;
-      top: 5px;
-      width: 18px;
-      height: 12px;
-      border: 2px solid $primary-blue;
-      border-left: 0;
-      border-radius: 0 8px 8px 0;
-    }
-  }
 }
 
 .copy {
@@ -85,10 +37,10 @@ $off-white: #e5e5e5;
 }
 
 .eyebrow {
-  margin: 0 0 7px;
+  margin: 0 0 5px;
   color: rgba(255, 255, 255, 0.72);
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.76rem;
+  font-size: clamp(0.66rem, 0.9vw, 0.78rem);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -97,20 +49,20 @@ $off-white: #e5e5e5;
   margin: 0;
   color: #ffffff;
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(1.35rem, 3vw, 2.65rem);
+  font-size: clamp(1.7rem, 3.5vw, 3.25rem);
   font-weight: 900;
   line-height: 1.04;
   letter-spacing: 0;
 }
 
 .text {
-  max-width: 760px;
-  margin: 12px 0 0;
+  max-width: 900px;
+  margin: 10px 0 0;
   color: rgba(255, 255, 255, 0.86);
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(0.88rem, 1.2vw, 1rem);
+  font-size: clamp(0.92rem, 1.18vw, 1.08rem);
   font-weight: 500;
-  line-height: 1.65;
+  line-height: 1.52;
 }
 
 .link {
@@ -119,14 +71,14 @@ $off-white: #e5e5e5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 22px;
+  min-height: 46px;
+  padding: 0 24px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 999px;
   color: $primary-blue;
   background: #ffffff;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.78rem;
+  font-size: clamp(0.78rem, 0.9vw, 0.92rem);
   font-weight: 900;
   text-transform: uppercase;
   white-space: nowrap;
@@ -146,7 +98,10 @@ $off-white: #e5e5e5;
 @media (max-width: 780px) {
   .featureBand {
     grid-template-columns: 1fr;
-    gap: 18px;
+    min-height: auto;
+    gap: 16px;
+    padding: 24px 22px;
+    background-position: 42% center;
   }
 
   .link {
@@ -157,24 +112,21 @@ $off-white: #e5e5e5;
 @media (max-width: 520px) {
   .featureSection {
     padding-inline: 16px;
+    padding-bottom: 48px;
   }
 
   .featureBand {
     border-radius: 18px;
-    padding: 22px 18px;
-  }
-
-  .iconMark {
-    width: 58px;
+    padding: 24px 18px;
   }
 
   .title {
-    font-size: clamp(1.45rem, 8vw, 2.25rem);
+    font-size: clamp(1.5rem, 7.8vw, 2.15rem);
   }
 
   .text {
-    font-size: 0.88rem;
-    line-height: 1.55;
+    font-size: 0.84rem;
+    line-height: 1.5;
   }
 
   .link {

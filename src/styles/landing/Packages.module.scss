@@ -5,8 +5,10 @@ $off-white: #e5e5e5;
   position: relative;
   padding: clamp(58px, 8vw, 104px) clamp(18px, 5vw, 76px);
   overflow: hidden;
-  background: radial-gradient(circle at 18% 16%, rgba(0, 55, 192, 0.08), transparent 24%),
-    linear-gradient(180deg, #ffffff 0%, $off-white 100%);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.22), rgba(245, 246, 248, 0.18)),
+    url('/image/png/whiteheroupdated.png') center top / cover no-repeat,
+    #f5f6f8;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -240,6 +242,7 @@ $off-white: #e5e5e5;
 @media (max-width: 620px) {
   .container {
     padding: 54px 16px;
+    background-position: 54% top;
   }
 
   .packageGrid {
