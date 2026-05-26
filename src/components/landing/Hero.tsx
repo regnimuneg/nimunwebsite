@@ -70,8 +70,8 @@ export default function Hero() {
         <div className={styles.heroVisual}>
           <div className={styles.photoFrame}>
             <Image
-              src="/image/png/homepage0.jpg"
-              alt="NIMUN delegates celebrating during conference"
+              src="/image/png/IMG_4323.png"
+              alt="NIMUN delegates celebrating with placards during conference"
               fill
               sizes="(max-width: 900px) 92vw, 48vw"
               priority
