@@ -50,6 +50,7 @@ body {
 html,
 body {
   overflow-x: hidden;
+  max-width: 100%;
   height: 100%;
   // Allow pull-to-refresh on mobile
   overscroll-behavior-y: auto;
@@ -62,6 +63,14 @@ body {
 #__next {
   position: relative;
   max-width: 100vw;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main {
+  max-width: 100vw;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 html body {
