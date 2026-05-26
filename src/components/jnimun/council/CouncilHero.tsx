@@ -19,6 +19,66 @@ export default function CouncilHero({ council }: CouncilHeroProps) {
         ? styles.heroBackdropBlue
         : styles.heroBackdropPink
 
+  if (council.heroImage) {
+    return (
+      <section className={styles.heroSection} aria-labelledby="council-title">
+        <div className={styles.heroContent}>
+          <div className={`${styles.heroMain} ${styles.heroMainWithPortrait}`}>
+            <div className={styles.heroCopy}>
+              <div className={styles.levelBadgeTorn}>
+                <span>{council.badge}</span>
+              </div>
+
+              <h1 id="council-title" className={styles.councilTitle}>
+                {council.titleParts.map((part, i) => (
+                  <span key={`${part.text}-${i}`} className={titleColorClass[part.color]}>
+                    {part.text}
+                  </span>
+                ))}
+              </h1>
+
+              <p className={styles.heroDescription}>
+                <DescriptionWithHighlights text={council.desc} highlights={council.highlightWords} />
+              </p>
+            </div>
+
+            <aside className={styles.heroPortraitPanel} aria-label={`${council.ctaShortName} chairs`}>
+              <span className={`${styles.drawnStar} ${styles.drawnStarPink}`} aria-hidden />
+              <span className={`${styles.drawnArrow} ${styles.drawnArrowYellow}`} aria-hidden />
+              <span className={`${styles.drawnStrokes} ${styles.drawnStrokesBlue}`} aria-hidden />
+              <span className={`${styles.drawnLoop} ${styles.drawnLoopYellow}`} aria-hidden />
+
+              <Image
+                src={council.heroImage}
+                alt={`${council.ctaShortName} secretariat`}
+                width={760}
+                height={600}
+                className={styles.heroPortraitImage}
+                priority
+              />
+
+              {council.pillars && council.pillars.length > 0 ? (
+                <CouncilPillarsNote pillars={council.pillars} />
+              ) : null}
+            </aside>
+          </div>
+        </div>
+
+        {council.stickers.slice(0, 3).map((sticker, idx) => (
+          <Image
+            key={sticker}
+            src={sticker}
+            alt=""
+            width={110}
+            height={110}
+            className={`${styles.heroFloatingSticker} ${styles[`heroSticker_${idx}`]}`}
+            aria-hidden
+          />
+        ))}
+      </section>
+    )
+  }
+
   return (
     <section className={styles.heroSection} aria-labelledby="council-title">
       <div className={`${styles.heroBackdrop} ${backdropClass}`} aria-hidden />

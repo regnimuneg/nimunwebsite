@@ -33,6 +33,7 @@ export interface CouncilConfig {
   desc: string
   highlightWords: string[]
   logo: string
+  heroImage?: string
   pillars?: CouncilPillar[]
   stickers: string[]
   heroAccent: string
@@ -42,6 +43,7 @@ export interface CouncilConfig {
   groupPhoto: string
   groupPhoto2?: string
   ctaShortName: string
+  ctaTitle?: string
 }
 
 export type CouncilSlug = 'sc' | 'crisis' | 'unodc' | 'imo' | 'unhcr' | 'press'

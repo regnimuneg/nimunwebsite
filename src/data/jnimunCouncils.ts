@@ -8,6 +8,7 @@ const placeholderChair = '/image/png/Council1.png'
 const placeholderChair2 = '/image/png/Council2.png'
 const placeholderGroup = '/image/png/Council1.png'
 const placeholderGroup2 = '/image/png/Council2.png'
+const secsImage = (filename: string) => `/image/People/Secs%20Images/${encodeURIComponent(filename)}`
 
 export const COUNCIL_SLUGS = ['sc', 'crisis', 'unodc', 'imo', 'unhcr', 'press'] as const
 
@@ -17,18 +18,20 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
     title: 'United Nations Office on Drugs and Crime — UNODC',
     badge: 'INTERMEDIATE',
     titleParts: [
-      { text: 'UNITED NATIONS OFFICE', color: 'black' },
-      { text: 'ON DRUGS AND CRIME –', color: 'pink' },
-      { text: 'UNODC', color: 'blue' },
+      { text: 'UNITED NATIONS', color: 'black' },
+      { text: 'OFFICE ON', color: 'black' },
+      { text: 'DRUGS AND CRIME —', color: 'black' },
+      { text: 'UNODC', color: 'pink' },
     ],
     desc:
-      'The United Nations Office on Drugs and Crime (UNODC) is a global leader in the fight against illicit drugs, transnational organized crime, terrorism, and corruption. It supports Member States in strengthening criminal justice systems, promoting fair and humane justice, and advancing international cooperation to protect security, justice, and health for all.',
-    highlightWords: ['security, justice, and health'],
+      'The United Nations Office on Drugs and Crime is a global leader in the fight against illicit drugs, transnational organized crime, terrorism, and corruption. It assists Member States with legislation, capacity-building, and research to promote security, justice, and health. We promote international cooperation between states to achieve our goal of preventing organized crime across borders.',
+    highlightWords: ['security', 'justice', 'health'],
     logo: '/image/png/odc.png',
+    heroImage: secsImage('UNODC 2.png'),
     pillars: [
-      { icon: '🛡️', label: 'SECURITY' },
-      { icon: '⚖️', label: 'JUSTICE' },
-      { icon: '❤️', label: 'HEALTH' },
+      { icon: 'shield', label: 'SECURITY' },
+      { icon: 'scales', label: 'JUSTICE' },
+      { icon: 'heart', label: 'HEALTH' },
     ],
     stickers: [
       asset('megaphone.png'),
@@ -45,13 +48,14 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
       accentSecondary: pink,
     },
     chairs: [
-      { name: 'CHAIR NAME', role: 'UNODC CHAIR', image: placeholderChair },
-      { name: 'CHAIR NAME', role: 'UNODC CHAIR', image: placeholderChair2 },
+      { name: 'MALAK EHAB', role: 'UNODC CHAIR', image: secsImage('Malak Ehab - UNODC Chair.png') },
+      { name: 'NOOR BADAWI', role: 'UNODC CO-CHAIR', image: secsImage('Noor Badawi - UNODC Co-Chair.png') },
     ],
     chairBackings: [blue, pink],
-    groupPhoto: placeholderGroup,
-    groupPhoto2: placeholderGroup2,
+    groupPhoto: '/image/png/CCPCJ%2726.jpg',
+    groupPhoto2: '/image/png/JNIMUN%20Sessions.jpg',
     ctaShortName: 'UNODC',
+    ctaTitle: 'UNITED NATIONS OFFICE ON DRUGS AND CRIME — UNODC',
   },
 
   sc: {
