@@ -13,15 +13,35 @@ const summaryPhotos = [
   },
   {
     src: '/image/png/homepage1.jpg',
-    alt: 'NIMUN students during a conference moment',
-  },
-  {
-    src: '/image/png/homepage2.jpg',
-    alt: 'NIMUN delegates gathered together',
+    alt: 'NIMUN students dancing during a conference moment',
   },
   {
     src: '/image/png/homepage3.jpg',
-    alt: 'NIMUN conference participants sharing a group moment',
+    alt: 'NIMUN delegate speaking on microphone in an auditorium',
+  },
+  {
+    src: '/image/png/homepage4.jpg',
+    alt: 'NIMUN delegates taking notes during committee',
+  },
+  {
+    src: '/image/png/Group.jpg',
+    alt: 'NIMUN delegation group photo outside Nile University',
+  },
+  {
+    src: '/image/png/_NU27875.jpg',
+    alt: 'NIMUN delegate holding up a country placard',
+  },
+  {
+    src: '/image/png/JNIMUN Conference.jpg',
+    alt: 'JNIMUN delegates raising placards during a committee session',
+  },
+  {
+    src: '/image/png/JNIMUN Sessions.jpg',
+    alt: 'JNIMUN delegates listening attentively during a session',
+  },
+  {
+    src: '/image/png/JNIMUN Closing.jpg',
+    alt: 'JNIMUN closing celebration with delegates cheering',
   },
 ]
 
@@ -60,7 +80,6 @@ export default function Summary() {
       <div className={styles.pattern} aria-hidden="true" />
       <div className={styles.summaryInner}>
         <div className={styles.copy}>
-          <p className={styles.kicker}>Nile University Delegation</p>
           <h2 id="life-changing-title" className={styles.title}>
             A LIFE CHANGING EXPERIENCE
           </h2>

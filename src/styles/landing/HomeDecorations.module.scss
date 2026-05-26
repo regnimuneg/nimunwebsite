@@ -6,7 +6,7 @@
 .decorLayer {
   position: absolute;
   inset: 0;
-  z-index: 40;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .decorTopLeft {
-  top: clamp(130px, 11vw, 210px);
+  top: clamp(340px, 27vw, 450px);
   left: clamp(-165px, -7vw, -88px);
   transform: rotate(-10deg);
 }
@@ -78,7 +78,7 @@
   }
 
   .decorTopLeft {
-    top: 128px;
+    top: 350px;
     left: -92px;
   }
 

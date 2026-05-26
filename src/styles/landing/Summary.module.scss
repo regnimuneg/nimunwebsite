@@ -17,6 +17,7 @@ $off-white: #e5e5e5;
 
 .summaryInner {
   position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.88fr);
   align-items: center;

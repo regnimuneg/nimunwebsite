@@ -14,6 +14,7 @@ $off-white: #e5e5e5;
 
 .card {
   position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(24px, 4vw, 42px);
