@@ -98,9 +98,41 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
 }
 
 .primaryButton {
-  background: #ffffff;
-  color: $primary-blue;
-  box-shadow: 0 18px 34px rgba(0, 20, 78, 0.24);
+  position: relative;
+  min-width: clamp(190px, 16vw, 240px);
+  min-height: clamp(70px, 5.4vw, 88px);
+  border: clamp(3px, 0.34vw, 5px) solid #1d4054;
+  border-radius: 999px;
+  padding: 0 clamp(46px, 4vw, 70px) 0 clamp(42px, 4.2vw, 76px);
+  color: #ffffff;
+  background: #3498d1;
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 60, 105, 0.2),
+    5px 7px 0 #222f34,
+    0 18px 34px rgba(0, 20, 78, 0.18);
+  font-family: 'Bionix', 'Montserrat', sans-serif;
+  font-size: clamp(1.55rem, 2.35vw, 2.5rem);
+  line-height: 1;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 -4px 0 rgba(0, 60, 105, 0.2),
+      5px 10px 0 #222f34,
+      0 22px 38px rgba(0, 20, 78, 0.2);
+  }
+}
+
+.applySticker {
+  position: absolute;
+  top: clamp(-30px, -2.1vw, -18px);
+  right: clamp(-12px, -0.9vw, -4px);
+  width: clamp(58px, 5vw, 78px);
+  height: auto;
+  pointer-events: none;
+  transform: rotate(8deg);
+  transform-origin: center;
+  filter: drop-shadow(0 5px 5px rgba(0, 20, 78, 0.18));
 }
 
 .secondaryButton {
@@ -225,7 +257,9 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
   border: 1px solid rgba(100, 160, 255, 0.4);
   border-radius: 20px;
   background: linear-gradient(90deg, #011d6b 0%, #05268c 50%, #031b70 100%);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 50, 255, 0.3);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(0, 50, 255, 0.3);
   overflow: hidden;
 
   &::before {
@@ -235,7 +269,7 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
     right: 0;
     bottom: 0;
     width: 50%;
-    background: radial-gradient(circle at right, rgba(255,255,255,0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at right, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
     pointer-events: none;
   }
 }
@@ -248,9 +282,11 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
   width: 68px;
   height: 68px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
-  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3), 0 4px 15px rgba(0,0,0,0.2);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+    0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   flex-shrink: 0;
   z-index: 1;
