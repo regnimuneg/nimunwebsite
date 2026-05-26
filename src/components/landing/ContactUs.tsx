@@ -15,7 +15,7 @@ export default function ContactUs() {
       <div className={styles.card}>
         <div className={styles.brand}>
           <Image
-            src="/image/png/logo24.png"
+            src="/image/png/logo_white.png"
             alt="NIMUN logo"
             width={82}
             height={68}

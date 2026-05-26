@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Drawer from '@mui/material/Drawer'
@@ -28,36 +29,29 @@ export default function Header(): JSX.Element {
   const [isHomePage, setIsHomePage] = useState(false)
 
   React.useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY
-      if (scroll > 10) {
-        setIsScrolling(true)
-      } else {
-        setIsScrolling(false)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Initial check
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  React.useEffect(() => {
     setIsHomePage(router.pathname === '/')
   }, [router.pathname])
 
-  const toggleDrawer = (open: boolean) => () => {
-    setDrawerOpen(open)
-  }
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleLogoClick = (e: React.MouseEvent) => {
     if (isHomePage) {
       e.preventDefault()
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+  }
+
+  const toggleDrawer = (open: boolean) => (e: React.KeyboardEvent | React.MouseEvent) => {
+    if (e.type === 'keydown' && ((e as React.KeyboardEvent).key === 'Tab' || (e as React.KeyboardEvent).key === 'Shift')) {
+      return
+    }
+    setDrawerOpen(open)
   }
 
   return (
@@ -73,8 +67,18 @@ export default function Header(): JSX.Element {
               className={styles.logoWrapper}
               aria-label="Nile International Model United Nations Home"
             >
-              <span className={styles.brandTitle}>NIMUN</span>
-              <span className={styles.brandSubtitle}>Nile International Model United Nations</span>
+              <Image
+                src="/image/png/logo_white.png"
+                alt="NIMUN Logo"
+                width={100}
+                height={100}
+                className={styles.headerLogo}
+                priority
+              />
+              <div className={styles.logoTextWrapper}>
+                <span className={styles.brandTitle}>NIMUN</span>
+                <span className={styles.brandSubtitle}>Nile International Model United Nations</span>
+              </div>
             </a>
             {/* Render Menu component only on desktop, directly after logo */}
             {!isMobile && <Menu />}

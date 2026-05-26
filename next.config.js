@@ -32,13 +32,14 @@ const nextConfig = {
       },
     ];
 
-    if (isProd) {
-      rules.push({
-        source: '/JNIMUN/:path*',
-        destination: '/404',
-        permanent: false,
-      });
-    }
+    // if (isProd) {
+    // TODO: DO NOT COMMIT - uncomment this redirect rule before pushing to prod
+    //   rules.push({
+    //     source: '/JNIMUN/:path*',
+    //     destination: '/404',
+    //     permanent: false,
+    //   });
+    // }
 
     return rules;
   },
