@@ -3,8 +3,8 @@ const nextConfig = {
   // Use default server/SSR output so API routes work
   trailingSlash: true,
   images: {
-    unoptimized: true,
-    qualities: [40, 75, 85],
+    qualities: [40, 60, 75, 85],
+    formats: ['image/webp'],
   },
   // Redirect hidden pages to 404
   async redirects() {

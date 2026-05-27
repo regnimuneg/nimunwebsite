@@ -1,32 +1,29 @@
-import React, { useEffect, useRef } from 'react'
-import styles from '@/styles/Hierarchy.module.scss' // Import SCSS module
-import Image from 'next/image'
-import type { StaticImageData } from 'next/image'
-import gsap from 'gsap'
+import styles from '@/styles/Hierarchy.module.scss'
+import Image, { type StaticImageData } from 'next/image'
+import type { ReactNode } from 'react'
 
 // High Board imports from 26 folder
+import CM from '@public/image/People/HB/26/CM.png'
+import DSG from '@public/image/People/HB/26/DSG.png'
 import FarahHB from '@public/image/People/HB/26/Farah.png'
 import Rawya from '@public/image/People/HB/26/Rawya.png'
-import DSG from '@public/image/People/HB/26/DSG.png'
-import CM from '@public/image/People/HB/26/CM.png'
 
 // Organizing Committee imports from NIMUN26 folder
 import Adham from '@public/image/People/OC/NIMUN26/Adham.png'
-import Omar from '@public/image/People/OC/NIMUN26/Omar.png'
+import Amina from '@public/image/People/OC/NIMUN26/Amina.png'
 import Asmar from '@public/image/People/OC/NIMUN26/Asmar.png'
-import Tifa from '@public/image/People/OC/NIMUN25/Mostafa.png'
-import Rana from '@public/image/People/OC/NIMUN26/Rana.png'
-import Yassine from '@public/image/People/OC/NIMUN26/Yassine.png'
+import Engy from '@public/image/People/OC/NIMUN26/Engy.png'
+import FC from '@public/image/People/OC/NIMUN26/FC.png'
+import Fallal from '@public/image/People/OC/NIMUN26/Fallal.png'
+import Hossam from '@public/image/People/OC/NIMUN26/Hossam.png'
 import Kabbani from '@public/image/People/OC/NIMUN26/Kabbani.png'
 import Lina from '@public/image/People/OC/NIMUN26/Lina.png'
-import FC from '@public/image/People/OC/NIMUN26/FC.png'
-import Hossam from '@public/image/People/OC/NIMUN26/Hossam.png'
-import Fallal from '@public/image/People/OC/NIMUN26/Fallal.png'
-import Amina from '@public/image/People/OC/NIMUN26/Amina.png'
-import Wafa from '@public/image/People/OC/NIMUN26/Wafa.png'
-import Engy from '@public/image/People/OC/NIMUN26/Engy.png'
 import MalakK from '@public/image/People/OC/NIMUN26/Malak K.png'
-
+import Omar from '@public/image/People/OC/NIMUN26/Omar.png'
+import Rana from '@public/image/People/OC/NIMUN26/Rana.png'
+import Wafa from '@public/image/People/OC/NIMUN26/Wafa.png'
+import Yassine from '@public/image/People/OC/NIMUN26/Yassine.png'
+import Tifa from '@public/image/People/OC/NIMUN25/Mostafa.png'
 
 interface Person {
   name: string
@@ -34,23 +31,39 @@ interface Person {
   head?: string
   viceHead?: string
   viceHead2?: string
-  image?: string | StaticImageData | undefined // Include undefined as a type
-  headImage?: string | StaticImageData | undefined // Include undefined as a type
-  viceHeadImage?: string | StaticImageData | undefined // Include undefined as a type
-  viceHead2Image?: string | StaticImageData | undefined // Include undefined as a type
-  isCoordinator?: boolean // Flag for coordinator positions
-  // Custom image positioning (e.g., 'center top', 'center 30%', 'center bottom')
+  image?: StaticImageData
+  headImage?: StaticImageData
+  viceHeadImage?: StaticImageData
+  viceHead2Image?: StaticImageData
+  isCoordinator?: boolean
   imagePosition?: string
   headImagePosition?: string
   viceHeadImagePosition?: string
   viceHead2ImagePosition?: string
 }
 
+interface CommitteeMember {
+  name: string
+  title: string
+  image: StaticImageData
+  imagePosition?: string
+}
+
 const HighBoard: Person[] = [
-  { name: 'Farah Ghaly', position: 'Secretary General', image: FarahHB, imagePosition: "center 30%" },
-  { name: 'Nizar Amer', position: 'Deputy Secretary General', image: DSG, imagePosition: "center 30%" },
+  {
+    name: 'Farah Ghaly',
+    position: 'Secretary General',
+    image: FarahHB,
+    imagePosition: 'center 30%',
+  },
+  {
+    name: 'Nizar Amer',
+    position: 'Deputy Secretary General',
+    image: DSG,
+    imagePosition: 'center 30%',
+  },
   { name: 'Seif Elnahas', position: 'Conference Manager', image: CM },
-  { name: 'Rawya Nabil', position: 'Academic Director', image: Rawya, imagePosition: "center 10%" }
+  { name: 'Rawya Nabil', position: 'Academic Director', image: Rawya, imagePosition: 'center 10%' },
 ]
 
 const OrganizingCommittee: Person[] = [
@@ -60,11 +73,11 @@ const OrganizingCommittee: Person[] = [
     viceHead: 'Omar Sherif',
     viceHead2: 'Rana Shafik',
     headImage: Adham,
-    headImagePosition: "center 10%",
+    headImagePosition: 'center 10%',
     viceHeadImage: Omar,
-    viceHeadImagePosition: "center top",
+    viceHeadImagePosition: 'center top',
     viceHead2Image: Rana,
-    viceHead2ImagePosition: "center 10%",
+    viceHead2ImagePosition: 'center 10%',
   },
   {
     name: 'Operations & Logistics',
@@ -72,11 +85,11 @@ const OrganizingCommittee: Person[] = [
     viceHead: 'Yassine Mohamed',
     viceHead2: 'Hana Elfallal',
     headImage: Wafa,
-    headImagePosition: "center 40%",
+    headImagePosition: 'center 40%',
     viceHeadImage: Yassine,
+    viceHeadImagePosition: 'center 10%',
     viceHead2Image: Fallal,
-    viceHeadImagePosition: "center 10%",
-    viceHead2ImagePosition: "center 50%",
+    viceHead2ImagePosition: 'center 50%',
   },
   {
     name: 'Public Relations',
@@ -84,11 +97,11 @@ const OrganizingCommittee: Person[] = [
     viceHead: 'Amina Kamal',
     viceHead2: 'Malak Khaled',
     headImage: Kabbani,
-    headImagePosition: "center 30%",
+    headImagePosition: 'center 30%',
     viceHeadImage: Amina,
+    viceHeadImagePosition: 'center 20%',
     viceHead2Image: MalakK,
-    viceHeadImagePosition: "center 20%",
-    viceHead2ImagePosition: "center 40%",
+    viceHead2ImagePosition: 'center 40%',
   },
   {
     name: 'Media & Design',
@@ -96,306 +109,234 @@ const OrganizingCommittee: Person[] = [
     viceHead: 'Seif alasmar',
     viceHead2: 'Engy Lutfi',
     headImage: Hossam,
-    headImagePosition: "center 17%",
-    viceHeadImage: Asmar, 
-    viceHeadImagePosition: "center 20%",
+    headImagePosition: 'center 17%',
+    viceHeadImage: Asmar,
+    viceHeadImagePosition: 'center 20%',
     viceHead2Image: Engy,
-    viceHead2ImagePosition: "center 30%",
+    viceHead2ImagePosition: 'center 30%',
   },
   {
     name: 'Socials & Events',
     head: 'Mostafa Salama',
     viceHead: 'Lina Amr',
     headImage: Tifa,
-    headImagePosition: "center 30%",
+    headImagePosition: 'center 30%',
     viceHeadImage: Lina,
-    viceHeadImagePosition: "center 25%",
+    viceHeadImagePosition: 'center 25%',
   },
   {
     name: 'Financial Coordinator',
     head: 'Belal Amer',
     headImage: FC,
-    headImagePosition: "center 30%",
-    isCoordinator: true, // Flag to indicate this is a coordinator, not a head
+    headImagePosition: 'center 30%',
+    isCoordinator: true,
   },
 ]
 
-// const AcademicCommittees: { council: string; members: Person[] }[] = [
-//   {
-//     council: 'ICJ',
-//     members: [
-//       { name: 'Zein Raafat', position: 'President', image: ZeinRaafat },
-//       { name: 'Omar Awad', position: 'Vice President', image: OmarAkl },
-//     ],
-//   },
-//   {
-//     council: 'SPECPOL',
-//     members: [
-//       { name: 'Farah Ghaly', position: 'President', image: FarahGhaly },
-//       { name: 'Adham Ahmed', position: 'Director', image: AdhamAhmed },
-//       { name: 'Ameena Yehia', position: 'Rapporteur', image: AmeenaYahya },
-//     ],
-//   },
-//   {
-//     council: 'UNFCCC COP',
-//     members: [
-//       { name: 'Rana Aboelhassan', position: 'Chair', image: RanaAboElHassan },
-//       { name: 'Rawya Nabil', position: 'Co-chair', image: RawyaNabil },
-//     ],
-//   },
-//   {
-//     council: 'UNESCO',
-//     members: [
-//       { name: 'Mohab Hegazy', position: 'Chair', image: MohabHegazy },
-//       { name: 'Alia Nafea', position: 'Co-chair', image: AliaNafea },
-//     ],
-//   },
-//   {
-//     council: 'UNHRC',
-//     members: [
-//       { name: 'Nizar Amer', position: 'President', image: NizarAmer },
-//       { name: 'Kareem Tantawy', position: 'Director', image: KareemTantawi },
-//       { name: 'Mariam Kabbany', position: 'Rapporteur', image: MariamKabbany },
-//     ],
-//   },
-//   {
-//     council: 'Press Head',
-//     members: [{ name: 'Karen Effat', image: KarenEffat }],
-//   },
-// ]
+const getCommitteeMembers = (committee: Person): CommitteeMember[] => {
+  const members: CommitteeMember[] = []
 
-const Hierarchy: React.FC = () => {
-  const leftShapeRef = useRef<HTMLImageElement>(null)
-  const rightShapeRef = useRef<HTMLImageElement>(null)
-  useEffect(() => {
-    // Floating animation for the right shape with a delay
-    if (leftShapeRef.current) {
-      gsap.to(leftShapeRef.current, {
-        y: -20,
-        repeat: -1,
-        yoyo: true,
-        duration: 2,
-        ease: 'power1.inOut',
-        delay: 0.8, // Add a delay of 0.5 seconds
-      })
-    }
-    // Floating animation for the right shape with a delay
-    if (rightShapeRef.current) {
-      gsap.to(rightShapeRef.current, {
-        y: -20,
-        repeat: -1,
-        yoyo: true,
-        duration: 2,
-        ease: 'power1.inOut',
-        delay: 0.8, // Add a delay of 0.5 seconds
-      })
-    }
-  }, [])
+  if (committee.head && committee.headImage) {
+    members.push({
+      name: committee.head,
+      title: committee.isCoordinator ? 'Coordinator' : 'Head',
+      image: committee.headImage,
+      imagePosition: committee.headImagePosition,
+    })
+  }
+
+  if (committee.viceHead && committee.viceHeadImage) {
+    members.push({
+      name: committee.viceHead,
+      title: 'Vice Head',
+      image: committee.viceHeadImage,
+      imagePosition: committee.viceHeadImagePosition,
+    })
+  }
+
+  if (committee.viceHead2 && committee.viceHead2Image) {
+    members.push({
+      name: committee.viceHead2,
+      title: 'Vice Head',
+      image: committee.viceHead2Image,
+      imagePosition: committee.viceHead2ImagePosition,
+    })
+  }
+
+  return members
+}
+
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+
+function MemberImage({
+  image,
+  name,
+  imagePosition,
+  sizes,
+  priority = false,
+}: {
+  image: StaticImageData
+  name: string
+  imagePosition?: string
+  sizes: string
+  priority?: boolean
+}) {
+  return (
+    <Image
+      src={image}
+      alt={`${name}, NIMUN team member`}
+      fill
+      sizes={sizes}
+      quality={60}
+      placeholder="blur"
+      loading={priority ? undefined : 'lazy'}
+      priority={priority}
+      className={styles.memberImage}
+      style={{ objectPosition: imagePosition || 'center top' }}
+    />
+  )
+}
+
+function SectionHeading({ children }: { children: ReactNode }) {
+  return (
+    <div className={styles.sectionHeading}>
+      <span aria-hidden />
+      <h2>{children}</h2>
+      <span aria-hidden />
+    </div>
+  )
+}
+
+function HighBoardCard({ person }: { person: Person }) {
+  if (!person.image || !person.position) return null
 
   return (
-    <div className={styles.page}>
-      <div id="hierarchy" className={styles.container}>
-        <img
-          ref={leftShapeRef}
-          src="/image/png/31.png"
-          alt="Floating 3D Shape Left"
-          className={styles.floatingShapeLeft}
+    <article className={styles.highBoardCard}>
+      <div className={styles.highBoardRoleHeader}>{person.position}</div>
+      <div className={styles.highBoardPhoto}>
+        <MemberImage
+          image={person.image}
+          name={person.name}
+          imagePosition={person.imagePosition}
+          sizes="(max-width: 430px) 92vw, (max-width: 760px) 70vw, (max-width: 1100px) 42vw, 285px"
+          priority
         />
-        {/* High Board */}
-        <section>
-          <div className={styles.PageTitle}>MEET OUR TEAM</div>
-          <div className={styles.sectionTitle}>HIGH BOARD</div>
-          <div className={`${styles.personCircleContainer} ${styles.highBoardGrid}`}>
-            {HighBoard.map((person, index) => (
-              <div key={index} className={styles.personCircle}>
-                <div className={styles.blueCircle}>
-                  <div className={styles.whiteCircle}>
-                    {person.image && (
-                      <Image
-                        src={person.image}
-                        alt={person.name}
-                        className={styles.personImage}
-                        fill
-                        style={{ 
-                          objectFit: 'cover', 
-                          objectPosition: person.imagePosition || 'center top' 
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className={styles.personDetails}>
-                  <p className={styles.personName}>{person.name}</p>
-                  <p className={styles.personPosition}>{person.position}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+      </div>
+      <div className={styles.highBoardInfo}>
+        <h3>{person.name}</h3>
+      </div>
+    </article>
+  )
+}
 
-        {/* Organizing Committee */}
-        <section>
-          <div className={styles.divider}></div>
-          <h2 className={styles.sectionTitle}>Organizing Committee</h2>
-          {OrganizingCommittee.map((committee, index) => (
-            <div key={index} className={styles.committeeSection}>
-              <h3 className={styles.committeeTitle}>{committee.name}</h3>
-              <div className={`${styles.personCircleContainer} ${styles.committeeContainer} ${committee.viceHead2 ? styles.twoVices : committee.viceHead ? styles.oneVice : ''}`}>
-                {/* Always render Head first, then Vice Heads */}
-                {/* Render Head first */}
-                {committee.head && (
-                  <div className={`${styles.personCircle} ${styles.headCircle}`}>
-                    <div className={styles.blueCircle}>
-                      <div className={styles.whiteCircle}>
-                        {committee.headImage && (
-                          <Image
-                            src={committee.headImage}
-                            alt={committee.head}
-                            className={styles.personImage}
-                            fill
-                            style={{ 
-                              objectFit: 'cover', 
-                              objectPosition: committee.headImagePosition || 'center top' 
-                            }}
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className={styles.personDetails}>
-                      <p className={styles.personName}>{committee.head}</p>
-                      {/* Only show "Head" if not a coordinator */}
-                      {!committee.isCoordinator && <p className={styles.personPosition}>Head</p>}
-                    </div>
-                  </div>
-                )}
-
-                {/* Render Vice Heads after Head */}
-                {committee.viceHead2 ? (
-                  // If 2 vices: wrap them in a container to display side by side
-                  <div className={styles.vicesContainer}>
-                    {committee.viceHead && (
-                      <div className={`${styles.personCircle} ${styles.viceCircle}`}>
-                        <div className={styles.blueCircle}>
-                          <div className={styles.whiteCircle}>
-                            {committee.viceHeadImage && (
-                              <Image
-                                src={committee.viceHeadImage}
-                                alt={committee.viceHead}
-                                className={styles.personImage}
-                                fill
-                                style={{ 
-                                  objectFit: 'cover', 
-                                  objectPosition: committee.viceHeadImagePosition || 'center top' 
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.personDetails}>
-                          <p className={styles.personName}>{committee.viceHead}</p>
-                          <p className={styles.personPosition}>Vice Head</p>
-                        </div>
-                      </div>
-                    )}
-                    {committee.viceHead2 && (
-                      <div className={`${styles.personCircle} ${styles.viceCircle}`}>
-                        <div className={styles.blueCircle}>
-                          <div className={styles.whiteCircle}>
-                            {committee.viceHead2Image && (
-                              <Image
-                                src={committee.viceHead2Image}
-                                alt={committee.viceHead2}
-                                className={styles.personImage}
-                                fill
-                                style={{ 
-                                  objectFit: 'cover', 
-                                  objectPosition: committee.viceHead2ImagePosition || 'center top' 
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.personDetails}>
-                          <p className={styles.personName}>{committee.viceHead2}</p>
-                          <p className={styles.personPosition}>Vice Head</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  // If only 1 vice: render it directly
-                  committee.viceHead && (
-                    <div className={`${styles.personCircle} ${styles.viceCircle}`}>
-                      <div className={styles.blueCircle}>
-                        <div className={styles.whiteCircle}>
-                          {committee.viceHeadImage && (
-                            <Image
-                              src={committee.viceHeadImage}
-                              alt={committee.viceHead}
-                              className={styles.personImage}
-                              fill
-                              style={{ 
-                                objectFit: 'cover', 
-                                objectPosition: committee.viceHeadImagePosition || 'center top' 
-                              }}
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className={styles.personDetails}>
-                        <p className={styles.personName}>{committee.viceHead}</p>
-                        <p className={styles.personPosition}>Vice Head</p>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* Academic Committees 
-      <section>
-        <div className={styles.divider}></div>
-        <h2 className={styles.sectionTitle}>Academic Committees</h2>
-        {AcademicCommittees.map((committee, index) => (
-          <div key={index} className={styles.committeeSection}>
-            <h3 className={styles.committeeTitle}>{committee.council}</h3>
-            <div className={styles.personCircleContainer}>
-              {committee.members.map((member, memberIndex) => (
-                <div key={memberIndex} className={styles.personCircle}>
-                  <div className={styles.blueCircle}>
-                    <div className={styles.whiteCircle}>
-                      {member.image && (
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          className={styles.personImage}
-                          fill
-                          style={{ objectFit: 'cover' }}
-                        />
-                      )}
-                    </div>
-                  </div>
-                  <div className={styles.personDetails}>
-                    <p className={styles.personName}>{member.name}</p>
-                    <p className={styles.personPosition}>{member.position}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </section> */}
-        <img
-          ref={rightShapeRef}
-          src="/image/png/37.png"
-          alt="Floating 3D Shape Right"
-          className={styles.floatingShapeRight}
+function CommitteeMemberCard({ member }: { member: CommitteeMember }) {
+  return (
+    <div className={styles.committeeMember}>
+      <div className={styles.committeePhoto}>
+        <MemberImage
+          image={member.image}
+          name={member.name}
+          imagePosition={member.imagePosition}
+          sizes="(max-width: 600px) 260px, (max-width: 760px) 34vw, (max-width: 1100px) 22vw, 175px"
         />
+      </div>
+      <div className={styles.committeeMemberInfo}>
+        <h3>{member.name}</h3>
+        <p>{member.title}</p>
       </div>
     </div>
   )
 }
 
-export default Hierarchy
+function CommitteeCard({ committee }: { committee: Person }) {
+  const members = getCommitteeMembers(committee)
+  const [headMember, ...viceMembers] = members
+
+  return (
+    <article className={styles.committeeCard} id={slugify(committee.name)}>
+      <div className={styles.committeeLabel}>{committee.name}</div>
+      <div className={styles.committeeMembers}>
+        {headMember && (
+          <div className={styles.committeeHead}>
+            <CommitteeMemberCard member={headMember} />
+          </div>
+        )}
+        {viceMembers.length > 0 && (
+          <div className={styles.committeeVices}>
+            {viceMembers.map((member) => (
+              <CommitteeMemberCard member={member} key={`${committee.name}-${member.name}`} />
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  )
+}
+
+export default function Hierarchy() {
+  return (
+    <main className={styles.page}>
+      <section className={styles.hero} aria-labelledby="team-page-title">
+        <Image
+          src="/image/png/31.png"
+          alt=""
+          width={360}
+          height={360}
+          quality={40}
+          sizes="(max-width: 760px) 0px, 360px"
+          className={`${styles.heroDecor} ${styles.heroDecorLeft}`}
+          aria-hidden="true"
+          loading="lazy"
+        />
+        <Image
+          src="/image/png/35.png"
+          alt=""
+          width={380}
+          height={380}
+          quality={40}
+          sizes="(max-width: 760px) 0px, 380px"
+          className={`${styles.heroDecor} ${styles.heroDecorRight}`}
+          aria-hidden="true"
+          loading="lazy"
+        />
+        <div className={styles.heroContent}>
+          <Image
+            src="/image/png/logo_white.png"
+            alt=""
+            width={92}
+            height={76}
+            className={styles.heroLogo}
+            aria-hidden="true"
+          />
+          <h1 id="team-page-title">MEET OUR TEAM</h1>
+          <p>The people behind the diplomacy, leadership, and impact of NIMUN.</p>
+        </div>
+      </section>
+
+      <section className={styles.teamShell} aria-labelledby="high-board-title">
+        <SectionHeading>
+          <span id="high-board-title">HIGH BOARD</span>
+        </SectionHeading>
+        <div className={styles.highBoardGrid}>
+          {HighBoard.map((person) => (
+            <HighBoardCard person={person} key={person.name} />
+          ))}
+        </div>
+
+        <SectionHeading>
+          <span id="organizing-committee">ORGANIZING COMMITTEE</span>
+        </SectionHeading>
+        <div className={styles.committeeGrid}>
+          {OrganizingCommittee.map((committee) => (
+            <CommitteeCard committee={committee} key={committee.name} />
+          ))}
+        </div>
+      </section>
+    </main>
+  )
+}

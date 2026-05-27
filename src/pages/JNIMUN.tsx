@@ -109,7 +109,7 @@ const JNIMUN: NextPage = () => {
 
           <div className={styles.stickerCluster} aria-hidden="true">
             <Image
-              src="/image/png/monochrome_globe_sticker_illustration.png?v=2"
+              src="/image/png/monochrome_globe_sticker_illustration.png"
               alt=""
               width={430}
               height={430}

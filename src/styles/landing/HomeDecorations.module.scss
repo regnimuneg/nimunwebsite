@@ -33,10 +33,11 @@
 }
 
 .decorMidLeft {
-  top: clamp(760px, 62vw, 980px);
+  top: clamp(860px, 72vw, 1080px);
   left: clamp(-180px, -8vw, -94px);
   width: clamp(220px, 24vw, 470px);
   transform: rotate(7deg);
+  z-index: -1;
 }
 
 .decorMidRight {

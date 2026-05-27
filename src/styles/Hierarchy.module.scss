@@ -1,474 +1,438 @@
+$nimun-blue: #0037c0;
+$deep-blue: #001f78;
+$ink-blue: #061848;
+$off-white: #f5f7fb;
+$line-blue: rgba(0, 55, 192, 0.16);
+
 .page {
-  background-color: #f8f8f8;
+  min-height: 100vh;
   width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden; // Prevent horizontal scroll
+  overflow-x: hidden;
+  color: $ink-blue;
+  background:
+    linear-gradient(rgba(245, 247, 251, 0.92), rgba(245, 247, 251, 0.96)),
+    url('/image/optimized/whiteheroupdated.webp') center top / cover repeat,
+    $off-white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.page,
+.page * {
   box-sizing: border-box;
 }
 
-.container {
-  max-width: 1600px; // Increased to prevent cutoff on larger screens
-  margin: 0 auto; // Center the container
-  // Top padding: navbar height (100px desktop, 80px mobile) + spacing (20px)
-  padding: clamp(120px, 10vw, 120px) clamp(20px, 4vw, 40px) clamp(50px, 8vw, 100px);
-  text-align: center;
+.hero {
   position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden; // Prevent horizontal scroll
+  display: grid;
+  place-items: center;
+  min-height: clamp(430px, 50vw, 620px);
+  padding: clamp(150px, 13vw, 190px) clamp(20px, 5vw, 72px) clamp(70px, 8vw, 110px);
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(0, 55, 192, 0.74), rgba(0, 26, 118, 0.86)),
+    url('/image/optimized/hero-diplomatic-background.webp') center / cover no-repeat,
+    $nimun-blue;
 
-  @media screen and (max-width: 1050px) {
-    padding-top: clamp(90px, 10vw, 100px); // Tablet: navbar ~65px + spacing
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -58px;
+    width: min(1180px, calc(100% - 28px));
+    height: 116px;
+    border-radius: 999px 999px 0 0;
+    background: $off-white;
+    transform: translateX(-50%);
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.55);
   }
-
-  @media screen and (max-width: 600px) {
-    padding-top: clamp(100px, 12vw, 110px); // Mobile: navbar ~80px + spacing
-  }
 }
 
-.PageTitle {
-  font-family: 'Bionix';
-  color: #0037c0;
-  font-size: clamp(2rem, 5vw, 50px); // Responsive typography
-  margin-bottom: clamp(20px, 3vw, 40px);
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  width: min(840px, 100%);
+  text-align: center;
 }
 
-.sectionTitle {
-  font-family: 'Montserrat';
-  font-weight: 800;
+.heroLogo {
+  width: clamp(64px, 8vw, 92px);
+  height: auto;
+  margin-bottom: clamp(14px, 2vw, 22px);
+  filter: drop-shadow(0 16px 24px rgba(0, 20, 78, 0.26));
 }
 
-.personImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; // Cover to fill the square
-  object-position: center top; // Position to show faces (top of image centered)
+.heroContent h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(3.4rem, 9vw, 7.9rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: 0 22px 46px rgba(0, 20, 78, 0.24);
+}
+
+.heroContent p {
+  width: min(560px, 100%);
+  max-width: 560px;
+  margin: clamp(16px, 2vw, 22px) 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 1.7vw, 1.32rem);
+  font-weight: 700;
+  line-height: 1.42;
+}
+
+.heroDecor {
   position: absolute;
-  top: 0;
-  left: 0;
-  transform: scale(1.1); // Reduced scale to prevent cutoff
-  transform-origin: center;
-  transition: transform 0.3s ease; // Smooth transition on hover
+  z-index: 1;
+  width: clamp(220px, 22vw, 420px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.92;
+  filter: drop-shadow(0 22px 34px rgba(0, 20, 78, 0.18));
+}
 
-  // Ensure images don't overflow on small screens
-  @media screen and (max-width: 480px) {
-    transform: scale(1.05); // Slightly less scale on very small screens
+.heroDecorLeft {
+  left: clamp(-210px, -10vw, -92px);
+  bottom: clamp(24px, 7vw, 96px);
+  transform: rotate(-11deg);
+}
+
+.heroDecorRight {
+  right: clamp(-220px, -10vw, -96px);
+  top: clamp(110px, 14vw, 190px);
+  transform: rotate(10deg);
+}
+
+.teamShell {
+  position: relative;
+  z-index: 2;
+  width: min(1320px, calc(100% - 32px));
+  margin: clamp(-38px, -3vw, -24px) auto clamp(48px, 8vw, 96px);
+  padding: clamp(34px, 5vw, 62px) clamp(16px, 4vw, 48px) clamp(44px, 6vw, 72px);
+  overflow: hidden;
+  border: 1px solid rgba(0, 55, 192, 0.1);
+  border-radius: clamp(26px, 4vw, 46px);
+  background: radial-gradient(circle at 6% 12%, rgba(0, 55, 192, 0.08), transparent 24%),
+    radial-gradient(circle at 94% 24%, rgba(0, 55, 192, 0.06), transparent 24%),
+    rgba(255, 255, 255, 0.94);
+  box-shadow: 0 24px 60px rgba(0, 20, 78, 0.08);
+  contain: layout paint style;
+}
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  width: min(720px, 100%);
+  margin: 0 auto clamp(22px, 3vw, 34px);
+  color: $deep-blue;
+  text-align: center;
+
+  > span {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 55, 192, 0.72), transparent);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.6vw, 2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-transform: uppercase;
   }
 }
 
-.personCircleContainer {
-  display: flex;
-  flex-wrap: wrap; // Enable wrapping for responsiveness
-  gap: clamp(20px, 4vw, 60px); // Responsive gap
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-// High Board Grid - 4 columns on desktop, 2x2 on tablet, 1 column on mobile
 .highBoardGrid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr); // 4 columns on desktop
-  grid-template-rows: auto;
-  gap: clamp(20px, 4vw, 60px);
-  max-width: 100%; // Use full container width to prevent cutoff
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
-
-  @media screen and (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr); // 2x2 grid on tablet
-    grid-template-rows: repeat(2, auto);
-    max-width: 100%;
-    gap: clamp(20px, 3vw, 40px);
-  }
-
-  @media screen and (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); // Keep 2 columns on mobile
-    grid-template-rows: auto;
-    gap: clamp(15px, 3vw, 30px);
-    max-width: 100%;
-  }
-
-  @media screen and (max-width: 480px) {
-    grid-template-columns: 1fr; // Single column on very small screens
-    gap: clamp(20px, 4vw, 30px);
-  }
-}
-
-.AcContainer {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* First row: 5 columns */
-  gap: 40px; /* Add gap between circles */
-  justify-content: center !important; /* Center items horizontally */
-  align-items: center !important; /* Center items vertically */
-  text-align: center !important; /* Center text within circles */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-bottom: clamp(42px, 6vw, 70px);
 }
 
-.RestAcContainer {
+.highBoardCard,
+.committeeCard {
+  border: 1px solid $line-blue;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 14px 32px rgba(0, 20, 78, 0.06);
+  contain: layout paint style;
+}
+
+.highBoardCard {
+  position: relative;
   display: grid;
-  margin-top: 35px;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 100px; /* Add gap between circles */
-  margin-left: 0px;
-  padding: 0px;
+  grid-template-rows: auto auto 1fr;
+  min-height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
-.organizingCommitteeContainer {
-  display: block;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
+.highBoardRoleHeader {
+  display: grid;
+  place-items: center;
+  min-height: 72px;
+  padding: 14px 16px;
+  color: $nimun-blue;
+  font-size: clamp(1rem, 1.45vw, 1.28rem);
+  font-weight: 900;
+  line-height: 1.12;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-.personCircle {
+.highBoardPhoto {
+  position: relative;
+  aspect-ratio: 1 / 1.08;
+  overflow: hidden;
+  background: #eef3fb;
+}
+
+.memberImage {
+  object-fit: cover;
+  transition: transform 0.22s ease;
+}
+
+@media (hover: hover) {
+  .highBoardCard:hover .memberImage,
+  .committeeMember:hover .memberImage {
+    transform: scale(1.025);
+  }
+}
+
+.highBoardInfo {
+  min-height: 78px;
+  padding: 18px 18px 22px;
+  text-align: center;
+}
+
+.highBoardInfo h3,
+.committeeMemberInfo h3 {
+  margin: 0;
+  color: $deep-blue;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.highBoardInfo h3 {
+  font-size: clamp(1rem, 1.5vw, 1.24rem);
+}
+
+.committeeMemberInfo p {
+  margin: 6px 0 0;
+  color: $nimun-blue;
+  font-weight: 900;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.committeeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
+}
+
+.committeeCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  flex-shrink: 0; // Prevent shrinking
-  min-width: 0; // Allow text to wrap properly
-}
-.floatingShapeLeft {
-  position: absolute;
-  top: clamp(40px, 7vw, 90px);
-  left: clamp(-220px, -12vw, -120px); // Move further left and away
-  width: clamp(180px, 26vw, 300px); // size tuned for metallic element
-  height: auto;
-  z-index: 5; // Above background but behind content
-  pointer-events: none;
-  // opacity: 0.6; // Slightly transparent to not interfere
-}
-.floatingShapeRight {
-  position: absolute;
-  top: clamp(1600px, 140vw, 2100px); // Responsive positioning
-  right: clamp(-200px, -12vw, -90px); // Move further right
-  width: clamp(200px, 30vw, 320px); // size tuned for metallic element
-  height: auto;
-  z-index: 3; // Behind content
-  pointer-events: none;
-  // opacity: 0.6; // Slightly transparent
-}
-.blueCircle {
-  width: clamp(120px, 15vw, 200px); // Responsive sizing
-  height: clamp(120px, 15vw, 200px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 2rem;
-  background-color: #e6e6e6;
-  border: clamp(4px, 0.8vw, 7px) solid #0037c0;
-  border-radius: 0; // Make it square
-  flex-shrink: 0; // Prevent shrinking
-  position: relative; // For absolute positioning of image
-  overflow: hidden; // Clip image to border
+  min-height: 100%;
+  padding: 14px;
+  border-radius: 16px;
 }
 
-.whiteCircle {
-  width: 100%; // Fill the blue square
-  height: 100%; // Fill the blue square
+.committeeLabel {
   display: flex;
-  position: relative;
-  overflow: hidden; // Clip to square bounds
-  background-color: transparent; // Remove white background
-  border-radius: 0; // Make it square to match blueCircle
-}
-
-.personDetails {
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-bottom: 14px;
+  border-radius: 9px;
+  color: #ffffff;
+  background: linear-gradient(135deg, $nimun-blue, #004fe0);
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-weight: 900;
+  line-height: 1.15;
   text-align: center;
-  font-family: 'Montserrat';
+  text-transform: uppercase;
+}
+
+.committeeMembers {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
   width: 100%;
-  max-width: 200px; // Prevent text from being too wide
-  margin-top: 8px;
-
-  @media screen and (max-width: 480px) {
-    max-width: 150px;
-  }
 }
 
-.personName {
-  font-weight: bold;
-  font-family: 'Montserrat';
-  font-size: clamp(0.875rem, 1.5vw, 1rem); // Responsive typography
-  margin-bottom: 4px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  line-height: 1.3;
+.committeeMember {
+  display: grid;
+  gap: 8px;
+  width: min(100%, 176px);
+  min-width: 0;
 }
 
-.personPosition {
-  font-weight: normal;
-  font-size: clamp(0.75rem, 1.2vw, 0.875rem); // Responsive typography
-  font-family: 'Montserrat';
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  line-height: 1.4;
-  color: #555;
+.committeeHead {
+  display: grid;
+  justify-items: center;
+  width: 100%;
 }
 
-.sectionTitle {
-  margin-top: clamp(20px, 3vw, 30px);
-  padding: clamp(20px, 3vw, 40px);
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem); // Responsive typography
-  font-family: 'Montserrat';
-}
-
-.committeeSection {
-  margin-bottom: clamp(30px, 4vw, 40px);
+.committeeVices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, min(176px, calc((100% - 14px) / 2))));
+  justify-content: center;
+  gap: 14px;
   width: 100%;
   max-width: 100%;
-  box-sizing: border-box;
+}
 
-  &:last-child {
-    margin-bottom: 0;
+.committeePhoto {
+  position: relative;
+  aspect-ratio: 1 / 1.02;
+  overflow: hidden;
+  border: 1px solid rgba(0, 55, 192, 0.1);
+  border-radius: 12px;
+  background: #edf2fa;
+}
+
+.committeeMemberInfo {
+  min-height: 54px;
+  text-align: center;
+}
+
+.committeeMemberInfo h3 {
+  font-size: clamp(0.78rem, 1vw, 0.95rem);
+}
+
+.committeeMemberInfo p {
+  font-size: 0.68rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .highBoardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .committeeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.committeeContainer {
-  width: 100%;
-  max-width: 100%; // Prevent cutoff on larger screens
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(20px, 3vw, 40px);
-  box-sizing: border-box;
-
-  // Head always first
-  .headCircle {
-    order: 1;
+@media screen and (max-width: 760px) {
+  .hero {
+    min-height: auto;
+    padding: 118px 18px 78px;
   }
 
-  // Vices come after
-  .viceCircle {
-    order: 2;
+  .heroContent h1 {
+    max-width: 7ch;
+    font-size: clamp(2.35rem, 10.5vw, 3rem);
   }
 
-  // Two vices: Head on top, vices below side by side
-  &.twoVices {
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(15px, 2vw, 25px);
+  .heroContent p {
+    width: min(100%, 330px);
+    font-size: 0.92rem;
+  }
 
-    .headCircle {
-      order: 1;
-    }
+  .heroDecor {
+    display: none;
+  }
 
-    .vicesContainer {
-      order: 2;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: clamp(20px, 4vw, 60px);
-      width: 100%;
-      max-width: 100%;
-      flex-wrap: wrap;
-      box-sizing: border-box;
-    }
+  .heroDecorLeft {
+    left: -190px;
+    bottom: 18px;
+  }
 
-    @media screen and (max-width: 768px) {
-      gap: clamp(15px, 3vw, 25px);
+  .heroDecorRight {
+    right: -190px;
+    top: 88px;
+  }
 
-      .headCircle {
-        margin-bottom: clamp(10px, 2vw, 20px);
-      }
+  .teamShell {
+    width: min(calc(100vw - 20px), 680px);
+    border-radius: 24px;
+    padding: 28px 12px 42px;
+    box-shadow: 0 14px 34px rgba(0, 20, 78, 0.07);
+  }
 
-      .vicesContainer {
-        gap: clamp(15px, 3vw, 30px);
-      }
-    }
+  .sectionHeading {
+    grid-template-columns: 1fr;
+    gap: 8px;
 
-    @media screen and (max-width: 480px) {
-      .vicesContainer {
-        flex-direction: column; // Stack vices vertically on very small screens
-        gap: clamp(15px, 3vw, 25px);
-      }
+    > span {
+      display: none;
     }
   }
 
-  // Vices container for side-by-side display
-  .vicesContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(20px, 4vw, 60px);
-    flex-wrap: wrap;
+  .highBoardGrid,
+  .committeeGrid {
+    grid-template-columns: 1fr;
   }
 
-  // One vice: Head and vice side by side
-  &.oneVice {
-    flex-direction: row;
-    justify-content: center;
-    gap: clamp(20px, 4vw, 60px);
-    flex-wrap: wrap;
-
-    .headCircle {
-      order: 1;
-    }
-
-    .viceCircle {
-      order: 2;
-    }
-
-    @media screen and (max-width: 768px) {
-      gap: clamp(15px, 3vw, 30px);
-
-      .headCircle {
-        margin-bottom: 0;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      flex-direction: column; // Stack on very small screens
-      gap: clamp(15px, 3vw, 25px);
-
-      .headCircle {
-        margin-bottom: clamp(10px, 2vw, 15px);
-      }
-    }
+  .highBoardGrid {
+    gap: 18px;
   }
 
-  // No vice: Just head centered
-  &:not(.oneVice):not(.twoVices) {
-    justify-content: center;
+  .committeeVices {
+    grid-template-columns: repeat(2, minmax(0, 176px));
   }
 }
 
-.committeeTitle {
-  font-size: clamp(1rem, 2vw, 1.2rem); // Responsive typography
-  font-weight: bold;
-  margin-bottom: clamp(20px, 3vw, 30px);
-}
-
-.divider {
-  width: 100%;
-  max-width: 800px;
-  margin: clamp(20px, 3vw, 40px) auto;
-  border: 0;
-  border-top: 2px solid #0037c0;
-}
-
-// Tablet styles
-@media screen and (max-width: 1024px) {
-  .container {
-    max-width: 100%;
-    padding: clamp(100px, 10vw, 130px) clamp(15px, 3vw, 30px) clamp(40px, 6vw, 80px);
+@media screen and (max-width: 430px) {
+  .hero {
+    padding-top: 108px;
   }
 
-  .personCircleContainer {
-    gap: clamp(15px, 3vw, 40px);
+  .heroContent p {
+    width: min(100%, 310px);
   }
 
-  .floatingShapeLeft {
-    left: clamp(-180px, -12vw, -90px);
-    width: clamp(150px, 20vw, 240px);
-    opacity: 0.5;
+  .teamShell {
+    width: min(calc(100vw - 12px), 430px);
   }
 
-  .floatingShapeRight {
-    right: clamp(-160px, -12vw, -80px);
-    width: clamp(160px, 22vw, 260px);
-    opacity: 0.5;
+  .highBoardPhoto {
+    aspect-ratio: 1 / 0.9;
   }
 
-  .blueCircle {
-    width: clamp(130px, 18vw, 180px);
-    height: clamp(130px, 18vw, 180px);
+  .committeeCard {
+    padding: 12px;
+  }
+
+  .committeePhoto {
+    aspect-ratio: 1 / 0.96;
   }
 }
 
-// Mobile styles
-@media screen and (max-width: 768px) {
-  .container {
-    padding: clamp(100px, 12vw, 120px) clamp(15px, 3vw, 25px) clamp(40px, 6vw, 60px);
+@media screen and (max-width: 600px) {
+  .committeeMember {
+    width: 100%;
   }
 
-  .personCircleContainer {
-    gap: clamp(15px, 2.5vw, 30px);
+  .committeeHead .committeeMember {
+    width: min(100%, 176px);
   }
 
-  .floatingShapeLeft {
-    left: clamp(-160px, -18vw, -70px);
-    top: clamp(24px, 6vw, 44px);
-    width: clamp(140px, 32vw, 220px);
-    opacity: 0.3; // More transparent on mobile
-  }
-
-  .floatingShapeRight {
-    right: clamp(-140px, -16vw, -60px);
-    width: clamp(150px, 34vw, 230px);
-    opacity: 0.3; // More transparent on mobile
-  }
-
-  .personCircle {
-    margin-bottom: clamp(15px, 2vw, 20px);
-  }
-
-  .committeeSection {
-    margin-bottom: clamp(25px, 4vw, 35px);
-  }
-
-  .committeeTitle {
-    margin-bottom: clamp(15px, 3vw, 25px);
-  }
-
-  .sectionTitle {
-    margin-top: clamp(15px, 3vw, 25px);
-    padding: clamp(15px, 3vw, 30px);
-  }
-
-  .divider {
-    margin: clamp(15px, 3vw, 25px) 0;
+  .committeeVices {
+    grid-template-columns: repeat(2, minmax(0, min(176px, calc((100% - 12px) / 2))));
+    gap: 12px;
   }
 }
 
-// Small mobile styles
-@media screen and (max-width: 480px) {
-  .container {
-    padding: clamp(90px, 10vw, 110px) clamp(10px, 2vw, 20px) clamp(30px, 5vw, 50px);
+@media (hover: none) {
+  .memberImage {
+    transition: none;
   }
+}
 
-  .PageTitle {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-    margin-bottom: clamp(15px, 3vw, 25px);
-  }
-
-  .personCircleContainer {
-    gap: clamp(10px, 2vw, 20px);
-  }
-
-  .blueCircle {
-    width: clamp(100px, 25vw, 150px);
-    height: clamp(100px, 25vw, 150px);
-  }
-
-  .floatingShapeLeft,
-  .floatingShapeRight {
-    display: none; // Hide on very small screens to save space
-  }
-
-  .personName {
-    font-size: clamp(0.8rem, 2vw, 0.95rem);
-  }
-
-  .personPosition {
-    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
-  }
-
-  .sectionTitle {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    padding: clamp(10px, 2vw, 20px);
-  }
-
-  .committeeTitle {
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    margin-bottom: clamp(12px, 2.5vw, 20px);
+@media (prefers-reduced-motion: reduce) {
+  .memberImage {
+    transition: none;
   }
 }
