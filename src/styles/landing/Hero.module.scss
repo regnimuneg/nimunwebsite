@@ -12,7 +12,8 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
   padding: clamp(150px, 10vw, 176px) clamp(18px, 5vw, 76px) clamp(32px, 4vw, 52px);
   overflow: hidden;
   color: #ffffff;
-  background: url('/image/png/hero-diplomatic-background.png') center / cover no-repeat #0037c0;
+  background: url('/image/optimized/hero-diplomatic-background.webp') center / cover no-repeat
+    #0037c0;
 }
 
 .heroInner {
@@ -140,6 +141,7 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
   color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .heroVisual {
@@ -349,7 +351,7 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
   display: none;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   .hero {
     min-height: auto;
     padding-top: 112px;
@@ -405,6 +407,12 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
     min-height: 52px;
     padding: 0 18px;
     font-size: clamp(1rem, 4.7vw, 1.22rem);
+  }
+
+  .secondaryButton {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.14);
   }
 
   .photoFrame {
@@ -483,7 +491,7 @@ $navy-shadow: rgba(0, 20, 78, 0.22);
   }
 }
 
-@media (min-width: 1051px) and (max-height: 780px) {
+@media (min-width: 901px) and (max-height: 780px) {
   .hero {
     justify-content: flex-start;
     padding-top: 132px;

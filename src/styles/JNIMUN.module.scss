@@ -143,9 +143,18 @@
     font-size: clamp(1.1rem, 2.6vw, 1.5rem);
   }
 
+  @media (max-width: 600px) {
+    max-width: min(100%, 276px);
+    font-size: clamp(0.68rem, 3vw, 0.8rem);
+    line-height: 1.18;
+    overflow-wrap: anywhere;
+  }
+
   @media (max-width: 480px) {
-    max-width: 100%;
-    font-size: clamp(1rem, 4.2vw, 1.2rem);
+    max-width: min(100%, 276px);
+    font-size: clamp(0.68rem, 3vw, 0.8rem);
+    line-height: 1.18;
+    overflow-wrap: anywhere;
   }
 }
 

@@ -15,15 +15,23 @@ export function LenisProvider(props: LenisProviderProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null)
 
   useEffect(() => {
+    const shouldUseNativeScroll = window.matchMedia(
+      '(max-width: 768px), (pointer: coarse), (prefers-reduced-motion: reduce)'
+    ).matches
+
+    if (shouldUseNativeScroll) {
+      return
+    }
+
     const lenis = new Lenis({
-      duration: 2,
-      touchMultiplier: 1.5,
+      duration: 0.9,
+      touchMultiplier: 1,
       wheelMultiplier: 1,
       infinite: false,
       // Allow zoom gestures
       gestureOrientation: 'vertical',
     })
-    
+
     // Ensure Lenis doesn't interfere with pinch-zoom
     const handleWheel = (e: WheelEvent) => {
       // Allow zoom with Ctrl/Cmd + wheel
@@ -31,22 +39,23 @@ export function LenisProvider(props: LenisProviderProps) {
         return // Let browser handle zoom
       }
     }
-    
+
     const handleTouchStart = (e: TouchEvent) => {
       // Allow pinch zoom (2 touches)
       if (e.touches.length === 2) {
         return // Let browser handle pinch zoom
       }
     }
-    
+
     if (typeof window !== 'undefined') {
       window.addEventListener('wheel', handleWheel, { passive: true })
       window.addEventListener('touchstart', handleTouchStart, { passive: true })
     }
-    
-    setLenis(lenis)
-    
+
+    const lenisStateFrame = window.requestAnimationFrame(() => setLenis(lenis))
+
     return () => {
+      window.cancelAnimationFrame(lenisStateFrame)
       if (typeof window !== 'undefined') {
         window.removeEventListener('wheel', handleWheel)
         window.removeEventListener('touchstart', handleTouchStart)
@@ -59,10 +68,12 @@ export function LenisProvider(props: LenisProviderProps) {
   }, [])
 
   useEffect(() => {
+    if (!lenis) return
+
     let animationFrameHandle = 0
 
     const render: FrameRequestCallback = (time) => {
-      lenis?.raf(time)
+      lenis.raf(time)
       animationFrameHandle = requestAnimationFrame(render)
     }
     animationFrameHandle = requestAnimationFrame(render)

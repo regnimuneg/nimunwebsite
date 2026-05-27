@@ -2,10 +2,12 @@ $primary-blue: #0037c0;
 $off-white: #e5e5e5;
 
 .featureSection {
+  content-visibility: auto;
+  contain-intrinsic-size: 280px;
   padding: 0 clamp(18px, 5vw, 76px) clamp(42px, 6vw, 70px);
   background:
     linear-gradient(rgba(245, 246, 248, 0.12), rgba(245, 246, 248, 0.12)),
-    url('/image/png/whiteheroupdated.png') center bottom / cover no-repeat,
+    url('/image/optimized/whiteheroupdated.webp') center bottom / cover no-repeat,
     #f5f6f8;
 }
 
@@ -26,7 +28,7 @@ $off-white: #e5e5e5;
   color: #ffffff;
   background:
     linear-gradient(90deg, rgba(0, 55, 192, 0.12), rgba(0, 55, 192, 0.02)),
-    url('/image/png/boxbg.png') center / cover no-repeat,
+    url('/image/optimized/boxbg.webp') center / cover no-repeat,
     $primary-blue;
   box-shadow: 0 26px 64px rgba(0, 20, 78, 0.18);
 }

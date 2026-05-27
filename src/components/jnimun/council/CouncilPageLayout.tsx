@@ -40,7 +40,7 @@ export default function CouncilPageLayout({ council }: CouncilPageLayoutProps) {
         <main className={styles.councilMain}>
           <CouncilHero council={council} />
           <CouncilChairs council={council} />
-          {council.slug !== 'unodc' ? <CouncilFocus council={council} /> : null}
+          {!council.heroImage ? <CouncilFocus council={council} /> : null}
           <CouncilCTA council={council} />
         </main>
 

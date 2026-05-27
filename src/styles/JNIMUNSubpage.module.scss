@@ -1199,8 +1199,13 @@ $paper-gray: #e5e5e5;
   color: $jnimun-blue;
 }
 
-/* UNODC page rebuild */
-.subpageWrapper[data-council='unodc'] {
+/* JNIMUN'26 council page template */
+.subpageWrapper[data-council='unodc'],
+.subpageWrapper[data-council='sc'],
+.subpageWrapper[data-council='crisis'],
+.subpageWrapper[data-council='imo'],
+.subpageWrapper[data-council='unhcr'],
+.subpageWrapper[data-council='press'] {
   $unodc-navy: #073b78;
   $unodc-royal: #0879c8;
   $unodc-pink: #ff4d8d;
@@ -1912,18 +1917,22 @@ $paper-gray: #e5e5e5;
 
     .heroPortraitPanel {
       min-height: auto;
+      flex-direction: column;
       padding-top: 8px;
     }
 
     .heroPortraitImage {
       width: min(100%, 560px) !important;
+      transform: none;
     }
 
     .pillarsNote {
       position: relative;
+      left: auto;
       right: auto;
       bottom: auto;
       margin-top: -28px;
+      transform: none;
     }
   }
 
@@ -1960,20 +1969,26 @@ $paper-gray: #e5e5e5;
 
     .heroPortraitImage {
       width: min(92%, 520px) !important;
-    }
-
-    .pillarsList {
-      grid-template-columns: 1fr;
+      margin-top: 18px;
     }
 
     .pillarItem {
-      min-height: 70px;
-      padding: 12px;
+      min-height: 66px;
+      padding: 8px 6px;
 
       & + .pillarItem {
-        border-left: 0;
-        border-top: 1px solid rgba(7, 59, 120, 0.18);
+        border-left: 1px solid rgba(7, 59, 120, 0.18);
+        border-top: 0;
       }
+    }
+
+    .pillarIcon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .pillarLabel {
+      font-size: 0.76rem;
     }
 
     .chairsGrid,

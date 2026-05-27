@@ -75,6 +75,7 @@ export default function Hero() {
               fill
               sizes="(max-width: 900px) 92vw, 48vw"
               priority
+              quality={78}
               className={styles.heroImage}
             />
           </div>

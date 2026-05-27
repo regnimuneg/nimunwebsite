@@ -2,6 +2,8 @@ import styles from '@/styles/landing/Summary.module.scss'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
+const visiblePhotoCount = 3
+
 const summaryPhotos = [
   {
     src: '/image/png/salama.jpg',
@@ -48,8 +50,21 @@ const summaryPhotos = [
 export default function Summary() {
   const [activePhoto, setActivePhoto] = useState(0)
   const [isFlying, setIsFlying] = useState(false)
+  const [shouldShuffle, setShouldShuffle] = useState(false)
 
   useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 700px)')
+    const updateShufflePreference = () => setShouldShuffle(!motionQuery.matches)
+
+    updateShufflePreference()
+    motionQuery.addEventListener('change', updateShufflePreference)
+
+    return () => motionQuery.removeEventListener('change', updateShufflePreference)
+  }, [])
+
+  useEffect(() => {
+    if (!shouldShuffle) return
+
     let settleTimer: number | undefined
 
     const shuffleTimer = window.setInterval(() => {
@@ -68,9 +83,9 @@ export default function Summary() {
         window.clearTimeout(settleTimer)
       }
     }
-  }, [])
+  }, [shouldShuffle])
 
-  const orderedPhotos = summaryPhotos.map((_, index) => {
+  const orderedPhotos = Array.from({ length: visiblePhotoCount }, (_, index) => {
     const photoIndex = (activePhoto + index) % summaryPhotos.length
     return summaryPhotos[photoIndex]!
   })
@@ -96,7 +111,7 @@ export default function Summary() {
           {orderedPhotos.map((photo, index) => (
             <div
               className={`${styles.photoCard} ${styles[`photoCard${index}`]} ${
-                index === 0 && isFlying ? styles.photoCardFlying : ''
+                index === 0 && isFlying && shouldShuffle ? styles.photoCardFlying : ''
               }`}
               key={photo.src}
               aria-hidden={index !== 0}
@@ -107,7 +122,8 @@ export default function Summary() {
                 fill
                 sizes="(max-width: 860px) 92vw, 42vw"
                 className={styles.summaryImage}
-                priority={index === 0}
+                loading="lazy"
+                quality={index === 0 ? 74 : 68}
               />
             </div>
           ))}

@@ -4,6 +4,7 @@ import Summary from '@/components/landing/Summary'
 import ContactUs from '@/components/landing/ContactUs'
 import styles from '@/styles/landing/HomeDecorations.module.scss'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 const metalDecorations = [
   {
@@ -39,20 +40,37 @@ const metalDecorations = [
 ]
 
 export default function Home() {
+  const [showDecorations, setShowDecorations] = useState(false)
+
+  useEffect(() => {
+    const decorationQuery = window.matchMedia('(min-width: 760px)')
+    const updateDecorationVisibility = () => setShowDecorations(decorationQuery.matches)
+
+    updateDecorationVisibility()
+    decorationQuery.addEventListener('change', updateDecorationVisibility)
+
+    return () => decorationQuery.removeEventListener('change', updateDecorationVisibility)
+  }, [])
+
   return (
     <div className={styles.homePage}>
-      <div className={styles.decorLayer} aria-hidden="true">
-        {metalDecorations.map((decoration) => (
-          <Image
-            key={decoration.src}
-            src={decoration.src}
-            alt={decoration.alt}
-            width={360}
-            height={360}
-            className={`${styles.decor} ${decoration.className}`}
-          />
-        ))}
-      </div>
+      {showDecorations && (
+        <div className={styles.decorLayer} aria-hidden="true">
+          {metalDecorations.map((decoration) => (
+            <Image
+              key={decoration.src}
+              src={decoration.src}
+              alt={decoration.alt}
+              width={360}
+              height={360}
+              sizes="(max-width: 900px) 190px, 24vw"
+              loading="lazy"
+              quality={62}
+              className={`${styles.decor} ${decoration.className}`}
+            />
+          ))}
+        </div>
+      )}
       <Hero />
       <Summary />
       <Video />
