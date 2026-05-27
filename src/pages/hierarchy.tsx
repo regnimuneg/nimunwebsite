@@ -15,7 +15,6 @@ import Asmar from '@public/image/People/OC/NIMUN26/Asmar.png'
 import Engy from '@public/image/People/OC/NIMUN26/Engy.png'
 import FC from '@public/image/People/OC/NIMUN26/FC.png'
 import Fallal from '@public/image/People/OC/NIMUN26/Fallal.png'
-import Hossam from '@public/image/People/OC/NIMUN26/Hossam.png'
 import Kabbani from '@public/image/People/OC/NIMUN26/Kabbani.png'
 import Lina from '@public/image/People/OC/NIMUN26/Lina.png'
 import MalakK from '@public/image/People/OC/NIMUN26/Malak K.png'
@@ -40,6 +39,10 @@ interface Person {
   headImagePosition?: string
   viceHeadImagePosition?: string
   viceHead2ImagePosition?: string
+  imageStyle?: React.CSSProperties
+  headImageStyle?: React.CSSProperties
+  viceHeadImageStyle?: React.CSSProperties
+  viceHead2ImageStyle?: React.CSSProperties
 }
 
 interface CommitteeMember {
@@ -47,6 +50,7 @@ interface CommitteeMember {
   title: string
   image: StaticImageData
   imagePosition?: string
+  imageStyle?: React.CSSProperties
 }
 
 const HighBoard: Person[] = [
@@ -74,6 +78,7 @@ const OrganizingCommittee: Person[] = [
     viceHead2: 'Rana Shafik',
     headImage: Adham,
     headImagePosition: 'center 10%',
+    headImageStyle: { transform: 'scale(1.1) translateX(7%)' },
     viceHeadImage: Omar,
     viceHeadImagePosition: 'center top',
     viceHead2Image: Rana,
@@ -86,6 +91,7 @@ const OrganizingCommittee: Person[] = [
     viceHead2: 'Hana Elfallal',
     headImage: Wafa,
     headImagePosition: 'center 40%',
+    headImageStyle: { transform: 'scale(1.2)' },
     viceHeadImage: Yassine,
     viceHeadImagePosition: 'center 10%',
     viceHead2Image: Fallal,
@@ -105,15 +111,13 @@ const OrganizingCommittee: Person[] = [
   },
   {
     name: 'Media & Design',
-    head: 'Hossam Aqeel',
-    viceHead: 'Seif alasmar',
-    viceHead2: 'Engy Lutfi',
-    headImage: Hossam,
-    headImagePosition: 'center 17%',
-    viceHeadImage: Asmar,
-    viceHeadImagePosition: 'center 20%',
-    viceHead2Image: Engy,
-    viceHead2ImagePosition: 'center 30%',
+    head: 'Seif Alasmar',
+    viceHead: 'Engy Lutfi',
+    headImage: Asmar,
+    headImagePosition: 'center 20%',
+    headImageStyle: { transform: 'scale(1.1)' },
+    viceHeadImage: Engy,
+    viceHeadImagePosition: 'center 30%',
   },
   {
     name: 'Socials & Events',
@@ -129,6 +133,7 @@ const OrganizingCommittee: Person[] = [
     head: 'Belal Amer',
     headImage: FC,
     headImagePosition: 'center 30%',
+    headImageStyle: { transform: 'scale(1.2)' },
     isCoordinator: true,
   },
 ]
@@ -142,6 +147,7 @@ const getCommitteeMembers = (committee: Person): CommitteeMember[] => {
       title: committee.isCoordinator ? 'Coordinator' : 'Head',
       image: committee.headImage,
       imagePosition: committee.headImagePosition,
+      imageStyle: committee.headImageStyle,
     })
   }
 
@@ -151,6 +157,7 @@ const getCommitteeMembers = (committee: Person): CommitteeMember[] => {
       title: 'Vice Head',
       image: committee.viceHeadImage,
       imagePosition: committee.viceHeadImagePosition,
+      imageStyle: committee.viceHeadImageStyle,
     })
   }
 
@@ -160,6 +167,7 @@ const getCommitteeMembers = (committee: Person): CommitteeMember[] => {
       title: 'Vice Head',
       image: committee.viceHead2Image,
       imagePosition: committee.viceHead2ImagePosition,
+      imageStyle: committee.viceHead2ImageStyle,
     })
   }
 
@@ -179,12 +187,14 @@ function MemberImage({
   imagePosition,
   sizes,
   priority = false,
+  style,
 }: {
   image: StaticImageData
   name: string
   imagePosition?: string
   sizes: string
   priority?: boolean
+  style?: React.CSSProperties
 }) {
   return (
     <Image
@@ -197,7 +207,10 @@ function MemberImage({
       loading={priority ? undefined : 'lazy'}
       priority={priority}
       className={styles.memberImage}
-      style={{ objectPosition: imagePosition || 'center top' }}
+      style={{
+        objectPosition: imagePosition || 'center top',
+        ...style,
+      }}
     />
   )
 }
@@ -223,7 +236,8 @@ function HighBoardCard({ person }: { person: Person }) {
           image={person.image}
           name={person.name}
           imagePosition={person.imagePosition}
-          sizes="(max-width: 430px) 92vw, (max-width: 760px) 70vw, (max-width: 1100px) 42vw, 285px"
+          style={person.imageStyle}
+          sizes="(max-width: 760px) 46vw, (max-width: 1100px) 46vw, 285px"
           priority
         />
       </div>
@@ -242,6 +256,7 @@ function CommitteeMemberCard({ member }: { member: CommitteeMember }) {
           image={member.image}
           name={member.name}
           imagePosition={member.imagePosition}
+          style={member.imageStyle}
           sizes="(max-width: 600px) 260px, (max-width: 760px) 34vw, (max-width: 1100px) 22vw, 175px"
         />
       </div>
@@ -267,7 +282,7 @@ function CommitteeCard({ committee }: { committee: Person }) {
           </div>
         )}
         {viceMembers.length > 0 && (
-          <div className={styles.committeeVices}>
+          <div className={viceMembers.length === 1 ? styles.committeeVicesSingle : styles.committeeVices}>
             {viceMembers.map((member) => (
               <CommitteeMemberCard member={member} key={`${committee.name}-${member.name}`} />
             ))}

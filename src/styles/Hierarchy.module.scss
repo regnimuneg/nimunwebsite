@@ -94,6 +94,7 @@ $line-blue: rgba(0, 55, 192, 0.16);
   user-select: none;
   opacity: 0.92;
   filter: drop-shadow(0 22px 34px rgba(0, 20, 78, 0.18));
+  will-change: transform;
 }
 
 .heroDecorLeft {
@@ -196,6 +197,7 @@ $line-blue: rgba(0, 55, 192, 0.16);
 .memberImage {
   object-fit: cover;
   transition: transform 0.22s ease;
+  will-change: transform;
 }
 
 @media (hover: hover) {
@@ -292,6 +294,12 @@ $line-blue: rgba(0, 55, 192, 0.16);
   max-width: 100%;
 }
 
+.committeeVicesSingle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .committeePhoto {
   position: relative;
   aspect-ratio: 1 / 1.02;
@@ -370,13 +378,36 @@ $line-blue: rgba(0, 55, 192, 0.16);
     }
   }
 
-  .highBoardGrid,
   .committeeGrid {
     grid-template-columns: 1fr;
   }
 
   .highBoardGrid {
-    gap: 18px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .highBoardCard {
+    border-radius: 12px;
+  }
+
+  .highBoardRoleHeader {
+    min-height: 68px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+
+  .highBoardPhoto {
+    aspect-ratio: 1 / 1;
+  }
+
+  .highBoardInfo {
+    min-height: auto;
+    padding: 10px 8px 12px;
+  }
+
+  .highBoardInfo h3 {
+    font-size: 0.88rem;
   }
 
   .committeeVices {
@@ -397,10 +428,6 @@ $line-blue: rgba(0, 55, 192, 0.16);
     width: min(calc(100vw - 12px), 430px);
   }
 
-  .highBoardPhoto {
-    aspect-ratio: 1 / 0.9;
-  }
-
   .committeeCard {
     padding: 12px;
   }
@@ -411,12 +438,8 @@ $line-blue: rgba(0, 55, 192, 0.16);
 }
 
 @media screen and (max-width: 600px) {
-  .committeeMember {
+  .committeeVices .committeeMember {
     width: 100%;
-  }
-
-  .committeeHead .committeeMember {
-    width: min(100%, 176px);
   }
 
   .committeeVices {
