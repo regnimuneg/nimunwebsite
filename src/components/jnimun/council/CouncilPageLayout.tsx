@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import type { CouncilConfig } from '@/types/jnimunCouncil'
-import CouncilHeader from './CouncilHeader'
+import ApplyNavbar from '@/components/apply/ApplyNavbar'
 import CouncilHero from './CouncilHero'
 import CouncilChairs from './CouncilChairs'
 import CouncilFocus from './CouncilFocus'
@@ -35,7 +35,7 @@ export default function CouncilPageLayout({ council }: CouncilPageLayoutProps) {
           } as React.CSSProperties
         }
       >
-        <CouncilHeader />
+        <ApplyNavbar />
 
         <main className={styles.councilMain}>
           <CouncilHero council={council} />

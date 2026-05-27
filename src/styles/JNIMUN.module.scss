@@ -72,9 +72,13 @@
   }
 
   @media (max-width: 480px) {
-    padding: clamp(80px, 9vh, 95px) 16px clamp(35px, 5vh, 45px);
+    min-height: auto;
+    max-height: none;
+    height: auto;
+    justify-content: center;
+    padding: clamp(118px, 14vh, 142px) 16px clamp(48px, 7vh, 72px);
     background-size: cover, 440px auto;
-    gap: clamp(8px, 1.2vh, 14px);
+    gap: clamp(20px, 3vh, 34px);
   }
 }
 
@@ -120,8 +124,8 @@
   }
 
   @media (max-width: 480px) {
-    font-size: clamp(2.2rem, 9.5vw, 3.4rem);
-    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.16);
+    font-size: clamp(3.25rem, 15vw, 4.4rem);
+    text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.16);
   }
 }
 
@@ -151,9 +155,10 @@
   }
 
   @media (max-width: 480px) {
-    max-width: min(100%, 276px);
-    font-size: clamp(0.68rem, 3vw, 0.8rem);
-    line-height: 1.18;
+    max-width: min(100%, 350px);
+    margin-top: clamp(10px, 1.8vh, 16px);
+    font-size: clamp(1.02rem, 4.15vw, 1.28rem);
+    line-height: 1.16;
     overflow-wrap: anywhere;
   }
 }
@@ -176,8 +181,8 @@
   }
 
   @media (max-width: 480px) {
-    width: clamp(150px, 26vh, 240px);
-    margin-top: 6px;
+    width: clamp(260px, 42vh, 340px);
+    margin-top: clamp(4px, 1vh, 12px);
   }
 }
 

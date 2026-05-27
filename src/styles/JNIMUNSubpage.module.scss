@@ -9,6 +9,7 @@ $paper-gray: #e5e5e5;
   width: 100%;
   position: relative;
   overflow-x: hidden;
+  padding-top: clamp(90px, 8vw, 102px);
   color: $jnimun-black;
   font-family: $jnimun-font-body;
   background-color: $paper-gray;
@@ -17,6 +18,10 @@ $paper-gray: #e5e5e5;
     url('/image/png/JNIMUN%2726/executives-template-juniors-grey-texture.png');
   background-repeat: no-repeat, repeat;
   background-size: cover, 720px auto;
+
+  @media (max-width: 900px) {
+    padding-top: 88px;
+  }
 }
 
 .councilMain {
