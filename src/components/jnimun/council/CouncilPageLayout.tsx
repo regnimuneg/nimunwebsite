@@ -19,22 +19,51 @@ export default function CouncilPageLayout({ council }: CouncilPageLayoutProps) {
   const { lenis } = useLenis()
 
   useEffect(() => {
-    // 1. Scroll native window and Lenis immediately
-    window.scrollTo(0, 0)
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true })
+    const canManageScrollRestoration = 'scrollRestoration' in window.history
+    const previousScrollRestoration = canManageScrollRestoration
+      ? window.history.scrollRestoration
+      : 'auto'
+
+    if (canManageScrollRestoration) {
+      window.history.scrollRestoration = 'manual'
     }
 
-    // 2. Perform a delayed scroll to ensure Next.js route transition and 
-    // any automatic scroll-restoration/layout paints have completed.
-    const timer = setTimeout(() => {
+    const previousHtmlOverflowAnchor = document.documentElement.style.overflowAnchor
+    const previousBodyOverflowAnchor = document.body.style.overflowAnchor
+    document.documentElement.style.overflowAnchor = 'none'
+    document.body.style.overflowAnchor = 'none'
+
+    const scrollToTop = () => {
+      document.scrollingElement?.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
       window.scrollTo(0, 0)
       if (lenis) {
         lenis.scrollTo(0, { immediate: true })
       }
-    }, 50)
+    }
 
-    return () => clearTimeout(timer)
+    scrollToTop()
+
+    let nestedFrame = 0
+    const frame = window.requestAnimationFrame(() => {
+      scrollToTop()
+      nestedFrame = window.requestAnimationFrame(scrollToTop)
+    })
+    const timers = [80, 180, 360, 700, 1100, 1600, 2200].map((delay) =>
+      window.setTimeout(scrollToTop, delay)
+    )
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(nestedFrame)
+      timers.forEach((timer) => window.clearTimeout(timer))
+      document.documentElement.style.overflowAnchor = previousHtmlOverflowAnchor
+      document.body.style.overflowAnchor = previousBodyOverflowAnchor
+      if (canManageScrollRestoration) {
+        window.history.scrollRestoration = previousScrollRestoration
+      }
+    }
   }, [council.slug, lenis])
 
   return (

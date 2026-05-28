@@ -283,321 +283,321 @@ const JNIMUN: NextPage = () => {
         <div className={styles.doodleSectionWrapper}>
           {/* --- What is JNIMUN? Section --- */}
           <section className={styles.whatIsSection}>
-          <div className={styles.whatIsInner}>
-            <div className={styles.whatIsTitleBlock}>
-              <h2 className={styles.whatIsTitle}>
-                WHAT IS<br />JNIMUN?
-              </h2>
-              <svg className={styles.whatIsSwoosh} viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 20C40 6 100 2 140 8C180 14 200 22 216 16" stroke="#ff639b" strokeWidth="5" strokeLinecap="round" fill="none" />
-              </svg>
-            </div>
+            <div className={styles.whatIsInner}>
+              <div className={styles.whatIsTitleBlock}>
+                <h2 className={styles.whatIsTitle}>
+                  WHAT IS<br />JNIMUN?
+                </h2>
+                <svg className={styles.whatIsSwoosh} viewBox="0 0 220 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 20C40 6 100 2 140 8C180 14 200 22 216 16" stroke="#ff639b" strokeWidth="5" strokeLinecap="round" fill="none" />
+                </svg>
+              </div>
 
-            <div className={styles.whatIsCards}>
-              {/* Card 01 */}
-              <div className={`${styles.whatIsCard} ${styles.whatIsCardGreen}`}>
-                <div className={styles.whatIsCardTop}>
-                  <h3 className={styles.whatIsCardTitle}>
-                    LEARN DIPLOMACY THROUGH FUN SIMULATIONS.
-                  </h3>
-                  <span className={styles.whatIsCardNumber}>01</span>
+              <div className={styles.whatIsCards}>
+                {/* Card 01 */}
+                <div className={`${styles.whatIsCard} ${styles.whatIsCardGreen}`}>
+                  <div className={styles.whatIsCardTop}>
+                    <h3 className={styles.whatIsCardTitle}>
+                      LEARN DIPLOMACY THROUGH FUN SIMULATIONS.
+                    </h3>
+                    <span className={styles.whatIsCardNumber}>01</span>
+                  </div>
+                  <p className={styles.whatIsCardDesc}>
+                    Experience real-world topics in a safe and friendly environment.
+                  </p>
+                  <div className={styles.whatIsCardIcons}>
+                    <Image
+                      src="/image/png/JNIMUN%2726/lens.png"
+                      alt=""
+                      width={100}
+                      height={100}
+                      className={styles.whatIsIcon}
+                    />
+                  </div>
                 </div>
-                <p className={styles.whatIsCardDesc}>
-                  Experience real-world topics in a safe and friendly environment.
+
+                {/* Card 02 */}
+                <div className={`${styles.whatIsCard} ${styles.whatIsCardYellow}`}>
+                  <div className={styles.whatIsCardTop}>
+                    <h3 className={styles.whatIsCardTitle}>
+                      BUILD CONFIDENCE IN SPEAKING AND TEAM WORK.
+                    </h3>
+                    <span className={styles.whatIsCardNumber}>02</span>
+                  </div>
+                  <p className={styles.whatIsCardDesc}>
+                    Grow your voice, make friends, and lead with confidence.
+                  </p>
+                  <div className={styles.whatIsCardIcons}>
+                    <Image
+                      src="/image/png/JNIMUN%2726/megaphone.png"
+                      alt=""
+                      width={100}
+                      height={100}
+                      className={styles.whatIsIcon}
+                    />
+                  </div>
+                </div>
+
+                {/* Card 03 */}
+                <div className={`${styles.whatIsCard} ${styles.whatIsCardPink}`}>
+                  <div className={styles.whatIsCardTop}>
+                    <h3 className={styles.whatIsCardTitle}>
+                      DESIGNED FOR JUNIORS WITH GUIDANCE AND SUPPORT.
+                    </h3>
+                    <span className={styles.whatIsCardNumber}>03</span>
+                  </div>
+                  <p className={styles.whatIsCardDesc}>
+                    Trained chairs and members to support you in every step.
+                  </p>
+                  <div className={styles.whatIsCardIcons}>
+                    <Image
+                      src="/image/png/JNIMUN%2726/thumbs_up.png"
+                      alt=""
+                      width={100}
+                      height={100}
+                      className={styles.whatIsIcon}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* --- Our Councils Section --- */}
+          <section id="councils" className={styles.ourCouncilsSection}>
+            <div className={styles.councilsHeader}>
+              <div className={styles.councilsTitleWrapper}>
+                <h2 className={styles.councilsTitle}>
+                  <span className={styles.titleOur}>OUR</span>{' '}
+                  <span className={styles.titleCouncils}>COUNCILS</span>
+                </h2>
+                {/* Lines under the title */}
+                <div className={styles.titleDecorations}>
+                  <div className={styles.yellowLines}>
+                    <div className={styles.yellowLine1}></div>
+                    <div className={styles.yellowLine2}></div>
+                  </div>
+                  <div className={styles.blueLine}></div>
+                </div>
+              </div>
+              <div className={styles.councilsSubtitleBox}>
+                <div className={styles.councilsSubtitleBg}></div>
+                <p className={styles.councilsSubtitleText}>
+                  Explore our <span className={styles.textBlue}>councils</span> and the <span className={styles.textBlue}>leaders</span> who will guide the debate.
                 </p>
-                <div className={styles.whatIsCardIcons}>
-                  <Image
-                    src="/image/png/JNIMUN%2726/lens.png"
-                    alt=""
-                    width={100}
-                    height={100}
-                    className={styles.whatIsIcon}
-                  />
-                </div>
-              </div>
-
-              {/* Card 02 */}
-              <div className={`${styles.whatIsCard} ${styles.whatIsCardYellow}`}>
-                <div className={styles.whatIsCardTop}>
-                  <h3 className={styles.whatIsCardTitle}>
-                    BUILD CONFIDENCE IN SPEAKING AND TEAM WORK.
-                  </h3>
-                  <span className={styles.whatIsCardNumber}>02</span>
-                </div>
-                <p className={styles.whatIsCardDesc}>
-                  Grow your voice, make friends, and lead with confidence.
-                </p>
-                <div className={styles.whatIsCardIcons}>
-                  <Image
-                    src="/image/png/JNIMUN%2726/megaphone.png"
-                    alt=""
-                    width={100}
-                    height={100}
-                    className={styles.whatIsIcon}
-                  />
-                </div>
-              </div>
-
-              {/* Card 03 */}
-              <div className={`${styles.whatIsCard} ${styles.whatIsCardPink}`}>
-                <div className={styles.whatIsCardTop}>
-                  <h3 className={styles.whatIsCardTitle}>
-                    DESIGNED FOR JUNIORS WITH GUIDANCE AND SUPPORT.
-                  </h3>
-                  <span className={styles.whatIsCardNumber}>03</span>
-                </div>
-                <p className={styles.whatIsCardDesc}>
-                  Trained chairs and members to support you in every step.
-                </p>
-                <div className={styles.whatIsCardIcons}>
-                  <Image
-                    src="/image/png/JNIMUN%2726/thumbs_up.png"
-                    alt=""
-                    width={100}
-                    height={100}
-                    className={styles.whatIsIcon}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- Our Councils Section --- */}
-        <section id="councils" className={styles.ourCouncilsSection}>
-          <div className={styles.councilsHeader}>
-            <div className={styles.councilsTitleWrapper}>
-              <h2 className={styles.councilsTitle}>
-                <span className={styles.titleOur}>OUR</span>{' '}
-                <span className={styles.titleCouncils}>COUNCILS</span>
-              </h2>
-              {/* Lines under the title */}
-              <div className={styles.titleDecorations}>
-                <div className={styles.yellowLines}>
-                  <div className={styles.yellowLine1}></div>
-                  <div className={styles.yellowLine2}></div>
-                </div>
-                <div className={styles.blueLine}></div>
-              </div>
-            </div>
-            <div className={styles.councilsSubtitleBox}>
-              <div className={styles.councilsSubtitleBg}></div>
-              <p className={styles.councilsSubtitleText}>
-                Explore our <span className={styles.textBlue}>councils</span> and the <span className={styles.textBlue}>leaders</span> who will guide the debate.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.councilsGrid}>
-            {/* Card 1: UNSC */}
-            <div className={`${styles.councilCard} ${styles.cardPink}`}>
-              <Image src="/image/png/JNIMUN%2726/pigeon.png" alt="" width={60} height={75} className={styles.sC1_1} />
-              <Image src="/image/png/JNIMUN%2726/stars.png" alt="" width={60} height={60} className={styles.sC1_2} />
-              <div className={styles.cardInner}>
-                <div className={styles.councilHeader}>
-                  <div className={styles.councilLogo}>
-                    <Image src="/image/png/security.png" alt="Security Council" width={94} height={94} className={styles.logoImg} />
-                  </div>
-                  <div className={styles.councilTitleDesc}>
-                    <span className={styles.levelBadge}>Advanced</span>
-                    <h3>SECURITY COUNCIL — UNSC</h3>
-                  </div>
-                </div>
-                <div className={styles.ecstaticBtnWrapper}>
-                  <Link href="/JNIMUN/sc" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextPink}`}>
-                    LEARN MORE
-                  </Link>
-                </div>
               </div>
             </div>
 
-            {/* Card 2: UNHRC */}
-            <div className={`${styles.councilCard} ${styles.cardBlue}`}>
-              <Image src="/image/png/JNIMUN%2726/megaphone.png" alt="" width={65} height={70} className={styles.sC2_1} />
-              <Image src="/image/png/JNIMUN%2726/pencil.png" alt="" width={35} height={75} className={styles.sC2_2} />
-              <div className={styles.cardInner}>
-                <div className={styles.councilHeader}>
-                  <div className={styles.councilLogo}>
-                    <Image src="/image/png/crisis.png" alt="Crisis Committee" width={94} height={94} className={styles.logoImg} />
-                  </div>
-                  <div className={styles.councilTitleDesc}>
-                    <span className={styles.levelBadge}>Advanced</span>
-                    <h3>CRISIS COMMITTEE</h3>
-                  </div>
-                </div>
-                <div className={styles.ecstaticBtnWrapper}>
-                  <Link href="/JNIMUN/crisis" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextBlue}`}>
-                    LEARN MORE
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: DISEC */}
-            <div className={`${styles.councilCard} ${styles.cardYellow}`}>
-              <Image src="/image/png/JNIMUN%2726/lens.png" alt="" width={50} height={77} className={styles.sC3_1} />
-              <Image src="/image/png/JNIMUN%2726/handwriting.png" alt="" width={75} height={60} className={styles.sC3_2} />
-              <div className={styles.cardInner}>
-                <div className={styles.councilHeader}>
-                  <div className={styles.councilLogo}>
-                    <Image src="/image/png/odc.png" alt="UNODC" width={94} height={94} className={styles.logoImg} />
-                  </div>
-                  <div className={styles.councilTitleDesc}>
-                    <span className={styles.levelBadge}>Intermediate</span>
-                    <h3>UNITED NATIONS OFFICE ON DRUGS AND CRIME — UNODC</h3>
-                  </div>
-                </div>
-                <div className={styles.ecstaticBtnWrapper}>
-                  <Link href="/JNIMUN/unodc" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextYellow}`}>
-                    LEARN MORE
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4: ECOSOC */}
-            <div className={`${styles.councilCard} ${styles.cardGreen}`}>
-              <Image src="/image/png/JNIMUN%2726/bulb.png" alt="" width={45} height={68} className={styles.sC4_1} />
-              <Image src="/image/png/JNIMUN%2726/clip.png" alt="" width={55} height={63} className={styles.sC4_2} />
-              <div className={styles.cardInner}>
-                <div className={styles.councilHeader}>
-                  <div className={styles.councilLogo}>
-                    <Image src="/image/png/imo.png" alt="IMO" width={94} height={94} className={styles.logoImg} />
-                  </div>
-                  <div className={styles.councilTitleDesc}>
-                    <span className={styles.levelBadge}>Intermediate</span>
-                    <h3>INTERNATIONAL MARITIME ORGANIZATION — IMO</h3>
-                  </div>
-                </div>
-                <div className={styles.ecstaticBtnWrapper}>
-                  <Link href="/JNIMUN/imo" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextGreen}`}>
-                    LEARN MORE
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 5: WHO */}
-            <div className={`${styles.councilCard} ${styles.cardOrange}`}>
-              <Image src="/image/png/JNIMUN%2726/sand_clock.png" alt="" width={65} height={78} className={styles.sC5_1} />
-              <Image src="/image/png/JNIMUN%2726/moon.png" alt="" width={50} height={85} className={styles.sC5_2} />
-              <div className={styles.cardInner}>
-                <div className={styles.councilHeader}>
-                  <div className={styles.councilLogo}>
-                    <Image src="/image/png/hcr.png" alt="UNHCR" width={94} height={94} className={styles.logoImg} />
-                  </div>
-                  <div className={styles.councilTitleDesc}>
-                    <span className={styles.levelBadge}>Beginner</span>
-                    <h3>UNITED NATIONS HIGH COMMISSIONER FOR REFUGEES — UNHCR</h3>
-                  </div>
-                </div>
-                <div className={styles.ecstaticBtnWrapper}>
-                  <Link href="/JNIMUN/unhcr" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextOrange}`}>
-                    LEARN MORE
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 6: Arab League */}
-            <div className={`${styles.councilCard} ${styles.cardTeal}`}>
-              <Image src="/image/png/JNIMUN%2726/laptop.png" alt="" width={65} height={64} className={styles.sC6_1} />
-              <Image src="/image/png/JNIMUN%2726/brain.png" alt="" width={75} height={62} className={styles.sC6_2} />
-              <div className={styles.cardInner}>
-                <div className={styles.councilHeader}>
-                  <div className={styles.councilLogo}>
-                    <Image src="/image/png/press-new.png" alt="International Press" width={94} height={94} className={styles.logoImg} />
-                  </div>
-                  <div className={styles.councilTitleDesc}>
-                    <span className={styles.levelBadge}>Beginner</span>
-                    <h3>INTERNATIONAL PRESS</h3>
-                  </div>
-                </div>
-                <div className={styles.ecstaticBtnWrapper}>
-                  <Link href="/JNIMUN/press" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextTeal}`}>
-                    LEARN MORE
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- International Packages Section --- */}
-        <section className={styles.packagesSection}>
-          <Image src="/image/png/globe-sticker.png" alt="" width={150} height={150} className={`${styles.packageSticker} ${styles.packageStickerGlobe}`} aria-hidden />
-          <Image src="/image/png/JNIMUN%2726/clip.png" alt="" width={86} height={86} className={`${styles.packageSticker} ${styles.packageStickerClip}`} aria-hidden />
-          <Image src="/image/png/sticker-hourglass.png" alt="" width={124} height={124} className={`${styles.packageSticker} ${styles.packageStickerHourglass}`} aria-hidden />
-
-          <div className={styles.packagesHeader}>
-            <span className={styles.packagesEyebrow}>Choose Your Experience</span>
-            <h2 className={styles.packagesTitle}>
-              International Packages
-            </h2>
-            <p className={styles.packagesSubtitle}>
-              Join JNIMUN&apos;26 from anywhere in the world. Choose the package that fits your delegation and be part of a global impact.
-            </p>
-          </div>
-
-          {/* Package Type Tab Selector */}
-          <div className={styles.packagePillContainer}>
-            <div className={styles.packagePillWrapper} role="tablist" aria-label="International package categories">
-              {PACKAGES_DATA.map((pkg, index) => (
-                <button
-                  key={pkg.packageName}
-                  type="button"
-                  role="tab"
-                  aria-selected={selectedPackage === pkg.packageName}
-                  className={`${styles.packagePillButton} ${selectedPackage === pkg.packageName ? styles.activePillButton : ''}`}
-                  onClick={() => setSelectedPackage(pkg.packageName)}
-                >
-                  <span className={styles.packagePillIcon}>{index + 1}</span>
-                  <span>{formatPackageLabel(pkg.packageName)}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.packagesGrid}>
-            {displayCards.map((card, index) => (
-              <div key={`${card.packageName}-${card.roomType ?? index}`} className={`${styles.packageCard} ${styles[card.colorClass as keyof typeof styles]}`}>
-                <div className={styles.packageCardBadge}>{card.roomType || 'Package'}</div>
-                <div className={styles.packageCardInner}>
-                  <h3 className={styles.packageCardTitle}>
-                    {formatPackageLabel(card.packageName)}
-                  </h3>
-                  <p className={styles.packageCardTagline}>{card.tagline}</p>
-                  <div className={styles.packagePrices}>
-                    <div className={styles.packagePriceRow}>
-                      <span className={styles.priceLabel}>{card.roomType || 'USD'}</span>
-                      <div className={styles.priceValueWrap}>
-                        <span className={styles.priceValue}>${card.price}</span>
-                        {card.priceNote && <span className={styles.priceNote}>{card.priceNote}</span>}
-                      </div>
+            <div className={styles.councilsGrid}>
+              {/* Card 1: UNSC */}
+              <div className={`${styles.councilCard} ${styles.cardPink}`}>
+                <Image src="/image/png/JNIMUN%2726/pigeon.png" alt="" width={60} height={75} className={styles.sC1_1} />
+                <Image src="/image/png/JNIMUN%2726/stars.png" alt="" width={60} height={60} className={styles.sC1_2} />
+                <div className={styles.cardInner}>
+                  <div className={styles.councilHeader}>
+                    <div className={styles.councilLogo}>
+                      <Image src="/image/png/security.png" alt="Security Council" width={94} height={94} className={styles.logoImg} />
+                    </div>
+                    <div className={styles.councilTitleDesc}>
+                      <span className={styles.levelBadge}>Advanced</span>
+                      <h3>SECURITY COUNCIL — UNSC</h3>
                     </div>
                   </div>
-                  <ul className={styles.packageFeatures}>
-                    {PACKAGE_FEATURES.map((featName) => {
-                      const included = card.description.includes(featName)
-                      return (
-                        <li key={featName} className={`${styles.packageFeature} ${included ? styles.featIncluded : styles.featExcluded}`}>
-                          <span className={styles.featIcon}>{included ? '✓' : '✗'}</span>
-                          <span className={styles.featName}>{featName}</span>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                  <Link href="https://forms.gle/xo5xzySkSZhg8DrV9a" target="_blank" rel="noopener noreferrer" className={styles.packageApplyBtn}>
-                    <span>Apply Now</span>
-                    <span className={styles.packageApplyIcon}>→</span>
-                  </Link>
+                  <div className={styles.ecstaticBtnWrapper}>
+                    <Link href="/JNIMUN/sc" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextPink}`}>
+                      LEARN MORE
+                    </Link>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-        </section>
-      </div>
+              {/* Card 2: UNHRC */}
+              <div className={`${styles.councilCard} ${styles.cardBlue}`}>
+                <Image src="/image/png/JNIMUN%2726/megaphone.png" alt="" width={65} height={70} className={styles.sC2_1} />
+                <Image src="/image/png/JNIMUN%2726/pencil.png" alt="" width={35} height={75} className={styles.sC2_2} />
+                <div className={styles.cardInner}>
+                  <div className={styles.councilHeader}>
+                    <div className={styles.councilLogo}>
+                      <Image src="/image/png/crisis.png" alt="Crisis Committee" width={94} height={94} className={styles.logoImg} />
+                    </div>
+                    <div className={styles.councilTitleDesc}>
+                      <span className={styles.levelBadge}>Advanced</span>
+                      <h3>CRISIS COMMITTEE</h3>
+                    </div>
+                  </div>
+                  <div className={styles.ecstaticBtnWrapper}>
+                    <Link href="/JNIMUN/crisis" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextBlue}`}>
+                      LEARN MORE
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: DISEC */}
+              <div className={`${styles.councilCard} ${styles.cardYellow}`}>
+                <Image src="/image/png/JNIMUN%2726/lens.png" alt="" width={50} height={77} className={styles.sC3_1} />
+                <Image src="/image/png/JNIMUN%2726/handwriting.png" alt="" width={75} height={60} className={styles.sC3_2} />
+                <div className={styles.cardInner}>
+                  <div className={styles.councilHeader}>
+                    <div className={styles.councilLogo}>
+                      <Image src="/image/png/odc.png" alt="UNODC" width={94} height={94} className={styles.logoImg} />
+                    </div>
+                    <div className={styles.councilTitleDesc}>
+                      <span className={styles.levelBadge}>Intermediate</span>
+                      <h3>UNITED NATIONS OFFICE ON DRUGS AND CRIME — UNODC</h3>
+                    </div>
+                  </div>
+                  <div className={styles.ecstaticBtnWrapper}>
+                    <Link href="/JNIMUN/unodc" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextYellow}`}>
+                      LEARN MORE
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4: ECOSOC */}
+              <div className={`${styles.councilCard} ${styles.cardGreen}`}>
+                <Image src="/image/png/JNIMUN%2726/bulb.png" alt="" width={45} height={68} className={styles.sC4_1} />
+                <Image src="/image/png/JNIMUN%2726/clip.png" alt="" width={55} height={63} className={styles.sC4_2} />
+                <div className={styles.cardInner}>
+                  <div className={styles.councilHeader}>
+                    <div className={styles.councilLogo}>
+                      <Image src="/image/png/imo.png" alt="IMO" width={94} height={94} className={styles.logoImg} />
+                    </div>
+                    <div className={styles.councilTitleDesc}>
+                      <span className={styles.levelBadge}>Intermediate</span>
+                      <h3>INTERNATIONAL MARITIME ORGANIZATION — IMO</h3>
+                    </div>
+                  </div>
+                  <div className={styles.ecstaticBtnWrapper}>
+                    <Link href="/JNIMUN/imo" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextGreen}`}>
+                      LEARN MORE
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 5: WHO */}
+              <div className={`${styles.councilCard} ${styles.cardOrange}`}>
+                <Image src="/image/png/JNIMUN%2726/sand_clock.png" alt="" width={65} height={78} className={styles.sC5_1} />
+                <Image src="/image/png/JNIMUN%2726/moon.png" alt="" width={50} height={85} className={styles.sC5_2} />
+                <div className={styles.cardInner}>
+                  <div className={styles.councilHeader}>
+                    <div className={styles.councilLogo}>
+                      <Image src="/image/png/hcr.png" alt="UNHCR" width={94} height={94} className={styles.logoImg} />
+                    </div>
+                    <div className={styles.councilTitleDesc}>
+                      <span className={styles.levelBadge}>Beginner</span>
+                      <h3>UNITED NATIONS HIGH COMMISSIONER FOR REFUGEES — UNHCR</h3>
+                    </div>
+                  </div>
+                  <div className={styles.ecstaticBtnWrapper}>
+                    <Link href="/JNIMUN/unhcr" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextOrange}`}>
+                      LEARN MORE
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 6: Arab League */}
+              <div className={`${styles.councilCard} ${styles.cardTeal}`}>
+                <Image src="/image/png/JNIMUN%2726/laptop.png" alt="" width={65} height={64} className={styles.sC6_1} />
+                <Image src="/image/png/JNIMUN%2726/brain.png" alt="" width={75} height={62} className={styles.sC6_2} />
+                <div className={styles.cardInner}>
+                  <div className={styles.councilHeader}>
+                    <div className={styles.councilLogo}>
+                      <Image src="/image/png/press-new.png" alt="International Press" width={94} height={94} className={styles.logoImg} />
+                    </div>
+                    <div className={styles.councilTitleDesc}>
+                      <span className={styles.levelBadge}>Beginner</span>
+                      <h3>INTERNATIONAL PRESS</h3>
+                    </div>
+                  </div>
+                  <div className={styles.ecstaticBtnWrapper}>
+                    <Link href="/JNIMUN/press" className={`${styles.ecstaticMeetChairBtn} ${styles.btnTextTeal}`}>
+                      LEARN MORE
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* --- International Packages Section --- */}
+          <section className={styles.packagesSection}>
+            <Image src="/image/png/globe-sticker.png" alt="" width={150} height={150} className={`${styles.packageSticker} ${styles.packageStickerGlobe}`} aria-hidden />
+            <Image src="/image/png/JNIMUN%2726/clip.png" alt="" width={86} height={86} className={`${styles.packageSticker} ${styles.packageStickerClip}`} aria-hidden />
+            <Image src="/image/png/sticker-hourglass.png" alt="" width={124} height={124} className={`${styles.packageSticker} ${styles.packageStickerHourglass}`} aria-hidden />
+
+            <div className={styles.packagesHeader}>
+              <span className={styles.packagesEyebrow}>Choose Your Experience</span>
+              <h2 className={styles.packagesTitle}>
+                International Packages
+              </h2>
+              <p className={styles.packagesSubtitle}>
+                Join JNIMUN&apos;26 from anywhere in the world. Choose the package that fits your delegation and be part of a global impact.
+              </p>
+            </div>
+
+            {/* Package Type Tab Selector */}
+            <div className={styles.packagePillContainer}>
+              <div className={styles.packagePillWrapper} role="tablist" aria-label="International package categories">
+                {PACKAGES_DATA.map((pkg, index) => (
+                  <button
+                    key={pkg.packageName}
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedPackage === pkg.packageName}
+                    className={`${styles.packagePillButton} ${selectedPackage === pkg.packageName ? styles.activePillButton : ''}`}
+                    onClick={() => setSelectedPackage(pkg.packageName)}
+                  >
+                    <span className={styles.packagePillIcon}>{index + 1}</span>
+                    <span>{formatPackageLabel(pkg.packageName)}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.packagesGrid}>
+              {displayCards.map((card, index) => (
+                <div key={`${card.packageName}-${card.roomType ?? index}`} className={`${styles.packageCard} ${styles[card.colorClass as keyof typeof styles]}`}>
+                  <div className={styles.packageCardBadge}>{card.roomType || 'Package'}</div>
+                  <div className={styles.packageCardInner}>
+                    <h3 className={styles.packageCardTitle}>
+                      {formatPackageLabel(card.packageName)}
+                    </h3>
+                    <p className={styles.packageCardTagline}>{card.tagline}</p>
+                    <div className={styles.packagePrices}>
+                      <div className={styles.packagePriceRow}>
+                        <span className={styles.priceLabel}>{card.roomType || 'USD'}</span>
+                        <div className={styles.priceValueWrap}>
+                          <span className={styles.priceValue}>${card.price}</span>
+                          {card.priceNote && <span className={styles.priceNote}>{card.priceNote}</span>}
+                        </div>
+                      </div>
+                    </div>
+                    <ul className={styles.packageFeatures}>
+                      {PACKAGE_FEATURES.map((featName) => {
+                        const included = card.description.includes(featName)
+                        return (
+                          <li key={featName} className={`${styles.packageFeature} ${included ? styles.featIncluded : styles.featExcluded}`}>
+                            <span className={styles.featIcon}>{included ? '✓' : '✗'}</span>
+                            <span className={styles.featName}>{featName}</span>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                    <Link href="https://docs.google.com/forms/d/e/1FAIpQLSc4YAorOpKZRZcJWXmUr0SYO-4Pr7-H_Fz3CLq3G4LYeabmwQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className={styles.packageApplyBtn}>
+                      <span>Apply Now</span>
+                      <span className={styles.packageApplyIcon}>→</span>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </section>
+        </div>
       </main>
       <JNIMUNFooter />
     </>

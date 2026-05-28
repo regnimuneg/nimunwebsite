@@ -127,7 +127,7 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
     groupPhoto: secsImage('Crisis.png'),
     groupPhoto2: secsImage('Crisis 2.png'),
     ctaShortName: 'CC',
-    ctaTitle: 'CRISIS COMMITTEE — CC',
+    ctaTitle: 'CRISIS COMMITTEE',
   },
 
   imo: {
