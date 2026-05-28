@@ -121,7 +121,7 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
     },
     chairs: [
       { name: 'OMAR AKL', role: 'PRESIDENT OF CRISIS COMMITTEE', image: secsImage('Omar Akl - President Of Crisis Committee.png') },
-      { name: 'JOUDI YOUSRI', role: 'VICE PRESIDENT OF CRISIS COMMITTEE', image: secsImage('Joudy Yousri - Vice President Of Crisis Committee.png') },
+      { name: 'JUDI YOUSRI', role: 'VICE PRESIDENT OF CRISIS COMMITTEE', image: secsImage('Joudy Yousri - Vice President Of Crisis Committee.png') },
     ],
     chairBackings: [blue, pink],
     groupPhoto: secsImage('Crisis.png'),
