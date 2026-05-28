@@ -112,8 +112,8 @@ const PACKAGES_DATA: JNIMUNPackageData[] = [
     colorClass: 'packageGroupSuper',
     hasRoomTypes: true,
     roomOptions: [
-      { roomType: 'Double Room', price: '480', priceNote: 'per person (for 8 delegates)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] },
-      { roomType: 'Single Room', price: '485', priceNote: 'for supervisor ($3,840 Total)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] }
+      { roomType: 'Double Rooms', price: '480', priceNote: 'per person (for 8 delegates)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] },
+      { roomType: 'Single Rooms', price: '485', priceNote: '($3,840 Total)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] }
     ]
   }
 ]

@@ -3551,6 +3551,10 @@
     line-height: 1.1;
     letter-spacing: -0.03em;
     text-align: center;
+
+    &:not(:last-child) {
+      font-size: clamp(0.67rem, 2.5vw, 0.82rem);
+    }
   }
 
   .packagePillIcon {
