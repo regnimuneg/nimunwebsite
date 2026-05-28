@@ -2,8 +2,9 @@ import type { NextPage } from 'next'
 import styles from '@/styles/JNIMUN.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import ApplyNavbar from '@/components/apply/ApplyNavbar'
+import JNIMUNFooter from '@/components/jnimun/JNIMUNFooter'
 
 const PaperAirplaneIcon = () => (
   <svg viewBox="0 0 100 100" fill="none" stroke="#ffffff" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" className={styles.cardDoodleSvg}>
@@ -33,6 +34,59 @@ const BeetleIcon = () => (
     <path d="M70 45 L85 40 M70 55 L88 55 M70 65 L85 70" />
   </svg>
 )
+
+const PACKAGES_DATA = [
+  {
+    packageName: 'SILVER',
+    tagline: 'Essential Conference Package',
+    colorClass: 'packageSilver',
+    hasRoomTypes: true,
+    roomOptions: [
+      { roomType: 'Single Room', price: '450', description: ['Accommodation', 'Conference fees', 'Transportation'] },
+      { roomType: 'Double Room', price: '360', priceNote: '($720 Total)', description: ['Accommodation', 'Conference fees', 'Transportation'] }
+    ]
+  },
+  {
+    packageName: 'GOLD',
+    tagline: 'Full Experience Package',
+    colorClass: 'packageGold',
+    hasRoomTypes: true,
+    roomOptions: [
+      { roomType: 'Single Room', price: '565', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] },
+      { roomType: 'Double Room', price: '475', priceNote: '($950 Total)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] }
+    ]
+  },
+  {
+    packageName: 'GROUP OF 4',
+    tagline: 'Best for Small Groups',
+    colorClass: 'packageGroup4',
+    hasRoomTypes: false,
+    price: '450',
+    priceNote: 'per person ($1,799 Total)',
+    roomType: 'Double Room',
+    description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation']
+  },
+  {
+    packageName: 'GROUP OF 8',
+    tagline: 'Vibrant Group Experience',
+    colorClass: 'packageGroup8',
+    hasRoomTypes: false,
+    price: '425',
+    priceNote: 'per person ($3,400 Total)',
+    roomType: 'Double Room',
+    description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation']
+  },
+  {
+    packageName: 'GROUP OF 8 + SUPERVISOR',
+    tagline: 'For Delegations & Leaders',
+    colorClass: 'packageGroupSuper',
+    hasRoomTypes: true,
+    roomOptions: [
+      { roomType: 'Double Room', price: '480', priceNote: 'per person (for 8 delegates)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] },
+      { roomType: 'Single Room', price: '485', priceNote: 'for supervisor ($3,840 Total)', description: ['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'] }
+    ]
+  }
+]
 
 const JNIMUN: NextPage = () => {
   useEffect(() => {
@@ -84,6 +138,66 @@ const JNIMUN: NextPage = () => {
       document.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
+
+  const [selectedPackage, setSelectedPackage] = useState<string>('SILVER')
+  const [pillStyle, setPillStyle] = useState({ left: 4, width: 0 })
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([])
+
+  useEffect(() => {
+    const selectedIndex = PACKAGES_DATA.findIndex(pkg => pkg.packageName === selectedPackage)
+    const activeTab = tabsRef.current[selectedIndex]
+    if (activeTab) {
+      // Calculate position relative to wrapper (subtract parent left offset)
+      setPillStyle({
+        left: activeTab.offsetLeft,
+        width: activeTab.offsetWidth,
+      })
+    }
+  }, [selectedPackage])
+
+  // Recalculate on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const selectedIndex = PACKAGES_DATA.findIndex(pkg => pkg.packageName === selectedPackage)
+      const activeTab = tabsRef.current[selectedIndex]
+      if (activeTab) {
+        setPillStyle({
+          left: activeTab.offsetLeft,
+          width: activeTab.offsetWidth,
+        })
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [selectedPackage])
+
+  const currentPackage = PACKAGES_DATA.find(pkg => pkg.packageName === selectedPackage)
+
+  const getDisplayCards = () => {
+    if (!currentPackage) return []
+
+    if (currentPackage.hasRoomTypes && currentPackage.roomOptions) {
+      return currentPackage.roomOptions.map(option => ({
+        packageName: currentPackage.packageName,
+        colorClass: currentPackage.colorClass,
+        roomType: option.roomType,
+        price: option.price,
+        priceNote: option.priceNote,
+        description: option.description
+      }))
+    } else {
+      return [{
+        packageName: currentPackage.packageName,
+        colorClass: currentPackage.colorClass,
+        roomType: currentPackage.roomType,
+        price: currentPackage.price || '',
+        priceNote: currentPackage.priceNote,
+        description: currentPackage.description || []
+      }]
+    }
+  }
+
+  const displayCards = getDisplayCards()
 
   return (
     <>
@@ -144,8 +258,9 @@ const JNIMUN: NextPage = () => {
           />
         </div>
 
-        {/* --- What is JNIMUN? Section --- */}
-        <section className={styles.whatIsSection}>
+        <div className={styles.doodleSectionWrapper}>
+          {/* --- What is JNIMUN? Section --- */}
+          <section className={styles.whatIsSection}>
           <div className={styles.whatIsInner}>
             <div className={styles.whatIsTitleBlock}>
               <h2 className={styles.whatIsTitle}>
@@ -227,7 +342,7 @@ const JNIMUN: NextPage = () => {
         </section>
 
         {/* --- Our Councils Section --- */}
-        <section className={styles.ourCouncilsSection}>
+        <section id="councils" className={styles.ourCouncilsSection}>
           <div className={styles.councilsHeader}>
             <div className={styles.councilsTitleWrapper}>
               <h2 className={styles.councilsTitle}>
@@ -385,7 +500,78 @@ const JNIMUN: NextPage = () => {
             </div>
           </div>
         </section>
+
+        {/* --- International Packages Section --- */}
+        <section className={styles.packagesSection}>
+          <div className={styles.packagesHeader}>
+            <h2 className={styles.packagesTitle}>
+              INTERNATIONAL <span className={styles.titleWhite}>PACKAGES</span>
+            </h2>
+          </div>
+
+          {/* Package Type Tab Selector */}
+          <div className={styles.packagePillContainer}>
+            <div className={styles.packagePillWrapper}>
+              <div 
+                className={styles.slidingPill}
+                style={{
+                  width: pillStyle.width ? `${pillStyle.width}px` : `calc((100% - 8px) / ${PACKAGES_DATA.length})`,
+                  left: pillStyle.width ? `${pillStyle.left}px` : `calc(4px + ${PACKAGES_DATA.findIndex(pkg => pkg.packageName === selectedPackage)} * ((100% - 8px) / ${PACKAGES_DATA.length}))`,
+                }}
+              />
+              {PACKAGES_DATA.map((pkg, index) => (
+                <button
+                  key={pkg.packageName}
+                  ref={el => { tabsRef.current[index] = el }}
+                  type="button"
+                  className={`${styles.packagePillButton} ${selectedPackage === pkg.packageName ? styles.activePillButton : ''}`}
+                  onClick={() => setSelectedPackage(pkg.packageName)}
+                >
+                  {pkg.packageName}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.packagesGrid}>
+            {displayCards.map((card, index) => (
+              <div key={index} className={`${styles.packageCard} ${styles[card.colorClass as keyof typeof styles]}`}>
+                <div className={styles.packageCardPin} />
+                <div className={styles.packageCardInner}>
+                  <h3 className={styles.packageCardTitle}>
+                    {card.packageName}
+                  </h3>
+                  <div className={styles.packagePrices}>
+                    <div className={styles.packagePriceRow}>
+                      <span className={styles.priceLabel}>{card.roomType || 'Price'}</span>
+                      <div className={styles.priceValueWrap}>
+                        <span className={styles.priceValue}>${card.price}</span>
+                        {card.priceNote && <span className={styles.priceNote}>{card.priceNote}</span>}
+                      </div>
+                    </div>
+                  </div>
+                  <ul className={styles.packageFeatures}>
+                    {['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'].map((featName) => {
+                      const included = card.description.includes(featName)
+                      return (
+                        <li key={featName} className={`${styles.packageFeature} ${included ? styles.featIncluded : styles.featExcluded}`}>
+                          <span className={styles.featIcon}>{included ? '✓' : '✗'}</span>
+                          <span className={styles.featName}>{featName}</span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <Link href="https://forms.gle/xo5xzySkSZhg8DrV9a" target="_blank" rel="noopener noreferrer" className={styles.packageApplyBtn}>
+                    Apply Now
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
       </main>
+      <JNIMUNFooter />
     </>
   )
 }

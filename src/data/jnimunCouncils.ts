@@ -48,8 +48,8 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
       { name: 'NOOR BADAWI', role: 'UNODC CO-CHAIR', image: secsImage('Noor Badawi - UNODC Co-Chair.png') },
     ],
     chairBackings: [blue, pink],
-    groupPhoto: '/image/png/CCPCJ%2726.jpg',
-    groupPhoto2: '/image/png/JNIMUN%20Sessions.jpg',
+    groupPhoto: secsImage('UNODC.png'),
+    groupPhoto2: secsImage('UNODC 2.png'),
     ctaShortName: 'UNODC',
     ctaTitle: 'UNITED NATIONS OFFICE ON DRUGS AND CRIME — UNODC',
   },
@@ -98,8 +98,8 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
     badge: 'ADVANCED',
     titleParts: [
       { text: 'CRISIS', color: 'black' },
-      { text: 'COMMITTEE —', color: 'black' },
-      { text: 'CC', color: 'pink' },
+      { text: 'COMMITTEE', color: 'pink' },
+      // { text: 'CC', color: 'pink' },
     ],
     desc:
       'Crisis Committee simulates fast-moving global emergencies where delegates act as cabinet members, intelligence officers, and diplomats. Strategy, secrecy, and rapid decision-making define the room as crises unfold in real time.',
@@ -212,14 +212,14 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
     badge: 'BEGINNER',
     titleParts: [
       { text: 'INTERNATIONAL', color: 'black' },
-      { text: 'PRESS —', color: 'black' },
-      { text: 'IP', color: 'pink' },
+      { text: 'PRESS', color: 'pink' },
+      // { text: 'IP', color: 'pink' },
     ],
     desc:
       'The International Press Corps documents committee proceedings, conducts interviews, and publishes breaking coverage. Delegates sharpen investigative skills, ethical reporting, and storytelling that keeps diplomacy accountable and the conference informed.',
     highlightWords: ['investigative skills'],
     logo: '/image/png/press-new.png',
-    heroImage: secsImage('Press.png'),
+    heroImage: secsImage('Press 2.png'),
     pillars: [
       { icon: 'newspaper', label: 'REPORT' },
       { icon: 'camera', label: 'CAPTURE' },
@@ -239,7 +239,7 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
     chairBackings: [blue, pink],
     groupPhoto: secsImage('Press.png'),
     ctaShortName: 'IP',
-    ctaTitle: 'INTERNATIONAL PRESS — IP',
+    ctaTitle: 'INTERNATIONAL PRESS',
   },
 }
 

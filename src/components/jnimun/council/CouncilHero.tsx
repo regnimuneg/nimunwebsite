@@ -37,8 +37,13 @@ export default function CouncilHero({ council }: CouncilHeroProps) {
                 ))}
               </h1>
 
-              <p className={styles.heroDescription}>
-                <DescriptionWithHighlights text={council.desc} highlights={council.highlightWords} />
+              <p
+                className={styles.heroDescription}
+                style={{
+                  '--desc-font-multiplier': council.desc.length < 240 ? 1.18 : council.desc.length < 270 ? 1.08 : 0.94
+                } as React.CSSProperties}
+              >
+                {council.desc}
               </p>
             </div>
 
@@ -101,7 +106,7 @@ export default function CouncilHero({ council }: CouncilHeroProps) {
               <div className={styles.washiTapePink} aria-hidden />
               <div className={styles.notebookPaper}>
                 <p className={styles.notebookText}>
-                  <DescriptionWithHighlights text={council.desc} highlights={council.highlightWords} />
+                  {council.desc}
                 </p>
               </div>
             </div>

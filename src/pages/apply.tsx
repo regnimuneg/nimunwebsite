@@ -1,5 +1,6 @@
 import ApplyDecorations from '@/components/apply/ApplyDecorations'
 import ApplyNavbar from '@/components/apply/ApplyNavbar'
+import JNIMUNFooter from '@/components/jnimun/JNIMUNFooter'
 import Head from 'next/head'
 import { useMemo, useState, useEffect } from 'react'
 import styles from '@/styles/Apply.module.scss'
@@ -1066,6 +1067,7 @@ NIMUN Delegate Package Includes:
             </p>
           </div>
         </div>
+        <JNIMUNFooter />
       </div>
     )
   }
@@ -1102,6 +1104,7 @@ NIMUN Delegate Package Includes:
             </p>
           </div>
         </div>
+        <JNIMUNFooter />
       </div>
     )
   }
@@ -1215,6 +1218,7 @@ NIMUN Delegate Package Includes:
           </div>
         </div>
       )}
+      <JNIMUNFooter />
     </div>
   )
 }

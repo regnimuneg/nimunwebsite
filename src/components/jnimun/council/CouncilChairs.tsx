@@ -8,6 +8,10 @@ interface CouncilChairsProps {
 }
 
 export default function CouncilChairs({ council }: CouncilChairsProps) {
+  if (!council.chairs || council.chairs.length === 0) {
+    return null
+  }
+
   return (
     <section className={styles.chairsSection} aria-labelledby="chairs-heading">
       <div className={styles.sectionRibbonPink}>
@@ -73,6 +77,18 @@ export default function CouncilChairs({ council }: CouncilChairsProps) {
           )
         })}
       </div>
+
+      {council.groupPhoto ? (
+        <div className={styles.chairsGroupPhotoWrapper}>
+          <Image
+            src={council.groupPhoto}
+            alt={`${council.ctaShortName} chairs group`}
+            width={600}
+            height={460}
+            className={styles.chairsGroupPhoto}
+          />
+        </div>
+      ) : null}
 
       <Image
         src="/image/png/heart.png"

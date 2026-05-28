@@ -88,7 +88,7 @@ export default function ApplyNavbar(): JSX.Element {
     <>
       <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brandCluster} aria-label="NIMUN home">
+        <Link href="/JNIMUN" className={styles.brandCluster} aria-label="JNIMUN home">
           <img
             src={jnimun26Asset('JNIMUN logo.png')}
             alt=""
@@ -103,6 +103,9 @@ export default function ApplyNavbar(): JSX.Element {
 
         {!isMobile && (
           <nav className={styles.desktopNav} aria-label="Main navigation">
+            <Link href="/" className={styles.navLink}>
+              Home
+            </Link>
             <div
               className={styles.navItem}
               onMouseEnter={handleAboutEnter}
@@ -119,6 +122,9 @@ export default function ApplyNavbar(): JSX.Element {
               </button>
               {aboutOpen && aboutDropdown()}
             </div>
+            <Link href="/JNIMUN" className={styles.navLink}>
+              JNIMUN
+            </Link>
             <Link href="/#contact" className={styles.navLink}>
               Contact Us
             </Link>
@@ -147,6 +153,9 @@ export default function ApplyNavbar(): JSX.Element {
               </IconButton>
             </div>
             <nav className={styles.drawerNav}>
+              <Link href="/" className={styles.drawerLink} onClick={closeMenus}>
+                Home
+              </Link>
               <div className={styles.drawerAbout}>
                 <button
                   type="button"
@@ -159,6 +168,9 @@ export default function ApplyNavbar(): JSX.Element {
                 </button>
                 {aboutOpen && aboutDropdown(true)}
               </div>
+              <Link href="/JNIMUN" className={styles.drawerLink} onClick={closeMenus}>
+                JNIMUN
+              </Link>
               <Link href="/#contact" className={styles.drawerLink} onClick={closeMenus}>
                 Contact Us
               </Link>

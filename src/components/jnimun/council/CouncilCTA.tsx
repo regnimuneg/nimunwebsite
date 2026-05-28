@@ -55,7 +55,7 @@ export default function CouncilCTA({ council }: CouncilCTAProps) {
         </p>
 
         <div className={styles.ctaButtons}>
-          <Link href="/JNIMUN" className={styles.ctaBackBtn}>
+          <Link href="/JNIMUN#councils" className={styles.ctaBackBtn}>
             Back to Councils
           </Link>
           <Link href="/apply" className={styles.ctaApplyBtn}>
