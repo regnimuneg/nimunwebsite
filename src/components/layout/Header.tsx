@@ -1,15 +1,23 @@
+import Image from 'next/image'
 import MenuIcon from '@mui/icons-material/Menu'
 import IconButton from '@mui/material/IconButton'
 import Drawer from '@mui/material/Drawer'
 import Menu from '@/components/layout/Menu' // Updated Menu component
-import { useLenis } from '@/lib/lenis'
-import { jnimun26Asset } from '@/lib/jnimun26Brand'
 import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import styles from '@/styles/layout/Header.module.scss'
-import Image from 'next/image'
 import React, { useState } from 'react'
 import Link from 'next/link' // Import Link for Apply button if it's a link
+
+function RightSideElements() {
+  return (
+    <div className={styles.rightSideContainer}>
+      <Link href="/apply" className={styles.applyButton}>
+        APPLY NOW
+      </Link>
+    </div>
+  )
+}
 
 export default function Header(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -21,30 +29,16 @@ export default function Header(): JSX.Element {
   const [isHomePage, setIsHomePage] = useState(false)
 
   React.useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY
-      if (scroll > 10) {
-        setIsScrolling(true)
-      } else {
-        setIsScrolling(false)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Initial check
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  React.useEffect(() => {
     setIsHomePage(router.pathname === '/')
   }, [router.pathname])
 
-  const toggleDrawer = (open: boolean) => () => {
-    setDrawerOpen(open)
-  }
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleLogoClick = (e: React.MouseEvent) => {
     if (isHomePage) {
@@ -53,20 +47,12 @@ export default function Header(): JSX.Element {
     }
   }
 
-  // Right side elements component
-  const RightSideElements = () => (
-    <div className={styles.rightSideContainer}>
-      <Link href="/apply" className={styles.applyButton}>
-        APPLY
-        <img
-          src={jnimun26Asset('laptop.png')}
-          alt=""
-          className={styles.applyLaptop}
-          aria-hidden="true"
-        />
-      </Link>
-    </div>
-  )
+  const toggleDrawer = (open: boolean) => (e: React.KeyboardEvent | React.MouseEvent) => {
+    if (e.type === 'keydown' && ((e as React.KeyboardEvent).key === 'Tab' || (e as React.KeyboardEvent).key === 'Shift')) {
+      return
+    }
+    setDrawerOpen(open)
+  }
 
   return (
     <>
@@ -81,13 +67,18 @@ export default function Header(): JSX.Element {
               className={styles.logoWrapper}
               aria-label="Nile International Model United Nations Home"
             >
-              <img
-                src="/image/png/logo24.png"
+              <Image
+                src="/image/png/logo_white.png"
                 alt="NIMUN Logo"
-                className={styles.logo}
-                width={80}
-                height={36}
+                width={100}
+                height={100}
+                className={styles.headerLogo}
+                priority
               />
+              <div className={styles.logoTextWrapper}>
+                <span className={styles.brandTitle}>NIMUN</span>
+                <span className={styles.brandSubtitle}>Nile International Model United Nations</span>
+              </div>
             </a>
             {/* Render Menu component only on desktop, directly after logo */}
             {!isMobile && <Menu />}
@@ -112,10 +103,7 @@ export default function Header(): JSX.Element {
               >
                 {/* Drawer content: includes Menu and RightSideElements */}
                 <div className={styles.drawerContent}>
-                  <button
-                    className={styles.backButton}
-                    onClick={toggleDrawer(false)}
-                  >
+                  <button className={styles.backButton} onClick={toggleDrawer(false)}>
                     ← Back
                   </button>
                   <Menu onNavigate={() => setDrawerOpen(false)} />

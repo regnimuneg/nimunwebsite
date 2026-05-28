@@ -1,5 +1,5 @@
 import styles from '@/styles/landing/Hero.module.scss'
-import { jnimun26Asset } from '@/lib/jnimun26Brand'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -26,13 +26,10 @@ export default function Hero() {
 
   useEffect(() => {
     const updateCountdown = () => setCountdown(getCountdown())
-    const initialCountdownTimer = window.setTimeout(updateCountdown, 0)
     const countdownTimer = window.setInterval(updateCountdown, 1000)
+    updateCountdown()
 
-    return () => {
-      window.clearTimeout(initialCountdownTimer)
-      window.clearInterval(countdownTimer)
-    }
+    return () => window.clearInterval(countdownTimer)
   }, [])
 
   const countdownItems = [
@@ -43,51 +40,142 @@ export default function Hero() {
   ]
 
   return (
-    <>
-      <div className={styles.heroWrapper}>
-        <div className={styles.heroBanner}>
-          <div className={styles.heroOverlay} />
+    <section id="top" className={styles.hero}>
+      <div className={styles.heroInner}>
+        <div className={styles.heroCopy}>
+          <h1 className={styles.wordmark}>NIMUN</h1>
+          <p className={styles.subtitle}>Nile International Model United Nations</p>
+          <p className={styles.intro}>
+            Nile International Model United Nations is a vibrant, student-led club dedicated to
+            inspiring global awareness, diplomacy, and leadership.
+          </p>
+          <div className={styles.actions}>
+            <Link href="/apply" className={styles.primaryButton}>
+              <span>APPLY</span>
+              <Image
+                src="/image/png/JNIMUN'26/laptop.png"
+                alt=""
+                width={74}
+                height={74}
+                className={styles.applySticker}
+                aria-hidden="true"
+              />
+            </Link>
+            <Link href="/JNIMUN" className={styles.secondaryButton}>
+              JNIMUN
+            </Link>
+          </div>
+        </div>
 
-          <div className={styles.heroContent}>
-            <div className={styles.countdownCard}>
-              {/* Stickers scattered around the card */}
-              <img src={jnimun26Asset('rays.png')} alt="" className={`${styles.sticker} ${styles.stickerRays}`} aria-hidden="true" />
-              <img src={jnimun26Asset('stars.png')} alt="" className={`${styles.sticker} ${styles.stickerStars}`} aria-hidden="true" />
-              <img src={jnimun26Asset('megaphone.png')} alt="" className={`${styles.sticker} ${styles.stickerMegaphone}`} aria-hidden="true" />
-              <img src={jnimun26Asset('sand_clock.png')} alt="" className={`${styles.sticker} ${styles.stickerHourglass}`} aria-hidden="true" />
-              <img src={jnimun26Asset('big_star.png')} alt="" className={`${styles.sticker} ${styles.stickerBigStar}`} aria-hidden="true" />
-              <img src={jnimun26Asset('small_stars.png')} alt="" className={`${styles.sticker} ${styles.stickerSmallStars}`} aria-hidden="true" />
-              <img src={jnimun26Asset('lens.png')} alt="" className={`${styles.sticker} ${styles.stickerLens}`} aria-hidden="true" />
-              <img src={jnimun26Asset('pencil.png')} alt="" className={`${styles.sticker} ${styles.stickerPencil}`} aria-hidden="true" />
-              <img src={jnimun26Asset('bulb.png')} alt="" className={`${styles.sticker} ${styles.stickerBulb}`} aria-hidden="true" />
-              <img src={jnimun26Asset('exclamation.png')} alt="" className={`${styles.sticker} ${styles.stickerExclamation}`} aria-hidden="true" />
-              <img src={jnimun26Asset('thumbs_up.png')} alt="" className={`${styles.sticker} ${styles.stickerThumbsUp}`} aria-hidden="true" />
-              <img src={jnimun26Asset('clip.png')} alt="" className={`${styles.sticker} ${styles.stickerClip}`} aria-hidden="true" />
-
-              <p className={styles.countdownEyebrow}>
-                <span>JNIMUN</span>
-                <span className={styles.countdownYear}>&apos;26</span>
-                <span> is approaching</span>
-              </p>
-              <div className={styles.countdownGrid} aria-label="Countdown to JNIMUN'26">
-                {countdownItems.map((item) => (
-                  <div className={styles.countdownItem} key={item.label}>
-                    <span className={styles.countdownValue}>
-                      {item.value.toString().padStart(2, '0')}
-                    </span>
-                    <span className={styles.countdownLabel}>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className={styles.heroActions}>
-                <Link href="/apply" className={styles.applyNowBtn}>
-                  APPLY NOW
-                </Link>
-              </div>
-            </div>
+        <div className={styles.heroVisual}>
+          <div className={styles.photoFrame}>
+            <Image
+              src="/image/png/IMG_4323.png"
+              alt="NIMUN delegates celebrating with placards during conference"
+              fill
+              sizes="(max-width: 900px) 92vw, 48vw"
+              priority
+              quality={78}
+              className={styles.heroImage}
+            />
           </div>
         </div>
       </div>
-    </>
+
+      <div className={styles.countdownHeading}>
+        <span>JNIMUN&apos;26</span>
+        <h2>Countdown</h2>
+      </div>
+
+      <div className={styles.countdownBar} aria-label="Countdown to JNIMUN 2026">
+        <div className={styles.timerIcon} aria-hidden="true">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 2V6"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8 2V6"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3 10H21"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8 14H8.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 14H12.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 14H16.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8 18H8.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 18H12.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 18H16.01"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        {countdownItems.map((item) => (
+          <div className={styles.countdownItem} key={item.label}>
+            <span className={styles.countdownValue}>{item.value.toString().padStart(2, '0')}</span>
+            <span className={styles.countdownLabel}>{item.label}</span>
+            <div className={styles.divider} />
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }

@@ -3,8 +3,8 @@ const nextConfig = {
   // Use default server/SSR output so API routes work
   trailingSlash: true,
   images: {
-    unoptimized: true,
-    qualities: [40, 75, 85],
+    qualities: [40, 60, 75, 85],
+    formats: ['image/webp'],
   },
   // Redirect hidden pages to 404
   async redirects() {
@@ -32,13 +32,14 @@ const nextConfig = {
       },
     ];
 
-    if (isProd) {
-      rules.push({
-        source: '/JNIMUN/:path*',
-        destination: '/404',
-        permanent: false,
-      });
-    }
+    // if (isProd) {
+    // TODO: DO NOT COMMIT - uncomment this redirect rule before pushing to prod
+    //   rules.push({
+    //     source: '/JNIMUN/:path*',
+    //     destination: '/404',
+    //     permanent: false,
+    //   });
+    // }
 
     return rules;
   },

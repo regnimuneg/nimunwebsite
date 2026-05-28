@@ -4,6 +4,7 @@ export const JNIMUN26 = {
     pink: '#FF639B',
     teal: '#3CBF96',
     offWhite: '#F2F2F2',
+    paperGray: '#E5E5E5',
     yellow: '#FFDF51',
     red: '#FF4040',
     blue: '#2E90CF',

@@ -34,7 +34,7 @@ export default function MainLayout({ children }: Props) {
   const isJNIMUNPage = router.pathname === '/JNIMUN' || router.pathname.startsWith('/JNIMUN/')
   
   const hideHeader = isIC26Page || isApplyPage || isJNIMUNPage
-  const hideFooter = isIC26Page || isApplyPage
+  const hideFooter = isIC26Page || isApplyPage || isJNIMUNPage
   
   // Enable double-tap zoom on all pages (but not on images)
   useDoubleTapZoom()

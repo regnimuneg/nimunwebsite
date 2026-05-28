@@ -1,151 +1,90 @@
-import React from 'react'
-
-// Legacy interface for backward compatibility with Package component
 export interface PackageInterface {
   title: string
   price: string
-  groupInfo?: string // e.g., "(Groups of 4)"
-  description: string[] // Array of feature strings
+  priceUnit?: string
+  groupInfo?: string
+  description: string[]
   isPopular?: boolean
-  titleColor: string // To match reference image title colors
-  roomType?: 'Single' | 'Double' // Room type label for cards
+  titleColor?: string
+  roomType?: 'Single' | 'Double'
 }
 
 export interface RoomTypeOption {
   roomType: 'Single' | 'Double'
   price: string
-  description: string[] // Array of feature strings
-  priceNote?: string // Optional savings note (e.g., "Save $90!")
+  description: string[]
+  priceNote?: string
 }
 
 export interface PackageData {
   packageName: string
-  titleColor: string // Color for the package title
-  hasRoomTypes: boolean // Whether this package has Single/Double options
-  roomOptions?: RoomTypeOption[] // Single and Double room options (only for Regular & Silver)
-  price?: string // Direct price (for Gold & Platinum)
-  priceNote?: string // For per-person pricing and savings notes
-  description?: string[] // Features (for Gold & Platinum)
+  titleColor: string
+  hasRoomTypes: boolean
+  roomOptions?: RoomTypeOption[]
+  price?: string
+  priceUnit?: string
+  priceNote?: string
+  description?: string[]
   isPopular?: boolean
 }
+
+const sharedBenefits = [
+  'Accommodation',
+  'Transportation',
+  'Conference fees',
+  'Food',
+  "NIMUN's Welcome Set",
+  'Sightseeing Tours',
+  'Authentic Culinary Experience',
+]
 
 export const packagesData: PackageData[] = [
   {
     packageName: 'Regular',
-    titleColor: '#0036bf', // Dark blue
-    hasRoomTypes: true,
-    roomOptions: [
-      {
-        roomType: 'Single',
-        price: '440',
-        description: [
-          'Accommodation',
-          'Conference fees',
-          'Transportation',
-          'NIMUN\'s Welcome Set',
-          'Food',
-        ],
-      },
-      {
-        roomType: 'Double',
-        price: '350',
-        priceNote: 'Save $90!',
-        description: [
-          'Accommodation',
-          'Conference fees',
-          'Transportation',
-          'NIMUN\'s Welcome Set',
-          'Food',
-        ],
-      },
-    ],
+    titleColor: '#0037C0',
+    hasRoomTypes: false,
+    price: '340',
+    priceUnit: 'delegate',
+    description: sharedBenefits,
   },
   {
     packageName: 'Silver',
-    titleColor: '#A0A0A0', // Silver
-    hasRoomTypes: true,
-    roomOptions: [
-      {
-        roomType: 'Single',
-        price: '540',
-        description: [
-          'Accommodation',
-          'Conference fees',
-          'Transportation',
-          'NIMUN\'s Welcome Set',
-          'Food',
-          'Sightseeing Tours all over Cairo',
-          'Authentic Culinary Experience',
-        ],
-      },
-      {
-        roomType: 'Double',
-        price: '450',
-        priceNote: 'Save $90!',
-        description: [
-          'Accommodation',
-          'Conference fees',
-          'Transportation',
-          'NIMUN\'s Welcome Set',
-          'Food',
-          'Sightseeing Tours all over Cairo',
-          'Authentic Culinary Experience',
-        ],
-      },
-    ],
+    titleColor: '#0037C0',
+    hasRoomTypes: false,
+    price: '450',
+    priceUnit: 'delegate',
+    description: sharedBenefits,
   },
   {
     packageName: 'Gold',
-    titleColor: '#BFA15F', // Gold
+    titleColor: '#0037C0',
     hasRoomTypes: false,
-    price: '1,699',
-    priceNote: '$425 per person (Groups of 4) - Save $115!',
-    description: [
-      'Accommodation',
-      'Conference fees',
-      'Transportation',
-      'NIMUN\'s Welcome Set',
-      'Food',
-      'Sightseeing Tours all over Cairo',
-      'Authentic Culinary Experience',
-    ],
+    price: '1,600',
+    priceUnit: 'group',
+    priceNote: 'Groups of 4',
+    description: sharedBenefits,
   },
   {
     packageName: 'Platinum',
-    titleColor: '#5AC8FA', // Platinum blue
+    titleColor: '#0037C0',
     hasRoomTypes: false,
-    price: '3,599',
-    priceNote: '$450 per person (Groups of 8 + Supervisor) - Save $90!',
-    description: [
-      'Accommodation',
-      'Conference fees',
-      'Transportation',
-      'NIMUN\'s Welcome Set',
-      'Food',
-      'Sightseeing Tours all over Cairo',
-      'Authentic Culinary Experience',
-    ],
+    price: '3,600',
+    priceUnit: 'group',
+    priceNote: 'Groups of 8 + 2 supervisors',
+    description: sharedBenefits,
     isPopular: true,
   },
 ]
 
-// Legacy exports for backward compatibility (if needed)
-export const singlePackagesData = packagesData.map(pkg => ({
+export const packages: PackageInterface[] = packagesData.map((pkg) => ({
   title: pkg.packageName,
-  price: pkg.hasRoomTypes && pkg.roomOptions?.[0] ? pkg.roomOptions[0].price : pkg.price || '',
+  price: pkg.price || '',
+  priceUnit: pkg.priceUnit,
   groupInfo: pkg.priceNote,
-  description: pkg.hasRoomTypes && pkg.roomOptions?.[0] ? pkg.roomOptions[0].description : pkg.description || [],
+  description: pkg.description || [],
   isPopular: pkg.isPopular,
   titleColor: pkg.titleColor,
 }))
 
-export const doublePackagesData = packagesData.map(pkg => ({
-  title: pkg.packageName,
-  price: pkg.hasRoomTypes && pkg.roomOptions?.[1] ? pkg.roomOptions[1].price : pkg.price || '',
-  groupInfo: pkg.priceNote,
-  description: pkg.hasRoomTypes && pkg.roomOptions?.[1] ? pkg.roomOptions[1].description : pkg.description || [],
-  isPopular: pkg.isPopular,
-  titleColor: pkg.titleColor,
-}))
-
-export const packages = singlePackagesData.concat(doublePackagesData)
+export const singlePackagesData = packages
+export const doublePackagesData = packages

@@ -1,0 +1,98 @@
+@import '@/styles/JNIMUN26Brand.scss';
+
+.footer {
+  position: relative;
+  width: 100%;
+  background-color: #e5e5e5;
+  color: $jnimun-black;
+  padding: 50px 24px 36px;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('/image/png/doodles.png');
+    background-size: auto;
+    background-repeat: repeat;
+    filter: brightness(0) opacity(0.2);
+  }
+}
+
+.tornEdge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  height: 24px;
+  background: url('/image/png/torn-paper-edge.png') repeat-x center top;
+  background-size: auto 24px;
+  transform: scaleY(-1);
+  z-index: 1;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.brandTitle {
+  font-family: $jnimun-font-body;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: $jnimun-blue;
+  -webkit-text-stroke: 1px $jnimun-black;
+  paint-order: stroke fill;
+  letter-spacing: 0.04em;
+}
+
+.brandYear {
+  color: $jnimun-pink;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.link {
+  font-family: $jnimun-font-body;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: $jnimun-black;
+  transition: color 0.15s ease;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $jnimun-blue;
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 40px 16px 28px;
+  }
+  .brandTitle {
+    font-size: 1.8rem;
+  }
+  .links {
+    gap: 16px;
+  }
+  .link {
+    font-size: 0.85rem;
+  }
+}
