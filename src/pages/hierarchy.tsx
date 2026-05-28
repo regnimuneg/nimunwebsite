@@ -1,6 +1,7 @@
 import styles from '@/styles/Hierarchy.module.scss'
 import Image, { type StaticImageData } from 'next/image'
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
+import { useLenis } from '@/lib/lenis'
 
 // High Board imports from 26 folder
 import CM from '@public/image/People/HB/26/CM.png'
@@ -186,7 +187,7 @@ function MemberImage({
   name,
   imagePosition,
   sizes,
-  priority = false,
+  priority = true,
   style,
 }: {
   image: StaticImageData
@@ -294,6 +295,71 @@ function CommitteeCard({ committee }: { committee: Person }) {
 }
 
 export default function Hierarchy() {
+  const { lenis } = useLenis()
+
+  useEffect(() => {
+    const canManageScrollRestoration = 'scrollRestoration' in window.history
+    const previousScrollRestoration = canManageScrollRestoration
+      ? window.history.scrollRestoration
+      : 'auto'
+
+    if (canManageScrollRestoration) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    const previousHtmlOverflowAnchor = document.documentElement.style.overflowAnchor
+    const previousBodyOverflowAnchor = document.body.style.overflowAnchor
+    document.documentElement.style.overflowAnchor = 'none'
+    document.body.style.overflowAnchor = 'none'
+
+    const scrollToTop = () => {
+      document.scrollingElement?.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      window.scrollTo(0, 0)
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true })
+      }
+    }
+
+    const interactionEvents = ['touchstart', 'touchmove', 'wheel', 'keydown', 'mousedown']
+    let nestedFrame = 0
+    let frame = 0
+    let timers: number[] = []
+
+    const cancelScrollToTop = () => {
+      window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(nestedFrame)
+      timers.forEach((timer) => window.clearTimeout(timer))
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, cancelScrollToTop)
+      })
+    }
+
+    scrollToTop()
+
+    frame = window.requestAnimationFrame(() => {
+      scrollToTop()
+      nestedFrame = window.requestAnimationFrame(scrollToTop)
+    })
+    timers = [80, 180, 360, 700, 1100, 1600, 2200].map((delay) =>
+      window.setTimeout(scrollToTop, delay)
+    )
+
+    interactionEvents.forEach((event) => {
+      window.addEventListener(event, cancelScrollToTop, { passive: true })
+    })
+
+    return () => {
+      cancelScrollToTop()
+      document.documentElement.style.overflowAnchor = previousHtmlOverflowAnchor
+      document.body.style.overflowAnchor = previousBodyOverflowAnchor
+      if (canManageScrollRestoration) {
+        window.history.scrollRestoration = previousScrollRestoration
+      }
+    }
+  }, [lenis])
+
   return (
     <main className={styles.page}>
       <section className={styles.hero} aria-labelledby="team-page-title">
@@ -306,7 +372,7 @@ export default function Hierarchy() {
           sizes="(max-width: 760px) 0px, 360px"
           className={`${styles.heroDecor} ${styles.heroDecorLeft}`}
           aria-hidden="true"
-          loading="lazy"
+          priority
         />
         <Image
           src="/image/png/35.png"
@@ -317,7 +383,7 @@ export default function Hierarchy() {
           sizes="(max-width: 760px) 0px, 380px"
           className={`${styles.heroDecor} ${styles.heroDecorRight}`}
           aria-hidden="true"
-          loading="lazy"
+          priority
         />
         <div className={styles.heroContent}>
           <Image
@@ -327,6 +393,7 @@ export default function Hierarchy() {
             height={76}
             className={styles.heroLogo}
             aria-hidden="true"
+            priority
           />
           <h1 id="team-page-title">MEET OUR TEAM</h1>
           <p>The people behind the diplomacy, leadership, and impact of NIMUN.</p>

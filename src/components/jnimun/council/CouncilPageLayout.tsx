@@ -43,21 +43,36 @@ export default function CouncilPageLayout({ council }: CouncilPageLayoutProps) {
       }
     }
 
-    scrollToTop()
-
+    const interactionEvents = ['touchstart', 'touchmove', 'wheel', 'keydown', 'mousedown']
     let nestedFrame = 0
-    const frame = window.requestAnimationFrame(() => {
-      scrollToTop()
-      nestedFrame = window.requestAnimationFrame(scrollToTop)
-    })
-    const timers = [80, 180, 360, 700, 1100, 1600, 2200].map((delay) =>
-      window.setTimeout(scrollToTop, delay)
-    )
+    let frame = 0
+    let timers: number[] = []
 
-    return () => {
+    const cancelScrollToTop = () => {
       window.cancelAnimationFrame(frame)
       window.cancelAnimationFrame(nestedFrame)
       timers.forEach((timer) => window.clearTimeout(timer))
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, cancelScrollToTop)
+      })
+    }
+
+    scrollToTop()
+
+    frame = window.requestAnimationFrame(() => {
+      scrollToTop()
+      nestedFrame = window.requestAnimationFrame(scrollToTop)
+    })
+    timers = [80, 180, 360, 700, 1100, 1600, 2200].map((delay) =>
+      window.setTimeout(scrollToTop, delay)
+    )
+
+    interactionEvents.forEach((event) => {
+      window.addEventListener(event, cancelScrollToTop, { passive: true })
+    })
+
+    return () => {
+      cancelScrollToTop()
       document.documentElement.style.overflowAnchor = previousHtmlOverflowAnchor
       document.body.style.overflowAnchor = previousBodyOverflowAnchor
       if (canManageScrollRestoration) {

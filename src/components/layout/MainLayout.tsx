@@ -10,6 +10,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { Montserrat } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { useRef, useEffect } from 'react'
+import { useLenis } from '@/lib/lenis'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -38,6 +39,91 @@ export default function MainLayout({ children }: Props) {
   
   // Enable double-tap zoom on all pages (but not on images)
   useDoubleTapZoom()
+
+  const { lenis } = useLenis()
+
+  useEffect(() => {
+    const canManageScrollRestoration = 'scrollRestoration' in window.history
+    const previousScrollRestoration = canManageScrollRestoration
+      ? window.history.scrollRestoration
+      : 'auto'
+
+    if (canManageScrollRestoration) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    const previousHtmlOverflowAnchor = document.documentElement.style.overflowAnchor
+    const previousBodyOverflowAnchor = document.body.style.overflowAnchor
+    document.documentElement.style.overflowAnchor = 'none'
+    document.body.style.overflowAnchor = 'none'
+
+    let frame = 0
+    let nestedFrame = 0
+    let timers: number[] = []
+
+    const interactionEvents = ['touchstart', 'touchmove', 'wheel', 'keydown', 'mousedown']
+
+    const cancelScrollToTop = () => {
+      window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(nestedFrame)
+      timers.forEach((timer) => window.clearTimeout(timer))
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, cancelScrollToTop)
+      })
+    }
+
+    const executeScroll = (url: string) => {
+      if (url.includes('#')) {
+        return
+      }
+
+      cancelScrollToTop()
+
+      const scrollToTop = () => {
+        document.scrollingElement?.scrollTo(0, 0)
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0
+        window.scrollTo(0, 0)
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true })
+        }
+      }
+
+      scrollToTop()
+
+      frame = window.requestAnimationFrame(() => {
+        scrollToTop()
+        nestedFrame = window.requestAnimationFrame(scrollToTop)
+      })
+      timers = [80, 180, 360, 700, 1100, 1600, 2200].map((delay) =>
+        window.setTimeout(scrollToTop, delay)
+      )
+
+      interactionEvents.forEach((event) => {
+        window.addEventListener(event, cancelScrollToTop, { passive: true })
+      })
+    }
+
+    // Run on initial mount
+    executeScroll(router.asPath)
+
+    // Run on subsequent client-side navigations
+    const handleRouteChange = (url: string) => {
+      executeScroll(url)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      cancelScrollToTop()
+      router.events.off('routeChangeComplete', handleRouteChange)
+      document.documentElement.style.overflowAnchor = previousHtmlOverflowAnchor
+      document.body.style.overflowAnchor = previousBodyOverflowAnchor
+      if (canManageScrollRestoration) {
+        window.history.scrollRestoration = previousScrollRestoration
+      }
+    }
+  }, [router, lenis])
 
   useGSAP(
     () => {

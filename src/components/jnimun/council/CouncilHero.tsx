@@ -78,6 +78,7 @@ export default function CouncilHero({ council }: CouncilHeroProps) {
             height={110}
             className={`${styles.heroFloatingSticker} ${styles[`heroSticker_${idx}`]}`}
             aria-hidden
+            priority
           />
         ))}
       </section>
@@ -146,6 +147,7 @@ export default function CouncilHero({ council }: CouncilHeroProps) {
           height={110}
           className={`${styles.heroFloatingSticker} ${styles[`heroSticker_${idx}`]}`}
           aria-hidden
+          priority
         />
       ))}
     </section>

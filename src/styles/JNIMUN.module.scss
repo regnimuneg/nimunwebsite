@@ -2931,7 +2931,7 @@
   width: 100%;
   min-height: calc(100dvh - 92px);
   scroll-margin-top: 92px;
-  padding: clamp(1.25rem, 2.8vw, 2.2rem) clamp(1rem, 3vw, 2rem) clamp(2.2rem, 3.8vw, 3.2rem);
+  padding: clamp(1.25rem, 2.8vw, 2.2rem) clamp(1rem, 3vw, 2rem) clamp(6.5rem, 11vw, 9.5rem);
   position: relative;
   z-index: 2;
   display: flex;
@@ -2953,12 +2953,14 @@
     right: 0;
     bottom: -1px;
     height: clamp(62px, 9vw, 118px);
-    background: #0037c0;
-    clip-path: polygon(0 46%, 7% 57%, 16% 43%, 26% 60%, 37% 48%, 49% 66%, 61% 50%, 74% 62%, 86% 46%, 100% 58%, 100% 100%, 0 100%);
+    background-image: url("/image/png/JNIMUN'26/Assets/-Ripped Notebook/full width blue.png");
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-size: auto 100%;
     z-index: 1;
   }
 
-  > * {
+  >* {
     position: relative;
     z-index: 3;
   }
@@ -3314,6 +3316,18 @@
   margin-bottom: clamp(1rem, 1.8vw, 1.45rem);
   padding: 0;
   width: 100%;
+
+  @media (max-width: 900px) {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0.5rem 0.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 .packagePillWrapper {
@@ -3459,10 +3473,11 @@
 
 .packageSticker {
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   pointer-events: none;
   user-select: none;
   filter: drop-shadow(0 12px 18px rgba(0, 55, 192, 0.14));
+  height: auto !important;
 }
 
 .packageStickerGlobe {
@@ -3485,12 +3500,18 @@
 
 @media (max-width: 900px) {
   .packagePillWrapper {
-    flex-wrap: wrap;
-    border-radius: 26px;
+    flex-wrap: nowrap;
+    border-radius: 999px;
+    width: max-content;
+    padding: 0.35rem;
+    margin: 0 auto;
   }
 
   .packagePillButton {
-    flex-basis: calc(50% - 0.2rem);
+    flex: 0 0 auto;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
   }
 
 }
@@ -3507,29 +3528,49 @@
     padding-inline: 0.95rem;
   }
 
+  .packagePillContainer {
+    padding: 0.5rem 0.25rem;
+  }
+
   .packagePillWrapper {
-    border-radius: 22px;
+    flex-wrap: nowrap;
+    border-radius: 999px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.22rem;
+    box-sizing: border-box;
   }
 
   .packagePillButton {
-    flex-basis: 100%;
-    min-height: 48px;
-    justify-content: flex-start;
-    padding-inline: 0.85rem;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.4rem 0.15rem;
+    font-size: clamp(0.55rem, 2vw, 0.65rem);
+    white-space: normal !important;
+    word-break: break-word;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-align: center;
+  }
+
+  .packagePillIcon {
+    display: none;
   }
 
   .packageSticker {
-    opacity: 0.28;
+    opacity: 0.85;
   }
 
   .packageStickerGlobe {
-    left: -1.5rem;
-    top: 6.5rem;
+    width: clamp(50px, 14vw, 75px) !important;
+    left: 2%;
+    top: 2%;
   }
 
   .packageStickerClip {
-    right: -1rem;
-    top: 9.5rem;
+    width: clamp(40px, 10vw, 55px) !important;
+    right: 2%;
+    top: 5%;
   }
 
   .packageStickerHourglass {

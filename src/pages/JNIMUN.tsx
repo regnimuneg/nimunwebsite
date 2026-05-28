@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ApplyNavbar from '@/components/apply/ApplyNavbar'
 import JNIMUNFooter from '@/components/jnimun/JNIMUNFooter'
+import { useLenis } from '@/lib/lenis'
 
 const PaperAirplaneIcon = () => (
   <svg viewBox="0 0 100 100" fill="none" stroke="#ffffff" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" className={styles.cardDoodleSvg}>
@@ -139,6 +140,76 @@ const formatPackageLabel = (packageName: string) =>
     .replace(/\bOf\b/g, 'of')
 
 const JNIMUN: NextPage = () => {
+  const { lenis } = useLenis()
+
+  useEffect(() => {
+    // Only scroll to top if we are NOT navigating specifically to the councils section
+    if (typeof window !== 'undefined' && window.location.hash.includes('#councils')) {
+      return
+    }
+
+    const canManageScrollRestoration = 'scrollRestoration' in window.history
+    const previousScrollRestoration = canManageScrollRestoration
+      ? window.history.scrollRestoration
+      : 'auto'
+
+    if (canManageScrollRestoration) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    const previousHtmlOverflowAnchor = document.documentElement.style.overflowAnchor
+    const previousBodyOverflowAnchor = document.body.style.overflowAnchor
+    document.documentElement.style.overflowAnchor = 'none'
+    document.body.style.overflowAnchor = 'none'
+
+    const scrollToTop = () => {
+      document.scrollingElement?.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      window.scrollTo(0, 0)
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true })
+      }
+    }
+
+    const interactionEvents = ['touchstart', 'touchmove', 'wheel', 'keydown', 'mousedown']
+    let nestedFrame = 0
+    let frame = 0
+    let timers: number[] = []
+
+    const cancelScrollToTop = () => {
+      window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(nestedFrame)
+      timers.forEach((timer) => window.clearTimeout(timer))
+      interactionEvents.forEach((event) => {
+        window.removeEventListener(event, cancelScrollToTop)
+      })
+    }
+
+    scrollToTop()
+
+    frame = window.requestAnimationFrame(() => {
+      scrollToTop()
+      nestedFrame = window.requestAnimationFrame(scrollToTop)
+    })
+    timers = [80, 180, 360, 700, 1100, 1600, 2200].map((delay) =>
+      window.setTimeout(scrollToTop, delay)
+    )
+
+    interactionEvents.forEach((event) => {
+      window.addEventListener(event, cancelScrollToTop, { passive: true })
+    })
+
+    return () => {
+      cancelScrollToTop()
+      document.documentElement.style.overflowAnchor = previousHtmlOverflowAnchor
+      document.body.style.overflowAnchor = previousBodyOverflowAnchor
+      if (canManageScrollRestoration) {
+        window.history.scrollRestoration = previousScrollRestoration
+      }
+    }
+  }, [lenis])
+
   useEffect(() => {
     // Check if device supports hover (not touch-only)
     const supportsHover = window.matchMedia('(hover: hover)').matches
@@ -261,6 +332,7 @@ const JNIMUN: NextPage = () => {
             height={300}
             className={styles.cornerStar}
             aria-hidden="true"
+            priority
           />
           <Image
             src="/image/png/JNIMUN%2726/basic/megaphone.png"
@@ -269,6 +341,7 @@ const JNIMUN: NextPage = () => {
             height={120}
             className={styles.cornerMegaphone}
             aria-hidden="true"
+            priority
           />
           <Image
             src="/image/png/JNIMUN%2726/rays.png"
@@ -277,6 +350,7 @@ const JNIMUN: NextPage = () => {
             height={90}
             className={styles.cornerRays}
             aria-hidden="true"
+            priority
           />
         </div>
 
