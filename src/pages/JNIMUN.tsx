@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import styles from '@/styles/JNIMUN.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import ApplyNavbar from '@/components/apply/ApplyNavbar'
 import JNIMUNFooter from '@/components/jnimun/JNIMUNFooter'
 
@@ -35,7 +35,36 @@ const BeetleIcon = () => (
   </svg>
 )
 
-const PACKAGES_DATA = [
+type PackageRoomOption = {
+  roomType: string
+  price: string
+  priceNote?: string
+  description: string[]
+}
+
+type JNIMUNPackageData = {
+  packageName: string
+  tagline: string
+  colorClass: string
+  hasRoomTypes: boolean
+  roomOptions?: PackageRoomOption[]
+  price?: string
+  priceNote?: string
+  roomType?: string
+  description?: string[]
+}
+
+type PackageDisplayCard = {
+  packageName: string
+  tagline: string
+  colorClass: string
+  roomType?: string
+  price: string
+  priceNote?: string
+  description: string[]
+}
+
+const PACKAGES_DATA: JNIMUNPackageData[] = [
   {
     packageName: 'SILVER',
     tagline: 'Essential Conference Package',
@@ -87,6 +116,27 @@ const PACKAGES_DATA = [
     ]
   }
 ]
+
+const PACKAGE_FEATURES = Array.from(
+  new Set(
+    PACKAGES_DATA.flatMap((pkg) =>
+      pkg.hasRoomTypes
+        ? pkg.roomOptions?.flatMap((option) => option.description) ?? []
+        : pkg.description ?? []
+    )
+  )
+)
+
+const PACKAGE_LABEL_OVERRIDES: Record<string, string> = {
+  'GROUP OF 8 + SUPERVISOR': 'Group of 8 - Supervisor',
+}
+
+const formatPackageLabel = (packageName: string) =>
+  PACKAGE_LABEL_OVERRIDES[packageName] ??
+  packageName
+    .toLowerCase()
+    .replace(/\b\w/g, (letter) => letter.toUpperCase())
+    .replace(/\bOf\b/g, 'of')
 
 const JNIMUN: NextPage = () => {
   useEffect(() => {
@@ -140,45 +190,16 @@ const JNIMUN: NextPage = () => {
   }, [])
 
   const [selectedPackage, setSelectedPackage] = useState<string>('SILVER')
-  const [pillStyle, setPillStyle] = useState({ left: 4, width: 0 })
-  const tabsRef = useRef<(HTMLButtonElement | null)[]>([])
-
-  useEffect(() => {
-    const selectedIndex = PACKAGES_DATA.findIndex(pkg => pkg.packageName === selectedPackage)
-    const activeTab = tabsRef.current[selectedIndex]
-    if (activeTab) {
-      // Calculate position relative to wrapper (subtract parent left offset)
-      setPillStyle({
-        left: activeTab.offsetLeft,
-        width: activeTab.offsetWidth,
-      })
-    }
-  }, [selectedPackage])
-
-  // Recalculate on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      const selectedIndex = PACKAGES_DATA.findIndex(pkg => pkg.packageName === selectedPackage)
-      const activeTab = tabsRef.current[selectedIndex]
-      if (activeTab) {
-        setPillStyle({
-          left: activeTab.offsetLeft,
-          width: activeTab.offsetWidth,
-        })
-      }
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [selectedPackage])
 
   const currentPackage = PACKAGES_DATA.find(pkg => pkg.packageName === selectedPackage)
 
-  const getDisplayCards = () => {
+  const getDisplayCards = (): PackageDisplayCard[] => {
     if (!currentPackage) return []
 
     if (currentPackage.hasRoomTypes && currentPackage.roomOptions) {
       return currentPackage.roomOptions.map(option => ({
         packageName: currentPackage.packageName,
+        tagline: currentPackage.tagline,
         colorClass: currentPackage.colorClass,
         roomType: option.roomType,
         price: option.price,
@@ -188,6 +209,7 @@ const JNIMUN: NextPage = () => {
     } else {
       return [{
         packageName: currentPackage.packageName,
+        tagline: currentPackage.tagline,
         colorClass: currentPackage.colorClass,
         roomType: currentPackage.roomType,
         price: currentPackage.price || '',
@@ -503,31 +525,34 @@ const JNIMUN: NextPage = () => {
 
         {/* --- International Packages Section --- */}
         <section className={styles.packagesSection}>
+          <Image src="/image/png/globe-sticker.png" alt="" width={150} height={150} className={`${styles.packageSticker} ${styles.packageStickerGlobe}`} aria-hidden />
+          <Image src="/image/png/JNIMUN%2726/clip.png" alt="" width={86} height={86} className={`${styles.packageSticker} ${styles.packageStickerClip}`} aria-hidden />
+          <Image src="/image/png/sticker-hourglass.png" alt="" width={124} height={124} className={`${styles.packageSticker} ${styles.packageStickerHourglass}`} aria-hidden />
+
           <div className={styles.packagesHeader}>
+            <span className={styles.packagesEyebrow}>Choose Your Experience</span>
             <h2 className={styles.packagesTitle}>
-              INTERNATIONAL <span className={styles.titleWhite}>PACKAGES</span>
+              International Packages
             </h2>
+            <p className={styles.packagesSubtitle}>
+              Join JNIMUN&apos;26 from anywhere in the world. Choose the package that fits your delegation and be part of a global impact.
+            </p>
           </div>
 
           {/* Package Type Tab Selector */}
           <div className={styles.packagePillContainer}>
-            <div className={styles.packagePillWrapper}>
-              <div 
-                className={styles.slidingPill}
-                style={{
-                  width: pillStyle.width ? `${pillStyle.width}px` : `calc((100% - 8px) / ${PACKAGES_DATA.length})`,
-                  left: pillStyle.width ? `${pillStyle.left}px` : `calc(4px + ${PACKAGES_DATA.findIndex(pkg => pkg.packageName === selectedPackage)} * ((100% - 8px) / ${PACKAGES_DATA.length}))`,
-                }}
-              />
+            <div className={styles.packagePillWrapper} role="tablist" aria-label="International package categories">
               {PACKAGES_DATA.map((pkg, index) => (
                 <button
                   key={pkg.packageName}
-                  ref={el => { tabsRef.current[index] = el }}
                   type="button"
+                  role="tab"
+                  aria-selected={selectedPackage === pkg.packageName}
                   className={`${styles.packagePillButton} ${selectedPackage === pkg.packageName ? styles.activePillButton : ''}`}
                   onClick={() => setSelectedPackage(pkg.packageName)}
                 >
-                  {pkg.packageName}
+                  <span className={styles.packagePillIcon}>{index + 1}</span>
+                  <span>{formatPackageLabel(pkg.packageName)}</span>
                 </button>
               ))}
             </div>
@@ -535,15 +560,16 @@ const JNIMUN: NextPage = () => {
 
           <div className={styles.packagesGrid}>
             {displayCards.map((card, index) => (
-              <div key={index} className={`${styles.packageCard} ${styles[card.colorClass as keyof typeof styles]}`}>
-                <div className={styles.packageCardPin} />
+              <div key={`${card.packageName}-${card.roomType ?? index}`} className={`${styles.packageCard} ${styles[card.colorClass as keyof typeof styles]}`}>
+                <div className={styles.packageCardBadge}>{card.roomType || 'Package'}</div>
                 <div className={styles.packageCardInner}>
                   <h3 className={styles.packageCardTitle}>
-                    {card.packageName}
+                    {formatPackageLabel(card.packageName)}
                   </h3>
+                  <p className={styles.packageCardTagline}>{card.tagline}</p>
                   <div className={styles.packagePrices}>
                     <div className={styles.packagePriceRow}>
-                      <span className={styles.priceLabel}>{card.roomType || 'Price'}</span>
+                      <span className={styles.priceLabel}>{card.roomType || 'USD'}</span>
                       <div className={styles.priceValueWrap}>
                         <span className={styles.priceValue}>${card.price}</span>
                         {card.priceNote && <span className={styles.priceNote}>{card.priceNote}</span>}
@@ -551,7 +577,7 @@ const JNIMUN: NextPage = () => {
                     </div>
                   </div>
                   <ul className={styles.packageFeatures}>
-                    {['Accommodation', 'Conference fees', 'Transportation', 'Outings', 'Outings Transportation'].map((featName) => {
+                    {PACKAGE_FEATURES.map((featName) => {
                       const included = card.description.includes(featName)
                       return (
                         <li key={featName} className={`${styles.packageFeature} ${included ? styles.featIncluded : styles.featExcluded}`}>
@@ -562,12 +588,14 @@ const JNIMUN: NextPage = () => {
                     })}
                   </ul>
                   <Link href="https://forms.gle/xo5xzySkSZhg8DrV9a" target="_blank" rel="noopener noreferrer" className={styles.packageApplyBtn}>
-                    Apply Now
+                    <span>Apply Now</span>
+                    <span className={styles.packageApplyIcon}>→</span>
                   </Link>
                 </div>
               </div>
             ))}
           </div>
+
         </section>
       </div>
       </main>
