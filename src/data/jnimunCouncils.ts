@@ -82,8 +82,8 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
       accentSecondary: blue,
     },
     chairs: [
-      { name: 'AMEENA GAMALELDIN', role: 'Chair OF UNSC', image: secsImage('Ameena Gamaleldin - Chair Of UNSC.png') },
-      { name: 'FARAH ABDULLAH', role: 'Co-Chair OF UNSC', image: secsImage('Farah Abdullah - Co-Chair Of UNSC.png') },
+      { name: 'AMEENA GAMALELDIN', role: 'Chair OF UNSC', image: secsImage('Ameena Gamaleldin - President Of UNSC.png') },
+      { name: 'FARAH ABDULLAH', role: 'Co-Chair OF UNSC', image: secsImage('Farah Abdullah - Vice President Of UNSC.png') },
     ],
     chairBackings: [pink, blue],
     groupPhoto: secsImage('UNSC.png'),
@@ -120,8 +120,8 @@ export const COMMITTEE_DATA: Record<(typeof COUNCIL_SLUGS)[number], CouncilConfi
       accentSecondary: blue,
     },
     chairs: [
-      { name: 'OMAR AKL', role: 'Chair OF CRISIS COMMITTEE', image: secsImage('Omar Akl - Chair Of Crisis Committee.png') },
-      { name: 'JUDI YOUSRI', role: 'Co-Chair OF CRISIS COMMITTEE', image: secsImage('Joudy Yousri - Co-Chair Of Crisis Committee.png') },
+      { name: 'OMAR AKL', role: 'Chair OF CRISIS COMMITTEE', image: secsImage('Omar Akl - President Of Crisis Committee.png') },
+      { name: 'JUDI YOUSRI', role: 'Co-Chair OF CRISIS COMMITTEE', image: secsImage('Joudy Yousri - Vice President Of Crisis Committee.png') },
     ],
     chairBackings: [blue, pink],
     groupPhoto: secsImage('Crisis.png'),
