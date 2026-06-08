@@ -55,7 +55,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(20px, 3vw, 42px);
+  gap: clamp(10px, 2vw, 24px);
 }
 
 .navItem {
@@ -66,17 +66,17 @@
 
 .navLink {
   font-family: $jnimun-font-display;
-  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   font-weight: 400;
   text-decoration: none;
   color: $jnimun-off-white;
   -webkit-text-stroke: 1.2px $jnimun-black;
   paint-order: stroke fill;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 10px 16px;
+  padding: 6px 12px;
   line-height: 1.2;
   display: inline-flex;
   align-items: center;

@@ -128,6 +128,11 @@ export default function ApplyNavbar(): JSX.Element {
             <Link href="/#contact" className={styles.navLink}>
               Contact Us
             </Link>
+            {router.pathname !== '/merch' && (
+              <Link href="/merch" className={styles.navLink}>
+                Merch
+              </Link>
+            )}
             <a href="https://portal.nimuneg.org" className={styles.navLink} target="_blank" rel="noopener noreferrer">
               Portal
             </a>
@@ -174,6 +179,11 @@ export default function ApplyNavbar(): JSX.Element {
               <Link href="/#contact" className={styles.drawerLink} onClick={closeMenus}>
                 Contact Us
               </Link>
+              {router.pathname !== '/merch' && (
+                <Link href="/merch" className={styles.drawerLink} onClick={closeMenus}>
+                  Merch
+                </Link>
+              )}
               <a
                 href="https://portal.nimuneg.org"
                 className={styles.drawerLink}

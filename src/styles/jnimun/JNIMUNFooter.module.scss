@@ -3,7 +3,7 @@
 .footer {
   position: relative;
   width: 100%;
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   color: $jnimun-black;
   padding: 50px 24px 36px;
   overflow: hidden;
@@ -20,18 +20,6 @@
     background-repeat: repeat;
     filter: brightness(0) opacity(0.2);
   }
-}
-
-.tornEdge {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -2px;
-  height: 24px;
-  background: url('/image/png/torn-paper-edge.png') repeat-x center top;
-  background-size: auto 24px;
-  transform: scaleY(-1);
-  z-index: 1;
 }
 
 .inner {

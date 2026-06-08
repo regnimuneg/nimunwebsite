@@ -98,6 +98,11 @@ $header-border-radius: 0;
     margin-left: 0;
     flex: 1 1 auto;
     justify-content: center;
+
+    .navButton, .navLink {
+      font-size: clamp(0.85rem, 1vw, 1.1rem);
+      padding: 5px 10px;
+    }
   }
 
   // Container for the right-side elements (Apply button)

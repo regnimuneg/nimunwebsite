@@ -4,7 +4,6 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 const ADMIN_EMAIL = 'reg.nimun.eg@gmail.com'
 const MERCH_WEBHOOK_URL = process.env.MERCH_WEBHOOK_URL
-const DRIVE_WEBHOOK_URL = process.env.DRIVE_WEBHOOK_URL
 
 interface CartItem {
   id: string
@@ -213,25 +212,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     } else {
       console.warn('MERCH_WEBHOOK_URL not configured')
-    }
-
-    // Save payment confirmation to Google Drive
-    if (DRIVE_WEBHOOK_URL) {
-      try {
-        await fetch(DRIVE_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fileUrl: orderData.paymentConfirmationUrl,
-            fileName: `payment_${orderId}_${orderData.firstName}_${orderData.lastName}.jpg`,
-            fileType: 'image/jpeg',
-          }),
-        })
-      } catch (driveError) {
-        console.error('Drive upload error:', driveError)
-      }
-    } else {
-      console.warn('DRIVE_WEBHOOK_URL not configured')
     }
 
     return res.status(200).json({

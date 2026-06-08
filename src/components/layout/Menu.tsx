@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import useWindowSize from '@/lib/useWindowSize'
 import Link from 'next/link'
 import styles from '@/styles/layout/Header.module.scss'
@@ -32,6 +33,7 @@ const mainLinks: MainLink[] = [
     ],
   },
   { id: 'jnimun', text: "JNIMUN'26", href: '/JNIMUN' },
+  { id: 'merch', text: 'MERCH', href: '/merch' },
   { id: 'contact', text: 'CONTACT US', href: '/#contact' },
   { id: 'portal', text: 'PORTAL', href: 'https://portal.nimuneg.org' },
 ]
@@ -41,10 +43,16 @@ interface MenuProps {
 }
 
 export default function Menu({ onNavigate }: MenuProps) {
+  const router = useRouter()
   const isTabletOrMobile = useWindowSize(1050)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const navRef = useRef<HTMLElement>(null) // Ref for the main nav container
+
+  const activeLinks = mainLinks.filter(link => {
+    if (link.id === 'merch' && router.pathname === '/merch') return false
+    return true
+  })
 
   const handleMouseEnter = (id: string) => {
     if (!isTabletOrMobile) {
@@ -123,7 +131,7 @@ export default function Menu({ onNavigate }: MenuProps) {
 
   return (
     <nav className={styles.navbar} ref={navRef}>
-      {mainLinks.map((link) => (
+      {activeLinks.map((link) => (
         <div
           key={link.id}
           className={styles.navItemContainer} // Wrapper for positioning dropdown

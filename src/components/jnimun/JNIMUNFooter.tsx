@@ -5,7 +5,6 @@ import styles from '@/styles/jnimun/JNIMUNFooter.module.scss'
 export default function JNIMUNFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.tornEdge} aria-hidden />
       <div className={styles.inner}>
         <div className={styles.brand}>
           <span className={styles.brandTitle}>

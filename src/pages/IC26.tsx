@@ -206,6 +206,9 @@ const IC26: NextPage = () => {
           <Link href="/" className={styles.navButton}>
             Home
           </Link>
+          <Link href="/merch" className={styles.navButton}>
+            Merch
+          </Link>
         </nav>
 
         {/* Grid Title Area */}

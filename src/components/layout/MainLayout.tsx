@@ -32,7 +32,7 @@ export default function MainLayout({ children }: Props) {
   const router = useRouter()
   const isIC26Page = router.pathname === '/IC26'
   const isApplyPage = router.pathname === '/apply'
-  const isJNIMUNPage = router.pathname === '/JNIMUN' || router.pathname.startsWith('/JNIMUN/')
+  const isJNIMUNPage = router.pathname === '/JNIMUN' || router.pathname.startsWith('/JNIMUN/') || router.pathname === '/merch'
   
   const hideHeader = isIC26Page || isApplyPage || isJNIMUNPage
   const hideFooter = isIC26Page || isApplyPage || isJNIMUNPage
