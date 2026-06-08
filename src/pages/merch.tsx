@@ -625,7 +625,7 @@ export default function Merch() {
                                     <h3>Instapay</h3>
                                     <p className={styles.paymentDetail}>
                                         <a href="https://ipn.eg/S/belalmf/instapay/1KiSwO" target="_blank" rel="noopener noreferrer">
-                                            belal3amer@instapay (Click the link)
+                                            belalmf@instapay (Click the link)
                                         </a>
                                     </p>
                                 </div>
