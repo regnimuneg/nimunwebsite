@@ -78,7 +78,7 @@ const BUNDLES = [
 
 const COUNCILS = ['Crisis Committee', 'IMO', 'UNHCR', 'International Press', 'UNSC', 'UNODC']
 const COMMITTEES = ['Registration Affairs', 'Socials & Events', 'Operations & Logistics', 'Media & Design', 'Public Relations', 'NIMUN Executive']
-const ROLES = ['Delegate', 'NIMUN Member'] as const
+const ROLES = ['Delegate', 'NIMUN Member', 'Waitlisted Delegate'] as const
 type Role = typeof ROLES[number]
 
 export default function Merch() {
