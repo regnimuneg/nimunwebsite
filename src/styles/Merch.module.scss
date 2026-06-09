@@ -606,6 +606,22 @@ $page-top-offset: 96px;
     font-weight: 700;
 }
 
+.warningNote {
+    background: rgba(255, 99, 155, 0.1);
+    border-left: 4px solid $jnimun-pink;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: $jnimun-black;
+    line-height: 1.5;
+
+    strong {
+        color: $jnimun-pink;
+        margin-right: 4px;
+    }
+}
+
 .fileUploadArea {
     border: 2px dashed $jnimun-black;
     border-radius: 12px;

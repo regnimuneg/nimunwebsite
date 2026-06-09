@@ -512,7 +512,7 @@ export default function Merch() {
                                                     style={!product.image ? { cursor: 'default' } : {}}
                                                 >
                                                     {product.image ? (
-                                                        <img src={product.image} alt={product.name} />
+                                                        <img src={product.image} alt={product.name} loading="eager" fetchPriority="high" />
                                                     ) : (
                                                         <div className={styles.comingSoonBadge}>
                                                             <span>IMAGE<br />COMING<br />SOON</span>
@@ -746,6 +746,11 @@ export default function Merch() {
                                 </div>
                             )}
 
+                            {/* Non-Refundable Note */}
+                            <div className={styles.warningNote}>
+                                <strong>Please note:</strong> All orders are final and non-refundable.
+                            </div>
+
                             {/* Payment Confirmation Upload */}
                             <div className={`${styles.field} ${errors.paymentConfirmation ? styles.fieldError : ''}`}>
                                 <label>Payment Confirmation *</label>
@@ -812,7 +817,7 @@ export default function Merch() {
                         <div className={styles.imageModal} onClick={() => setExpandedImage(null)}>
                             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                                 <button className={styles.closeModal} onClick={() => setExpandedImage(null)}>×</button>
-                                <img src={expandedImage.src} alt={expandedImage.alt} />
+                                <img src={expandedImage.src} alt={expandedImage.alt} loading="eager" fetchPriority="high" />
                                 <p className={styles.modalCaption}>{expandedImage.alt}</p>
                             </div>
                         </div>,
