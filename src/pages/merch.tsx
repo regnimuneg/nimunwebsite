@@ -339,7 +339,7 @@ export default function Merch() {
             newErrors.phone = 'Phone number is required'
         }
         if (!formData.role) newErrors.role = 'Role is required'
-        if (!formData.council) newErrors.council = formData.role === 'Delegate' ? 'Council is required' : 'Committee is required'
+        if (formData.role !== 'Waitlisted Delegate' && !formData.council) newErrors.council = formData.role === 'Delegate' ? 'Council is required' : 'Committee is required'
         if (!formData.paymentMethod) newErrors.paymentMethod = 'Payment method is required'
 
         if (!paymentConfirmation.url) {
@@ -727,7 +727,7 @@ export default function Merch() {
                                 </div>
                             </div>
 
-                            {formData.role && (
+                            {formData.role && formData.role !== 'Waitlisted Delegate' && (
                                 <div className={`${styles.field} ${errors.council ? styles.fieldError : ''}`}>
                                     <label htmlFor="council">
                                         {formData.role === 'Delegate' ? 'Council' : 'Committee'} *
