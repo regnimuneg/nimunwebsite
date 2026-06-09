@@ -28,7 +28,7 @@ export default async function handler(
       })
       if (statusResponse.ok) {
         const data = await statusResponse.json()
-        if (data && typeof data.totalCount === 'number' && data.totalCount >= 240) {
+        if (data && typeof data.totalCount === 'number' && data.totalCount >= 230) {
           return res.status(400).json({
             ok: false,
             error: 'Applications have closed as we have reached the maximum limit of responses for the waitlist. Thank you for your interest!'
