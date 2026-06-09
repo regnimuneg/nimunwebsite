@@ -24,7 +24,7 @@ const PRODUCTS = [
     { id: 'poster-2', name: 'Nefertiti Poster', type: 'poster', price: 30, image: "/image/png/merch/JNIMUN'26/Nefertiti Poster.jpeg" },
     { id: 'racket-set', name: 'Racket Set', type: 'racket-set', price: 330, image: "/image/png/merch/JNIMUN'26/Raquet.jpeg" },
     { id: 'frisbee', name: 'Frisbee', type: 'frisbee', price: 100, image: "/image/png/merch/JNIMUN'26/Frisbee.jpeg" },
-    { id: 'washed-cap', name: 'Limited quantity Washed Cap', type: 'washed-cap', price: 200, image: "/image/png/merch/JNIMUN'26/Cap.jpeg" },
+    { id: 'washed-cap', name: 'Limited quantity Washed Cap', type: 'washed-cap', price: 250, image: "/image/png/merch/JNIMUN'26/Cap.jpeg" },
 ]
 
 // Map ID to Type for quick lookups
