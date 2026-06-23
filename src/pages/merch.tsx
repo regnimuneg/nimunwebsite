@@ -82,6 +82,31 @@ const ROLES = ['Delegate', 'NIMUN Member', 'Waitlisted Delegate'] as const
 type Role = typeof ROLES[number]
 
 export default function Merch() {
+    const isClosed = true
+
+    if (isClosed) {
+        return (
+            <>
+                <Head>
+                    <title>Merch Store Closed | JNIMUN&apos;26</title>
+                </Head>
+                <ApplyNavbar />
+                <div className={styles.pageShell}>
+                    <ApplyDecorations />
+                    <div className={`${styles.container} ${styles.successContainer}`}>
+                        <div className={styles.card}>
+                            <h1 className={styles.title}>Merch Store Closed</h1>
+                            <p className={styles.subtitle}>
+                                The JNIMUN&apos;26 Merch Store is now closed. Thank you for your interest!
+                            </p>
+                        </div>
+                    </div>
+                    <JNIMUNFooter />
+                </div>
+            </>
+        )
+    }
+
     const [cart, setCart] = useState<Record<string, number>>({})
 
     // Derived state: Detect matching bundle
