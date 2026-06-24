@@ -82,7 +82,7 @@ const ROLES = ['Delegate', 'NIMUN Member', 'Waitlisted Delegate'] as const
 type Role = typeof ROLES[number]
 
 export default function Merch() {
-    const isClosed = false
+    const isClosed = true
 
     if (isClosed) {
         return (
