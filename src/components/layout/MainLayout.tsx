@@ -31,11 +31,12 @@ export default function MainLayout({ children }: Props) {
   const isMobile = useWindowSize()
   const router = useRouter()
   const isIC26Page = router.pathname === '/IC26'
+  const isIC27Page = router.pathname === '/IC27'
   const isApplyPage = router.pathname === '/apply'
   const isJNIMUNPage = router.pathname === '/JNIMUN' || router.pathname.startsWith('/JNIMUN/') || router.pathname === '/merch'
   
-  const hideHeader = isIC26Page || isApplyPage || isJNIMUNPage
-  const hideFooter = isIC26Page || isApplyPage || isJNIMUNPage
+  const hideHeader = isIC26Page || isIC27Page || isApplyPage || isJNIMUNPage
+  const hideFooter = isIC26Page || isIC27Page || isApplyPage || isJNIMUNPage
   
   // Enable double-tap zoom on all pages (but not on images)
   useDoubleTapZoom()
