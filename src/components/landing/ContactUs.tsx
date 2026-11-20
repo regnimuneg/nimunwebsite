@@ -31,11 +31,11 @@ export default function ContactUs() {
 
         <div className={styles.content}>
           <address className={styles.contactDetails}>
-            <a href="tel:+201009863946" className={styles.contactItem}>
+            <a href="tel:+201226243491" className={styles.contactItem}>
               <FaPhoneAlt className={styles.icon} />
               <span>
                 <strong>Phone</strong>
-                +20 100 986 3946
+                +20 12 26243491
               </span>
             </a>
             <a href="mailto:nimun.nu@gmail.com" className={styles.contactItem}>

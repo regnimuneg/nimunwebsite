@@ -32,7 +32,7 @@ const mainLinks: MainLink[] = [
       { id: 'archives', text: 'Conference Archives', href: '/Archives' },
     ],
   },
-  { id: 'jnimun', text: "JNIMUN'26", href: '/JNIMUN' },
+  { id: 'ic8', text: 'IC8', href: '/IC8' },
   { id: 'merch', text: 'MERCH', href: '/merch' },
   { id: 'contact', text: 'CONTACT US', href: '/#contact' },
   { id: 'portal', text: 'PORTAL', href: 'https://portal.nimuneg.org' },

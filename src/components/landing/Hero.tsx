@@ -61,8 +61,8 @@ export default function Hero() {
                 aria-hidden="true"
               />
             </Link>
-            <Link href="/JNIMUN" className={styles.secondaryButton}>
-              JNIMUN
+            <Link href="/IC8" className={styles.secondaryButton}>
+              IC8
             </Link>
           </div>
         </div>
