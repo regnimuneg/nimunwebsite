@@ -152,8 +152,9 @@ $line-blue: rgba(0, 55, 192, 0.16);
 
 .highBoardGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 28px);
+  grid-template-columns: repeat(3, minmax(0, 320px));
+  justify-content: center;
+  gap: clamp(16px, 2.5vw, 36px);
   margin-bottom: clamp(42px, 6vw, 70px);
 }
 
@@ -191,19 +192,61 @@ $line-blue: rgba(0, 55, 192, 0.16);
   position: relative;
   aspect-ratio: 1 / 1.08;
   overflow: hidden;
-  background: #eef3fb;
+  background: #f3ece4;
 }
 
 .memberImage {
   object-fit: cover;
-  transition: transform 0.22s ease;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
 }
 
 @media (hover: hover) {
-  .highBoardCard:hover .memberImage,
+  /* High Board card hover */
+  .highBoardCard {
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                border-color 0.35s ease;
+  }
+
+  .highBoardCard:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 24px 50px rgba(0, 55, 192, 0.18);
+    border-color: rgba(0, 55, 192, 0.35);
+  }
+
+  .highBoardCard:hover .memberImage {
+    transform: scale(1.1);
+  }
+
+  .highBoardCard:hover .highBoardInfo h3 {
+    color: $nimun-blue;
+    transform: translateY(-2px);
+  }
+
+  /* Committee member card hover */
+  .committeeMember {
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .committeeMember:hover {
+    transform: translateY(-8px) scale(1.04);
+  }
+
+  .committeeMember:hover .committeePhoto {
+    border-color: rgba(0, 55, 192, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 55, 192, 0.22);
+  }
+
   .committeeMember:hover .memberImage {
-    transform: scale(1.025);
+    transform: scale(1.1);
+  }
+
+  .committeeMember:hover .committeeMemberInfo h3 {
+    color: $nimun-blue;
+    transform: translateY(-2px);
   }
 }
 
@@ -219,6 +262,7 @@ $line-blue: rgba(0, 55, 192, 0.16);
   color: $deep-blue;
   font-weight: 900;
   line-height: 1.2;
+  transition: color 0.28s ease, transform 0.28s ease;
 }
 
 .highBoardInfo h3 {
@@ -306,7 +350,8 @@ $line-blue: rgba(0, 55, 192, 0.16);
   overflow: hidden;
   border: 1px solid rgba(0, 55, 192, 0.1);
   border-radius: 12px;
-  background: #edf2fa;
+  background: #f3ece4;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .committeeMemberInfo {
@@ -323,10 +368,6 @@ $line-blue: rgba(0, 55, 192, 0.16);
 }
 
 @media screen and (max-width: 1100px) {
-  .highBoardGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .committeeGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -383,7 +424,7 @@ $line-blue: rgba(0, 55, 192, 0.16);
   }
 
   .highBoardGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
   }
 
