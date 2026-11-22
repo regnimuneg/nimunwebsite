@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Monument Extended';
+  src: url('/fonts/MonumentExtended-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Monument Extended';
+  src: url('/fonts/MonumentExtended-Ultrabold.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 $cream: #f3ece4;
 $blue: #183591;
 $blue-hover: #10266b;
@@ -43,10 +59,11 @@ $ink: #1e1e1e;
   display: inline-flex;
   align-items: center;
   padding: 8px 6px 0 12px;
-  font-family: 'Monument', 'Arial Black', sans-serif;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
+  font-weight: 900;
   font-size: 27px;
   font-weight: 900;
-  letter-spacing: -1.5px;
+  letter-spacing: 0.04em;
   line-height: 1;
   color: $ink;
   text-decoration: none;
@@ -104,8 +121,9 @@ $ink: #1e1e1e;
   justify-content: center;
   background: $blue;
   color: #ffffff;
-  font-family: 'Monument', 'Arial Black', sans-serif;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
   font-weight: 900;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -163,11 +181,11 @@ $ink: #1e1e1e;
 
   h1 {
     color: $ink;
-    font-family: 'Monument', 'Arial Black', sans-serif;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
     font-size: clamp(78px, 9.2vw, 134px);
     font-weight: 900;
     line-height: 0.86;
-    letter-spacing: -6px;
+    letter-spacing: 0.01em;
     margin: 0 0 12px;
     white-space: nowrap;
 
@@ -177,11 +195,11 @@ $ink: #1e1e1e;
   }
 
   h2 {
-    font-family: 'Monument', 'Arial Black', sans-serif;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
     font-size: clamp(46px, 5.2vw, 76px);
     font-weight: 900;
     line-height: 0.92;
-    letter-spacing: -3px;
+    letter-spacing: 0.045em;
     margin: 0 0 26px;
   }
 
@@ -330,11 +348,11 @@ $ink: #1e1e1e;
 }
 
 .aboutTitleBlock h2 {
-  font-family: 'Monument', 'Arial Black', sans-serif;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
   font-size: clamp(38px, 4.1vw, 58px);
   font-weight: 900;
   line-height: 0.96;
-  letter-spacing: -2.5px;
+  letter-spacing: 0.025em;
   margin: 0;
 
   b {
@@ -395,11 +413,11 @@ $ink: #1e1e1e;
   min-height: 205px;
 
   h3 {
-    font-family: 'Monument', 'Arial Black', sans-serif;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
     font-size: clamp(20px, 1.8vw, 25px);
     font-weight: 900;
     line-height: 1.02;
-    letter-spacing: -1px;
+    letter-spacing: 0.035em;
     color: $ink;
     margin: 12px 0 14px;
 
@@ -429,10 +447,11 @@ $ink: #1e1e1e;
   }
 
   span {
-    font-family: 'Monument', 'Arial Black', sans-serif;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
     font-size: 22px;
     font-weight: 900;
     line-height: 1;
+    letter-spacing: 0.08em;
     color: $ink;
   }
 }
@@ -481,11 +500,11 @@ $ink: #1e1e1e;
 }
 
 .councilTitleRow h2 {
-  font-family: 'Monument', 'Arial Black', sans-serif;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
   font-size: clamp(46px, 6.2vw, 86px);
   font-weight: 900;
   line-height: 0.9;
-  letter-spacing: -4px;
+  letter-spacing: 0.02em;
   margin: 0;
 
   b {
@@ -535,18 +554,18 @@ $ink: #1e1e1e;
     background: $blue;
     border: 1.5px solid $ink;
     color: #ffffff;
-    font-family: 'Monument', 'Arial Black', sans-serif;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
     font-size: 21px;
     font-weight: 900;
   }
 
   h3 {
     color: $ink;
-    font-family: 'Monument', 'Arial Black', sans-serif;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
     font-size: clamp(15px, 1.35vw, 19px);
     font-weight: 900;
     line-height: 0.95;
-    letter-spacing: -0.8px;
+    letter-spacing: 0.025em;
     margin: 0;
   }
 }
@@ -688,11 +707,11 @@ $ink: #1e1e1e;
 }
 
 .impactCopy h2 {
-  font-family: 'Monument', 'Arial Black', sans-serif;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
   font-size: clamp(36px, 4vw, 56px);
   font-weight: 900;
   line-height: 0.94;
-  letter-spacing: -2.5px;
+  letter-spacing: 0.02em;
   margin: 0 0 14px;
 
   b {
@@ -743,6 +762,180 @@ $ink: #1e1e1e;
   pointer-events: none;
 }
 
+.packages {
+  position: relative;
+  min-height: 650px;
+  width: 100%;
+  padding: 18px 32px 64px;
+  overflow: hidden;
+}
+
+.packagesHeading {
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto 20px;
+  text-align: center;
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 150px;
+      height: 1.5px;
+      background: $ink;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
+    font-size: clamp(36px, 4.5vw, 62px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.02em;
+
+    b {
+      color: $blue;
+    }
+  }
+}
+
+.packagesSparkle {
+  position: absolute;
+  right: -80px;
+  top: -24px;
+  width: 44px;
+  height: 44px;
+  background: $blue;
+  clip-path: polygon(50% 0%, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0% 50%, 43% 43%);
+}
+
+.packageTabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  max-width: 1050px;
+  margin: 0 auto 24px;
+  border: 1.5px solid $ink;
+  border-radius: 999px;
+  overflow: hidden;
+  background: $cream;
+}
+
+.packageTab,
+.packageTabActive {
+  min-height: 52px;
+  border: 0;
+  border-right: 1.5px solid $ink;
+  background: transparent;
+  color: $blue;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
+  font-size: clamp(10px, 1vw, 14px);
+  font-weight: 900;
+  cursor: pointer;
+
+  &:last-child {
+    border-right: 0;
+  }
+}
+
+.packageTabActive {
+  background: $blue;
+  color: #ffffff;
+}
+
+.packageCards {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.packageCard {
+  position: relative;
+  width: 320px;
+  min-height: 390px;
+  overflow: hidden;
+  border: 1.5px solid $ink;
+  border-radius: 22px;
+  background: $blue;
+  color: #ffffff;
+}
+
+.packageCardLabel {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 20px 0;
+  border: 1.5px solid $ink;
+  border-radius: 999px;
+  background: $cream;
+  color: $ink;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.packageCardContent {
+  min-height: 312px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  text-align: center;
+
+  p {
+    margin: 0 0 10px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+
+  strong {
+    font-family: 'Monument Extended', 'Arial Black', sans-serif;
+    font-size: clamp(42px, 5vw, 64px);
+  }
+}
+
+.packageApply {
+  margin-top: 26px;
+  padding: 14px 28px;
+  border: 1.5px solid #ffffff;
+  color: #ffffff;
+  font-family: 'Monument Extended', 'Arial Black', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.packageDecoration {
+  position: absolute;
+  left: -64px;
+  bottom: -70px;
+  width: 250px;
+  height: 250px;
+  z-index: 1;
+  transform: rotate(-12deg);
+}
+
+.packageEmblem {
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
 // RESPONSIVE BREAKPOINTS
 @media (max-width: 1120px) {
   .features {
@@ -752,6 +945,10 @@ $ink: #1e1e1e;
 
   .councilGrid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .packages {
+    padding-inline: 24px;
   }
 }
 
@@ -813,6 +1010,15 @@ $ink: #1e1e1e;
     border-left: 1.5px solid $ink;
     border-top: 0;
   }
+
+  .packageTabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .packageTab,
+  .packageTabActive {
+    border-bottom: 1.5px solid $ink;
+  }
 }
 
 @media (max-width: 600px) {
@@ -826,5 +1032,38 @@ $ink: #1e1e1e;
 
   .councilGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .packages {
+    min-height: 720px;
+    padding-inline: 12px;
+  }
+
+  .packagesHeading p::before,
+  .packagesHeading p::after {
+    width: 34px;
+  }
+
+  .packageTabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .packageTab,
+  .packageTabActive {
+    min-height: 46px;
+  }
+
+  .packageCards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .packageCard {
+    width: min(320px, 88vw);
+    min-height: 340px;
+  }
+
+  .packageCardContent {
+    min-height: 260px;
   }
 }

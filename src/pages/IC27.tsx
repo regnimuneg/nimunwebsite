@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import styles from '@/styles/IC27.module.scss'
 
 const councils = [
@@ -55,6 +56,27 @@ const features = [
 ]
 
 const IC27: NextPage = () => {
+  const packageTabs = [
+    'SILVER',
+    'GOLD',
+    'GROUP OF 4',
+    'GROUP OF 8',
+    'GROUP OF 8-SUPERVISOR',
+  ]
+  const [selectedPackage, setSelectedPackage] = useState(packageTabs[0])
+
+  const packageCards =
+    selectedPackage === 'GROUP OF 4'
+      ? [{ room: 'GROUP OF 4', price: '$1,600', note: 'PER GROUP' }]
+      : selectedPackage === 'GROUP OF 8'
+        ? [{ room: 'GROUP OF 8', price: '$3,200', note: 'PER GROUP' }]
+        : selectedPackage === 'GROUP OF 8-SUPERVISOR'
+          ? [{ room: 'GROUP OF 8 + SUPERVISORS', price: '$3,600', note: 'PER GROUP' }]
+          : [
+              { room: 'SINGLE ROOM', price: selectedPackage === 'GOLD' ? '$650' : '$450', note: 'PER DELEGATE' },
+              { room: 'DOUBLE ROOM', price: selectedPackage === 'GOLD' ? '$550' : '$340', note: 'PER DELEGATE' },
+            ]
+
   return (
     <>
       <Head>
@@ -300,6 +322,56 @@ const IC27: NextPage = () => {
             </Link>
             <span className={styles.blueSwishOuter} aria-hidden="true" />
             <span className={styles.blueSwishInner} aria-hidden="true" />
+          </div>
+        </section>
+
+        {/* International Packages Section */}
+        <section className={styles.packages}>
+          <div className={styles.packagesHeading}>
+            <span className={styles.packagesSparkle} aria-hidden="true" />
+            <p>CHOOSE YOUR EXPERIENCE</p>
+            <h2>
+              INTERNATIONAL <b>PACKAGES</b>
+            </h2>
+          </div>
+
+          <div className={styles.packageTabs} role="tablist" aria-label="International package type">
+            {packageTabs.map((tab) => (
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedPackage === tab}
+                className={selectedPackage === tab ? styles.packageTabActive : styles.packageTab}
+                key={tab}
+                onClick={() => setSelectedPackage(tab)}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.packageCards}>
+            {packageCards.map((card) => (
+              <article className={styles.packageCard} key={card.room}>
+                <div className={styles.packageCardLabel}>{card.room}</div>
+                <div className={styles.packageCardContent}>
+                  <p>{card.note}</p>
+                  <strong>{card.price}</strong>
+                  <Link href="/apply" className={styles.packageApply}>
+                    APPLY
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className={styles.packageDecoration} aria-hidden="true">
+            <Image
+              src="/image/png/IC'27/elements/WhatsApp Image 2026-09-09 at 11.36.57 PM (2).jpeg"
+              alt=""
+              fill
+              className={styles.packageEmblem}
+            />
           </div>
         </section>
       </main>
