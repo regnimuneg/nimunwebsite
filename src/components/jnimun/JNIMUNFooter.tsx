@@ -15,8 +15,8 @@ export default function JNIMUNFooter() {
           <Link href="/" className={styles.link}>
             Home
           </Link>
-          <Link href="/JNIMUN" className={styles.link}>
-            JNIMUN
+          <Link href="/IC8" className={styles.link}>
+            IC8
           </Link>
           <Link href="/hierarchy" className={styles.link}>
             Our Team

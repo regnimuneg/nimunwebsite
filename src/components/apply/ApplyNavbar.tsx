@@ -88,7 +88,7 @@ export default function ApplyNavbar(): JSX.Element {
     <>
       <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/JNIMUN" className={styles.brandCluster} aria-label="JNIMUN home">
+        <Link href="/IC8" className={styles.brandCluster} aria-label="JNIMUN home">
           <img
             src={jnimun26Asset('JNIMUN logo.png')}
             alt=""
@@ -122,8 +122,8 @@ export default function ApplyNavbar(): JSX.Element {
               </button>
               {aboutOpen && aboutDropdown()}
             </div>
-            <Link href="/JNIMUN" className={styles.navLink}>
-              JNIMUN
+            <Link href="/IC8" className={styles.navLink}>
+              IC8
             </Link>
             <Link href="/#contact" className={styles.navLink}>
               Contact Us
@@ -173,8 +173,8 @@ export default function ApplyNavbar(): JSX.Element {
                 </button>
                 {aboutOpen && aboutDropdown(true)}
               </div>
-              <Link href="/JNIMUN" className={styles.drawerLink} onClick={closeMenus}>
-                JNIMUN
+              <Link href="/IC8" className={styles.drawerLink} onClick={closeMenus}>
+                IC8
               </Link>
               <Link href="/#contact" className={styles.drawerLink} onClick={closeMenus}>
                 Contact Us

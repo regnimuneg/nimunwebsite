@@ -3,27 +3,32 @@ import Image, { type StaticImageData } from 'next/image'
 import { useEffect, type ReactNode } from 'react'
 import { useLenis } from '@/lib/lenis'
 
-// High Board imports from 26 folder
-import CM from '@public/image/People/HB/26/CM.png'
-import DSG from '@public/image/People/HB/26/DSG.png'
-import FarahHB from '@public/image/People/HB/26/Farah.png'
-import Rawya from '@public/image/People/HB/26/Rawya.png'
+// High Board imports from NIMUN27
+import AdhamAbdelaal from '@public/image/People/HB/27/Adham_Abdelaal_SG.png'
+import MostafaSalama from '@public/image/People/HB/27/Mostafa_Salama_CM.png'
+import NourHabbak from '@public/image/People/HB/27/Nour_Habbak_AD.png'
 
-// Organizing Committee imports from NIMUN26 folder
-import Adham from '@public/image/People/OC/NIMUN26/Adham.png'
-import Amina from '@public/image/People/OC/NIMUN26/Amina.png'
-import Asmar from '@public/image/People/OC/NIMUN26/Asmar.png'
-import Engy from '@public/image/People/OC/NIMUN26/Engy.png'
-import FC from '@public/image/People/OC/NIMUN26/FC.png'
-import Fallal from '@public/image/People/OC/NIMUN26/Fallal.png'
-import Kabbani from '@public/image/People/OC/NIMUN26/Kabbani.png'
-import Lina from '@public/image/People/OC/NIMUN26/Lina.png'
-import MalakK from '@public/image/People/OC/NIMUN26/Malak K.png'
-import Omar from '@public/image/People/OC/NIMUN26/Omar.png'
-import Rana from '@public/image/People/OC/NIMUN26/Rana.png'
-import Wafa from '@public/image/People/OC/NIMUN26/Wafa.png'
-import Yassine from '@public/image/People/OC/NIMUN26/Yassine.png'
-import Tifa from '@public/image/People/OC/NIMUN25/Mostafa.png'
+// Organizing Committee imports from NIMUN27 (with cropped offwhite studio backgrounds)
+import BelalAmer from '@public/image/People/OC/NIMUN27/Belal_Amer_Head_clean.jpg'
+import AhmedHisham from '@public/image/People/OC/NIMUN27/Ahmed_Hisham_Vice_Head_clean.jpg'
+import NourElkhouly from '@public/image/People/OC/NIMUN27/Nour_Elkhouly_Vice_Head_clean.jpg'
+
+import YassineMohamed from '@public/image/People/OC/NIMUN27/Yassine_Mohamed_Head_clean.jpg'
+import NourRefaat from '@public/image/People/OC/NIMUN27/Nour_Refaat_Vice_Head_clean.jpg'
+import YoussefAmgad from '@public/image/People/OC/NIMUN27/Youssef_Amgad_Vice_Head_clean.jpg'
+
+import MalakKhaled from '@public/image/People/OC/NIMUN27/Malak_Khaled_Head_clean.jpg'
+import KenzyRoshdy from '@public/image/People/OC/NIMUN27/Kenzy_Roshdy_Vice_Head_clean.jpg'
+import NourDoha from '@public/image/People/OC/NIMUN27/Nour_Doha_Vice_Head_clean.jpg'
+
+import EngyLutfi from '@public/image/People/OC/NIMUN27/Engy_Lutfi_Head_clean.jpg'
+import JanaEzzat from '@public/image/People/OC/NIMUN27/Jana_Ezzat_Vice_Head_clean.jpg'
+import TeyaMohamed from '@public/image/People/OC/NIMUN27/Teya_Mohamed_Vice_Head_clean.jpg'
+
+import SalmaSoliman from '@public/image/People/OC/NIMUN27/Salma_Soliman_Vice_Head_clean.jpg'
+import ToqaMamdouh from '@public/image/People/OC/NIMUN27/Toqa_Mamdouh_Vice_Head_clean.jpg'
+
+import AliKabbani from '@public/image/People/OC/NIMUN27/Ali_Kabbani_clean.jpg'
 
 interface Person {
   name: string
@@ -56,85 +61,106 @@ interface CommitteeMember {
 
 const HighBoard: Person[] = [
   {
-    name: 'Farah Ghaly',
-    position: 'Secretary General',
-    image: FarahHB,
-    imagePosition: 'center 30%',
+    name: 'Nour Habbak',
+    position: 'Academic Director',
+    image: NourHabbak,
+    imagePosition: 'center 15%',
+    imageStyle: { transform: 'scale(1.05)' },
   },
   {
-    name: 'Nizar Amer',
-    position: 'Deputy Secretary General',
-    image: DSG,
-    imagePosition: 'center 30%',
+    name: 'Adham Abdelaal',
+    position: 'Secretary General',
+    image: AdhamAbdelaal,
+    imagePosition: 'center 15%',
+    imageStyle: { transform: 'scale(1.05)' },
   },
-  { name: 'Seif Elnahas', position: 'Conference Manager', image: CM },
-  { name: 'Rawya Nabil', position: 'Academic Director', image: Rawya, imagePosition: 'center 10%' },
+  {
+    name: 'Mostafa Salama',
+    position: 'Conference Manager',
+    image: MostafaSalama,
+    imagePosition: 'center 15%',
+    imageStyle: { transform: 'scale(1.05)' },
+  },
 ]
 
 const OrganizingCommittee: Person[] = [
   {
     name: 'Registration Affairs',
-    head: 'Adham Abdelaal',
-    viceHead: 'Omar Sherif',
-    viceHead2: 'Rana Shafik',
-    headImage: Adham,
-    headImagePosition: 'center 10%',
-    headImageStyle: { transform: 'scale(1.1) translateX(7%)' },
-    viceHeadImage: Omar,
-    viceHeadImagePosition: 'center top',
-    viceHead2Image: Rana,
-    viceHead2ImagePosition: 'center 10%',
+    head: 'Belal Amer',
+    viceHead: 'Ahmed Hisham',
+    viceHead2: 'Nour Elkhouly',
+    headImage: BelalAmer,
+    headImagePosition: 'center 15%',
+    headImageStyle: { transform: 'scale(1.05)' },
+    viceHeadImage: AhmedHisham,
+    viceHeadImagePosition: 'center 15%',
+    viceHeadImageStyle: { transform: 'scale(1.05)' },
+    viceHead2Image: NourElkhouly,
+    viceHead2ImagePosition: 'center 15%',
+    viceHead2ImageStyle: { transform: 'scale(1.05)' },
   },
   {
     name: 'Operations & Logistics',
-    head: 'Mohamed Abuelwafa',
-    viceHead: 'Yassine Mohamed',
-    viceHead2: 'Hana Elfallal',
-    headImage: Wafa,
-    headImagePosition: 'center 40%',
-    headImageStyle: { transform: 'scale(1.2)' },
-    viceHeadImage: Yassine,
-    viceHeadImagePosition: 'center 10%',
-    viceHead2Image: Fallal,
-    viceHead2ImagePosition: 'center 50%',
+    head: 'Yassine Mohamed',
+    viceHead: 'Nour Refaat',
+    viceHead2: 'Youssef Amgad',
+    headImage: YassineMohamed,
+    headImagePosition: 'center 15%',
+    headImageStyle: { transform: 'scale(1.05)' },
+    viceHeadImage: NourRefaat,
+    viceHeadImagePosition: 'center 15%',
+    viceHeadImageStyle: { transform: 'scale(1.05)' },
+    viceHead2Image: YoussefAmgad,
+    viceHead2ImagePosition: 'center 15%',
+    viceHead2ImageStyle: { transform: 'scale(1.05)' },
   },
   {
     name: 'Public Relations',
-    head: 'Ali Kabbani',
-    viceHead: 'Amina Kamal',
-    viceHead2: 'Malak Khaled',
-    headImage: Kabbani,
-    headImagePosition: 'center 30%',
-    viceHeadImage: Amina,
-    viceHeadImagePosition: 'center 20%',
-    viceHead2Image: MalakK,
-    viceHead2ImagePosition: 'center 40%',
+    head: 'Malak Khaled',
+    viceHead: 'Kenzy Roshdy',
+    viceHead2: 'Nour Doha',
+    headImage: MalakKhaled,
+    headImagePosition: 'center 15%',
+    headImageStyle: { transform: 'scale(1.05)' },
+    viceHeadImage: KenzyRoshdy,
+    viceHeadImagePosition: 'center 15%',
+    viceHeadImageStyle: { transform: 'scale(1.05)' },
+    viceHead2Image: NourDoha,
+    viceHead2ImagePosition: 'center 15%',
+    viceHead2ImageStyle: { transform: 'scale(1.05)' },
   },
   {
     name: 'Media & Design',
-    head: 'Seif Alasmar',
-    viceHead: 'Engy Lutfi',
-    headImage: Asmar,
-    headImagePosition: 'center 20%',
-    headImageStyle: { transform: 'scale(1.1)' },
-    viceHeadImage: Engy,
-    viceHeadImagePosition: 'center 30%',
+    head: 'Engy Lutfi',
+    viceHead: 'Jana Ezzat',
+    viceHead2: 'Teya Mohamed',
+    headImage: EngyLutfi,
+    headImagePosition: 'center 15%',
+    headImageStyle: { transform: 'scale(1.05)' },
+    viceHeadImage: JanaEzzat,
+    viceHeadImagePosition: 'center 15%',
+    viceHeadImageStyle: { transform: 'scale(1.05)' },
+    viceHead2Image: TeyaMohamed,
+    viceHead2ImagePosition: 'center 15%',
+    viceHead2ImageStyle: { transform: 'scale(1.05)' },
   },
   {
     name: 'Socials & Events',
-    head: 'Mostafa Salama',
-    viceHead: 'Lina Amr',
-    headImage: Tifa,
-    headImagePosition: 'center 30%',
-    viceHeadImage: Lina,
-    viceHeadImagePosition: 'center 25%',
+    head: 'Toqa Mamdouh',
+    viceHead: 'Salma Soliman',
+    headImage: ToqaMamdouh,
+    headImagePosition: 'center 15%',
+    headImageStyle: { transform: 'scale(1.05)' },
+    viceHeadImage: SalmaSoliman,
+    viceHeadImagePosition: 'center 15%',
+    viceHeadImageStyle: { transform: 'scale(1.05)' },
   },
   {
     name: 'Financial Coordinator',
-    head: 'Belal Amer',
-    headImage: FC,
-    headImagePosition: 'center 30%',
-    headImageStyle: { transform: 'scale(1.2)' },
+    head: 'Ali Kabbani',
+    headImage: AliKabbani,
+    headImagePosition: 'center 20%',
+    headImageStyle: { transform: 'scale(1.05)' },
     isCoordinator: true,
   },
 ]
@@ -204,7 +230,7 @@ function MemberImage({
       fill
       sizes={sizes}
       quality={60}
-      placeholder="blur"
+      placeholder="empty"
       loading={priority ? undefined : 'lazy'}
       priority={priority}
       className={styles.memberImage}
