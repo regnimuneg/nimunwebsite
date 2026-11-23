@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Monument Extended";
   src: url("/fonts/MonumentExtended-Regular.otf") format("opentype");
@@ -38,11 +39,11 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  height: 78px;
+  height: 88px;
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  padding: 16px 32px 10px;
+  padding: 18px 32px 12px;
   background: #f3ece4;
 }
 
@@ -87,10 +88,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 26px;
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  gap: 32px;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.025em;
   white-space: nowrap;
 }
 .nav a {
@@ -124,11 +125,11 @@
 }
 
 .applyTop {
-  height: 46px;
-  padding-inline: 24px;
-  margin-left: 24px;
-  font-size: 13.5px;
-  letter-spacing: 0.03em;
+  height: 52px;
+  padding-inline: 28px;
+  margin-left: 28px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
 }
 
 .hero {
@@ -153,8 +154,8 @@
 
 .heroCornerBR {
   position: absolute;
-  right: 48px;
-  bottom: 42px;
+  right: 15px;
+  bottom: 15px;
   width: 40px;
   height: 40px;
   border-bottom: 3.5px solid #1e1e1e;
@@ -191,10 +192,10 @@
 }
 .heroCopy p {
   font-family: Consolas, "Courier New", monospace;
-  font-size: clamp(20px, 1.85vw, 26px);
+  font-size: clamp(24px, 2.25vw, 32px);
   line-height: 1.32;
   letter-spacing: 0.04em;
-  margin: 0 0 28px;
+  margin: 0 0 34px;
 }
 
 .heroActions {
@@ -202,6 +203,7 @@
   display: inline-flex;
   align-items: center;
   margin-left: 52px;
+  margin-top: 18px;
 }
 
 .registerButton {
@@ -213,12 +215,11 @@
 
 .blueSparkle {
   position: absolute;
-  right: -102px;
-  top: -54px;
-  width: 78px;
-  height: 78px;
-  background: #183591;
-  clip-path: polygon(50% 0%, 56% 44%, 100% 50%, 56% 56%, 50% 100%, 44% 57%, 0% 50%, 44% 43%);
+  right: -171px;
+  top: -150px;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
   pointer-events: none;
 }
 
@@ -243,9 +244,10 @@
   position: absolute;
   z-index: 5;
   right: 26px;
-  top: 56px;
-  width: 175px;
-  height: 175px;
+  top: 40px;
+  width: 200px;
+  height: 200px;
+  transform: rotate(-20deg);
 }
 
 .roundLogo {
@@ -356,8 +358,6 @@
   top: -92px;
   width: 86px;
   height: 86px;
-  background: #183591;
-  clip-path: polygon(50% 0%, 56% 44%, 100% 50%, 56% 56%, 50% 100%, 44% 56%, 0% 50%, 44% 44%);
   pointer-events: none;
 }
 
@@ -573,8 +573,6 @@
   right: 26px;
   width: 44px;
   height: 44px;
-  background: #ffffff;
-  clip-path: polygon(50% 0%, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0% 50%, 43% 43%);
 }
 
 .settingTextBox {
@@ -706,6 +704,27 @@
   overflow: hidden;
 }
 
+.packagesCornerTL,
+.packagesCornerTR {
+  position: absolute;
+  top: 18px;
+  width: 42px;
+  height: 42px;
+  pointer-events: none;
+}
+
+.packagesCornerTL {
+  left: 32px;
+  border-top: 3.5px solid #1e1e1e;
+  border-left: 3.5px solid #1e1e1e;
+}
+
+.packagesCornerTR {
+  right: 32px;
+  border-top: 3.5px solid #1e1e1e;
+  border-right: 3.5px solid #1e1e1e;
+}
+
 .packagesHeading {
   position: relative;
   max-width: 920px;
@@ -740,14 +759,20 @@
   color: #183591;
 }
 
-.packagesSparkle {
+.packagesSparkleTop {
   position: absolute;
-  right: -80px;
-  top: -24px;
-  width: 44px;
-  height: 44px;
-  background: #183591;
-  clip-path: polygon(50% 0%, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0% 50%, 43% 43%);
+  right: 100px;
+  top: -30px;
+  width: 70px;
+  height: 70px;
+}
+
+.packagesSparkleBottom {
+  position: absolute;
+  left: 100px;
+  bottom: 0px;
+  width: 70px;
+  height: 70px;
 }
 
 .packageTabs {
@@ -789,14 +814,14 @@
   display: flex;
   justify-content: center;
   gap: 24px;
-  max-width: 820px;
+  max-width: 1050px;
   margin: 0 auto;
 }
 
 .packageCard {
   position: relative;
-  width: 320px;
-  min-height: 390px;
+  width: min(320px, (100% - 48px) / 3);
+  min-height: 430px;
   overflow: hidden;
   border: 1.5px solid #1e1e1e;
   border-radius: 22px;
@@ -809,6 +834,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin: 18px 20px 0;
   border: 1.5px solid #1e1e1e;
   border-radius: 999px;
@@ -821,7 +847,7 @@
 }
 
 .packageCardContent {
-  min-height: 312px;
+  min-height: 352px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -836,7 +862,31 @@
 }
 .packageCardContent strong {
   font-family: "Monument Extended", "Arial Black", sans-serif;
-  font-size: clamp(42px, 5vw, 64px);
+  font-size: clamp(38px, 4vw, 56px);
+}
+
+.perDelegate {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+}
+
+.packageBenefits {
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+.packageBenefits li {
+  margin: 4px 0;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+.packageBenefits li::before {
+  content: "✓";
+  margin-right: 8px;
 }
 
 .packageApply {
@@ -852,12 +902,12 @@
 
 .packageDecoration {
   position: absolute;
-  left: -64px;
-  bottom: -70px;
-  width: 250px;
-  height: 250px;
+  left: -52px;
+  bottom: -52px;
+  width: 290px;
+  height: 290px;
   z-index: 1;
-  transform: rotate(-12deg);
+  transform: rotate(10deg);
 }
 
 .packageEmblem {
@@ -880,9 +930,6 @@
 @media (max-width: 900px) {
   .header {
     grid-template-columns: auto 1fr auto;
-  }
-  .brandLine {
-    display: none;
   }
   .nav {
     gap: 14px;
@@ -930,6 +977,12 @@
   .packageTabActive {
     border-bottom: 1.5px solid #1e1e1e;
   }
+  .packageCards {
+    max-width: 720px;
+  }
+  .packageCard {
+    width: calc((100% - 24px) / 3);
+  }
 }
 @media (max-width: 600px) {
   .nav {
@@ -962,7 +1015,7 @@
   }
   .packageCard {
     width: min(320px, 88vw);
-    min-height: 340px;
+    min-height: 430px;
   }
   .packageCardContent {
     min-height: 260px;

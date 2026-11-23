@@ -67,15 +67,40 @@ const IC27: NextPage = () => {
 
   const packageCards =
     selectedPackage === 'GROUP OF 4'
-      ? [{ room: 'GROUP OF 4', price: '$1,600', note: 'PER GROUP' }]
+      ? [{
+          room: 'GROUP OF 4',
+          price: '$1,899',
+          perDelegate: '$474.75 PER DELEGATE',
+          note: 'PER GROUP',
+          benefits: ['Accommodation', 'Conference', 'Transportation', 'Outings'],
+        }]
       : selectedPackage === 'GROUP OF 8'
-        ? [{ room: 'GROUP OF 8', price: '$3,200', note: 'PER GROUP' }]
+        ? [{
+            room: 'GROUP OF 8',
+            price: '$3,699',
+            perDelegate: '$462.38 PER DELEGATE',
+            note: 'PER GROUP',
+            benefits: ['Accommodation', 'Conference', 'Transportation', 'Outings'],
+          }]
         : selectedPackage === 'GROUP OF 8-SUPERVISOR'
-          ? [{ room: 'GROUP OF 8 + SUPERVISORS', price: '$3,600', note: 'PER GROUP' }]
-          : [
-              { room: 'SINGLE ROOM', price: selectedPackage === 'GOLD' ? '$650' : '$450', note: 'PER DELEGATE' },
-              { room: 'DOUBLE ROOM', price: selectedPackage === 'GOLD' ? '$550' : '$340', note: 'PER DELEGATE' },
-            ]
+          ? [{
+              room: 'GROUP OF 8 + SUPERVISOR',
+              price: '$4,099',
+              perDelegate: '$512.38 PER DELEGATE',
+              note: 'PER GROUP',
+              benefits: ['Accommodation', 'Conference', 'Transportation', 'Outings'],
+            }]
+          : selectedPackage === 'GOLD'
+            ? [
+                { room: 'SINGLE ROOM', price: '$565', note: 'PER DELEGATE', benefits: ['Accommodation', 'Conference', 'Transportation', 'Outings'] },
+                { room: 'DOUBLE ROOM', price: '$999', perDelegate: '$499.50 PER DELEGATE', note: 'PER GROUP', benefits: ['Accommodation', 'Conference', 'Transportation', 'Outings'] },
+                { room: 'TRIPLE ROOM', price: '$1,499', perDelegate: '$499.67 PER DELEGATE', note: 'PER GROUP', benefits: ['Accommodation', 'Conference', 'Transportation', 'Outings'] },
+              ]
+            : [
+                { room: 'SINGLE ROOM', price: '$450', note: 'PER DELEGATE', benefits: ['Accommodation', 'Conference', 'Transportation'] },
+                { room: 'DOUBLE ROOM', price: '$760', perDelegate: '$380 PER DELEGATE', note: 'PER GROUP', benefits: ['Accommodation', 'Conference', 'Transportation'] },
+                { room: 'TRIPLE ROOM', price: '$1,199', perDelegate: '$399.67 PER DELEGATE', note: 'PER GROUP', benefits: ['Accommodation', 'Conference', 'Transportation'] },
+              ]
 
   return (
     <>
@@ -134,7 +159,9 @@ const IC27: NextPage = () => {
               <Link href="/apply" className={styles.registerButton}>
                 REGISTER NOW
               </Link>
-              <span className={styles.blueSparkle} aria-hidden="true" />
+              <span className={styles.blueSparkle} aria-hidden="true">
+                <Image src="/image/png/IC'27/elements/star.png" alt="" fill />
+              </span>
             </div>
           </div>
 
@@ -150,7 +177,7 @@ const IC27: NextPage = () => {
 
           <div className={styles.heroLogo}>
             <Image
-              src="/image/png/IC'27/elements/NILE INTERNATIONAL MODEL UNITED NATIONS.png"
+              src="/image/png/IC'27/elements/blue stamp.png"
               alt="Nile International Model United Nations"
               fill
               className={styles.roundLogo}
@@ -206,7 +233,9 @@ const IC27: NextPage = () => {
 
           {/* 3-Column Feature Cards Overlapping the About Photo */}
           <div className={styles.features} aria-label="What you can gain">
-            <span className={styles.featuresSparkle} aria-hidden="true" />
+            <span className={styles.featuresSparkle} aria-hidden="true">
+              <Image src="/image/png/IC'27/elements/star.png" alt="" fill />
+            </span>
             {features.map((feature) => (
               <article className={styles.feature} key={feature.number}>
                 <div className={styles.featureTop}>
@@ -266,7 +295,7 @@ const IC27: NextPage = () => {
                 </div>
                 <div className={styles.councilMark}>
                   <Image
-                    src="/image/png/IC'27/elements/WhatsApp Image 2026-09-09 at 11.36.57 PM (2).jpeg"
+                    src="/image/png/IC'27/elements/blue stamp.png"
                     alt={`${council.topLine} emblem`}
                     fill
                     className={styles.councilEmblem}
@@ -289,7 +318,9 @@ const IC27: NextPage = () => {
           </div>
 
           <div className={styles.impactSetting}>
-            <span className={styles.whiteSparkle} aria-hidden="true" />
+            <span className={styles.whiteSparkle} aria-hidden="true">
+              <Image src="/image/png/IC'27/elements/star.png" alt="" fill />
+            </span>
             <div className={styles.settingTextBox}>
               <span className={styles.settingRule} aria-hidden="true" />
               <p>
@@ -327,8 +358,15 @@ const IC27: NextPage = () => {
 
         {/* International Packages Section */}
         <section className={styles.packages}>
+          <span className={styles.packagesCornerTL} aria-hidden="true" />
+          <span className={styles.packagesCornerTR} aria-hidden="true" />
           <div className={styles.packagesHeading}>
-            <span className={styles.packagesSparkle} aria-hidden="true" />
+            <span className={styles.packagesSparkleTop} aria-hidden="true">
+              <Image src="/image/png/IC'27/elements/star.png" alt="" fill />
+            </span>
+            <span className={styles.packagesSparkleBottom} aria-hidden="true">
+              <Image src="/image/png/IC'27/elements/star.png" alt="" fill />
+            </span>
             <p>CHOOSE YOUR EXPERIENCE</p>
             <h2>
               INTERNATIONAL <b>PACKAGES</b>
@@ -357,6 +395,14 @@ const IC27: NextPage = () => {
                 <div className={styles.packageCardContent}>
                   <p>{card.note}</p>
                   <strong>{card.price}</strong>
+                  {card.perDelegate && (
+                    <p className={styles.perDelegate}>{card.perDelegate}</p>
+                  )}
+                  <ul className={styles.packageBenefits}>
+                    {card.benefits.map((benefit) => (
+                      <li key={benefit}>{benefit}</li>
+                    ))}
+                  </ul>
                   <Link href="/apply" className={styles.packageApply}>
                     APPLY
                   </Link>
@@ -367,7 +413,7 @@ const IC27: NextPage = () => {
 
           <div className={styles.packageDecoration} aria-hidden="true">
             <Image
-              src="/image/png/IC'27/elements/WhatsApp Image 2026-09-09 at 11.36.57 PM (2).jpeg"
+              src="/image/png/IC'27/elements/blue stamp.png"
               alt=""
               fill
               className={styles.packageEmblem}
