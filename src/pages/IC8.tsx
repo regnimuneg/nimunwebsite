@@ -1,4 +1,4 @@
-﻿import type { NextPage } from 'next'
+import type { NextPage } from 'next'
 import styles from '@/styles/JNIMUN.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -474,7 +474,7 @@ const JNIMUN: NextPage = () => {
                     </div>
                     <div className={styles.councilTitleDesc}>
                       <span className={styles.levelBadge}>Advanced</span>
-                      <h3>SECURITY COUNCIL â€” UNSC</h3>
+                      <h3>SECURITY COUNCIL — UNSC</h3>
                     </div>
                   </div>
                   <div className={styles.ecstaticBtnWrapper}>
@@ -518,7 +518,7 @@ const JNIMUN: NextPage = () => {
                     </div>
                     <div className={styles.councilTitleDesc}>
                       <span className={styles.levelBadge}>Intermediate</span>
-                      <h3>UNITED NATIONS OFFICE ON DRUGS AND CRIME â€” UNODC</h3>
+                      <h3>UNITED NATIONS OFFICE ON DRUGS AND CRIME — UNODC</h3>
                     </div>
                   </div>
                   <div className={styles.ecstaticBtnWrapper}>
@@ -540,7 +540,7 @@ const JNIMUN: NextPage = () => {
                     </div>
                     <div className={styles.councilTitleDesc}>
                       <span className={styles.levelBadge}>Intermediate</span>
-                      <h3>INTERNATIONAL MARITIME ORGANIZATION â€” IMO</h3>
+                      <h3>INTERNATIONAL MARITIME ORGANIZATION — IMO</h3>
                     </div>
                   </div>
                   <div className={styles.ecstaticBtnWrapper}>
@@ -562,7 +562,7 @@ const JNIMUN: NextPage = () => {
                     </div>
                     <div className={styles.councilTitleDesc}>
                       <span className={styles.levelBadge}>Beginner</span>
-                      <h3>UNITED NATIONS HIGH COMMISSIONER FOR REFUGEES â€” UNHCR</h3>
+                      <h3>UNITED NATIONS HIGH COMMISSIONER FOR REFUGEES — UNHCR</h3>
                     </div>
                   </div>
                   <div className={styles.ecstaticBtnWrapper}>
@@ -655,7 +655,7 @@ const JNIMUN: NextPage = () => {
                         const included = card.description.includes(featName)
                         return (
                           <li key={featName} className={`${styles.packageFeature} ${included ? styles.featIncluded : styles.featExcluded}`}>
-                            <span className={styles.featIcon}>{included ? 'âœ“' : 'âœ—'}</span>
+                            <span className={styles.featIcon}>{included ? '✓' : '✗'}</span>
                             <span className={styles.featName}>{featName}</span>
                           </li>
                         )
@@ -663,7 +663,7 @@ const JNIMUN: NextPage = () => {
                     </ul>
                     <Link href="https://docs.google.com/forms/d/e/1FAIpQLSc4YAorOpKZRZcJWXmUr0SYO-4Pr7-H_Fz3CLq3G4LYeabmwQ/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" className={styles.packageApplyBtn}>
                       <span>Apply Now</span>
-                      <span className={styles.packageApplyIcon}>â†’</span>
+                      <span className={styles.packageApplyIcon}>→</span>
                     </Link>
                   </div>
                 </div>

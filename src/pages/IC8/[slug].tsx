@@ -1,4 +1,4 @@
-﻿import type { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next'
+import type { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { CouncilPageLayout } from '@/components/IC8/council'
@@ -44,7 +44,7 @@ export function CommitteeNotFound() {
         <h1 className={styles.notFoundTitle}>Committee Not Found</h1>
         <p className={styles.notFoundDesc}>The committee you are trying to view does not exist.</p>
         <Link href="/IC8#councils" className={styles.backBtn}>
-          â† Back to Councils
+          ← Back to Councils
         </Link>
       </div>
     </div>
