@@ -61,8 +61,8 @@ export default function Hero() {
                 aria-hidden="true"
               />
             </Link>
-            <Link href="/IC8" className={styles.secondaryButton}>
-              IC8
+            <Link href="/IC27" className={styles.secondaryButton}>
+              IC
             </Link>
           </div>
         </div>

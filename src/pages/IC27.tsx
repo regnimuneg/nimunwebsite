@@ -217,16 +217,6 @@ const IC27: NextPage = () => {
                     <br />A <b>CONFERENCE</b>
                   </h2>
                 </div>
-
-                <div className={styles.aboutStatement}>
-                  <h3>
-                    WHERE DIPLOMACY MEETS
-                    <br />
-                    THE NEXT GENERATION OF
-                    <br />
-                    GLOBAL LEADERS.
-                  </h3>
-                </div>
               </div>
             </div>
           </div>
@@ -332,8 +322,13 @@ const IC27: NextPage = () => {
               </p>
               <span className={styles.settingRule} aria-hidden="true" />
             </div>
-            <span className={styles.whiteSwishOuter} aria-hidden="true" />
-            <span className={styles.whiteSwishInner} aria-hidden="true" />
+            <span className={styles.whiteSwish} aria-hidden="true">
+              <Image
+                src="/image/png/IC'27/elements/element_F3ECE4_transparent.png"
+                alt=""
+                fill
+              />
+            </span>
           </div>
 
           <div className={styles.impactCopy}>
@@ -351,8 +346,13 @@ const IC27: NextPage = () => {
             <Link href="/apply" className={styles.impactButton}>
               APPLY NOW
             </Link>
-            <span className={styles.blueSwishOuter} aria-hidden="true" />
-            <span className={styles.blueSwishInner} aria-hidden="true" />
+            <span className={styles.blueSwish} aria-hidden="true">
+              <Image
+                src="/image/png/IC'27/elements/Layer 25 copy.png"
+                alt=""
+                fill
+              />
+            </span>
           </div>
         </section>
 
@@ -360,6 +360,13 @@ const IC27: NextPage = () => {
         <section className={styles.packages}>
           <span className={styles.packagesCornerTL} aria-hidden="true" />
           <span className={styles.packagesCornerTR} aria-hidden="true" />
+          <span className={styles.packagesBlueSwish} aria-hidden="true">
+            <Image
+              src="/image/png/IC'27/elements/Layer 25 copy.png"
+              alt=""
+              fill
+            />
+          </span>
           <div className={styles.packagesHeading}>
             <span className={styles.packagesSparkleTop} aria-hidden="true">
               <Image src="/image/png/IC'27/elements/star.png" alt="" fill />

@@ -30,16 +30,6 @@ const nextConfig = {
         destination: '/404',
         permanent: false,
       },
-      {
-        source: '/JNIMUN',
-        destination: '/IC8',
-        permanent: false,
-      },
-      {
-        source: '/JNIMUN/:path*',
-        destination: '/IC8/:path*',
-        permanent: false,
-      },
     ];
 
     // if (isProd) {

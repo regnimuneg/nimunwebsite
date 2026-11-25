@@ -1,6 +1,0 @@
-export { default as CouncilPageLayout } from './CouncilPageLayout'
-export { default as CouncilHeader } from './CouncilHeader'
-export { default as CouncilHero } from './CouncilHero'
-export { default as CouncilChairs } from './CouncilChairs'
-export { default as CouncilFocus } from './CouncilFocus'
-export { default as CouncilCTA } from './CouncilCTA'

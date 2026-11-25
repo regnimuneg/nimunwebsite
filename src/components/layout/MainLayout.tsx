@@ -36,8 +36,6 @@ export default function MainLayout({ children }: Props) {
   const isJNIMUNPage =
     router.pathname === '/JNIMUN' ||
     router.pathname.startsWith('/JNIMUN/') ||
-    router.pathname === '/IC8' ||
-    router.pathname.startsWith('/IC8/') ||
     router.pathname === '/merch'
   
   const hideHeader = isIC26Page || isIC27Page || isApplyPage || isJNIMUNPage

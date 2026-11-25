@@ -33,7 +33,7 @@ export default function CouncilHeader() {
   return (
     <header className={styles.councilHeader}>
       <div className={styles.councilHeaderInner}>
-        <Link href="/IC8" className={styles.councilBrand} aria-label="JNIMUN home">
+        <Link href="/JNIMUN" className={styles.councilBrand} aria-label="JNIMUN home">
           <Image
             src={jnimun26Asset('JNIMUN logo.png')}
             alt=""

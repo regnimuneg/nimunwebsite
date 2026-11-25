@@ -33,7 +33,6 @@ const mainLinks: MainLink[] = [
     ],
   },
   { id: 'ic27', text: "IC'27", href: '/IC27' },
-  { id: 'ic8', text: 'IC8', href: '/IC8' },
   { id: 'merch', text: 'MERCH', href: '/merch' },
   { id: 'contact', text: 'CONTACT US', href: '/#contact' },
   { id: 'portal', text: 'PORTAL', href: 'https://portal.nimuneg.org' },
