@@ -1,53 +1,60 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
+import CustomHead from '@/components/utils/CustomHead'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import type { IconType } from 'react-icons'
+import {
+  FaEnvelope,
+  FaFacebook,
+  FaGlobeAfrica,
+  FaInstagram,
+  FaLightbulb,
+  FaLinkedin,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaUsers,
+} from 'react-icons/fa'
 import styles from '@/styles/IC27.module.scss'
+import { TBA, ic27Contact, ic27Councils, ic27Details, ic27Faqs } from '@/data/ic27'
 
-const councils = [
-  {
-    number: '01',
-    topLine: 'SECURITY',
-    bottomLine: 'COUNCIL',
-    highlightBottom: true,
-  },
-  {
-    number: '02',
-    prefix: 'UN',
-    topLine: 'WOMEN',
-  },
-  {
-    number: '03',
-    topLine: 'UNESCO',
-  },
-  {
-    number: '04',
-    topLine: 'UNICEF',
-  },
-  {
-    number: '05',
-    topLine: 'DISEC',
-  },
+const SITE_URL = 'https://nimuneg.org'
+const PAGE_DESCRIPTION =
+  "Join NIMUN'27, the Nile International Model United Nations conference in Egypt. Explore the councils and international delegate packages, and apply now."
+const SHARE_IMAGE = `${SITE_URL}/image/png/IC%2727/images/IMG_5494.JPG`
+
+const navLinks = [
+  { href: '/', label: 'HOME' },
+  { href: '/MissionHistory', label: 'ABOUT US' },
+  { href: '#details', label: 'CONFERENCE' },
+  { href: '#contact', label: 'CONTACT US' },
+  { href: '/merch', label: 'MERCH' },
+  { href: 'https://portal.nimuneg.org', label: 'PORTAL', external: true },
 ]
 
-const features = [
+const features: {
+  icon: IconType
+  number: string
+  topTitle: string
+  bottomTitle: string
+  copy: string
+}[] = [
   {
-    icon: "/image/png/IC'27/elements/Blue Globe, People, and Light Bulb Icons.png",
+    icon: FaGlobeAfrica,
     number: '01',
     topTitle: 'LEARN',
     bottomTitle: 'DIPLOMACY',
     copy: 'GAIN A DEEPER UNDERSTANDING OF GLOBAL ISSUES AND HOW TO APPROACH THEM COLLABORATIVELY.',
   },
   {
-    icon: "/image/png/IC'27/elements/Blue Globe, People, and Light Bulb Icons.png",
+    icon: FaUsers,
     number: '02',
     topTitle: 'FIND YOUR',
     bottomTitle: 'VOICE',
     copy: 'DEVELOP CRITICAL THINKING, PUBLIC SPEAKING, AND NEGOTIATION SKILLS IN A SUPPORTIVE ENVIRONMENT.',
   },
   {
-    icon: "/image/png/IC'27/elements/Blue Globe, People, and Light Bulb Icons.png",
+    icon: FaLightbulb,
     number: '03',
     topTitle: 'LEAD WITH',
     bottomTitle: 'PURPOSE',
@@ -64,6 +71,8 @@ const IC27: NextPage = () => {
     'GROUP OF 8-SUPERVISOR',
   ]
   const [selectedPackage, setSelectedPackage] = useState(packageTabs[0])
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   const packageCards =
     selectedPackage === 'GROUP OF 4'
@@ -104,9 +113,12 @@ const IC27: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>IC27 | Nile International Model United Nations</title>
-      </Head>
+      <CustomHead
+        title="IC27 | Nile International Model United Nations"
+        description={PAGE_DESCRIPTION}
+        image={SHARE_IMAGE}
+        twitterCardType="summary_large_image"
+      />
 
       <main className={styles.page}>
         {/* Top Navigation Bar */}
@@ -119,18 +131,46 @@ const IC27: NextPage = () => {
 
           <div className={styles.brandLine} aria-hidden="true" />
 
-          <nav className={styles.nav} aria-label="Main navigation">
-            <Link href="/">HOME</Link>
-            <Link href="/MissionHistory">ABOUT US</Link>
-            <Link href="/Archives">CONFERENCE</Link>
-            <Link href="/hierarchy">CONTACT US</Link>
-            <Link href="/merch">MERCH</Link>
-            <Link href="/apply">PORTAL</Link>
+          <nav
+            id="ic27-nav"
+            className={menuOpen ? `${styles.nav} ${styles.navOpen}` : styles.nav}
+            aria-label="Main navigation"
+          >
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.label} href={link.href} onClick={() => setMenuOpen(false)}>
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
 
           <Link href="/apply" className={styles.applyTop}>
             APPLY NOW
           </Link>
+
+          <button
+            type="button"
+            className={menuOpen ? `${styles.menuButton} ${styles.menuButtonOpen}` : styles.menuButton}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="ic27-nav"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </header>
 
         {/* Hero Section */}
@@ -193,6 +233,21 @@ const IC27: NextPage = () => {
           </div>
         </section>
 
+        {/* Key Conference Details */}
+        <section id="details" className={styles.details} aria-labelledby="ic27-details-title">
+          <h2 id="ic27-details-title" className={styles.visuallyHidden}>
+            Conference details
+          </h2>
+          <dl className={styles.detailsGrid}>
+            {ic27Details.map((detail) => (
+              <div className={styles.detailItem} key={detail.label}>
+                <dt>{detail.label}</dt>
+                <dd className={detail.value === TBA ? styles.tba : undefined}>{detail.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
         {/* About & Overlapping Feature Cards Section */}
         <section className={styles.aboutSection}>
           <div className={styles.aboutTop}>
@@ -229,7 +284,7 @@ const IC27: NextPage = () => {
             {features.map((feature) => (
               <article className={styles.feature} key={feature.number}>
                 <div className={styles.featureTop}>
-                  <Image src={feature.icon} alt="" width={54} height={54} />
+                  <feature.icon className={styles.featureIcon} aria-hidden="true" />
                   <span>{feature.number}</span>
                 </div>
                 <h3>
@@ -260,7 +315,7 @@ const IC27: NextPage = () => {
           </div>
 
           <div className={styles.councilGrid}>
-            {councils.map((council) => (
+            {ic27Councils.map((council) => (
               <article className={styles.councilCard} key={council.number}>
                 <div className={styles.councilTitle}>
                   <b>{council.number}</b>
@@ -283,14 +338,39 @@ const IC27: NextPage = () => {
                     )}
                   </h3>
                 </div>
-                <div className={styles.councilMark}>
+                <div className={styles.councilMark} aria-hidden="true">
+                  {/* PLACEHOLDER: swap in each council's own emblem once the design team provides them */}
                   <Image
                     src="/image/png/IC'27/elements/blue stamp.png"
-                    alt={`${council.topLine} emblem`}
+                    alt=""
                     fill
                     className={styles.councilEmblem}
                   />
                 </div>
+                <dl className={styles.councilInfo}>
+                  <div>
+                    <dt>TOPIC</dt>
+                    <dd className={council.topic === TBA ? styles.tba : undefined}>{council.topic}</dd>
+                  </div>
+                  <div>
+                    <dt>CHAIRS</dt>
+                    <dd className={council.chairs === TBA ? styles.tba : undefined}>{council.chairs}</dd>
+                  </div>
+                </dl>
+                {council.studyGuideUrl ? (
+                  <a
+                    href={council.studyGuideUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.councilGuide}
+                  >
+                    STUDY GUIDE
+                  </a>
+                ) : (
+                  <span className={`${styles.councilGuide} ${styles.councilGuideDisabled}`}>
+                    STUDY GUIDE SOON
+                  </span>
+                )}
               </article>
             ))}
           </div>
@@ -427,6 +507,84 @@ const IC27: NextPage = () => {
             />
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <section className={styles.faq} aria-labelledby="ic27-faq-title">
+          <div className={styles.councilKicker}>
+            <span>FAQ</span>
+            <i aria-hidden="true" />
+          </div>
+          <h2 id="ic27-faq-title" className={styles.faqTitle}>
+            GOOD TO <b>KNOW</b>
+          </h2>
+          <div className={styles.faqList}>
+            {ic27Faqs.map((faq, index) => {
+              const isOpen = openFaq === index
+              return (
+                <div className={styles.faqItem} key={faq.question}>
+                  <h3>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={`ic27-faq-${index}`}
+                      onClick={() => setOpenFaq(isOpen ? null : index)}
+                    >
+                      <span>{faq.question}</span>
+                      <b aria-hidden="true">{isOpen ? '−' : '+'}</b>
+                    </button>
+                  </h3>
+                  <p id={`ic27-faq-${index}`} hidden={!isOpen}>
+                    {faq.answer}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer id="contact" className={styles.footer}>
+          <div className={styles.footerBrand}>
+            <Link href="/" className={styles.footerLogo}>
+              NIMUN<b>27</b>
+            </Link>
+            <p>Nile International Model United Nations</p>
+          </div>
+
+          <address className={styles.footerContact}>
+            <a href={ic27Contact.phoneHref}>
+              <FaPhoneAlt aria-hidden="true" />
+              <span>{ic27Contact.phone}</span>
+            </a>
+            <a href={`mailto:${ic27Contact.email}`}>
+              <FaEnvelope aria-hidden="true" />
+              <span>{ic27Contact.email}</span>
+            </a>
+            <span>
+              <FaMapMarkerAlt aria-hidden="true" />
+              <span>{ic27Contact.address}</span>
+            </span>
+          </address>
+
+          <div className={styles.footerSide}>
+            <div className={styles.footerSocials}>
+              <a href={ic27Contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="NIMUN Instagram">
+                <FaInstagram />
+              </a>
+              <a href={ic27Contact.linkedin} target="_blank" rel="noopener noreferrer" aria-label="NIMUN LinkedIn">
+                <FaLinkedin />
+              </a>
+              <a href={ic27Contact.facebook} target="_blank" rel="noopener noreferrer" aria-label="NIMUN Facebook">
+                <FaFacebook />
+              </a>
+            </div>
+            <Link href="/apply" className={styles.footerApply}>
+              APPLY NOW
+            </Link>
+          </div>
+
+          <p className={styles.footerCopy}>© {new Date().getFullYear()} NIMUN. All rights reserved.</p>
+        </footer>
       </main>
     </>
   )

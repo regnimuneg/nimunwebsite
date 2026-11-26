@@ -202,7 +202,8 @@ export default function MainLayout({ children }: Props) {
 
   return (
     <>
-      <CustomHead />
+      {/* IC27 renders its own CustomHead with page-specific title, description and share image */}
+      {!isIC27Page && <CustomHead />}
       {/* <WebGLParticles size={isMobile ? 260 : 200} /> */}
       <main className={font.className}>
         <div id="full-size-image-slider"></div>
