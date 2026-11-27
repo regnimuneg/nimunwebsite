@@ -83,7 +83,7 @@ export default function Hero() {
       </div>
 
       <div className={styles.countdownHeading}>
-        <span>JNIMUN&apos;26</span>
+        <span>IC&apos;27</span>
         <h2>Countdown</h2>
       </div>
 
